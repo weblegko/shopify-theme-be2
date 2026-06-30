@@ -1,8 +1,23 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "sections": { 
-     "breadcrumbs": {
+  "sections": {
+    "breadcrumbs": {
       "type": "weblegko-breadcrumbs",
-      "settings": {}
+      "settings": {
+        "show_breadcrumbs": true,
+        "home_label": "Главная",
+        "catalog_label": "Каталог",
+        "show_current_collection": true,
+        "show_all_collections": false
+      }
     },
     "main": {
       "type": "main-product",
@@ -15,13 +30,25 @@
             "text_style": "uppercase"
           }
         },
-        "title": { "type": "title", "settings": {} },
-        "price": { "type": "price", "settings": {} },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
         "variant_picker": {
           "type": "variant_picker",
-          "settings": { "picker_type": "button", "swatch_shape": "circle" }
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
         },
-        "quantity_selector": { "type": "quantity_selector", "settings": {} },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -29,16 +56,16 @@
             "show_gift_card_recipient": true
           }
         },
-        "description": { "type": "description", "settings": {} },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
         "share": {
           "type": "share",
           "disabled": true,
-          "settings": { "share_label": "Share" }
-        },
-        "hoppy_free_shipping_shipping_bar_block_CDHXeg": {
-          "type": "shopify:\/\/apps\/hoppy-free-shipping\/blocks\/shipping_bar_block\/66159626-1fb8-4d18-901f-af7b6a63adaa",
-          "disabled": true,
-          "settings": { "shipping_bar_id": "" }
+          "settings": {
+            "share_label": "Share"
+          }
         }
       },
       "block_order": [
@@ -49,9 +76,9 @@
         "quantity_selector",
         "buy_buttons",
         "description",
-        "share",
-        "hoppy_free_shipping_shipping_bar_block_CDHXeg"
+        "share"
       ],
+      "disabled": true,
       "settings": {
         "enable_sticky_info": false,
         "color_scheme": "scheme-1",
@@ -68,7 +95,82 @@
         "padding_bottom": 12
       }
     },
-
+    "weblegko_main_product_RUgmNA": {
+      "type": "weblegko-main-product",
+      "blocks": {
+        "text_4Riaxt": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title_Qbk3hz": {
+          "type": "title",
+          "settings": {}
+        },
+        "price_nGRg7g": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker_LDjPp7": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector_bGXLbk": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons_cW6cPf": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "description_JAXTDx": {
+          "type": "description",
+          "settings": {}
+        },
+        "share_XdbrrD": {
+          "type": "share",
+          "disabled": true,
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "text_4Riaxt",
+        "title_Qbk3hz",
+        "price_nGRg7g",
+        "variant_picker_LDjPp7",
+        "quantity_selector_bGXLbk",
+        "buy_buttons_cW6cPf",
+        "description_JAXTDx",
+        "share_XdbrrD"
+      ],
+      "name": "WEBLEGKO MAIN PRODUCT",
+      "settings": {
+        "enable_sticky_info": false,
+        "color_scheme": "scheme-1",
+        "media_size": "small",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
     "related-products": {
       "type": "related-products",
       "settings": {
@@ -88,5 +190,10 @@
       }
     }
   },
-  "order": ["breadcrumbs", "main", "related-products"]
+  "order": [
+    "breadcrumbs",
+    "main",
+    "weblegko_main_product_RUgmNA",
+    "related-products"
+  ]
 }
