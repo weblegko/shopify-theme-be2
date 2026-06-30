@@ -1,0 +1,57 @@
+{% comment %}
+  Renders a product's price (regular, sale)
+  Usage: {% render 'weblegko-price', product: product %}
+{% endcomment %}
+{%- liquid
+  if use_variant
+    assign target = product.selected_or_first_available_variant
+  elsif placeholder
+    assign target = null
+  else
+    assign target = product
+  endif
+
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: 1999
+  assign available = target.available | default: false
+  
+  # Всегда без кода валюты
+  assign money_price = price | money
+  assign money_compare = compare_at_price | money
+
+  assign show_from = false
+  if target == product and product.price_varies
+    assign show_from = true
+  endif
+
+  assign is_on_sale = false
+  if compare_at_price > price
+    assign is_on_sale = true
+  endif
+-%}
+
+{%- unless target == null and placeholder == null -%}
+  <div class="tw:flex tw:flex-nowrap tw:gap-[0.8rem]{% if price_class %} {{ price_class }}{% endif %}">
+
+    {%- if is_on_sale -%}
+      <span class="tw:text-[2.4rem] tw:font-medium tw:whitespace-nowrap tw:text-grayscale-950 tw:leading-[1.33] tw:tracking-[-0.01em]">
+        {%- if show_from -%}<span>From </span>{%- endif -%}
+        <span class="tw:text-additional-red">
+          {{ money_price }}
+        </span>
+      </span>
+      <span class="tw:text-[1.4rem] tw:text-grayscale-400 tw:leading-[1.43] tw:tracking-[-0.01em] tw:line-through tw:whitespace-nowrap">
+        {{ money_compare }}
+      </span>
+
+    {%- else -%}
+      <span class="tw:text-[2.4rem] tw:font-medium tw:whitespace-nowrap tw:text-grayscale-950 tw:leading-[1.33] tw:tracking-[-0.01em]">
+        {%- if show_from -%}<span>From </span>{%- endif -%}
+        <span class="tw:text-grayscale-950">
+          {{ money_price }}
+        </span>
+      </span>
+    {%- endif -%}
+
+  </div>
+{% endunless %}

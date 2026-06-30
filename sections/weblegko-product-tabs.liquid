@@ -1,0 +1,565 @@
+<!-- sections/weblegko-product-tabs.liquid -->
+
+<style>
+  .weblegko-tabs-padding {
+    padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
+    padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
+  }
+
+  @media screen and (min-width: 640px) {
+    .weblegko-tabs-padding {
+      padding-top: {{ section.settings.padding_top_tablet | default: 5 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 5 }}rem !important;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .weblegko-tabs-padding {
+      padding-top: {{ section.settings.padding_top_desktop | default: 8 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_desktop | default: 8 }}rem !important;
+    }
+  }
+
+  .weblegko-tab-btn {
+    padding: 2rem 0 1.5rem;
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 143%;
+    letter-spacing: -0.04em;
+    color: #596173;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .weblegko-tab-btn:hover {
+    color: #ffc356;
+  }
+
+  .weblegko-tab-btn.active {
+    color: #00b5d1;
+    font-weight: 600;
+  }
+
+  .weblegko-tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #00b5d1;
+  }
+
+  .weblegko-tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .weblegko-tab-content.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ======================================== */
+  /* СТИЛИ ДЛЯ ВСЕХ ТАБОВ                     */
+  /* ======================================== */
+
+  .tab-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .tab-section h3 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 0.65rem;
+    line-height: 140%;
+    letter-spacing: -0.04em;
+    color: #0b0c0e;
+  }
+
+  .tab-section h4 {
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 150%;
+    letter-spacing: -0.04em;
+    color: #0b0c0e;
+  }
+
+  .tab-section p {
+    margin-bottom: 1rem;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 150%;
+    letter-spacing: -0.04em;
+    color: #8c94a6;
+  }
+
+  /* ======================================== */
+  /* MINERALS                                 */
+  /* ======================================== */
+  .minerals-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .minerals-list li {
+    padding: 0.15rem 0;
+    border-bottom: none;
+    display: block;
+  }
+
+  /* ======================================== */
+  /* WHY CHOOSE                               */
+  /* ======================================== */
+  .why-choose-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .why-choose-list li {
+    margin-bottom: 1rem;
+  }
+
+  /* ======================================== */
+  /* LABEL INFO                               */
+  /* ======================================== */
+  .label-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .label-info-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .label-info-block {
+    margin-bottom: 0;
+  }
+
+  .label-info-block h3 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 0.65rem;
+    line-height: 140%;
+    letter-spacing: -0.04em;
+    color: #0b0c0e;
+  }
+
+  .label-info-block p,
+  .label-info-block li {
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 150%;
+    letter-spacing: -0.04em;
+    color: #8c94a6;
+  }
+
+  .label-info-block ul,
+  .label-info-block ol {
+    padding-left: 2rem;
+  }
+
+  .label-info-block ul li,
+  .label-info-block ol li {
+    margin-bottom: 0.5rem;
+  }
+
+  /* ======================================== */
+  /* HIGHLIGHTS                               */
+  /* ======================================== */
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(32rem, 1fr));
+    gap: 1.5rem;
+  }
+
+  .highlight-item {
+    padding: 2rem 1.5rem;
+    background: #f8f6f1;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .highlight-item:hover {
+    transform: translateY(-4px);
+  }
+
+  .highlight-item .icon-wrapper {
+    width: 6rem;
+    height: 6rem;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .highlight-item .icon-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .highlight-item h4 {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin: 0.5rem 0;
+    color: #0b0c0e;
+  }
+
+  .highlight-item p {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #8c94a6;
+    margin: 0;
+    line-height: 1.5;
+  }
+</style>
+
+{%- liquid
+  assign tabs_data = product.metafields.custom.weblegko_product_tabs.value
+
+  assign has_content = false
+
+  if tabs_data != blank
+    assign has_content = true
+  endif
+-%}
+
+{% if has_content %}
+  <section class="tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem]">
+    <div class="tw:max-w-[112rem] tw:mx-auto weblegko-tabs-padding">
+      <!-- Заголовок секции -->
+      {%- if section.settings.heading != blank -%}
+        <h2 class="tw:text-[2.4rem] tw:sm:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.2] tw:text-center tw:mb-[3rem]">
+          {{ section.settings.heading }}
+        </h2>
+      {%- endif -%}
+
+      <div class="tw:rounded-t-[1.6rem] tw:bg-white tw:border-b tw:border-[#e5e5e5]">
+        <!-- Кнопки табов -->
+        <div class="tw:flex tw:gap-[1.6rem] tw:px-[1.6rem] tw:flex-nowrap" role="tablist">
+          {%- if tabs_data.tab1_overview != blank
+            or tabs_data.tab1_minerals != blank
+            or tabs_data.tab1_why_choose != blank
+          -%}
+            <button
+              class="weblegko-tab-btn active"
+              data-tab="tab-1"
+              role="tab"
+              aria-selected="true"
+              aria-controls="tab-1"
+              id="btn-tab-1"
+            >
+              Description
+            </button>
+          {%- endif -%}
+
+          {%- if tabs_data.tab2_label_info != blank -%}
+            <button
+              class="weblegko-tab-btn"
+              data-tab="tab-2"
+              role="tab"
+              aria-selected="false"
+              aria-controls="tab-2"
+              id="btn-tab-2"
+            >
+              Label Info
+            </button>
+          {%- endif -%}
+
+          {%- if tabs_data.tab3_highlights != blank -%}
+            <button
+              class="weblegko-tab-btn"
+              data-tab="tab-3"
+              role="tab"
+              aria-selected="false"
+              aria-controls="tab-3"
+              id="btn-tab-3"
+            >
+              Highlights
+            </button>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="tw:rounded-b-[1.6rem] tw:bg-white tw:px-[1.6rem] tw:py-[1.6rem]">
+        <!-- ======================================== -->
+        <!-- TAB 1: DESCRIPTION                       -->
+        <!-- ======================================== -->
+        {%- if tabs_data.tab1_overview != blank
+          or tabs_data.tab1_minerals != blank
+          or tabs_data.tab1_why_choose != blank
+        -%}
+          <div class="weblegko-tab-content active" id="tab-1" role="tabpanel" aria-labelledby="btn-tab-1">
+            <!-- Overview -->
+            {%- if tabs_data.tab1_overview != blank -%}
+              <div class="tab-section">
+                <h3>Overview</h3>
+                {{ tabs_data.tab1_overview | metafield_tag }}
+              </div>
+            {%- endif -%}
+
+            <!-- What's Inside -->
+            {%- if tabs_data.tab1_minerals != blank -%}
+              <div class="tab-section">
+                <h3>What's Inside</h3>
+                <ul class="minerals-list tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-[0.6rem] tw:list-none tw:p-0 tw:m-0">
+                  {%- for mineral in tabs_data.tab1_minerals.value -%}
+                    <li>
+                      <span class="tw:inline-flex tw:items-center tw:gap-2 tw:px-[1rem] tw:min-h-[3.2rem] tw:rounded-full tw:border tw:border-grayscale-100">
+                        <svg
+                          class="tw:w-[1.6rem] tw:h-[1.6rem] tw:text-additional-green tw:flex-shrink-0"
+                          focusable="false"
+                          aria-hidden="true"
+                        >
+                          <use href="#check"></use>
+                        </svg>
+                        <span class="tw:my-[0.6rem] tw:text-[1.2rem] tw:leading-[1.33] tw:tracking-[-0.04em] tw:text-grayscale-950">
+                          {{ mineral.name }}
+                        </span>
+                      </span>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
+
+            <!-- Why Choose -->
+            {%- if tabs_data.tab1_why_choose != blank -%}
+              <div class="tab-section">
+                <h3>Why Choose Dr. Berg Trace Minerals</h3>
+                <ul class="why-choose-list">
+                  {%- for block in tabs_data.tab1_why_choose.value -%}
+                    <li>
+                      <h4>{{ block.title }}</h4>
+                      {{ block.description | metafield_tag }}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <!-- ======================================== -->
+        <!-- TAB 2: LABEL INFO                       -->
+        <!-- ======================================== -->
+        {%- if tabs_data.tab2_label_info != blank -%}
+          <div class="weblegko-tab-content" id="tab-2" role="tabpanel" aria-labelledby="btn-tab-2">
+            <div class="label-info-grid">
+              {%- assign label_info = tabs_data.tab2_label_info.value -%}
+
+              <!-- Ингредиенты -->
+              {%- if label_info.ingredients != blank -%}
+                <div class="label-info-block">
+                  <h3>Ingredients</h3>
+                  {{ label_info.ingredients | metafield_tag }}
+                </div>
+              {%- endif -%}
+
+              <!-- Аллергены -->
+              {%- if label_info.allergens != blank -%}
+                <div class="label-info-block">
+                  <h3>Allergens</h3>
+                  {{ label_info.allergens | metafield_tag }}
+                </div>
+              {%- endif -%}
+
+              <!-- Сертификаты -->
+              {%- if label_info.certifications != blank -%}
+                <div class="label-info-block tw:md:col-span-2">
+                  <h3>Certifications</h3>
+                  {{ label_info.certifications | metafield_tag }}
+                </div>
+              {%- endif -%}
+
+              <!-- Предупреждения -->
+              {%- if label_info.warning != blank -%}
+                <div class="label-info-block tw:md:col-span-2">
+                  <h3>Warnings</h3>
+                  {{ label_info.warning | metafield_tag }}
+                </div>
+              {%- endif -%}
+
+              <!-- Хранение -->
+              {%- if label_info.storage != blank -%}
+                <div class="label-info-block tw:md:col-span-2">
+                  <h3>Storage</h3>
+                  {{ label_info.storage | metafield_tag }}
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        <!-- ======================================== -->
+        <!-- TAB 3: HIGHLIGHTS                       -->
+        <!-- ======================================== -->
+        {%- if tabs_data.tab3_highlights != blank -%}
+          <div class="weblegko-tab-content" id="tab-3" role="tabpanel" aria-labelledby="btn-tab-3">
+            <div class="highlights-grid">
+              {%- for highlight in tabs_data.tab3_highlights.value -%}
+                <div class="highlight-item">
+                  {%- if highlight.icon != blank -%}
+                    <div class="icon-wrapper">
+                      <img
+                        src="{{ highlight.icon | image_url: width: 100 }}"
+                        alt="{{ highlight.title }}"
+                        loading="lazy"
+                        width="60"
+                        height="60"
+                      >
+                    </div>
+                  {%- endif -%}
+                  <h4>{{ highlight.title }}</h4>
+                  <p>{{ highlight.description | metafield_tag }}</p>
+                </div>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const tabs = document.querySelectorAll('.weblegko-tab-btn');
+      const contents = document.querySelectorAll('.weblegko-tab-content');
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          tabs.forEach(function (t) {
+            t.classList.remove('active');
+            t.setAttribute('aria-selected', 'false');
+          });
+          contents.forEach(function (c) {
+            c.classList.remove('active');
+          });
+
+          this.classList.add('active');
+          this.setAttribute('aria-selected', 'true');
+
+          var targetId = this.getAttribute('data-tab');
+          var target = document.getElementById(targetId);
+          if (target) {
+            target.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "WEBLEGKO PRODUCT TABS",
+  "tag": "section",
+  "class": "section-product-tabs",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Product Details",
+      "label": "Section Heading"
+    },
+    {
+      "type": "header",
+      "content": "🖥️ Desktop (≥ 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "💻 Tablet (640px - 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile (< 640px)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding bottom"
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "WEBLEGKO PRODUCT TABS",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

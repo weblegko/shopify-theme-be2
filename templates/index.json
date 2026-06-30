@@ -1,0 +1,639 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "weblegko_promo_slider_Y9MiLX": {
+      "type": "weblegko-promo-slider",
+      "blocks": {
+        "slide_yU8JGj": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/home-slide.png",
+            "link": ""
+          }
+        },
+        "slide_mPQLR6": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/home-slide-1_67c98d6a-c9bd-49e9-bd1f-b5f3f1eab95e.png",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_yU8JGj",
+        "slide_mPQLR6"
+      ],
+      "name": "WEBLEGKO PROMO SLIDER",
+      "settings": {}
+    },
+    "weblegko_doctor_grid_pR7kbQ": {
+      "type": "weblegko-doctor-grid",
+      "blocks": {
+        "slide_gx6WBa": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/drberg-cosmetic.webp",
+            "link": ""
+          }
+        },
+        "slide_MGKRwm": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/drberg-cosmetic.webp",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_gx6WBa",
+        "slide_MGKRwm"
+      ],
+      "name": "WEBLEGKO DOCTOR",
+      "settings": {
+        "doctor_image": "shopify://shop_images/drberg.webp",
+        "doctor_name": "Dr. Eric Berg",
+        "doctor_profession": "Health & Nutrition Expert",
+        "instagram_count": "2.7M followers",
+        "youtube_count": "14M subscribers",
+        "info_heading": "Natural Vitamins",
+        "info_heading_italic": "Supplements",
+        "info_rating_value": "4.8",
+        "info_reviews_value": "15,255",
+        "info_description": "Quality vitamins and supplements trusted by millions worldwide —  now delivered to your door across the UK.",
+        "button_blue_label": "Shop All Products",
+        "button_blue_link": "",
+        "button_grey_label": "Shop All Products",
+        "button_grey_link": ""
+      }
+    },
+    "weblegko_features_gge7Lg": {
+      "type": "weblegko-features",
+      "blocks": {
+        "card_XWpQQx": {
+          "type": "card",
+          "settings": {
+            "icon_svg": "<svg width=\"24\" height=\"54\" viewbox=\"0 0 24 54\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n  <path d=\"M20.4 0H2.81905C2.07185 0.00151 1.35569 0.299001 0.827348 0.827348C0.299001 1.35569 0.00151 2.07185 0 2.81905V8.26667C0.0014519 8.64781 0.0798166 9.02475 0.2304 9.37489C0.380984 9.72503 0.600689 10.0412 0.876356 10.3044C1.15202 10.5676 1.47798 10.7725 1.8347 10.9067C2.19142 11.041 2.57157 11.1019 2.95238 11.0857V44.6762C2.95238 46.9722 3.86447 49.1742 5.488 50.7977C7.11153 52.4212 9.31351 53.3333 11.6095 53.3333C13.9055 53.3333 16.1075 52.4212 17.7311 50.7977C19.3546 49.1742 20.2667 46.9722 20.2667 44.6762C20.2581 39.5743 20.26 13.7562 20.2667 11.0857H20.4C21.1472 11.0842 21.8634 10.7867 22.3917 10.2584C22.92 9.73002 23.2175 9.01386 23.219 8.26667V2.81905C23.2175 2.07185 22.92 1.35569 22.3917 0.827348C21.8634 0.299001 21.1472 0.00151 20.4 0ZM18.3619 21.1048V21.263C18.1093 21.263 17.8671 21.3633 17.6885 21.5419C17.5099 21.7205 17.4095 21.9628 17.4095 22.2154C17.4095 22.468 17.5099 22.7102 17.6885 22.8888C17.8671 23.0674 18.1093 23.1677 18.3619 23.1677V23.0095V25.7143V25.8725C18.1093 25.8725 17.8671 25.9728 17.6885 26.1515C17.5099 26.3301 17.4095 26.5723 17.4095 26.8249C17.4095 27.0775 17.5099 27.3197 17.6885 27.4983C17.8671 27.6769 18.1093 27.7773 18.3619 27.7773V27.619V30.3238V30.482C18.1093 30.482 17.8671 30.5824 17.6885 30.761C17.5099 30.9396 17.4095 31.1818 17.4095 31.4344C17.4095 31.687 17.5099 31.9292 17.6885 32.1078C17.8671 32.2865 18.1093 32.3868 18.3619 32.3868V32.2286V34.6762H14.3619C13.381 34.6762 12.5619 34.0857 12.5619 33.3809V19.9524C12.5619 19.2476 13.381 18.6571 14.3619 18.6571H18.3619V21.1048ZM18.3619 16.7524H14.3619C13.4476 16.6911 12.546 16.9927 11.8525 17.5917C11.159 18.1907 10.7295 19.0389 10.6571 19.9524V22.3238H4.85714V11.0857H18.3619V16.7524Z\" fill=\"#0B0C0E\"></path>\n</svg>",
+            "title": "Lab Tested"
+          }
+        },
+        "card_nCYCny": {
+          "type": "card",
+          "settings": {
+            "icon_svg": "<svg width=\"64\" height=\"38\" viewbox=\"0 0 64 38\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n  <path d=\"M26.3794 34.0576C28.422 32.1535 28.7366 29.171 27.082 27.396C25.4273 25.621 22.4301 25.7257 20.3875 27.6298C18.3448 29.5339 18.0303 32.5164 19.6849 34.2914C21.3396 36.0664 24.3368 35.9617 26.3794 34.0576Z\" fill=\"black\"></path>\n  <path d=\"M53.4068 34.0596C55.4494 32.1555 55.7639 29.1729 54.1093 27.398C52.4547 25.623 49.4574 25.7276 47.4148 27.6318C45.3722 29.5359 45.0576 32.5184 46.7123 34.2934C48.3669 36.0684 51.3641 35.9637 53.4068 34.0596Z\" fill=\"black\"></path>\n  <path d=\"M4.94624 10.7531C4.94624 9.57437 3.99065 8.61877 2.81187 8.61877C1.63308 8.61877 0.67749 9.57437 0.67749 10.7531C0.67749 11.9319 1.63308 12.8875 2.81187 12.8875C3.99065 12.8875 4.94624 11.9319 4.94624 10.7531Z\" fill=\"black\"></path>\n  <path d=\"M43.3112 30.3975C44.0699 26.6475 47.6124 23.6675 51.4199 23.6675C55.0862 23.6675 57.7287 26.4313 57.6562 29.985C61.6212 30.0888 62.7249 24.8675 62.7249 24.8675C63.0587 23.4075 63.5574 20.5613 63.9749 17.7675C64.1118 16.905 64.0066 16.0213 63.6712 15.215C62.6347 12.7955 61.3822 10.4744 59.9287 8.28C58.5537 6.22875 56.2474 5.01375 53.6149 4.97C52.0449 4.945 50.5037 4.93 49.3399 4.93L49.3299 4.92C49.1799 2.41 47.3499 0.4875 44.7812 0.2575C43.1099 0.10875 36.4899 0 33.3124 0C32.0499 0 30.2387 0.0174997 28.4062 0.0474997V0.04H6.35869C6.07827 0.0398356 5.80057 0.0949462 5.54147 0.202182C5.28236 0.309417 5.04694 0.466674 4.84865 0.66496C4.65037 0.863246 4.49311 1.09867 4.38587 1.35778C4.27864 1.61688 4.22353 1.89458 4.22369 2.175V2.185C4.22369 2.74859 4.44758 3.28909 4.84609 3.6876C5.2446 4.08612 5.78511 4.31 6.34869 4.31H10.7899C11.3247 4.34943 11.8248 4.58958 12.19 4.9823C12.5551 5.37502 12.7582 5.89126 12.7587 6.4275V6.43875C12.7595 6.71944 12.705 6.99753 12.5982 7.25712C12.4914 7.51671 12.3345 7.7527 12.1365 7.95158C11.9384 8.15046 11.703 8.30834 11.4439 8.41617C11.1847 8.524 10.9069 8.57967 10.6262 8.58H8.34869C7.78279 8.58 7.24006 8.80481 6.8399 9.20496C6.43975 9.60512 6.21494 10.1478 6.21494 10.7138C6.21478 10.9941 6.26985 11.2717 6.377 11.5307C6.48416 11.7897 6.64131 12.0251 6.83946 12.2233C7.03761 12.4216 7.27289 12.5789 7.53185 12.6862C7.79081 12.7935 8.06838 12.8488 8.34869 12.8488H10.6262C11.1924 12.8488 11.7355 13.0737 12.1359 13.4741C12.5363 13.8745 12.7612 14.4175 12.7612 14.9838C12.7612 15.55 12.5363 16.093 12.1359 16.4934C11.7355 16.8938 11.1924 17.1188 10.6262 17.1188H2.10619C1.54017 17.1188 0.997314 17.3435 0.59696 17.7436C0.196606 18.1438 -0.0284772 18.6865 -0.0288086 19.2525C-0.0288086 19.8187 0.196128 20.3618 0.596518 20.7622C0.996909 21.1626 1.53995 21.3875 2.10619 21.3875H10.6262C11.1924 21.3875 11.7355 21.6124 12.1359 22.0128C12.5363 22.4132 12.7612 22.9563 12.7612 23.5225C12.7605 24.0883 12.5353 24.6307 12.135 25.0306C11.7347 25.4304 11.192 25.655 10.6262 25.655H7.99119C7.42529 25.655 6.88256 25.8798 6.4824 26.28C6.08225 26.6801 5.85744 27.2228 5.85744 27.7888C5.85744 28.3548 6.08221 28.8976 6.48233 29.298C6.88245 29.6983 7.42517 29.9234 7.99119 29.9238L16.3987 29.9175L17.0974 28.1763C18.5287 25.5363 21.3762 23.6663 24.3912 23.6663C28.1999 23.6663 30.9049 26.6488 30.6074 30.4013H43.3099M22.1349 9.57375H19.2699C19.2672 9.57397 19.2647 9.57506 19.2626 9.57687C19.2606 9.57867 19.2592 9.58109 19.2587 9.58375L18.9949 11.4588C18.9946 11.4603 18.9945 11.4618 18.9948 11.4633C18.9952 11.4649 18.9958 11.4663 18.9968 11.4675C18.9978 11.4687 18.999 11.4697 19.0004 11.4703C19.0018 11.471 19.0034 11.4713 19.0049 11.4713H21.1374C21.2421 11.4683 21.3461 11.4887 21.4419 11.531C21.5377 11.5734 21.6228 11.6365 21.6911 11.7159C21.7593 11.7953 21.809 11.889 21.8365 11.99C21.864 12.0911 21.8686 12.197 21.8499 12.3C21.8134 12.5265 21.699 12.7332 21.5266 12.8844C21.3541 13.0357 21.1343 13.1221 20.9049 13.1288H18.7699C18.7673 13.1287 18.7648 13.1295 18.7628 13.1311C18.7607 13.1327 18.7593 13.135 18.7587 13.1375L18.3762 15.8613C18.3397 16.0877 18.2253 16.2944 18.0528 16.4457C17.8803 16.5969 17.6605 16.6833 17.4312 16.69C17.3266 16.693 17.2226 16.6726 17.1268 16.6303C17.0311 16.5879 16.946 16.5247 16.8779 16.4453C16.8097 16.3659 16.7601 16.2722 16.7328 16.1711C16.7055 16.0701 16.7011 15.9642 16.7199 15.8613L17.7124 8.79625C17.7518 8.55705 17.873 8.33897 18.0555 8.17934C18.2379 8.01972 18.4701 7.92848 18.7124 7.92125H22.3662C22.4708 7.91824 22.5748 7.93864 22.6706 7.98098C22.7663 8.02331 22.8514 8.08651 22.9195 8.16595C22.9877 8.24538 23.0373 8.33905 23.0646 8.4401C23.0919 8.54115 23.0963 8.64703 23.0774 8.75C23.0404 8.97537 22.9261 9.18082 22.7541 9.33112C22.5821 9.48142 22.3632 9.5672 22.1349 9.57375ZM29.7924 8.48375C30.0901 8.74782 30.2995 9.09686 30.3924 9.48375C30.4964 9.92203 30.5133 10.3764 30.4424 10.8213C30.3555 11.5134 30.0723 12.1662 29.6262 12.7025C29.3538 13.0246 29.0078 13.2763 28.6174 13.4363C28.6157 13.4381 28.6147 13.4406 28.6147 13.4431C28.6147 13.4457 28.6157 13.4481 28.6174 13.45L29.3274 15.4988C29.5187 16.0488 29.0274 16.69 28.4162 16.69H28.3762C28.2279 16.6944 28.0821 16.6514 27.9598 16.5674C27.8376 16.4833 27.7452 16.3625 27.6962 16.2225L26.8374 13.7225C26.8362 13.7206 26.8346 13.7191 26.8326 13.718C26.8306 13.7169 26.8284 13.7163 26.8262 13.7163H25.0012C24.9986 13.7164 24.9962 13.7173 24.9942 13.7189C24.9922 13.7204 24.9907 13.7226 24.9899 13.725L24.6899 15.86C24.6534 16.0865 24.539 16.2932 24.3666 16.4444C24.1941 16.5957 23.9743 16.6821 23.7449 16.6888C23.6403 16.6918 23.5363 16.6714 23.4406 16.629C23.3448 16.5867 23.2598 16.5235 23.1916 16.4441C23.1234 16.3646 23.0739 16.271 23.0466 16.1699C23.0192 16.0688 23.0148 15.963 23.0337 15.86L24.0262 8.795C24.0655 8.5558 24.1868 8.33772 24.3692 8.17809C24.5516 8.01847 24.7839 7.92723 25.0262 7.92H27.8512C27.8512 7.92 29.0912 7.88125 29.7924 8.48375ZM37.5674 8.69125C37.5335 8.90281 37.4267 9.09587 37.2656 9.23713C37.1045 9.37839 36.8991 9.45898 36.6849 9.465H33.3987C33.3961 9.46514 33.3937 9.46605 33.3917 9.46762C33.3897 9.46918 33.3882 9.47132 33.3874 9.47375L33.1262 11.3288C33.1258 11.3303 33.1258 11.3318 33.1261 11.3333C33.1264 11.3349 33.1271 11.3363 33.1281 11.3375C33.129 11.3387 33.1303 11.3397 33.1317 11.3403C33.1331 11.341 33.1346 11.3413 33.1362 11.3413H35.6887C35.7864 11.3384 35.8836 11.3573 35.9731 11.3968C36.0625 11.4363 36.142 11.4953 36.2058 11.5695C36.2695 11.6436 36.3159 11.7311 36.3415 11.8255C36.3671 11.9199 36.3712 12.0188 36.3537 12.115C36.3197 12.3266 36.213 12.5196 36.0518 12.6609C35.8907 12.8021 35.6854 12.8827 35.4712 12.8888H32.9174C32.9149 12.8889 32.9125 12.8898 32.9104 12.8914C32.9084 12.8929 32.9069 12.8951 32.9062 12.8975L32.5924 15.13C32.5924 15.1331 32.5936 15.1361 32.5956 15.1384C32.5977 15.1407 32.6006 15.1422 32.6037 15.1425H35.8874C35.9852 15.1396 36.0824 15.1586 36.1718 15.1981C36.2613 15.2376 36.3408 15.2966 36.4045 15.3707C36.4683 15.4449 36.5146 15.5324 36.5402 15.6267C36.5658 15.7211 36.57 15.82 36.5524 15.9163C36.5185 16.1278 36.4117 16.3209 36.2506 16.4621C36.0895 16.6034 35.8841 16.684 35.6699 16.69H31.5949C31.485 16.6915 31.376 16.6689 31.2758 16.6236C31.1756 16.5784 31.0866 16.5117 31.015 16.4282C30.9434 16.3447 30.8911 16.2465 30.8617 16.1405C30.8323 16.0346 30.8266 15.9234 30.8449 15.815L31.8312 8.8C31.8705 8.5608 31.9918 8.34272 32.1742 8.18309C32.3566 8.02347 32.5889 7.93223 32.8312 7.925H36.9049C37.0017 7.9227 37.0978 7.94185 37.1863 7.98107C37.2749 8.02029 37.3536 8.07861 37.4169 8.15185C37.4803 8.22509 37.5266 8.31144 37.5526 8.40469C37.5786 8.49795 37.5837 8.59581 37.5674 8.69125ZM44.3937 8.69125C44.3597 8.90281 44.253 9.09587 44.0918 9.23713C43.9307 9.37839 43.7254 9.45898 43.5112 9.465H40.2249C40.2224 9.46514 40.22 9.46605 40.2179 9.46762C40.2159 9.46918 40.2145 9.47132 40.2137 9.47375L39.9537 11.3288C39.9533 11.3303 39.9533 11.3318 39.9536 11.3333C39.9539 11.3349 39.9546 11.3363 39.9556 11.3375C39.9565 11.3387 39.9578 11.3397 39.9592 11.3403C39.9606 11.341 39.9621 11.3413 39.9637 11.3413H42.5162C42.6139 11.3384 42.7111 11.3573 42.8006 11.3968C42.89 11.4363 42.9695 11.4953 43.0333 11.5695C43.097 11.6436 43.1434 11.7311 43.169 11.8255C43.1946 11.9199 43.1987 12.0188 43.1812 12.115C43.1472 12.3266 43.0405 12.5196 42.8793 12.6609C42.7182 12.8021 42.5129 12.8827 42.2987 12.8888H39.7437C39.7411 12.8889 39.7387 12.8898 39.7367 12.8914C39.7347 12.8929 39.7332 12.8951 39.7324 12.8975L39.4187 15.13C39.4187 15.1331 39.4198 15.1361 39.4219 15.1384C39.424 15.1407 39.4268 15.1422 39.4299 15.1425H42.7137C42.8114 15.1396 42.9086 15.1586 42.9981 15.1981C43.0875 15.2376 43.1671 15.2966 43.2308 15.3707C43.2945 15.4449 43.3409 15.5324 43.3665 15.6267C43.3921 15.7211 43.3962 15.82 43.3787 15.9163C43.3447 16.1278 43.238 16.3209 43.0768 16.4621C42.9157 16.6034 42.7104 16.684 42.4962 16.69H38.4212C38.3112 16.6915 38.2023 16.6689 38.1021 16.6236C38.0019 16.5784 37.9128 16.5117 37.8412 16.4282C37.7697 16.3447 37.7174 16.2465 37.688 16.1405C37.6586 16.0346 37.6529 15.9234 37.6712 15.815L38.6574 8.8C38.6968 8.5608 38.818 8.34272 39.0005 8.18309C39.1829 8.02347 39.4151 7.93223 39.6574 7.925H43.7312C43.828 7.9227 43.9241 7.94185 44.0126 7.98107C44.1011 8.02029 44.1799 8.07861 44.2432 8.15185C44.3065 8.22509 44.3528 8.31144 44.3789 8.40469C44.4049 8.49795 44.4099 8.59581 44.3937 8.69125ZM49.1437 7.89C50.2599 7.89 51.7049 7.905 53.1549 7.92875C54.9124 7.9575 56.4499 8.765 57.3724 10.1425C58.3578 11.628 59.2435 13.1772 60.0237 14.78C60.4362 15.62 59.6774 16.7138 58.6837 16.7138H48.0274L49.1437 7.89Z\" fill=\"black\"></path>\n  <path d=\"M27.1825 12.17H25.2075L25.5825 9.46498H27.5563C27.5563 9.46498 29.005 9.37123 28.7675 10.8175C28.7738 10.8175 28.6075 12.17 27.1825 12.17Z\" fill=\"black\"></path>\n</svg>",
+            "title": "Free UK Delivery £40+"
+          }
+        },
+        "card_mg6ydk": {
+          "type": "card",
+          "settings": {
+            "icon_svg": "<svg width=\"45\" height=\"54\" viewbox=\"0 0 45 54\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n  <path d=\"M10.9596 28.0893L13.7414 29.6579V33.4541L10.9596 31.8854V28.0893ZM19.1271 32.6906L14.9022 30.3168V34.4475C14.9126 34.8763 14.4107 35.1796 14.0342 34.9495L10.0916 32.7325C9.9034 32.6279 9.79883 32.4397 9.79883 32.2305V27.4409L5.58439 25.067V40.5444L19.1271 48.3667V32.6906ZM33.59 40.5444V25.0775L20.2879 32.6802V48.2203L33.59 40.5444ZM28.2043 22.0866L15.5401 29.3337L19.7022 31.6763L33.0462 24.0526L28.9363 21.6787L28.2043 22.0866ZM24.9624 19.3885L11.5243 27.0853L14.3584 28.6749L27.7546 21.0094C27.5036 20.863 25.2762 19.5767 24.9624 19.3885ZM6.1491 24.0526C7.19487 24.6382 9.30732 25.8304 10.3531 26.4161L23.8016 18.7192L19.5872 16.293L6.1491 24.0526ZM41.0045 15.3518C36.7378 8.72169 29.0514 4.31901 21.1977 3.92162C20.8944 3.90071 20.6643 3.64972 20.6643 3.34645V0L10.9805 6.26414L20.6643 12.5283V9.56876C20.6643 9.24457 20.9362 8.97267 21.2604 8.99359C30.0553 9.0145 38.3169 15.2891 40.8581 23.6971C43.7444 32.1991 40.3457 42.0712 33.339 47.4882C22.7559 55.7812 6.67199 52.3929 0 40.8058C7.90599 55.7602 28.4448 57.6426 39.2476 44.7692C46.2333 36.5286 46.8817 24.3977 41.0045 15.3518Z\" fill=\"black\"></path>\n</svg>",
+            "title": "30-Day Returns"
+          }
+        }
+      },
+      "block_order": [
+        "card_XWpQQx",
+        "card_nCYCny",
+        "card_mg6ydk"
+      ],
+      "name": "WEBLEGKO FEATURES",
+      "settings": {
+        "columns_desktop": 3,
+        "col_gap_desktop": 2,
+        "row_gap_desktop": 2,
+        "padding_top_desktop": 2,
+        "padding_bottom_desktop": 2,
+        "columns_tablet": 3,
+        "col_gap_tablet": 1,
+        "row_gap_tablet": 1,
+        "padding_top_tablet": 2,
+        "padding_bottom_tablet": 2,
+        "columns_mobile": 1,
+        "col_gap_mobile": 0.5,
+        "row_gap_mobile": 0.5,
+        "padding_top_mobile": 2,
+        "padding_bottom_mobile": 2
+      }
+    },
+    "weblegko_premium_products_i3XJbY": {
+      "type": "weblegko-premium-products",
+      "name": "WEBLEGKO PREMIUM",
+      "settings": {
+        "heading": "Premium Products",
+        "description": "Premium supplements for your health",
+        "collection": "premium-3",
+        "space_between_desktop": 2,
+        "padding_top_desktop": 9,
+        "padding_bottom_desktop": 9,
+        "space_between_tablet": 2,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "space_between_mobile": 1,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3,
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard"
+      }
+    },
+    "weblegko_why_choose_us_HmLr64": {
+      "type": "weblegko-why-choose-us",
+      "blocks": {
+        "card_4fAwMG": {
+          "type": "card",
+          "settings": {
+            "icon_image": "shopify://shop_images/leaf.webp",
+            "title": "Whole-food nutrition",
+            "text": "<p>We use only natural ingredients, free from synthetic isolates and artificial additives.</p>"
+          }
+        },
+        "card_ejWGUM": {
+          "type": "card",
+          "settings": {
+            "icon_image": "shopify://shop_images/shield.webp",
+            "title": "GMP-certified quality",
+            "text": "<p> Every batch is manufactured to pharmaceutical-grade standards, ensuring maximum safety and purity</p>"
+          }
+        },
+        "card_QMwNCQ": {
+          "type": "card",
+          "settings": {
+            "icon_image": "shopify://shop_images/ai-star.webp",
+            "title": "Premium ingredients",
+            "text": "<p>Our ingredients are sourced from reliable global partners who share our commitment to quality</p>"
+          }
+        },
+        "card_4rQahG": {
+          "type": "card",
+          "settings": {
+            "icon_image": "shopify://shop_images/lightning.webp",
+            "title": "Maximum bioavailability",
+            "text": "<p>Each formula is meticulously crafted to enhance absorption and deliver optimal results</p>"
+          }
+        }
+      },
+      "block_order": [
+        "card_4fAwMG",
+        "card_ejWGUM",
+        "card_QMwNCQ",
+        "card_4rQahG"
+      ],
+      "name": "WEBLEGKO WHY US",
+      "settings": {
+        "heading": "Why Choose Us",
+        "description": "Science-backed nutrition solutions",
+        "bg_image": "shopify://shop_images/whychooseus-background.webp",
+        "padding_top_desktop": 10,
+        "padding_bottom_desktop": 12.5,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
+      }
+    },
+    "weblegko_popular_products_8AXViG": {
+      "type": "weblegko-popular-products",
+      "name": "WEBLEGKO POPULAR",
+      "settings": {
+        "heading": "Popular Products",
+        "description": "Premium supplements for your health",
+        "collection": "popullar-6",
+        "products_to_show_desktop": 6,
+        "columns_desktop": 3,
+        "col_gap_desktop": 2,
+        "row_gap_desktop": 2,
+        "padding_top_desktop": 8,
+        "padding_bottom_desktop": 8,
+        "products_to_show_tablet": 4,
+        "columns_tablet": 2,
+        "col_gap_tablet": 1.5,
+        "row_gap_tablet": 1.5,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "products_to_show_mobile": 3,
+        "columns_mobile": 1,
+        "col_gap_mobile": 1,
+        "row_gap_mobile": 1,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3,
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard"
+      }
+    },
+    "weblegko_video_Ti4BRk": {
+      "type": "weblegko-video",
+      "name": "WEBLEGKO VIDEO",
+      "settings": {
+        "video": "shopify://files/videos/drberg-video.mp4",
+        "video_url": "",
+        "description": "",
+        "enable_video_looping": false
+      }
+    },
+    "weblegko_doctor_quote_JPqBzW": {
+      "type": "weblegko-doctor-quote",
+      "name": "WEBLEGKO DOCTOR QUOTE",
+      "settings": {
+        "doctor_image": "shopify://shop_images/drberg-quote.webp",
+        "quote_text": "<p>Dr. Eric Berg is a renowned expert in healthy ketosis and intermittent fasting. With over 15 million subscribers worldwide, Dr. Berg has dedicated his career to helping people achieve optimal health through natural nutrition.</p><p>All supplements are scientifically formulated with the highest quality natural ingredients, ensuring maximum effectiveness and safety.</p>",
+        "button_label": "Learn More",
+        "button_link": "shopify://policies/privacy-policy",
+        "image_width_desktop": 53,
+        "content_width_desktop": 47,
+        "gap_desktop": 5,
+        "padding_top_desktop": 11.5,
+        "padding_bottom_desktop": 13,
+        "image_width_tablet": 45,
+        "content_width_tablet": 55,
+        "gap_tablet": 3,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "gap_mobile": 2,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
+      }
+    },
+    "weblegko_secondary_slider_kEMGJw": {
+      "type": "weblegko-secondary-slider",
+      "blocks": {
+        "slide_W3jNxX": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/home-slide-1.png",
+            "link": ""
+          }
+        },
+        "slide_r7JzbD": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/home-slide-1_67c98d6a-c9bd-49e9-bd1f-b5f3f1eab95e.png",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_W3jNxX",
+        "slide_r7JzbD"
+      ],
+      "name": "WEBLEGKO SECONDARY SLIDER",
+      "settings": {}
+    },
+    "weblegko_resources_edkVqc": {
+      "type": "weblegko-resources",
+      "blocks": {
+        "resource_6H7TNg": {
+          "type": "resource",
+          "settings": {
+            "badge": "Free PDF Document",
+            "title": "Essential Definitions for Healthy Living",
+            "publish_date": "2025-06-20",
+            "category": "Health Resources",
+            "button_label": "Learn More",
+            "button_link": ""
+          }
+        },
+        "resource_PKWd73": {
+          "type": "resource",
+          "settings": {
+            "badge": "Free PDF Document",
+            "title": "Essential Definitions for Healthy Living",
+            "publish_date": "2025-06-20",
+            "category": "Health Resources",
+            "button_label": "Learn More",
+            "button_link": ""
+          }
+        },
+        "resource_FdjFtA": {
+          "type": "resource",
+          "settings": {
+            "badge": "Free PDF Document",
+            "title": "Essential Definitions for Healthy Living",
+            "publish_date": "2025-06-20",
+            "category": "Health Resources",
+            "button_label": "Learn More",
+            "button_link": ""
+          }
+        },
+        "resource_mzzaTj": {
+          "type": "resource",
+          "settings": {
+            "badge": "Free PDF Document",
+            "title": "Essential Definitions for Healthy Living",
+            "publish_date": "2025-06-20",
+            "category": "Health Resources",
+            "button_label": "Learn More",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "resource_6H7TNg",
+        "resource_PKWd73",
+        "resource_FdjFtA",
+        "resource_mzzaTj"
+      ],
+      "name": "WEBLEGKO RESOURCES",
+      "settings": {
+        "heading": "Health Resources",
+        "description": "Free Guides for Better Living",
+        "columns_desktop": 2,
+        "initial_items_desktop": 2,
+        "col_gap_desktop": 2,
+        "row_gap_desktop": 2,
+        "padding_top_desktop": 14,
+        "padding_bottom_desktop": 15.5,
+        "columns_tablet": 2,
+        "initial_items_tablet": 2,
+        "col_gap_tablet": 1.5,
+        "row_gap_tablet": 1.5,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "columns_mobile": 1,
+        "initial_items_mobile": 1,
+        "col_gap_mobile": 1.5,
+        "row_gap_mobile": 1.5,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
+      }
+    },
+    "weblegko_newsletter_banner_3JWHik": {
+      "type": "weblegko-newsletter-banner",
+      "name": "WEBLEGKO NEWSLETTER",
+      "settings": {
+        "bg_image": "shopify://shop_images/subscribe-background_fb28daad-77f0-407d-8f1c-78ec3eb81801.webp",
+        "heading_line_1": "Stay",
+        "heading_line_2": "Updated",
+        "avatar": "shopify://shop_images/drberg-avatar_22246983-f596-41ab-9ffb-dbfd3cb27edd.webp",
+        "doctor_name": "Dr. Eric Berg",
+        "doctor_role": "Health Specialist",
+        "text": "Get the latest health tips, exclusive offers, and expert advice delivered straight to your inbox. Join our community today and take the first step towards a healthier you."
+      }
+    },
+    "weblegko_reviews_rgawnn": {
+      "type": "weblegko-reviews",
+      "blocks": {
+        "review_b93HtQ": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "review_author_name": "Catherine Draganov",
+            "review_post_time": "15 hours ago",
+            "review_title": "Love what I have from you of Dr. Berg",
+            "review_short_text": "I can only tell you that in the beginning I was interested in probiotics because I had problems with my microbiome. Then I discovered other products and I appreciate the fact that they are natural. But I follow the advice of Eric Berg and eat a big salad every day. Now…",
+            "review_link": ""
+          }
+        },
+        "review_KzcYCx": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "review_author_name": "Catherine Draganov",
+            "review_post_time": "15 hours ago",
+            "review_title": "Love what I have from you of Dr. Berg",
+            "review_short_text": "I can only tell you that in the beginning I was interested in probiotics because I had problems with my microbiome. Then I discovered other products and I appreciate the fact that they are natural. But I follow the advice of Eric Berg and eat a big salad every day. Now…",
+            "review_link": ""
+          }
+        },
+        "review_yhMk9M": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "review_author_name": "Catherine Draganov",
+            "review_post_time": "15 hours ago",
+            "review_title": "Love what I have from you of Dr. Berg",
+            "review_short_text": "I can only tell you that in the beginning I was interested in probiotics because I had problems with my microbiome. Then I discovered other products and I appreciate the fact that they are natural. But I follow the advice of Eric Berg and eat a big salad every day. Now…",
+            "review_link": ""
+          }
+        },
+        "review_dN9aNE": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "review_author_name": "Catherine Draganov",
+            "review_post_time": "15 hours ago",
+            "review_title": "Love what I have from you of Dr. Berg",
+            "review_short_text": "I can only tell you that in the beginning I was interested in probiotics because I had problems with my microbiome. Then I discovered other products and I appreciate the fact that they are natural. But I follow the advice of Eric Berg and eat a big salad every day. Now…",
+            "review_link": ""
+          }
+        },
+        "review_QDPaAk": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "review_author_name": "Catherine Draganov",
+            "review_post_time": "15 hours ago",
+            "review_title": "Love what I have from you of Dr. Berg",
+            "review_short_text": "I can only tell you that in the beginning I was interested in probiotics because I had problems with my microbiome. Then I discovered other products and I appreciate the fact that they are natural. But I follow the advice of Eric Berg and eat a big salad every day. Now…",
+            "review_link": ""
+          }
+        },
+        "review_4GqWAd": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "review_author_name": "Catherine Draganov",
+            "review_post_time": "15 hours ago",
+            "review_title": "Love what I have from you of Dr. Berg",
+            "review_short_text": "I can only tell you that in the beginning I was interested in probiotics because I had problems with my microbiome. Then I discovered other products and I appreciate the fact that they are natural. But I follow the advice of Eric Berg and eat a big salad every day. Now…",
+            "review_link": ""
+          }
+        },
+        "review_fbwJkT": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "review_author_name": "Catherine Draganov",
+            "review_post_time": "15 hours ago",
+            "review_title": "Love what I have from you of Dr. Berg",
+            "review_short_text": "I can only tell you that in the beginning I was interested in probiotics because I had problems with my microbiome. Then I discovered other products and I appreciate the fact that they are natural. But I follow the advice of Eric Berg and eat a big salad every day. Now…",
+            "review_link": ""
+          }
+        },
+        "review_m9TJfJ": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "review_author_name": "Catherine Draganov",
+            "review_post_time": "15 hours ago",
+            "review_title": "Love what I have from you of Dr. Berg",
+            "review_short_text": "I can only tell you that in the beginning I was interested in probiotics because I had problems with my microbiome. Then I discovered other products and I appreciate the fact that they are natural. But I follow the advice of Eric Berg and eat a big salad every day. Now…",
+            "review_link": ""
+          }
+        },
+        "review_jacP8m": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "review_author_name": "Catherine Draganov",
+            "review_post_time": "15 hours ago",
+            "review_title": "Love what I have from you of Dr. Berg",
+            "review_short_text": "I can only tell you that in the beginning I was interested in probiotics because I had problems with my microbiome. Then I discovered other products and I appreciate the fact that they are natural. But I follow the advice of Eric Berg and eat a big salad every day. Now…",
+            "review_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_b93HtQ",
+        "review_KzcYCx",
+        "review_yhMk9M",
+        "review_dN9aNE",
+        "review_QDPaAk",
+        "review_4GqWAd",
+        "review_fbwJkT",
+        "review_m9TJfJ",
+        "review_jacP8m"
+      ],
+      "name": "WEBLEGKO REVIEWS",
+      "settings": {
+        "heading": "What Our Customers Say",
+        "rating_score": "4.8",
+        "review_count": "2,847",
+        "columns_desktop": 3,
+        "initial_items_desktop": 6,
+        "col_gap_desktop": 2,
+        "row_gap_desktop": 2,
+        "padding_top_desktop": 10.5,
+        "padding_bottom_desktop": 13,
+        "columns_tablet": 2,
+        "initial_items_tablet": 4,
+        "col_gap_tablet": 2,
+        "row_gap_tablet": 2,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "columns_mobile": 1,
+        "initial_items_mobile": 3,
+        "col_gap_mobile": 1.5,
+        "row_gap_mobile": 1.5,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
+      }
+    },
+    "weblegko_faq_6jEpVy": {
+      "type": "weblegko-faq",
+      "blocks": {
+        "question_iCm6cA": {
+          "type": "question",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>We accept returns within 30 days of purchase. Items must be in their original condition, unused, and with all tags attached. Refunds are processed within 5-7 business days.</p>"
+          }
+        },
+        "question_kPPJdK": {
+          "type": "question",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>Standard shipping typically takes 3-5 business days within the US. Express shipping is available for 1-2 business day delivery. International shipping times vary by destination.</p>"
+          }
+        },
+        "question_4THbUX": {
+          "type": "question",
+          "settings": {
+            "question": "Do you ship internationally?",
+            "answer": "<p>Yes, we ship to over 50 countries worldwide. International shipping rates and delivery times are calculated at checkout based on your location.</p>"
+          }
+        },
+        "question_Gm6DQm": {
+          "type": "question",
+          "settings": {
+            "question": "What payment methods do you accept?",
+            "answer": "<p>We accept all major credit cards (Visa, MasterCard, American Express), PayPal, Apple Pay, Google Pay, and Shop Pay. All transactions are secure and encrypted.</p>"
+          }
+        },
+        "question_UKkGB7": {
+          "type": "question",
+          "settings": {
+            "question": "How can I track my order?",
+            "answer": "<p>Once your order ships, you'll receive a confirmation email with a tracking number. You can also track your order in your account dashboard under 'Order History'.</p>"
+          }
+        },
+        "question_McaDeH": {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer discounts for bulk orders?",
+            "answer": "<p>Yes, we offer volume discounts for bulk orders over $500. Please contact our sales team at sales@yourstore.com for a custom quote based on your requirements.</p>"
+          }
+        },
+        "question_aCMmQG": {
+          "type": "question",
+          "settings": {
+            "question": "Is my personal information secure?",
+            "answer": "<p>Absolutely! We use industry-standard SSL encryption to protect your data. We never store your payment information, and we never share your personal details with third parties.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_iCm6cA",
+        "question_kPPJdK",
+        "question_4THbUX",
+        "question_Gm6DQm",
+        "question_UKkGB7",
+        "question_McaDeH",
+        "question_aCMmQG"
+      ],
+      "name": "WEBLEGKO FAQ",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "rating_score": "4.8",
+        "review_count": "2,847",
+        "gap_desktop": 2.5,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 8,
+        "gap_tablet": 2,
+        "padding_top_tablet": 0,
+        "padding_bottom_tablet": 5,
+        "gap_mobile": 1.5,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 3
+      }
+    },
+    "weblegko_about_doctor_txJXRE": {
+      "type": "weblegko-about-doctor",
+      "name": "WEBLEGKO ABOUT DOCTOR",
+      "settings": {
+        "heading": "More About Dr. Berg Supplements",
+        "text": "<p>Dr. Berg's supplements are formulated with the highest quality natural ingredients to support your health and wellness journey. Each product is carefully crafted based on years of research and clinical experience.</p><p>As the official UK distributor, we ensure that all products meet strict quality standards and are delivered fresh to your door. Our commitment to excellence means you can trust every supplement you purchase.</p><p>All of our products are third-party tested for purity and potency, giving you peace of mind with every purchase.</p><p>We offer fast, reliable shipping across the UK and Europe with tracking available for all orders.</p><p>Our customer support team is always ready to help you find the right supplements for your needs.</p>",
+        "button_label": "Show More",
+        "initial_paragraphs_desktop": 2,
+        "padding_top_desktop": 7.5,
+        "padding_bottom_desktop": 8,
+        "initial_paragraphs_tablet": 2,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "initial_paragraphs_mobile": 2,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
+      }
+    }
+  },
+  "order": [
+    "weblegko_promo_slider_Y9MiLX",
+    "weblegko_doctor_grid_pR7kbQ",
+    "weblegko_features_gge7Lg",
+    "weblegko_premium_products_i3XJbY",
+    "weblegko_why_choose_us_HmLr64",
+    "weblegko_popular_products_8AXViG",
+    "weblegko_video_Ti4BRk",
+    "weblegko_doctor_quote_JPqBzW",
+    "weblegko_secondary_slider_kEMGJw",
+    "weblegko_resources_edkVqc",
+    "weblegko_newsletter_banner_3JWHik",
+    "weblegko_reviews_rgawnn",
+    "weblegko_faq_6jEpVy",
+    "weblegko_about_doctor_txJXRE"
+  ]
+}

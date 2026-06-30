@@ -1,0 +1,494 @@
+<!-- sections/weblegko-popular-products.liquid -->
+
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+{% if section.settings.image_shape == 'blob' %}
+  {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- unless section.settings.quick_add == 'none' -%}
+  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
+{%- endunless -%}
+
+{%- if section.settings.quick_add == 'standard' -%}
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- if section.settings.quick_add == 'bulk' -%}
+  <script src="{{ 'quick-add-bulk.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'quick-order-list.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<style>
+  .section-popular-products .tw\:grid > * {
+    display: flex !important;
+  }
+  .section-popular-products .product-card-wrapper,
+  .section-popular-products .product-card-wrapper .card {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .section-popular-products .card__content:last-child {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* ============================================ */
+  /* ПАДДИНГИ СЕКЦИИ (rem) - inline стили */
+  /* ============================================ */
+  .weblegko-popular-padding {
+    padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
+    padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
+  }
+
+  @media screen and (min-width: 640px) {
+    .weblegko-popular-padding {
+      padding-top: {{ section.settings.padding_top_tablet | default: 5 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 5 }}rem !important;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .weblegko-popular-padding {
+      padding-top: {{ section.settings.padding_top_desktop | default: 8 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_desktop | default: 8 }}rem !important;
+    }
+  }
+
+  /* ============================================ */
+  /* CSS GRID С БРЕЙКПОИНТАМИ (колонки, gap) */
+  /* ============================================ */
+
+  /* Базово: настройки для мобильных */
+  #weblegko-popular-grid {
+    display: grid !important;
+    grid-template-columns: repeat({{ section.settings.columns_mobile | default: 1 }}, 1fr) !important;
+    gap: {{ section.settings.row_gap_mobile | default: 1 }}rem {{ section.settings.col_gap_mobile | default: 1 }}rem !important;
+    width: 100% !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  #weblegko-popular-grid .grid__item {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Брейкпоинт: планшеты (640px - 1023px) */
+  @media screen and (min-width: 640px) and (max-width: 1023px) {
+    #weblegko-popular-grid {
+      grid-template-columns: repeat({{ section.settings.columns_tablet | default: 2 }}, 1fr) !important;
+      gap: {{ section.settings.row_gap_tablet | default: 1.5 }}rem {{ section.settings.col_gap_tablet | default: 1.5 }}rem !important;
+    }
+  }
+
+  /* Брейкпоинт: десктопы (1024px+) */
+  @media screen and (min-width: 1024px) {
+    #weblegko-popular-grid {
+      grid-template-columns: repeat({{ section.settings.columns_desktop | default: 3 }}, 1fr) !important;
+      gap: {{ section.settings.row_gap_desktop | default: 2 }}rem {{ section.settings.col_gap_desktop | default: 2 }}rem !important;
+    }
+  }
+
+  /* ============================================ */
+  /* Скрытие лишних карточек на брейкпоинтах */
+  /* ============================================ */
+
+  /* Мобильные (< 640px) */
+  @media screen and (max-width: 639px) {
+    .weblegko-popular-hide-mobile {
+      display: none !important;
+    }
+  }
+
+  /* Планшеты (640px - 1023px) */
+  @media screen and (min-width: 640px) and (max-width: 1023px) {
+    .weblegko-popular-hide-tablet {
+      display: none !important;
+    }
+  }
+
+  /* Десктопы (>= 1024px) */
+  @media screen and (min-width: 1024px) {
+    .weblegko-popular-hide-desktop {
+      display: none !important;
+    }
+  }
+</style>
+
+{%- comment -%}
+  Определяем сколько товаров показывать на каждом брейкпоинте
+{%- endcomment -%}
+{%- assign desktop_limit = section.settings.products_to_show_desktop | default: 6 -%}
+{%- assign tablet_limit = section.settings.products_to_show_tablet | default: 6 -%}
+{%- assign mobile_limit = section.settings.products_to_show_mobile | default: 6 -%}
+
+<section class="section-popular-products tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem]">
+  <div class="weblegko-popular-padding tw:max-w-[112rem] tw:mx-auto">
+    <!-- Заголовок -->
+    {%- if section.settings.heading != blank -%}
+      <div class="tw:flex tw:flex-col tw:items-center tw:gap-[1rem] tw:mb-[2.5rem] tw:md:mb-[3rem]">
+        <h2 class="tw:text-[2.4rem] tw:sm:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.33] tw:lg:leading-[1.2] tw:text-center">
+          {{ section.settings.heading }}
+        </h2>
+        {%- if section.settings.description != blank -%}
+          <div class="tw:mx-auto tw:inline-flex tw:items-center tw:justify-center tw:gap-2 tw:py-[0.8rem] tw:px-[2rem] tw:bg-[#e5dccb] tw:rounded-full">
+            <span class="tw:pt-1 tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-center">
+              {{ section.settings.description }}
+            </span>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Сетка товаров -->
+    <div
+      id="weblegko-popular-grid"
+      data-id="{{ section.id }}"
+      class="product-grid"
+    >
+      {%- if section.settings.collection != blank -%}
+        {%- assign product_count = 0 -%}
+        {%- for product in section.settings.collection.products -%}
+          {%- assign product_count = forloop.index -%}
+          <div
+            class="grid__item
+              {% if product_count > mobile_limit %}weblegko-popular-hide-mobile{% endif %}
+              {% if product_count > tablet_limit %}weblegko-popular-hide-tablet{% endif %}
+              {% if product_count > desktop_limit %}weblegko-popular-hide-desktop{% endif %}
+              {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+            {% if settings.animations_reveal_on_scroll %}
+              data-cascade
+              style="--animation-order: {{ forloop.index }};"
+            {% endif %}
+          >
+            {% render 'card-product',
+              card_product: product,
+              media_aspect_ratio: section.settings.image_ratio,
+              image_shape: section.settings.image_shape,
+              show_secondary_image: section.settings.show_secondary_image,
+              show_vendor: section.settings.show_vendor,
+              show_rating: section.settings.show_rating,
+              lazy_load: lazy_load,
+              skip_styles: skip_card_product_styles,
+              quick_add: section.settings.quick_add,
+              section_id: section.id
+            %}
+          </div>
+        {%- endfor -%}
+
+      {%- else -%}
+        <!-- Плейсхолдеры -->
+        {%- for i in (1..6) -%}
+          <div class="tw:block tw:px-[0.8rem] tw:pt-[0.8rem] tw:pb-[1.6rem] tw:rounded-[1.6rem] tw:bg-white">
+            <div class="tw:aspect-square tw:bg-[#f2f1ed] tw:rounded-[0.8rem] tw:flex tw:items-center tw:justify-center tw:mb-[1.6rem]">
+              {{ 'product-1' | placeholder_svg_tag: 'tw:w-[6rem] tw:h-[6rem] tw:text-[#d4d4d4]' }}
+            </div>
+            <div class="tw:px-[1rem]">
+              <div class="tw:h-[1.6rem] tw:w-[70%] tw:bg-[#f2f1ed] tw:rounded-full tw:mb-[0.8rem]"></div>
+              <div class="tw:h-[1.2rem] tw:w-[100%] tw:bg-[#f2f1ed] tw:rounded-full tw:mb-[0.4rem]"></div>
+              <div class="tw:h-[1.2rem] tw:w-[60%] tw:bg-[#f2f1ed] tw:rounded-full tw:mb-[1.2rem]"></div>
+              <div class="tw:h-[1.4rem] tw:w-[40%] tw:bg-[#f2f1ed] tw:rounded-full"></div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "WEBLEGKO POPULAR",
+  "tag": "section",
+  "class": "section-popular-products",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Popular Products",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "default": "Premium supplements for your health",
+      "label": "Description Badge"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "🖥️ Desktop (≥ 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show_desktop",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 6,
+      "label": "Number of products to show"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3,
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_desktop",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 2,
+      "unit": "rem",
+      "label": "Column gap"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_desktop",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 2,
+      "unit": "rem",
+      "label": "Row gap (vertical)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "💻 Tablet (640px - 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show_tablet",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 4,
+      "label": "Number of products to show"
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2,
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_tablet",
+      "min": 0,
+      "max": 4,
+      "step": 0.5,
+      "default": 1.5,
+      "unit": "rem",
+      "label": "Column gap"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_tablet",
+      "min": 0,
+      "max": 4,
+      "step": 0.5,
+      "default": 1.5,
+      "unit": "rem",
+      "label": "Row gap (vertical)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile (< 640px)"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show_mobile",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 2,
+      "label": "Number of products to show"
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 1,
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_mobile",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "default": 1,
+      "unit": "rem",
+      "label": "Column gap"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_mobile",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "default": 1,
+      "unit": "rem",
+      "label": "Row gap (vertical)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "Product Card"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        { "value": "adapt", "label": "Adapt to image" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "square", "label": "Square" }
+      ],
+      "default": "adapt",
+      "label": "Image ratio"
+    },
+    {
+      "type": "select",
+      "id": "image_shape",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "arch", "label": "Arch" },
+        { "value": "blob", "label": "Blob" },
+        { "value": "chevronleft", "label": "Chevron left" },
+        { "value": "chevronright", "label": "Chevron right" },
+        { "value": "diamond", "label": "Diamond" },
+        { "value": "parallelogram", "label": "Parallelogram" },
+        { "value": "round", "label": "Round" }
+      ],
+      "default": "default",
+      "label": "Image shape"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "Show second image on hover"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "Show vendor"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": false,
+      "label": "Show product rating",
+      "info": "To display a rating, add a product rating app."
+    },
+    {
+      "type": "select",
+      "id": "quick_add",
+      "default": "standard",
+      "label": "Quick add",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "standard", "label": "Standard" },
+        { "value": "bulk", "label": "Bulk" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "WEBLEGKO POPULAR",
+      "category": "Home page"
+    }
+  ]
+}
+{% endschema %}

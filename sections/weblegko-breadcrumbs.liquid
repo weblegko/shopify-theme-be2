@@ -1,0 +1,111 @@
+<!-- ========================================== -->
+<!-- ХЛЕБНЫЕ КРОШКИ -->
+<!-- ========================================== -->
+
+<div class=" tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem]">
+  <div class="breadcrumbs tw:py-[2rem] tw:md:py-[2.5rem] tw:max-w-[112rem] tw:mx-auto" role="navigation" aria-label="Breadcrumbs">
+    <ol class="tw:text-[1.4rem] tw:flex tw:flex-nowrap tw:items-center tw:truncate tw:gap-1 tw:list-none tw:p-0 tw:m-0">
+      <li class="tw:flex tw:items-center tw:font-inter">
+        <a href="/" class="tw:text-grayscale-400 tw:hover:text-grayscale-950 tw:transition-colors tw:duration-200">
+          <svg class="tw:w-[1.8rem] tw:h-[1.8rem]" focusable="false" aria-hidden="true">
+            <use href="#home"></use>
+          </svg>
+          <span class="tw:sr-only">Home</span>
+        </a>
+        <span class="tw:text-grayscale-400 tw:mx-4">/</span>
+      </li>
+
+      {%- comment -%} ЛОГИКА ДЛЯ КОЛЛЕКЦИЙ {%- endcomment -%}
+
+      {%- if collection -%}
+        {%- comment -%} Если есть текущая коллекция {%- endcomment -%}
+        <li class="tw:flex tw:items-center">
+          {%- if collection.handle != 'all' -%}
+            <a
+              href="{{ collection.url }}"
+              class="tw:text-grayscale-500 tw:hover:text-grayscale-900 tw:transition-colors tw:duration-200"
+            >
+              {{ collection.title }}
+            </a>
+          {%- else -%}
+            <span class="tw:text-grayscale-500">All products</span>
+          {%- endif -%}
+          <span class="tw:text-grayscale-400 tw:mx-4">/</span>
+        </li>
+
+      {%- elsif product.collections.first -%}
+        {%- comment -%} Если нет текущей коллекции, но есть первая коллекция товара {%- endcomment -%}
+        <li class="tw:flex tw:items-center">
+          <a
+            href="{{ product.collections.first.url }}"
+            class="tw:text-grayscale-500 tw:hover:text-grayscale-900 tw:transition-colors tw:duration-200"
+          >
+            {{ product.collections.first.title }}
+          </a>
+          <span class="tw:text-grayscale-400 tw:mx-4">/</span>
+        </li>
+
+      {%- elsif request.page_type == 'product' -%}
+        {%- comment -%} Если товар без коллекции, показываем каталог {%- endcomment -%}
+        <li class="tw:flex tw:items-center">
+          <a
+            href="/collections/all"
+            class="tw:text-grayscale-500 tw:hover:text-grayscale-900 tw:transition-colors tw:duration-200"
+          >
+            Catalog
+          </a>
+          <span class="tw:text-grayscale-400 tw:mx-4">/</span>
+        </li>
+      {%- endif -%}
+
+      {%- comment -%} ПОСЛЕДНИЙ ЭЛЕМЕНТ - НАЗВАНИЕ ТОВАРА {%- endcomment -%}
+      <li class="tw:text-grayscale-900 tw:font-medium tw:truncate" title="{{ product.title }}">
+        {{ product.title }}
+      </li>
+    </ol>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "WEBLEGKO BREADCRUMBS",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "Show breadcrumbs",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "home_label",
+      "label": "Home label",
+      "default": "Главная"
+    },
+    {
+      "type": "text",
+      "id": "catalog_label",
+      "label": "Catalog label (for products without collection)",
+      "default": "Каталог"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_current_collection",
+      "label": "Show current collection if available",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_all_collections",
+      "label": "Show full collection hierarchy",
+      "default": false,
+      "info": "Shows: Home > Parent > Child > Product"
+    }
+  ],
+  "presets": [
+    {
+      "name": "WEBLEGKO BREADCRUMBS"
+    }
+  ]
+}
+{% endschema %}

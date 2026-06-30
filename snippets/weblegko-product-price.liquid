@@ -1,0 +1,69 @@
+{% comment %}
+  Renders a product's price (regular, sale)
+  Usage: {% render 'weblegko-price', product: product %}
+{% endcomment %}
+{%- liquid
+  if use_variant
+    assign target = product.selected_or_first_available_variant
+  elsif placeholder
+    assign target = null
+  else
+    assign target = product
+  endif
+
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: 1999
+  assign available = target.available | default: false
+  
+  # Всегда без кода валюты
+  assign money_price = price | money
+  assign money_compare = compare_at_price | money
+
+  assign show_from = false
+  if target == product and product.price_varies
+    assign show_from = true
+  endif
+
+  assign is_on_sale = false
+  if compare_at_price > price
+    assign is_on_sale = true
+    assign savings = compare_at_price | minus: price
+    assign savings_percent = savings | times: 100 | divided_by: compare_at_price
+  endif
+-%}
+
+{%- unless target == null and placeholder == null -%}
+  <div class="tw:flex tw:justify-between tw:items-center{% if price_class %} {{ price_class }}{% endif %}">
+
+    <!-- Левая часть: цена и старая цена -->
+    <div class="tw:flex tw:flex-wrap tw:items-start tw:gap-[0.8rem]">
+      {%- if is_on_sale -%}
+        <span class="tw:text-[4rem] tw:font-medium tw:whitespace-nowrap tw:text-grayscale-950 tw:leading-[1.2] tw:tracking-[-0.04em]">
+          {%- if show_from -%}<span>From </span>{%- endif -%}
+          <span>
+            {{ money_price }}
+          </span>
+        </span>
+
+        <span class="tw:text-[1.8rem] tw:text-grayscale-400 tw:leading-[1.33] tw:tracking-[-0.04em] tw:whitespace-nowrap">
+          incl VAT <span class="tw:line-through">{{ money_compare }}</span>
+        </span>
+      {%- else -%}
+        <span class="tw:text-[4rem] tw:font-medium tw:whitespace-nowrap tw:text-grayscale-950 tw:leading-[1.2] tw:tracking-[-0.04em]">
+          {%- if show_from -%}<span>From </span>{%- endif -%}
+          <span>
+            {{ money_price }}
+          </span>
+        </span>
+      {%- endif -%}
+    </div>
+
+    <!-- Правая часть: процент скидки -->
+    {%- if is_on_sale and savings_percent > 0 -%}
+      <span class="weblegko-product-badge tw:shrink-0 tw:bg-additional-green-light tw:text-additional-green tw:uppercase" >
+        save {{ savings_percent }}%
+      </span>
+    {%- endif -%}
+
+  </div>
+{% endunless %}

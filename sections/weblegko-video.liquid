@@ -1,0 +1,297 @@
+<!-- sections/weblegko-video.liquid -->
+
+{%- style -%}
+  /* Принудительное растягивание видео внутри Dawn (Tailwind тут бессилен) */
+  .video-modal__container deferred-media {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding-bottom: 0 !important;
+    background: #000;
+  }
+  .video-modal__container deferred-media .deferred-media__poster {
+    display: none !important;
+  }
+  .video-modal__container deferred-media .deferred-media__wrapper,
+  .video-modal__container deferred-media iframe,
+  .video-modal__container deferred-media video {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    border: 0;
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign video_id = section.settings.video.id | default: section.settings.video_url.id
+  assign video_alt = section.settings.video.alt | default: section.settings.description
+  assign alt = 'sections.video.load_video' | t: description: video_alt | escape
+  assign poster = section.settings.video.preview_image | default: section.settings.cover_image
+  assign cover_url = section.settings.cover_image | image_url: width: 3840
+  assign is_native = false
+  if section.settings.video != null
+    assign is_native = true
+  endif
+  assign enable_loop = section.settings.enable_video_looping
+-%}
+
+<!-- Секция скрыта на мобилке -->
+<section class="tw:hidden tw:md:block tw:bg-seriy tw:text-grayscale-950">
+  
+  <!-- ТРИГГЕР -->
+  <div class="tw:relative tw:overflow-hidden tw:aspect-video tw:cursor-pointer tw:bg-black tw:group" id="VideoTrigger-{{ section.id }}">
+      {%- if poster != null -%}
+          {%- if cover_url != null -%}
+            {%- assign img_width = 3840 -%}
+            {%- assign img_height = img_width | divided_by: poster.aspect_ratio -%}
+            <img
+              src="{{ cover_url }}"
+              alt="{{ alt }}"
+              width="{{ img_width }}"
+              height="{{ img_height }}"
+              class="tw:w-full tw:h-full tw:object-cover tw:transition-transform tw:duration-500 group-hover:tw:scale-105"
+              loading="lazy"
+            >
+          {%- else -%}
+            {{
+              poster
+              | image_url: width: 3840
+              | image_tag: sizes: sizes, widths: '375, 750, 1100, 1500, 1780, 2000, 3000, 3840', alt: alt
+            }}
+          {%- endif -%}
+        {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'tw:w-full tw:h-full tw:object-cover' }}
+    {%- endif -%}
+
+    <div class="tw:absolute tw:inset-0 tw:bg-black/30"></div>
+
+    <div class="tw:absolute tw:inset-0 tw:flex tw:flex-col tw:items-center tw:justify-center">
+      <div class="tw:hover:scale-105 tw:flex tw:items-center tw:gap-[0.8rem] tw:px-[1.6rem] tw:h-[4.4rem] tw:bg-black/30 tw:rounded-full tw:text-white tw:transition-all tw:duration-200 tw:hover:bg-goluboy">
+        <svg class="tw:w-[1.4rem] tw:h-[1.7rem]" focusable="false" aria-hidden="true">
+          <use href="#play"></use>
+        </svg>
+        <span class="tw:text-[1.4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.43]">Watch Video</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- МОДАЛКА -->
+  <div
+    class="tw:fixed tw:inset-0 tw:z-[9999] tw:flex tw:items-center tw:justify-center tw:bg-black/80 tw:opacity-0 tw:transition-opacity tw:duration-300 tw:hidden"
+    id="VideoModal-{{ section.id }}"
+  >
+    <button
+      class="tw:absolute tw:top-[1.6rem] tw:right-[1.6rem] tw:z-20 tw:w-[4.8rem] tw:h-[4.8rem] tw:flex tw:items-center tw:justify-center tw:bg-white/30 tw:rounded-full tw:text-white tw:cursor-pointer tw:transition-colors tw:duration-200 tw:hover:bg-goluboy tw:border-none tw:p-0"
+      id="VideoModalClose-{{ section.id }}"
+      aria-label="Close video"
+      type="button"
+    >
+      <svg class="tw:w-[2.4rem] tw:h-[2.4rem]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <div class="video-modal__container tw:relative tw:w-full tw:max-w-7xl tw:mx-[1.6rem] tw:aspect-video tw:bg-black tw:overflow-hidden tw:shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
+      <!-- Стандартный компонент deferred-media из Dawn -->
+      <deferred-media
+        class="deferred-media"
+        data-media-id="{{ video_id }}"
+      >
+        <button
+          id="Deferred-Poster-{{ section.id }}"
+          class="deferred-media__poster"
+          type="button"
+          aria-label="{{ alt }}"
+        ></button>
+
+        <template>
+          {%- if is_native -%}
+            {{
+              section.settings.video
+              | video_tag:
+                image_size: '1100x',
+                autoplay: true,
+                loop: enable_loop,
+                controls: true,
+                muted: false
+            }}
+          {%- else -%}
+            {%- liquid
+              assign loop = ''
+              if enable_loop
+                assign loop = '&loop=1&playlist=' | append: video_id
+              endif
+            -%}
+            {%- if section.settings.video_url.type == 'youtube' -%}
+              <iframe
+                src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1{{ loop }}"
+                class="js-youtube"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                title="{{ section.settings.description | escape }}"
+              ></iframe>
+            {%- else -%}
+              <iframe
+                src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1{{ loop }}"
+                class="js-vimeo"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                title="{{ section.settings.description | escape }}"
+              ></iframe>
+            {%- endif -%}
+          {%- endif -%}
+        </template>
+      </deferred-media>
+    </div>
+  </div>
+
+</section>
+
+<script>
+  (function() {
+    function initVideoModal(sectionId) {
+      const trigger = document.getElementById('VideoTrigger-' + sectionId);
+      const modal = document.getElementById('VideoModal-' + sectionId);
+      const closeBtn = document.getElementById('VideoModalClose-' + sectionId);
+      const deferredMedia = modal ? modal.querySelector('deferred-media') : null;
+
+      if (!trigger || !modal || !deferredMedia) return;
+      if (trigger.dataset.initialized) return;
+      trigger.dataset.initialized = 'true';
+
+      const enableLoop = {{ section.settings.enable_video_looping | json }};
+      const videoId = {{ video_id | json }};
+      const posterBtn = deferredMedia.querySelector('.deferred-media__poster');
+
+      function openModal() {
+        // Tailwind классы для показа модалки (убираем hidden, добавляем opacity)
+        modal.classList.remove('tw:hidden', 'tw:opacity-0');
+        modal.classList.add('tw:opacity-100');
+        document.body.style.overflow = 'hidden';
+
+        const iframe = deferredMedia.querySelector('iframe');
+        const nativeVideo = deferredMedia.querySelector('video');
+
+        if (iframe) {
+          let src = iframe.src;
+          src = src.replace(/[?&]autoplay=\d/g, '');
+          src = src.replace(/[?&]loop=\d/g, '');
+          src = src.replace(/[?&]playlist=[^&]*/g, '');
+          const separator = src.includes('?') ? '&' : '?';
+          src += separator + 'autoplay=1';
+          if (enableLoop) {
+            src += '&loop=1&playlist=' + videoId;
+          }
+          iframe.src = src;
+        } else if (nativeVideo) {
+          nativeVideo.play().catch(() => {});
+        } else {
+          if (typeof deferredMedia.loadContent === 'function') {
+            deferredMedia.loadContent();
+          } else if (posterBtn) {
+            posterBtn.click();
+          }
+        }
+      }
+
+      function closeModal() {
+        // Tailwind классы для скрытия модалки
+        modal.classList.remove('tw:opacity-100');
+        modal.classList.add('tw:opacity-0');
+        
+        setTimeout(() => {
+          modal.classList.add('tw:hidden');
+          document.body.style.overflow = '';
+
+          const iframe = deferredMedia.querySelector('iframe');
+          const nativeVideo = deferredMedia.querySelector('video');
+
+          if (iframe) {
+            let src = iframe.src;
+            src = src.replace(/[?&]autoplay=\d/g, '');
+            src = src.replace(/[?&]loop=\d/g, '');
+            src = src.replace(/[?&]playlist=[^&]*/g, '');
+            const separator = src.includes('?') ? '&' : '?';
+            src += separator + 'autoplay=0';
+            iframe.src = src;
+          } else if (nativeVideo) {
+            nativeVideo.pause();
+          }
+        }, 300); // Задержка для анимации прозрачности
+      }
+
+      trigger.addEventListener('click', openModal);
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeModal();
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !modal.classList.contains('tw:hidden')) {
+          closeModal();
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('[id^="VideoTrigger-"]').forEach(function(el) {
+        const sectionId = el.id.replace('VideoTrigger-', '');
+        initVideoModal(sectionId);
+      });
+    });
+
+    document.addEventListener('shopify:section:load', function(e) {
+      const section = e.target;
+      const trigger = section.querySelector('[id^="VideoTrigger-"]');
+      if (trigger) {
+        const sectionId = trigger.id.replace('VideoTrigger-', '');
+        initVideoModal(sectionId);
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "WEBLEGKO VIDEO",
+  "tag": "section",
+  "class": "section-video",
+  "settings": [
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Native Shopify Video"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "accept": ["youtube", "vimeo"],
+      "label": "Or use YouTube/Vimeo URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "cover_image",
+      "label": "Cover Image (Poster)"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Video Alt Text / Description"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_video_looping",
+      "label": "Enable video looping",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "WEBLEGKO VIDEO",
+      "category": "Home page",
+    }
+  ]
+}
+{% endschema %}

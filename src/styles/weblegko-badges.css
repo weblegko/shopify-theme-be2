@@ -1,0 +1,5 @@
+
+
+.weblegko-product-badge{
+  @apply tw:inline-flex tw:items-center tw:px-[1.2rem] tw:py-[0.4rem] tw:h-[2.8] tw:rounded-full tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em];
+}

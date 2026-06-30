@@ -1,0 +1,213 @@
+<!-- sections/custom-newsletter-banner.liquid -->
+
+<section
+  class="tw:z-0 tw:relative tw:w-full tw:p-[1.6rem] tw:flex tw:items-center tw:overflow-hidden"
+  style="background: linear-gradient(180deg, #00b5d1 0%, #048498 100%);"
+>
+  <!-- Фоновое изображение -->
+  {%- if section.settings.bg_image != blank -%}
+    {%- assign img_width = 1920 -%}
+    {%- assign img_height = img_width | divided_by: section.settings.bg_image.aspect_ratio -%}
+    <img
+      src="{{ section.settings.bg_image | image_url: width: 1920 }}"
+      alt=""
+      width="{{ img_width }}"
+      height="{{ img_height }}"
+      class="tw:absolute tw:inset-0 tw:w-full tw:h-full tw:object-cover tw:z-0"
+      loading="lazy"
+    >
+  {%- endif -%}
+
+  <!-- Контент -->
+  <div class="tw:relative tw:z-10 tw:w-full tw:flex tw:flex-col tw:xs:flex-row tw:justify-between tw:gap-[10rem] tw:xs:gap-[3rem]">
+    <!-- ЛЕВАЯ ЧАСТЬ: Текст -->
+    <h2 class="tw:text-white tw:text-[4rem] tw:font-medium tw:leading-[1.2] tw:tracking-[-0.04em]">
+      <span>{{ section.settings.heading_line_1 -}}</span><br>
+      <span class="tw:italic">{{ section.settings.heading_line_2 }}</span>
+    </h2>
+
+    <!-- ПРАВАЯ ЧАСТЬ: Карточка с формой -->
+    <div class="tw:bg-white tw:rounded-2xl tw:p-[1.6rem] tw:w-full tw:h-[54rem] tw:max-w-[54rem] tw:flex tw:flex-col tw:min-h-[42rem]">
+      <!-- Ряд 1: Аватар + Имя/Должность -->
+      <div class="tw:flex tw:items-center tw:gap-[2rem] tw:mb-[2rem]">
+        <div class="tw:w-[10rem] tw:h-[10rem] tw:flex-shrink-0 tw:rounded-lg tw:overflow-hidden tw:bg-gray-200">
+          {%- if section.settings.avatar != blank -%}
+            {%- assign avatar_width = 200 -%}
+            {%- assign avatar_height = avatar_width | divided_by: section.settings.avatar.aspect_ratio -%}
+            <img
+              src="{{ section.settings.avatar | image_url: width: 200 }}"
+              alt="Doctor"
+              width="{{ avatar_width }}"
+              height="{{ avatar_height }}"
+              class="tw:w-full tw:h-full tw:object-cover"
+            >
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'tw:w-full tw:h-full' }}
+          {%- endif -%}
+        </div>
+        <div>
+          <h3 class="tw:mb-2 tw:text-[1.8rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.33] tw:text-grayscale-800">
+            {{ section.settings.doctor_name }}
+          </h3>
+          <p class="tw:text-[1.4rem] tw:text-grayscale-300 tw:tracking-[-0.04em] tw:leading-[1.43]">
+            {{ section.settings.doctor_role }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Ряд 2: Серый текст -->
+      <div class="tw:text-[1.8rem] tw:text-grayscale-500 tw:leading-[1.33] tw:tracking-[-0.04em] tw:flex-1 tw:mb-[2rem]">
+        {{ section.settings.text }}
+      </div>
+
+      <!-- Ряд 3: Форма (Прижата к низу) -->
+      <div class="tw:mt-auto">
+        {%- form 'customer', id: 'BannerNewsletter', class: 'newsletter-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+
+          <div class="tw:flex tw:flex-col tw:gap-[1.6rem]">
+            <!-- Инпут с Label -->
+            <div class="block">
+              <label
+                for="BannerEmail-{{ section.id }}"
+                class="tw:mb-2 tw:block tw:text-[1.4rem] tw:text-grayscale-400 tw:tracking-[-0.04em] tw:leading-[1.43]"
+              >
+                Email
+              </label>
+              <input
+                id="BannerEmail-{{ section.id }}"
+                type="email"
+                name="contact[email]"
+                style="box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);"
+                class="tw:w-full tw:border tw:border-grayscale-100 tw:rounded-[0.8rem] tw:px-4 tw:h-[3.6rem] tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:placeholder-grayscale-500 tw:focus:outline-none tw:focus:ring-2 tw:focus:ring-black"
+                placeholder="Your email address"
+                required
+              >
+            </div>
+
+            <!-- Чекбокс согласия -->
+            <label class="cb tw:flex tw:items-center tw:gap-[0.8rem] tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-grayscale-950">
+              <input
+                type="checkbox"
+                required
+                name="subscribe-check"
+                class="cb-input"
+              >
+              <span class="cb-box tw:bg-white tw:shrink-0 tw:w-[1.8rem] tw:h-[1.8rem] tw:border-2 tw:border-slate-200 tw:rounded-[0.4rem] tw:flex tw:items-center tw:justify-center tw:transition ">
+                <svg class="cb-icon tw:w-[1.8rem] tw:h-[1.8rem] tw:scale-150 tw:translate-x-1/6 tw:-translate-y-1/5 ">
+                  <use href="#check"></use>
+                </svg>
+              </span>
+
+              <span class="tw:text-[1.4rem] tw:tracking-[-0.04em] tw:leading-[1.43]"
+                ><span class="tw:text-grayscale-400">By clicking "Subscribe", I agree to the </span>
+                {%- for policy in shop.policies -%}
+                  {%- if policy.url contains 'privacy' or policy.type == 'privacy' -%}
+                    <a
+                      class="tw:text-grayscale-950"
+                      href="{{ policy.url }}"
+                      style="text-decoration-skip-ink: none; text-decoration: underline;"
+                    >privacy policy
+                  </a>
+                  {%- endif -%}
+                {%- endfor -%}
+                .
+              </span>
+            </label>
+
+            {%- if form.posted_successfully? -%}
+              <h3
+                class="tw:text-green-600 tw:text-[1.4rem] tw:font-medium tw:leading-[1.43] tw:tracking-[-0.04em]"
+                tabindex="-1"
+                autofocus
+              >
+                Thank you for subscribing!
+              </h3>
+            {%- endif -%}
+
+            {%- if form.errors -%}
+              <small
+                class="tw:text-red-500 tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:block"
+                id="BannerNewsletter-error"
+              >
+                {{ form.errors.translated_fields.email | capitalize }}
+                {{ form.errors.messages.email }}
+              </small>
+            {%- endif -%}
+
+            <!-- Кнопка -->
+            <button
+              type="submit"
+              class="
+                tw:w-full tw:bg-goluboy tw:text-white tw:h-[4.8rem] tw:rounded-[0.8rem] tw:transition-colors tw:duration-300
+                tw:tracking-[-0.04em] tw:leading-[1.5] tw:text-[1.6rem] tw:font-medium tw:hover:bg-goluboydark
+              "
+            >
+              <span> Subscribe</span>
+            </button>
+          </div>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "WEBLEGKO NEWSLETTER",
+  "tag": "section",
+  "class": "section-newsletter-banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "default": "Stay",
+      "label": "Heading Line 1"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "default": "Updated",
+      "label": "Heading Line 2"
+    },
+    {
+      "type": "header",
+      "content": "Doctor Card"
+    },
+    {
+      "type": "image_picker",
+      "id": "avatar",
+      "label": "Doctor Avatar (100x100px)"
+    },
+    {
+      "type": "text",
+      "id": "doctor_name",
+      "default": "Dr. Eric Berg",
+      "label": "Doctor Name"
+    },
+    {
+      "type": "text",
+      "id": "doctor_role",
+      "default": "Health & Nutrition Expert",
+      "label": "Doctor Role / Title"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "default": "Subscribe to our newsletter and receive exclusive offers and news! Fill out the form below or message us to stay updated on all the great deals and special offers.",
+      "label": "Description Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "WEBLEGKO NEWSLETTER",
+      "category": "Home page",
+    }
+  ]
+}
+{% endschema %}

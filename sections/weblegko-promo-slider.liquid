@@ -1,0 +1,146 @@
+<!-- sections/weblegko-promo-slider.liquid -->
+
+<section class="tw:relative tw:max-w-[144rem] tw:mx-auto tw:w-full tw:h-[20rem] tw:md:h-[26rem] tw:bg-gray-100 tw:overflow-hidden">
+  
+  <!-- Главный контейнер Swiper -->
+  <div class="swiper myPromoSwiper tw:w-full tw:h-full">
+    <div class="swiper-wrapper">
+      
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          
+          <!-- ОДИН СЛАЙД -->
+          <div class="swiper-slide tw:relative tw:h-full" {{ block.shopify_attributes }}>
+            
+            {% if block.settings.link != blank %}
+              <a href="{{ block.settings.link }}" class="tw:block tw:w-full tw:h-full tw:group">
+            {% endif %}
+
+              <!-- Картинка -->
+              {% if block.settings.image != blank %}
+                {%- assign img_width = 1200 -%}
+                {%- assign img_height = img_width | divided_by: block.settings.image.aspect_ratio -%}
+                {{ 
+                  block.settings.image 
+                  | image_url: width: 1200 
+                  | image_tag: 
+                      class: 'tw:w-full tw:h-full tw:object-cover tw:transition-transform tw:duration-500 tw:group-hover:scale-105',
+                      loading: 'lazy',
+                      widths: '600, 900, 1200',
+                      width: img_width,
+                      height: img_height,
+                      alt: block.settings.image.alt | default: 'Промо слайд'
+                }}
+              {% else %}
+                {{ 'lifestyle-2' | placeholder_svg_tag: 'tw:w-full tw:h-full tw:object-cover tw:opacity-50' }}
+              {% endif %}
+
+            {% if block.settings.link != blank %}
+              </a>
+            {% endif %}
+
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="swiper-slide tw:flex tw:items-center tw:justify-center tw:bg-gray-200 tw:text-gray-500 tw:font-inter">
+          Добавьте слайды в настройках секции
+        </div>
+      {% endif %}
+
+    </div>
+    
+    <!-- СТРЕЛКА ВЛЕВО (Chevron Left) -->
+    <button class="promo-button-prev tw:absolute tw:left-2 tw:top-1/2 tw:-translate-y-1/2 tw:z-10 tw:w-[4.5rem] tw:h-[4.5rem] tw:flex tw:items-center tw:justify-center tw:text-white tw:hover:bg-goluboy tw:rounded-full tw:duration-300 tw:transition-colors" aria-label="Предыдущий слайд">
+      <svg class="tw:w-[3.2rem] tw:h-[3.2rem]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+
+    <!-- СТРЕЛКА ВПРАВО (Chevron Right) -->
+    <button class="promo-button-next tw:absolute tw:right-2 tw:top-1/2 tw:-translate-y-1/2 tw:z-10 tw:w-[4.5rem] tw:h-[4.5rem] tw:flex tw:items-center tw:justify-center tw:text-white tw:hover:bg-goluboy tw:rounded-full tw:duration-300 tw:transition-colors" aria-label="Следующий слайд">
+      <svg class="tw:w-[3.2rem] tw:h-[3.2rem]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+
+  </div>
+
+  <!-- Инициализация Swiper (БЕЗ пагинации) -->
+  <script>
+    function initPromoSlider() {
+      if (typeof Swiper !== 'undefined') {
+        const sliderEl = document.querySelector('.myPromoSwiper');
+        // Проверяем, не инициализирован ли уже слайдер (защита от дублей при Hot Reload)
+        if (sliderEl && !sliderEl.classList.contains('swiper-initialized')) {
+          new Swiper('.myPromoSwiper', {
+            loop: true,
+            speed: 600,
+            autoplay: {
+              delay: 4000,
+              disableOnInteraction: false,
+            },
+            navigation: {
+              nextEl: '.promo-button-next',
+              prevEl: '.promo-button-prev',
+            },
+            breakpoints: {
+              320: {
+                slidesPerView: 1,
+                spaceBetween: -2,
+              }
+            }
+          });
+        }
+      }
+    }
+
+    // Запуск
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initPromoSlider);
+    } else {
+      initPromoSlider();
+    }
+
+    // Перезапуск при смене секции в кастомайзере
+    document.addEventListener('shopify:section:load', (e) => {
+      if (e.target.querySelector('.myPromoSwiper')) {
+        initPromoSlider();
+      }
+    });
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "WEBLEGKO PROMO SLIDER",
+  "class": "section-promo-slider",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Слайд",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Изображение"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Ссылка (на товар или коллекцию)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "WEBLEGKO PROMO SLIDER",
+      "category": "Home page",
+      "blocks": [
+        { "type": "slide" }        
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,441 @@
+<!-- sections/custom-faq.liquid -->
+
+<style>
+  /* ============================================ */
+  /* ПАДДИНГИ СЕКЦИИ (rem) - inline стили */
+  /* ============================================ */
+  .weblegko-faq-padding {
+    padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
+    padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
+  }
+
+  @media screen and (min-width: 640px) {
+    .weblegko-faq-padding {
+      padding-top: {{ section.settings.padding_top_tablet | default: 5 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 5 }}rem !important;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .weblegko-faq-padding {
+      padding-top: {{ section.settings.padding_top_desktop | default: 8 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_desktop | default: 8 }}rem !important;
+    }
+  }
+
+  /* ============================================ */
+  /* ОТСТУПЫ МЕЖДУ КАРТОЧКАМИ */
+  /* ============================================ */
+  .weblegko-faq-gap {
+    gap: {{ section.settings.gap_mobile | default: 1.5 }}rem !important;
+  }
+
+  @media screen and (min-width: 640px) {
+    .weblegko-faq-gap {
+      gap: {{ section.settings.gap_tablet | default: 2 }}rem !important;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .weblegko-faq-gap {
+      gap: {{ section.settings.gap_desktop | default: 2.5 }}rem !important;
+    }
+  }
+
+  /* ============================================ */
+  /* FAQ СТИЛИ */
+  /* ============================================ */
+  /* Убираем стандартный треугольник браузера */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary {
+    list-style: none;
+  }
+
+  /* МАГИЯ ПЕРЕКЛЮЧЕНИЯ + и - */
+  details[open] summary .faq-icon-plus {
+    opacity: 0;
+  }
+  details[open] summary .faq-icon-minus {
+    opacity: 1;
+  }
+</style>
+
+<!-- Слегка серый фон, чтобы белые карточки выделялись -->
+<section class="tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem]">
+  <div class="weblegko-faq-padding tw:max-w-[112rem] tw:mx-auto">
+    <!-- Заголовок секции -->
+    {%- if section.settings.heading != blank -%}
+      <div class="tw:flex tw:flex-col tw:items-center tw:gap-[1rem] tw:mb-[3rem]">
+        <h2 class="tw:font-poppins tw:text-[2.4rem] tw:sm:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.2] tw:text-center">
+          {{ section.settings.heading }}
+        </h2>
+
+        <!-- Бейджик статистики по отзывам -->
+        {%- if section.settings.rating_score != blank and section.settings.review_count != blank -%}
+          <div class="tw:mx-auto tw:inline-flex tw:items-center tw:justify-center tw:gap-2 tw:py-[0.8rem] tw:px-[2rem] tw:bg-[#e5dccb] tw:rounded-full">
+            <span class="tw:pt-1 tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-center">
+              Rated {{ section.settings.rating_score }}/5 based on {{ section.settings.review_count }} reviews
+            </span>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Контейнер для карточек -->
+    <div
+      class="weblegko-faq-gap tw:flex tw:flex-col {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      {% if settings.animations_reveal_on_scroll %}
+        data-cascade
+        style="--animation-order: {{ forloop.index }};"
+      {% endif %}
+    >
+      {%- for block in section.blocks -%}
+        <!-- КАРТОЧКА -->
+        <!-- Добавлен {% if forloop.first %} open{% endif %} чтобы первый был открыт -->
+        <details
+          class="faq-animate tw:hover:scale-[101%] tw:hover:shadow-lg tw:transition-all tw:duration-300 tw:group tw:bg-white tw:rounded-[1.2rem] tw:border tw:border-gray-200 tw:shadow-sm tw:overflow-hidden"
+          {% if forloop.first %}
+            open
+          {% endif %}
+          {{ block.shopify_attributes }}
+        >
+          <!-- Заголовок вопроса -->
+          <summary class="tw:flex tw:justify-between tw:items-start tw:p-[1.5rem] tw:md:p-[2rem] tw:cursor-pointer tw:transition-colors">
+            <span
+              class="
+                tw:pt-1 tw:text-[1.4rem] tw:font-medium tw:pr-8 tw:leading-[1.4] tw:tracking-[-0.04em]
+                tw:lg:text-[2rem]
+              "
+            >
+              {{ block.settings.question }}
+            </span>
+
+            <!-- Контейнер для иконок -->
+            <span
+              class="
+                tw:relative tw:w-[2rem] tw:h-[2rem] tw:flex-shrink-0 tw:flex tw:items-center tw:justify-center
+                tw:lg:w-[2.8rem] tw:lg:h-[2.8rem]
+              "
+            >
+              <!-- Иконка ПЛЮС -->
+              <svg
+                class="faq-icon-plus tw:absolute tw:w-full tw:h-full tw:text-golden tw:transition-opacity tw:duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6"></path>
+              </svg>
+
+              <!-- Иконка МИНУС -->
+              <svg
+                class="faq-icon-minus tw:absolute tw:w-full tw:h-full tw:text-golden tw:opacity-0 tw:transition-opacity tw:duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6"></path>
+              </svg>
+            </span>
+          </summary>
+
+          <!-- Текст ответа -->
+          <div
+            class="
+              faq-content tw:translate-y-[-1rem] tw:px-[2rem] tw:pb-[1rem] tw:text-[1.3rem] tw:text-[#8b867a] tw:leading-[1.23] tw:tracking-[-0.04em]
+              tw:lg:text-[1.6rem] tw:lg:leading-[1.5]
+            "
+          >
+            {{ block.settings.answer }}
+          </div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Функции анимации вынесены отдельно
+  function shrinkFaq(el, summary) {
+    el.animating = true;
+    const startHeight = el.offsetHeight + 'px';
+    const endHeight = summary.offsetHeight + 'px';
+    el.style.overflow = 'hidden';
+
+    const animation = el.animate([{ height: startHeight }, { height: endHeight }], {
+      duration: 300,
+      easing: 'ease-out',
+    });
+
+    animation.onfinish = () => {
+      el.open = false;
+      el.style.overflow = '';
+      el.animating = false;
+    };
+    animation.oncancel = () => {
+      el.style.overflow = '';
+      el.animating = false;
+    };
+  }
+
+  function openFaq(el, summary, content) {
+    el.animating = true;
+    el.style.height = el.offsetHeight + 'px';
+    el.open = true;
+
+    const startHeight = el.offsetHeight + 'px';
+    const endHeight = summary.offsetHeight + content.offsetHeight + 'px';
+    el.style.overflow = 'hidden';
+
+    const animation = el.animate([{ height: startHeight }, { height: endHeight }], {
+      duration: 300,
+      easing: 'ease-out',
+    });
+
+    animation.onfinish = () => {
+      el.style.overflow = '';
+      el.style.height = '';
+      el.animating = false;
+    };
+    animation.oncancel = () => {
+      el.style.overflow = '';
+      el.style.height = '';
+      el.animating = false;
+    };
+  }
+
+  // Глобальный слушатель (Event Delegation) - работает даже после Hot Reload!
+  if (!window.faqListenerAdded) {
+    document.addEventListener('click', function (e) {
+      const summary = e.target.closest('details.faq-animate > summary');
+      if (!summary) return;
+
+      e.preventDefault(); // Отменяем мгновенное открытие
+
+      const el = summary.parentElement;
+      const content = el.querySelector('.faq-content');
+
+      if (el.animating) return;
+
+      if (el.open) {
+        shrinkFaq(el, summary);
+      } else {
+        openFaq(el, summary, content);
+      }
+    });
+    window.faqListenerAdded = true; // Флаг, чтобы не вешать много слушателей
+  }
+</script>
+
+{% schema %}
+{
+  "name": "WEBLEGKO FAQ",
+  "tag": "section",
+  "class": "section-faq",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Frequently Asked Questions",
+      "label": "Heading"
+    },
+    {
+      "type": "header",
+      "content": "Reviews Statistics"
+    },
+    {
+      "type": "text",
+      "id": "rating_score",
+      "default": "4.8",
+      "label": "Average rating score (e.g., 4.8)"
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "default": "2,847",
+      "label": "Total number of reviews (e.g., 2,847)"
+    },
+    {
+      "type": "header",
+      "content": "🖥️ Desktop (≥ 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "gap_desktop",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 2.5,
+      "unit": "rem",
+      "label": "Gap between items"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "💻 Tablet (640px - 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "gap_tablet",
+      "min": 0,
+      "max": 4,
+      "step": 0.5,
+      "default": 2,
+      "unit": "rem",
+      "label": "Gap between items"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile (< 640px)"
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "default": 1.5,
+      "unit": "rem",
+      "label": "Gap between items"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding bottom"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "default": "What is your return policy?",
+          "label": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "default": "<p>We accept returns within 30 days of purchase. Items must be in their original condition.</p>",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "WEBLEGKO FAQ",
+      "category": "Home page",
+      "blocks": [
+        {
+          "type": "question",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>We accept returns within 30 days of purchase. Items must be in their original condition, unused, and with all tags attached. Refunds are processed within 5-7 business days.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>Standard shipping typically takes 3-5 business days within the US. Express shipping is available for 1-2 business day delivery. International shipping times vary by destination.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Do you ship internationally?",
+            "answer": "<p>Yes, we ship to over 50 countries worldwide. International shipping rates and delivery times are calculated at checkout based on your location.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "What payment methods do you accept?",
+            "answer": "<p>We accept all major credit cards (Visa, MasterCard, American Express), PayPal, Apple Pay, Google Pay, and Shop Pay. All transactions are secure and encrypted.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "How can I track my order?",
+            "answer": "<p>Once your order ships, you'll receive a confirmation email with a tracking number. You can also track your order in your account dashboard under 'Order History'.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer discounts for bulk orders?",
+            "answer": "<p>Yes, we offer volume discounts for bulk orders over $500. Please contact our sales team at sales@yourstore.com for a custom quote based on your requirements.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Is my personal information secure?",
+            "answer": "<p>Absolutely! We use industry-standard SSL encryption to protect your data. We never store your payment information, and we never share your personal details with third parties.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

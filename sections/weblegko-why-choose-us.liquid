@@ -1,0 +1,289 @@
+<!-- sections/weblegko-why-choose-us.liquid -->
+
+{%- liquid
+  assign bg_image = section.settings.bg_image
+  assign poster_url = bg_image | image_url: width: 1920
+-%}
+
+<style>
+  /* ============================================ */
+  /* ПАДДИНГИ СЕКЦИИ (rem) - inline стили */
+  /* ============================================ */
+  .weblegko-why-padding {
+    padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
+    padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
+  }
+
+  @media screen and (min-width: 640px) {
+    .weblegko-why-padding {
+      padding-top: {{ section.settings.padding_top_tablet | default: 5 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 5 }}rem !important;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .weblegko-why-padding {
+      padding-top: {{ section.settings.padding_top_desktop | default: 8 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_desktop | default: 8 }}rem !important;
+    }
+  }
+</style>
+
+<!-- Скрыто на мобилке (tw:hidden), видно от md (768px) -->
+<section class="tw:hidden tw:md:block tw:relative tw:overflow-hidden tw:text-white">
+  <!-- Фоновое изображение -->
+  {% if bg_image != blank %}
+    {%- assign img_width = 1920 -%}
+    {%- assign img_height = img_width | divided_by: bg_image.aspect_ratio -%}
+    <img
+      src="{{ poster_url }}"
+      alt=""
+      width="{{ img_width }}"
+      height="{{ img_height }}"
+      class="tw:absolute tw:inset-0 tw:w-full tw:h-full tw:object-cover tw:z-0"
+      loading="lazy"
+    >
+  {% else %}
+    <div class="tw:absolute tw:inset-0 tw:bg-grayscale-950 tw:z-0"></div>
+  {% endif %}
+
+  <!-- Темный оверлей для контраста текста и усиления эффекта стекла -->
+  <div class="tw:absolute tw:inset-0 tw:bg-black/50 tw:z-[1]"></div>
+
+  <!-- Контент -->
+  <div class="weblegko-why-padding tw:relative tw:z-0 tw:max-w-[112rem] tw:mx-auto tw:px-[1.6rem] tw:xl:px-0">
+    <!-- Заголовок секции -->
+    {%- if section.settings.heading != blank -%}
+      <div class="tw:flex tw:flex-col tw:items-center tw:gap-[1rem] tw:mb-[3rem] tw:md:mb-[3.5rem]">
+        <h2 class="tw:text-[2.4rem] tw:md:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.33] tw:lg:leading-[1.2] tw:text-center">
+          {{ section.settings.heading }}
+        </h2>
+
+        {%- if section.settings.description != blank -%}
+          <div class="tw:mx-auto tw:inline-flex tw:items-center tw:justify-center tw:gap-2 tw:py-[0.8rem] tw:px-[2rem] tw:bg-white/20 tw:backdrop-blur-sm tw:rounded-full">
+            <span class="tw:pt-1 tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-center">
+              {{ section.settings.description }}
+            </span>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Сетка карточек (2 колонки) -->
+    <div class="tw:grid tw:grid-cols-2 tw:gap-[1rem]">
+      {%- for block in section.blocks -%}
+        <div
+          class="{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {% if settings.animations_reveal_on_scroll %}
+            data-cascade
+            style="--animation-order: {{ forloop.index }};"
+          {% endif %}
+          {{ block.shopify_attributes }}
+        >
+          <!-- КАРТОЧКА (Эффект стекла) -->
+          <div class="tw:flex tw:flex-col tw:items-center tw:text-center tw:p-[2rem] tw:rounded-[1.2rem] tw:bg-white/8 tw:backdrop-blur-md tw:border tw:border-white/20 tw:transition-all tw:duration-300 tw:hover:bg-white/20 tw:h-full">
+            <!-- Иконка -->
+            {%- if block.settings.icon_image != blank -%}
+              <div class="tw:w-[6rem] tw:h-[6rem] tw:flex tw:items-center tw:justify-center tw:mb-[2rem] tw:drop-shadow-lg">
+                <img
+                  src="{{ block.settings.icon_image | image_url: width: 100 }}"
+                  alt="{{ block.settings.title | escape }}"
+                  width="180"
+                  height="180"
+                  class="tw:w-full tw:h-full tw:object-contain"
+                  loading="lazy"
+                >
+              </div>
+            {%- else -%}
+              <div class="tw:w-[5rem] tw:h-[5rem] tw:flex tw:items-center tw:justify-center tw:mb-[2rem] tw:bg-white/20 tw:rounded-full">
+                <svg
+                  class="tw:w-[2.4rem] tw:h-[2.4rem] tw:opacity-70"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+            {%- endif -%}
+
+            <!-- Заголовок карточки -->
+            {%- if block.settings.title != blank -%}
+              <h3 class="tw:text-[2rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.4] tw:mb-[1rem]">
+                {{ block.settings.title }}
+              </h3>
+            {%- endif -%}
+
+            <!-- Описание карточки -->
+            {%- if block.settings.text != blank -%}
+              <div class="tw:text-[1.6rem] tw:text-white/60 tw:leading-[1.5] tw:tracking-[-0.04em]">
+                {{ block.settings.text }}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "WEBLEGKO WHY US",
+  "tag": "section",
+  "class": "section-why-us",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Why Choose Us",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "default": "Science-backed nutrition solutions",
+      "label": "Description Badge"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "header",
+      "content": "🖥️ Desktop (≥ 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "💻 Tablet (640px - 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile (< 640px)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding bottom"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Expert Team",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Our professionals provide top-tier service and unparalleled industry experience.</p>",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "WEBLEGKO WHY US",
+      "category": "Home page",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "title": "Whole-food nutrition",
+            "text": "<p>We use only natural ingredients, free from synthetic isolates and artificial additives.</p>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "GMP-certified quality",
+            "text": "<p> Every batch is manufactured to pharmaceutical-grade standards, ensuring maximum safety and purity</p>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Premium ingredients",
+            "text": "<p>Our ingredients are sourced from reliable global partners who share our commitment to quality</p>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Maximum bioavailability",
+            "text": "<p>Each formula is meticulously crafted to enhance absorption and deliver optimal results</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

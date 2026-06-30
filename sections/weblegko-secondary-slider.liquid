@@ -1,0 +1,310 @@
+<!-- sections/weblegko-secondary-slider.liquid -->
+
+{%- style -%}
+  /* Кастомная пагинация: полосочки без закруглений по центру */
+  .secondary-slider-pagination {
+    position: absolute;
+    bottom: 2rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    display: flex !important;
+    justify-content: center !important;
+    width: auto !important;
+    gap: 0.8rem;
+    z-index: 20;
+  }
+
+  .secondary-slider-pagination .custom-bullet {
+    width: 4rem !important;
+    height: 0.2rem !important;
+    border-radius: 0 !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .secondary-slider-pagination .custom-bullet .bullet-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #ffffff !important;
+    border-radius: 0;
+    transition: width 0.3s ease;
+    width: 0%;
+  }
+
+  .secondary-slider-pagination .custom-bullet.active .bullet-progress {
+    background: #ffffff !important;
+  }
+
+  .secondary-slider-pagination .custom-bullet:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+  }
+
+  /* Скрываем стандартные булеты Swiper */
+  .secondary-slider-pagination .swiper-pagination-bullet {
+    display: none !important;
+  }
+{%- endstyle -%}
+
+<section class="tw:relative tw:max-w-[144rem] tw:mx-auto tw:w-full tw:h-[19.8rem] tw:md:h-[73.1rem] tw:overflow-hidden">
+  
+  <!-- Главный контейнер Swiper -->
+  <div class="swiper mySecondarySwiper tw:w-full tw:h-full">
+    <div class="swiper-wrapper">
+      
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          
+          <!-- ОДИН СЛАЙД -->
+          <div class="swiper-slide tw:relative tw:h-full" {{ block.shopify_attributes }}>
+            
+            {% if block.settings.link != blank %}
+              <a href="{{ block.settings.link }}" class="tw:block tw:w-full tw:h-full tw:group">
+            {% endif %}
+
+              <!-- Картинка -->
+              {% if block.settings.image != blank %}
+                {%- assign img_width = 1200 -%}
+                {%- assign img_height = img_width | divided_by: block.settings.image.aspect_ratio -%}
+                {{ 
+                  block.settings.image 
+                  | image_url: width: 1200 
+                  | image_tag: 
+                      class: 'tw:w-full tw:h-full tw:object-cover tw:transition-transform tw:duration-500 tw:group-hover:scale-105',
+                      loading: 'lazy',
+                      widths: '600, 900, 1200',
+                      width: img_width,
+                      height: img_height,
+                      alt: block.settings.image.alt | default: 'Слайд'
+                }}
+              {% else %}
+                {{ 'lifestyle-2' | placeholder_svg_tag: 'tw:w-full tw:h-full tw:object-cover tw:opacity-50' }}
+              {% endif %}
+
+            {% if block.settings.link != blank %}
+              </a>
+            {% endif %}
+
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="swiper-slide tw:flex tw:items-center tw:justify-center tw:bg-gray-200 tw:text-gray-500 tw:font-inter">
+          Добавьте слайды в настройках секции
+        </div>
+      {% endif %}
+
+    </div>
+    
+    <!-- Пагинация (Полосочки) -->
+    <div class="secondary-slider-pagination"></div>
+
+    <!-- СТРЕЛКА ВЛЕВО -->
+    <button class="secondary-button-prev tw:absolute tw:left-2 tw:top-1/2 tw:-translate-y-1/2 tw:z-10 tw:w-[4.5rem] tw:h-[4.5rem] tw:flex tw:items-center tw:justify-center tw:text-white tw:hover:bg-goluboy tw:rounded-full tw:duration-300 tw:transition-colors" aria-label="Предыдущий слайд">
+      <svg class="tw:w-[3.2rem] tw:h-[3.2rem]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+
+    <!-- СТРЕЛКА ВПРАВО -->
+    <button class="secondary-button-next tw:absolute tw:right-2 tw:top-1/2 tw:-translate-y-1/2 tw:z-10 tw:w-[4.5rem] tw:h-[4.5rem] tw:flex tw:items-center tw:justify-center tw:text-white tw:hover:bg-goluboy tw:rounded-full tw:duration-300 tw:transition-colors" aria-label="Следующий слайд">
+      <svg class="tw:w-[3.2rem] tw:h-[3.2rem]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+
+  </div>
+
+  <!-- Инициализация Swiper -->
+  <script>
+    function initSecondarySlider() {
+      if (typeof Swiper !== 'undefined') {
+        const sliderEl = document.querySelector('.mySecondarySwiper');
+        if (sliderEl && !sliderEl.classList.contains('swiper-initialized')) {
+          // Получаем количество реальных слайдов
+          const realSlides = sliderEl.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate)');
+          const totalSlides = realSlides.length;
+          
+          // Определяем количество булетов (максимум 3)
+          const bulletsCount = Math.min(totalSlides, 3);
+          
+          // Получаем контейнер пагинации
+          const paginationEl = document.querySelector('.secondary-slider-pagination');
+          
+          // Очищаем контейнер
+          paginationEl.innerHTML = '';
+          
+          // Создаем кастомные булеты
+          for (let i = 0; i < bulletsCount; i++) {
+            const bullet = document.createElement('span');
+            bullet.className = 'custom-bullet';
+            bullet.dataset.index = i;
+            
+            // Создаем прогресс-бар
+            const progress = document.createElement('span');
+            progress.className = 'bullet-progress';
+            progress.style.width = '0%';
+            
+            bullet.appendChild(progress);
+            paginationEl.appendChild(bullet);
+          }
+          
+          // Инициализируем Swiper с отключенной пагинацией
+          const swiper = new Swiper('.mySecondarySwiper', {
+            loop: true,
+            speed: 600,
+            autoplay: {
+              delay: 4000,
+              disableOnInteraction: false,
+            },
+            pagination: false,
+            navigation: {
+              nextEl: '.secondary-button-next',
+              prevEl: '.secondary-button-prev',
+            },
+            breakpoints: {
+              320: {
+                slidesPerView: 1,
+                spaceBetween: -2,
+              }
+            }
+          });
+          
+          // Функция обновления булетов
+          function updateBullets(swiperInstance) {
+            let currentIndex = swiperInstance.realIndex % totalSlides;
+            
+            const bullets = document.querySelectorAll('.secondary-slider-pagination .custom-bullet');
+            
+            if (bullets.length === 0) return;
+            
+            const bulletsCount = bullets.length;
+            
+            bullets.forEach((bullet, idx) => {
+              // Определяем диапазон слайдов для этого булета
+              let start = Math.round((idx / bulletsCount) * totalSlides);
+              let end = Math.round(((idx + 1) / bulletsCount) * totalSlides);
+              
+              // Для последнего булета включаем все оставшиеся
+              if (idx === bulletsCount - 1) {
+                end = totalSlides;
+              }
+              
+              // Проверяем активность
+              const isActive = currentIndex >= start && currentIndex < end;
+              bullet.classList.toggle('active', isActive);
+              
+              // Вычисляем прогресс
+              let progress = 0;
+              if (isActive) {
+                const positionInGroup = currentIndex - start;
+                const groupSize = end - start;
+                progress = (positionInGroup / groupSize) * 100;
+              } else if (currentIndex >= end) {
+                progress = 100;
+              }
+              
+              // Обновляем прогресс-бар
+              const progressBar = bullet.querySelector('.bullet-progress');
+              if (progressBar) {
+                progressBar.style.width = Math.min(Math.max(progress, 0), 100) + '%';
+              }
+              
+              // Обработчик клика
+              bullet.onclick = function() {
+                const targetIndex = Math.round((idx / bulletsCount) * totalSlides);
+                // Находим слайд с нужным индексом в loop режиме
+                const slides = swiperInstance.slides;
+                for (let i = 0; i < slides.length; i++) {
+                  if (!slides[i].classList.contains('swiper-slide-duplicate')) {
+                    const slideIndex = parseInt(slides[i].getAttribute('data-swiper-slide-index'));
+                    if (slideIndex === targetIndex) {
+                      swiperInstance.slideTo(i);
+                      break;
+                    }
+                  }
+                }
+              };
+            });
+          }
+          
+          // Обновляем булеты при событиях
+          swiper.on('init', function() {
+            setTimeout(() => updateBullets(this), 100);
+          });
+          
+          swiper.on('slideChange', function() {
+            updateBullets(this);
+          });
+          
+          swiper.on('resize', function() {
+            updateBullets(this);
+          });
+          
+          // Сохраняем ссылку
+          sliderEl.swiper = swiper;
+        }
+      }
+    }
+
+    // Запуск (с защитой от двойной инициализации при Hot Reload)
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSecondarySlider);
+    } else {
+      initSecondarySlider();
+    }
+
+    document.addEventListener('shopify:section:load', (e) => {
+      if (e.target.querySelector('.mySecondarySwiper')) {
+        const oldSlider = e.target.querySelector('.mySecondarySwiper.swiper-initialized');
+        if (oldSlider && oldSlider.swiper) {
+          oldSlider.swiper.destroy(true, true);
+        }
+        // Очищаем пагинацию
+        const paginationEl = document.querySelector('.secondary-slider-pagination');
+        if (paginationEl) {
+          paginationEl.innerHTML = '';
+        }
+        initSecondarySlider();
+      }
+    });
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "WEBLEGKO SECONDARY SLIDER",
+  "class": "section-secondary-slider",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Слайд",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Изображение"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Ссылка (на товар или коллекцию)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "WEBLEGKO SECONDARY SLIDER",
+      "category": "Home page",
+      "blocks": [
+        { "type": "slide" }        
+      ]
+    }
+  ]
+}
+{% endschema %}

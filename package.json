@@ -1,0 +1,35 @@
+{
+  "name": "drberg-theme",
+  "version": "1.0.0",
+  "description": "Shopify theme for DrBergNZ",
+  "scripts": {
+    "watch": "npx @tailwindcss/cli -i ./src/styles/tailwind.css -o ./assets/tailwind.css --watch",
+    "build": "npx @tailwindcss/cli -i ./src/styles/tailwind.css -o ./assets/tailwind.css --minify",
+    "shop": "shopify theme dev --store=drbergnzdev.myshopify.com --theme-editor-sync --ignore=config/settings_data.json --ignore=templates/product.json",
+    "open-browser": "wait-on http://127.0.0.1:9292 && opn http://127.0.0.1:9292/?hr=9292",
+    "dev": "concurrently \"npm run watch\" \"npm run shop\" \"npm run open-browser\"",
+    "fonts": "node .scripts/fonts.js",
+    "svg": "node .scripts/svg.js",
+    "webp": "node .scripts/webp.js"    
+  },
+  "keywords": [],
+  "author": "weblegko",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.1",
+    "chalk": "^5.6.2",
+    "concurrently": "^10.0.3",
+    "fonteditor-core": "^2.6.3",
+    "fs-extra": "^11.3.5",
+    "glob": "^13.0.6",
+    "opn-cli": "^4.1.0",
+    "path": "^0.12.7",
+    "sharp": "^0.35.1",
+    "svg-sprite": "^2.0.4",
+    "tailwindcss": "^4.3.1",
+    "ttf2woff2": "^8.0.1",
+    "url": "^0.11.4",
+    "wait-on": "^9.0.10"
+  }
+}

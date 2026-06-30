@@ -1,0 +1,26 @@
+.button--golden {
+  @apply tw:min-h-[4rem] tw:text-[1.4rem] tw:tracking-[-0.01em] tw:leading-[1.43] tw:bg-golden tw:text-grayscale-950 tw:border tw:border-golden tw:after:content-none tw:before:content-none
+         tw:hover:bg-goldendark tw:hover:border-goldendark tw:transition-colors tw:duration-200;
+}
+
+.button--golden-transparent {
+  @apply tw:min-h-[4rem] tw:text-[1.4rem] tw:tracking-[-0.01em] tw:leading-[1.43] tw:bg-golden/20 tw:text-golden tw:border tw:border-golden tw:after:content-none tw:before:content-none
+         tw:hover:bg-golden/30 tw:hover:text-golden tw:transition-colors tw:duration-200;
+}
+
+.button--goluboy {
+  @apply tw:min-h-[4rem] tw:text-[1.4rem] tw:tracking-[-0.01em] tw:leading-[1.43] tw:bg-goluboy tw:text-white tw:border tw:border-goluboy tw:after:content-none tw:before:content-none
+         tw:hover:bg-goluboydark tw:hover:border-goluboy tw:transition-colors tw:duration-200;
+}
+
+.button--secondary {
+  @apply tw:min-h-[4rem] tw:text-[1.4rem] tw:tracking-[-0.01em] tw:leading-[1.43] tw:bg-golden tw:rounded-full tw:text-grayscale-950 tw:border tw:border-golden tw:after:content-none tw:before:content-none
+         tw:hover:bg-goldendark tw:hover:border-goldendark tw:transition-colors tw:duration-200;
+}
+
+.golden-color{
+  color: rgb(255, 195, 86);
+}
+.golubiy-color{
+  color: rgb(0, 181, 209);
+}

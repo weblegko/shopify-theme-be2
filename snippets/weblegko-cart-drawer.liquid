@@ -1,0 +1,332 @@
+<!-- snippets/weblegko-cart-drawer.liquid -->
+
+<cart-drawer>
+  <!-- Оверлей -->
+  <div
+    id="cart-drawer-overlay"
+    class="tw:fixed tw:inset-0 tw:bg-black/30 tw:opacity-0 tw:invisible tw:transition-all tw:duration-300"
+  >
+    <span></span>
+  </div>
+
+  <!-- Сам дровер -->
+  <div
+    id="cart-drawer"
+    class="tw:fixed tw:top-0 tw:right-0 tw:h-full tw:w-full tw:max-w-[40rem] tw:bg-white tw:z-[120] tw:shadow-xl tw:transform tw:translate-x-full tw:transition-transform tw:duration-300 tw:flex tw:flex-col"
+  >
+    <!-- Шапка -->
+    <div class="tw:flex tw:justify-between tw:items-center tw:px-[2rem] tw:py-[1rem] tw:border-b tw:border-grayscale-100">
+      <h2 class="tw:text-[2.4rem] ">Shopping cart</h2>
+      <button
+        type="button"
+        id="cart-drawer-close"
+        class="tw:text-grayscale-950 tw:hover:text-grayscale-600 hover:tw:text-gray-700 tw:transition-colors"
+        aria-label="{{ 'accessibility.close' | t }}"
+      >
+        <svg class="tw:w-[2.4rem] tw:h-[2.4rem]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Список товаров (заполняется через JS) -->
+    <div id="cart-drawer-items" class="tw:flex-1 tw:overflow-y-auto tw:p-6">
+      <div class="tw:text-center tw:text-gray-500 tw:mt-10" id="cart-drawer-empty">
+        {{ 'sections.cart.empty' | t }}
+      </div>
+    </div>
+
+    <!-- Футер с итогами и кнопками (total увеличен) -->
+    <div id="cart-drawer-footer" class="tw:border-t tw:border-gray-200 tw:p-6 tw:space-y-4 tw:bg-gray-50">
+      <div class="tw:flex tw:justify-between tw:items-center tw:text-2xl tw:font-bold">
+        <span>{{ 'sections.cart.headings.total' | t }}</span>
+        <span id="cart-drawer-total" class="tw:text-3xl">$0.00</span>
+      </div>
+      <div class="tw:flex tw:flex-col tw:gap-3">
+        <!-- Кнопка "View cart" -->
+        <a
+          href="{{ routes.cart_url }}"
+          id="cart-drawer-view-cart"
+          class="
+            tw:flex tw:items-center tw:justify-center
+            tw:tracking-[-0.04em] tw:px-6 tw:h-[4rem]
+            tw:border tw:border-gray-300 tw:rounded-full
+            tw:text-[1.6rem] tw:font-medium tw:bg-white hover:tw:bg-gray-50 tw:transition-colors
+          "
+        >
+          {{ 'general.cart.view' | t: count: cart.item_count }}
+        </a>
+
+        <!-- Кнопка "Checkout" -->
+        <form action="{{ routes.cart_url }}" method="post" id="cart-drawer-checkout-form">
+          <button
+            type="submit"
+            name="checkout"
+            form="cart-drawer-checkout-form"
+            class="
+              tw:w-full tw:flex tw:items-center tw:justify-center
+              tw:tracking-[-0.04em] tw:px-6 tw:h-[4rem]
+              tw:bg-golden hover:tw:bg-goldendark tw:rounded-full
+              tw:text-[1.6rem] tw:font-medium tw:text-white tw:transition-colors
+            "
+          >
+            {{ 'sections.cart.checkout' | t }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</cart-drawer>
+
+<!-- Глобальный лоадер (показывается при AJAX-запросах) -->
+<div
+  id="global-loader"
+  class="tw:fixed tw:inset-0 tw:z-[200] tw:flex tw:items-center tw:justify-center tw:bg-black/50 tw:opacity-0 tw:invisible tw:transition-all tw:duration-300"
+>
+  <div class="tw:bg-white tw:rounded-full tw:p-6 tw:shadow-2xl">
+    <svg
+      class="tw:animate-spin tw:w-12 tw:h-12 tw:text-golden"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle class="tw:opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="tw:opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    </svg>
+  </div>
+</div>
+
+
+<!-- snippets/weblegko-cart-drawer-script.liquid -->
+<script>
+  window.WeblegkoCart = window.WeblegkoCart || {};
+
+  (function () {
+    let isAdding = false;
+
+    WeblegkoCart.updateCartCounter = function () {
+      fetch('/cart.js')
+        .then(res => res.json())
+        .then(cart => {
+          const counter = document.querySelector('.cart-count-bubble');
+          if (counter) {
+            const count = cart.item_count;
+            counter.textContent = count;
+            counter.style.display = count > 0 ? 'flex' : 'none';
+          }
+        })
+        .catch(err => console.warn('Не удалось обновить счётчик:', err));
+    };
+
+    WeblegkoCart.loadCartDrawerContent = function () {
+      fetch('/cart.js')
+        .then(response => response.json())
+        .then(cart => {
+          const container = document.querySelector('#cart-drawer-items');
+          const totalEl = document.querySelector('#cart-drawer-total');
+          const viewCartButton = document.getElementById('cart-drawer-view-cart');
+          if (!container) return;
+
+          container.innerHTML = '';
+
+          if (cart.items.length === 0) {
+            container.innerHTML = `
+              <div class="tw:text-center tw:text-gray-500 tw:mt-10">
+                {{ 'sections.cart.empty' | t }}
+              </div>
+            `;
+            if (totalEl) totalEl.textContent = '$0.00';
+            return;
+          }
+
+          cart.items.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'tw:flex tw:items-start tw:gap-[1rem] tw:py-[1rem] tw:border-b tw:border-grayscale-100';
+            const price = (item.price / 100).toFixed(2);
+            const total = (item.line_price / 100).toFixed(2);
+            const imgSrc = item.image || '{{ "icon-apple.svg" | asset_url }}';
+
+            itemDiv.innerHTML = `
+              <img src="${imgSrc}" alt="${item.title}" width="96" height="96" class="tw:border tw:border-grayscale-100 tw:rounded-[0.8rem] tw:w-[6rem] tw:h-[6rem] tw:object-cover tw:rounded-[0.8rem] tw:flex-shrink-0">
+              <div class="tw:flex-1 tw:min-w-0">
+                <div class="tw:text-[1.2rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.2]">${item.title}</div>
+                <div class="tw:text-[1.6rem] tw:text-grayscale-600 tw:tracking-[-0.04em]">${item.quantity} × $${price}</div>
+              </div>
+              <div class="tw:text-[2rem] tw:font-semibold tw:tracking-[-0.04em] tw:whitespace-nowrap">$${total}</div>
+            `;
+            container.appendChild(itemDiv);
+          });
+
+          if (totalEl) {
+            const totalPrice = (cart.total_price / 100).toFixed(2);
+            totalEl.textContent = `$${totalPrice}`;
+          }
+          if (viewCartButton) {
+            viewCartButton.textContent = `View cart (${cart.item_count})`;
+          }
+        })
+        .catch(err => console.warn('Ошибка загрузки корзины:', err));
+    };
+
+    WeblegkoCart.showLoader = function () {
+      const loader = document.getElementById('global-loader');
+      if (loader) {
+        loader.classList.remove('tw:opacity-0', 'tw:invisible');
+        loader.classList.add('tw:opacity-100', 'tw:visible');
+      }
+    };
+
+    WeblegkoCart.hideLoader = function () {
+      const loader = document.getElementById('global-loader');
+      if (loader) {
+        loader.classList.add('tw:opacity-0', 'tw:invisible');
+        loader.classList.remove('tw:opacity-100', 'tw:visible');
+      }
+    };
+
+    WeblegkoCart.openCartDrawer = function () {
+      const overlay = document.querySelector('#cart-drawer-overlay');
+      const drawer = document.querySelector('#cart-drawer');
+      if (!overlay || !drawer) return;
+
+      overlay.classList.remove('tw:opacity-0', 'tw:invisible');
+      overlay.classList.add('tw:opacity-100', 'tw:visible');
+      drawer.classList.remove('tw:translate-x-full');
+      drawer.classList.add('tw:translate-x-0');
+
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.top = `-${window.scrollY}px`;
+
+      WeblegkoCart.loadCartDrawerContent();
+    };
+
+    WeblegkoCart.closeCartDrawer = function () {
+      const overlay = document.querySelector('#cart-drawer-overlay');
+      const drawer = document.querySelector('#cart-drawer');
+      if (!overlay || !drawer) return;
+
+      overlay.classList.add('tw:opacity-0', 'tw:invisible');
+      overlay.classList.remove('tw:opacity-100', 'tw:visible');
+      drawer.classList.add('tw:translate-x-full');
+      drawer.classList.remove('tw:translate-x-0');
+
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
+      window.scrollTo(0, parseInt(document.body.style.top || '0') * -1);
+    };
+
+    // Заглушка для quick-add
+    let notif = document.querySelector('cart-notification');
+    if (!notif) {
+      notif = document.createElement('cart-notification');
+      notif.style.display = 'none';
+      document.body.appendChild(notif);
+    }
+    if (notif && typeof notif.setActiveElement !== 'function') {
+      notif.setActiveElement = function () {};
+    }
+
+    // Отключаем на /cart и /checkout
+    const path = window.location.pathname;
+    if (path === '/cart' || path === '/checkout' || path.startsWith('/checkout/')) {
+      return;
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // ---- Перехват всех форм (capture) ----
+      document.addEventListener(
+        'submit',
+        function (event) {
+          const form = event.target;
+          const action = form.getAttribute('action');
+          if (form && action && action.includes('/cart/add')) {
+            // Логируем перехват
+            console.log('🛒 Перехват формы:', form);
+
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+
+            if (isAdding) {
+              console.warn('⏳ Уже идёт добавление, пропускаем');
+              return;
+            }
+            isAdding = true;
+
+            const formData = new FormData(form);
+            const variantId = formData.get('id');
+            const quantity = formData.get('quantity') || 1;
+
+            if (!variantId) {
+              console.error('❌ ID варианта не найден');
+              isAdding = false;
+              return;
+            }
+
+            console.log('📦 Отправка:', { variantId, quantity });
+
+            WeblegkoCart.showLoader();
+
+            fetch('/cart/add.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                items: [{ id: parseInt(variantId), quantity: parseInt(quantity) }],
+              }),
+            })
+              .then(async (response) => {
+                if (!response.ok) {
+                  const text = await response.text();
+                  console.error('❌ Ошибка сервера (' + response.status + '):', text);
+                  throw new Error('Ошибка добавления: ' + text);
+                }
+                return response.json();
+              })
+              .then((cart) => {
+                console.log('✅ Товар добавлен, корзина:', cart);
+                WeblegkoCart.updateCartCounter();
+                WeblegkoCart.openCartDrawer();
+              })
+              .catch((error) => {
+                console.error('❌ Ошибка:', error);
+                alert('Не удалось добавить товар. Подробности в консоли (F12).');
+              })
+              .finally(() => {
+                WeblegkoCart.hideLoader();
+                isAdding = false;
+              });
+          }
+        },
+        true // capture phase
+      );
+
+      // ---- События для иконки, крестика, оверлея ----
+      const cartIcon = document.querySelector('#cart-icon-bubble');
+      if (cartIcon) {
+        cartIcon.addEventListener('click', function (event) {
+          event.preventDefault();
+          WeblegkoCart.openCartDrawer();
+        });
+      }
+
+      const closeBtn = document.querySelector('#cart-drawer-close');
+      const overlay = document.querySelector('#cart-drawer-overlay');
+      if (closeBtn) closeBtn.addEventListener('click', WeblegkoCart.closeCartDrawer);
+      if (overlay) overlay.addEventListener('click', WeblegkoCart.closeCartDrawer);
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          WeblegkoCart.closeCartDrawer();
+        }
+      });
+
+      WeblegkoCart.updateCartCounter();
+    });
+  })();
+</script>

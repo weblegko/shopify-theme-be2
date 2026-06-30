@@ -1,0 +1,443 @@
+<!-- sections/weblegko-doctor-grid.liquid -->
+
+<section class="tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem]">
+  <div class="tw:flex tw:flex-col tw:lg:flex-row tw:gap-[1rem] tw:lg:gap-[1rem] tw:py-[1.6rem]">
+    <!-- ЛЕВАЯ КОЛОНКА: Фото доктора -->
+    <div class="tw:w-full tw:lg:w-1/2">
+      <div class="tw:relative tw:lg:aspect-auto tw:lg:h-full tw:rounded-[0.8rem] tw:overflow-hidden tw:bg-[#f2f1ed]">
+        <!-- Фото -->
+        {%- if section.settings.doctor_image != blank -%}
+          {%- assign img_width = 800 -%}
+          {%- assign img_height = img_width | divided_by: section.settings.doctor_image.aspect_ratio -%}
+          <img
+            src="{{ section.settings.doctor_image | image_url: width: 800 }}"
+            alt="{{ section.settings.doctor_name | escape }}"
+            class="tw:xs:aspect-[700/812] tw:w-full tw:h-full tw:object-cover tw:object-bottom"
+            loading="lazy"
+            width="{{ img_width }}"
+            height="{{ img_height }}"
+          >
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'tw:w-full tw:h-full tw:object-cover' }}
+        {%- endif -%}
+
+        <!-- Бейдж Имя и Профессия (Правый верхний угол) -->
+        {%- if section.settings.doctor_name != blank -%}
+          <div
+            class="
+              tw:absolute tw:top-[0.5rem] tw:left-[0.5rem] tw:bg-white/90 tw:backdrop-blur-sm
+              tw:px-[1.6rem] tw:py-[1rem] tw:rounded-[0.4rem] tw:shadow-md
+            "
+            style="backdrop-filter: blur(20rem);"
+          >
+            <h2 class="tw:text-[1.4rem] tw:font-medium tw:text-grayscale-800 tw:leading-[1.43] tw:tracking-[-0.04em]">
+              {{ section.settings.doctor_name }}
+            </h2>
+            {%- if section.settings.doctor_profession != blank -%}
+              <p class="tw:text-[1.4rem] tw:text-grayscale-300 tw:leading-[1.43] tw:tracking-[-0.04em]">
+                {{ section.settings.doctor_profession }}
+              </p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <!-- Бейджи Соцсетей (Нижний левый угол) -->
+        <div class="tw:absolute tw:bottom-[0.5rem] tw:right-[0.5rem] tw:flex tw:flex-col tw:gap-[0.5rem]">
+          {%- if section.settings.instagram_count != blank -%}
+            <div
+              class="tw:w-[15.5rem] tw:flex tw:justify-center tw:items-center tw:gap-[0.8rem] tw:bg-white/90 tw:px-[1.2rem] tw:py-[0.8rem] tw:rounded-[0.4rem]"
+              style="backdrop-filter: blur(20rem);"
+            >
+              <!-- Иконка Instagram -->
+              <div class="tw:w-[2rem] tw:h-[2rem] tw:shrink-0">
+                <img
+                  src="{{ 'instagram.webp' | asset_url }}"
+                  alt="Instagram"
+                  class="tw:w-full tw:h-full tw:object-cover"
+                  loading="lazy"
+                  width="60"
+                  height="60"
+                >
+              </div>
+
+              <span class="tw:text-[1.4rem] tw:text-grayscale-800 tw:font-medium tw:leading-[1.43] tw:tracking-[-0.04em] tw:whitespace-nowrap">
+                {{- section.settings.instagram_count -}}
+              </span>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.youtube_count != blank -%}
+            <div
+              class="tw:w-[15.5rem] tw:flex tw:justify-center tw:items-center tw:gap-[0.8rem] tw:bg-white/90 tw:px-[1.2rem] tw:py-[0.8rem] tw:rounded-[0.4rem]"
+              style="backdrop-filter: blur(20rem);"
+            >
+              <!-- Иконка YouTube -->
+              <div class="tw:w-[2rem] tw:h-[2rem] tw:shrink-0">
+                <img
+                  src="{{ 'youtube-around.webp' | asset_url }}"
+                  alt="Youtube"
+                  class="tw:w-full tw:h-full tw:object-cover"
+                  loading="lazy"
+                  width="60"
+                  height="60"
+                >
+              </div>
+
+              <span class="tw:text-[1.4rem] tw:text-grayscale-800 tw:font-medium tw:leading-[1.43] tw:tracking-[-0.04em] tw:whitespace-nowrap">
+                {{- section.settings.youtube_count -}}
+              </span>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    <!-- ПРАВАЯ КОЛОНКА: Инфо и Слайдер -->
+    <div class="tw:w-full tw:lg:w-1/2 tw:flex tw:flex-col tw:gap-[1rem]">
+      <!-- Ряд 1: Карточка с информацией -->
+      <div class="tw:flex-1 tw:bg-white tw:p-[1.6rem] tw:lg:p-[2.4rem] tw:rounded-[0.8rem] tw:flex tw:flex-col">
+        {%- if section.settings.info_heading != blank -%}
+          <div class="tw:flex tw:flex-col-reverse tw:sm:flex-row tw:gap-[2rem] tw:justify-between tw:items-start">
+            <h2 class="tw:text-[4rem] tw:lg:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.2] tw:text-grayscale-950">
+              <span>{{ section.settings.info_heading }}</span><br>
+              {%- if section.settings.info_heading_italic != blank -%}
+                <span class="tw:text-[#004c5a]">&</span>
+                <span class="tw:italic tw:text-[#004c5a] tw:font-play">
+                  {{ section.settings.info_heading_italic -}}
+                </span>
+              {%- endif -%}
+            </h2>
+
+            {%- if section.settings.youtube_count != blank -%}
+              <div
+                class="tw:border tw:border-grayscale-50 tw:h-[3.6rem] tw:inline-flex tw:justify-center tw:items-center
+                  tw:bg-white/90 tw:px-[0.6rem] tw:py-[0.8rem] tw:rounded-[0.8rem]
+                "
+                style="backdrop-filter: blur(20rem);"
+              >
+                <svg class="tw:w-[2rem] tw:h-[2rem]">
+                  <use href="#runo-left"></use>
+                </svg>
+
+                <span class="tw:flex tw:items-center tw:gap-[0.8rem]">
+                  <svg class="tw:w-[2rem] tw:h-[2rem]">
+                    <use href="#youtube"></use>
+                  </svg>
+
+                  <span class="tw:text-[1.4rem] tw:text-grayscale-800 tw:font-medium tw:leading-[1.43] tw:tracking-[-0.04em] tw:whitespace-nowrap">
+                    {{- section.settings.youtube_count -}}
+                  </span>
+                </span>
+
+                <svg class="tw:w-[2rem] tw:h-[2rem]">
+                  <use href="#runo-right"></use>
+                </svg>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <!-- Рейтинг звездами -->
+        <div
+          class="
+            tw:inline-flex tw:self-start tw:border tw:border-grayscale-50 tw:px-[1.2rem] tw:h-[3.6rem]
+            tw:rounded-[0.8rem] tw:items-center tw:gap-[0.5rem] tw:mt-[1.6rem]
+          "
+        >
+          <!-- Звезды (Динамический вывод из настроек) -->
+          <div class="tw:flex tw:gap-1">
+            {%- for i in (1..5) -%}
+              <svg class="tw:w-[1.8rem] tw:h-[1.8rem] tw:text-goluboydark">
+                <use href="#star"></use>
+              </svg>
+            {%- endfor -%}
+          </div>
+          {%- if section.settings.info_rating_value != blank -%}
+            <span class="tw:text-[1.4rem] tw:ml-[0.8rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-grayscale-800">
+              {{- section.settings.info_rating_value -}}
+            </span>
+          {%- endif -%}
+          <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="1" cy="1" r="1" fill="#80899C" />
+          </svg>
+          {%- if section.settings.info_reviews_value != blank -%}
+            <span class="tw:text-[1.4rem] tw:leading-[1.] tw:tracking-[-0.04em] tw:text-grayscale-800 ">
+              {{- section.settings.info_reviews_value -}}
+              <span> reviews</span>
+            </span>
+          {%- endif -%}
+
+          <button type="button" class="tw:cursor-pointer">
+            <svg class="tw:w-[1.8rem] tw:h-[1.8rem] tw:text-[#C6CAD2] tw:hover:text-goluboydark">
+              <use href="#chevron-right"></use>
+            </svg>
+          </button>
+        </div>
+
+        {%- if section.settings.info_description != blank -%}
+          <div class="tw:mt-[2rem] tw:mb-[2.4rem] tw:text-[1.6rem] tw:text-grayscale-600 tw:leading-[1.5] tw:tracking-[-0.04em]">
+            {{ section.settings.info_description }}
+          </div>
+        {%- endif -%}
+
+        <!-- Кнопки -->
+        <div class="tw:mt-auto tw:flex tw:gap-[1.2rem]">
+          {%- if section.settings.button_blue_label != blank -%}
+            <a
+              href="{{ section.settings.button_blue_link }}"
+              class="
+                tw:xs:flex tw:hidden tw:w-full tw:items-center tw:justify-center tw:gap-4 tw:px-[2.4rem] tw:h-[4.8rem] tw:bg-goluboy tw:hover:bg-goluboydark
+                tw:text-white tw:rounded-[0.8rem] tw:text-[1.6rem] tw:leading-[1.5] tw:font-medium tw:tracking-[-0.04em] tw:transition-colors tw:duration-200
+              "
+            >
+              <span>{{ section.settings.button_blue_label }}</span>
+              <svg
+                class="tw:w-[2.4rem] tw:h-[2.4rem]"
+                focusable="false"
+                aria-hidden="true"
+              >
+                <use href="#arror-up"></use>
+              </svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.button_grey_label != blank -%}
+            <a
+              href="{{ section.settings.button_grey_link }}"
+              class="
+                tw:flex tw:w-full tw:items-center tw:justify-center tw:px-[2.4rem] tw:h-[4.8rem] tw:bg-golden/10 tw:hover:bg-golden tw:hover:text-grayscale-950
+                tw:border tw:border-golden tw:text-golden tw:rounded-[0.8rem] tw:text-[1.6rem] tw:leading-[1.5] tw:font-medium tw:tracking-[-0.04em] tw:transition-colors tw:duration-200
+              "
+            >
+              {{ section.settings.button_grey_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Ряд 2: Слайдер -->
+      <div class="tw:relative tw:w-full tw:h-[20.8rem] tw:md:h-[42.6rem] tw:bg-gray-100 tw:overflow-hidden tw:rounded-[0.8rem]">
+        <div class="swiper doctorSwiper tw:w-full tw:h-full">
+          <div class="swiper-wrapper">
+            {% if section.blocks.size > 0 %}
+              {% for block in section.blocks %}
+                <div class="swiper-slide tw:relative tw:h-full" {{ block.shopify_attributes }}>
+                  {% if block.settings.link != blank %}
+                    <a href="{{ block.settings.link }}" class="tw:block tw:w-full tw:h-full tw:group">
+                  {% endif %}
+                  {% if block.settings.image != blank %}
+                    {%- assign img_width = 800 -%}
+                    {%- assign img_height = img_width | divided_by: block.settings.image.aspect_ratio -%}
+                    {{
+                      block.settings.image
+                      | image_url: width: 800
+                      | image_tag:
+                        class: 'tw:w-full tw:h-full tw:object-cover tw:transition-transform tw:duration-500 tw:group-hover:scale-105',
+                        loading: 'lazy',
+                        widths: '400, 600, 800',
+                        width: img_width,
+                        height: img_height,
+                        alt: block.settings.image.alt
+                      | default: 'Промо слайд'
+                    }}
+                  {% else %}
+                    {{ 'lifestyle-2' | placeholder_svg_tag: 'tw:w-full tw:h-full tw:object-cover tw:opacity-50' }}
+                  {% endif %}
+                  {% if block.settings.link != blank %}
+                    </a>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            {% else %}
+              <div class="swiper-slide tw:flex tw:items-center tw:justify-center tw:bg-gray-200 tw:text-gray-500">
+                Добавьте слайды
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Стрелки слайдера -->
+          <button
+            class="doctor-button-prev tw:absolute tw:left-2 tw:top-1/2 tw:-translate-y-1/2 tw:z-10 tw:w-[4rem] tw:h-[4rem] tw:flex tw:items-center tw:justify-center tw:text-white tw:hover:bg-black/10 tw:rounded-full tw:transition-all"
+            aria-label="Предыдущий слайд"
+          >
+            <svg class="tw:w-[2.4rem] tw:h-[2.4rem]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <button
+            class="doctor-button-next tw:absolute tw:right-2 tw:top-1/2 tw:-translate-y-1/2 tw:z-10 tw:w-[4rem] tw:h-[4rem] tw:flex tw:items-center tw:justify-center tw:text-white tw:hover:bg-black/10 tw:rounded-full tw:transition-all"
+            aria-label="Следующий слайд"
+          >
+            <svg class="tw:w-[2.4rem] tw:h-[2.4rem]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Скрипт Swiper -->
+<script>
+  function initDoctorSlider() {
+    if (typeof Swiper !== 'undefined') {
+      const sliderEl = document.querySelector('.doctorSwiper');
+      if (sliderEl && !sliderEl.classList.contains('swiper-initialized')) {
+        new Swiper('.doctorSwiper', {
+          loop: true,
+          speed: 600,
+          autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+          },
+          navigation: {
+            nextEl: '.doctor-button-next',
+            prevEl: '.doctor-button-prev',
+          },
+          breakpoints: {
+            320: {
+              slidesPerView: 1,
+              spaceBetween: -1,
+            },
+          },
+        });
+      }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDoctorSlider);
+  } else {
+    initDoctorSlider();
+  }
+
+  document.addEventListener('shopify:section:load', (e) => {
+    if (e.target.querySelector('.doctorSwiper')) {
+      initDoctorSlider();
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "WEBLEGKO DOCTOR",
+  "tag": "section",
+  "class": "section-doctor",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Doctor Photo & Info"
+    },
+    {
+      "type": "image_picker",
+      "id": "doctor_image",
+      "label": "Doctor Photo"
+    },
+    {
+      "type": "text",
+      "id": "doctor_name",
+      "label": "Doctor Name",
+      "default": "Dr. Eric Berg"
+    },
+    {
+      "type": "text",
+      "id": "doctor_profession",
+      "label": "Profession",
+      "default": "Health & Nutrition Expert"
+    },
+    {
+      "type": "text",
+      "id": "instagram_count",
+      "label": "Instagram Followers",
+      "default": "2.7M followers"
+    },
+    {
+      "type": "text",
+      "id": "youtube_count",
+      "label": "Youtube Subscribers",
+      "default": "14M subscribers"
+    },
+    {
+      "type": "header",
+      "content": "Right Column Info"
+    },
+    {
+      "type": "text",
+      "id": "info_heading",
+      "label": "Heading part 1",
+      "default": "Natural Vitamins"
+    },
+    {
+      "type": "text",
+      "id": "info_heading_italic",
+      "label": "Heading part 2 Italic",
+      "default": "Supplements"
+    },
+    {
+      "type": "text",
+      "id": "info_rating_value",
+      "label": "Rating value (e.g. 5.0)",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "info_reviews_value",
+      "label": "Reviews value",
+      "default": "15,255"
+    },
+    {
+      "type": "textarea",
+      "id": "info_description",
+      "label": "Description",
+      "default": "Quality vitamins and supplements trusted by millions worldwide —  now delivered to your door across the UK."
+    },
+    {
+      "type": "text",
+      "id": "button_blue_label",
+      "label": "Blue Button Label",
+      "default": "Shop All Products"
+    },
+    {
+      "type": "url",
+      "id": "button_blue_link",
+      "label": "Blue Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_grey_label",
+      "label": "Grey Button Label",
+      "default": "Shop All Products"
+    },
+    {
+      "type": "url",
+      "id": "button_grey_link",
+      "label": "Grey Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slider Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "WEBLEGKO DOCTOR",
+      "category": "Home page",
+      "blocks": [{ "type": "slide" }]
+    }
+  ]
+}
+{% endschema %}

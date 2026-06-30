@@ -1,0 +1,591 @@
+<style>
+  /* ============================================ */
+  /* ГАЛЛЕРЕЯ */
+  /* ============================================ */
+  .weblegko-gallery {
+    position: relative;
+  }
+
+  .weblegko-gallery .swiper-slide {
+    aspect-ratio: 1 / 1;
+  }
+
+  .thumb-swiper {
+    display: none;
+  }
+
+  .thumb-swiper.swiper-initialized {
+    display: block;
+  }
+
+  .weblegko-gallery .thumb-swiper .swiper-slide {
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .weblegko-gallery .thumb-swiper .swiper-slide.swiper-slide-thumb-active {
+    border-color: #00b5d1 !important;
+    opacity: 1 !important;
+  }
+
+  .weblegko-gallery .thumb-swiper .swiper-slide:hover {
+    border-color: #ffc356;
+  }
+
+  .gallery-btn-prev {
+    left: 1rem;
+  }
+  .gallery-btn-next {
+    right: 1rem;
+  }
+
+  /* ============================================ */
+  /* ПАРАЛЛАКС + ЛУПА */
+  /* ============================================ */
+  .main-swiper-wrapper {
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+  }
+
+  .main-swiper-wrapper .swiper-slide {
+    overflow: hidden;
+  }
+
+  .main-swiper-wrapper .swiper-slide img {
+    transition: transform 0.1s ease-out;
+    will-change: transform;
+    pointer-events: none;
+  }
+
+  .zoom-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6rem;
+    height: 6rem;
+    background: #00b5d1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.7s ease;
+    pointer-events: none;
+    z-index: 5;
+    backdrop-filter: blur(4px);
+  }
+
+  .zoom-icon svg {
+    width: 2.8rem;
+    height: 2.8rem;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .main-swiper-wrapper:hover .zoom-icon {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+
+  /* ============================================ */
+  /* ВАРИАНТЫ (HIDE VARIANT IMAGES) */
+  /* ============================================ */
+  .thumbnail-list_item--variant {
+    display: none;
+  }
+
+  /* ============================================ */
+  /* АДАПТИВ */
+  /* ============================================ */
+  @media (max-width: 768px) {
+    .zoom-icon {
+      width: 4.4rem;
+      height: 4.4rem;
+    }
+    .zoom-icon svg {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+</style>
+
+<!-- ========================================== -->
+<!-- ГАЛЛЕРЕЯ -->
+<!-- ========================================== -->
+<div class="weblegko-gallery" data-product-id="{{ product.id }}">
+  <!-- ГЛАВНЫЙ СЛАЙДЕР с параллаксом -->
+  <div class="tw:rounded-[1.6rem] tw:mb-[1.6rem] tw:p-[0.8rem] tw:bg-white main-swiper-wrapper">
+    <div class="main-swiper tw:rounded-[0.8rem] tw:overflow-hidden">
+      <div class="swiper-wrapper">
+        {% for media in product.media %}
+          {%- liquid
+            assign is_variant_image = false
+            if variant_images contains media.src
+              assign is_variant_image = true
+            endif
+          -%}
+          <div
+            class="swiper-slide tw:bg-[#f2f1ed] tw:select-none {% if is_variant_image and section.settings.hide_variants %} variant-image-slide{% endif %}"
+            data-media-id="{{ media.id }}"
+          >
+            <img
+              src="{{ media | image_url: width: 800 }}"
+              alt="{{ media.alt | escape }}"
+              width="800"
+              height="800"
+              class="tw:w-full tw:h-full tw:object-cover tw:select-none tw:pointer-events-none"
+              loading="lazy"
+              draggable="false"
+            >
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Иконка лупы -->
+    <div class="zoom-icon">
+      <svg
+        class="tw:w-[2.4rem] tw:h-[2.4rem] tw:transition-all tw:duration-300 tw:text-grayscale-300 tw:hover:text-grayscale-950"
+        focusable="false"
+        aria-hidden="true"
+      >
+        <use href="#search"></use>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ТУМБНЕЙЛЫ -->
+  <div class="thumb-wrapper tw:relative tw:flex tw:items-center tw:gap-[1.6rem]">
+    <button class="thumb-btn-prev tw:flex-shrink-0 tw:cursor-pointer">
+      <svg
+        class="tw:w-[2.4rem] tw:h-[2.4rem] tw:transition-all tw:duration-300 tw:text-grayscale-300 tw:hover:text-grayscale-950"
+        focusable="false"
+        aria-hidden="true"
+      >
+        <use href="#chevron-left"></use>
+      </svg>
+    </button>
+
+    <div class="thumb-swiper tw:flex-1 tw:overflow-hidden">
+      <div class="swiper-wrapper">
+        {% for media in product.media %}
+          {%- liquid
+            assign is_variant_image = false
+            if variant_images contains media.src
+              assign is_variant_image = true
+            endif
+          -%}
+          <div
+            class="swiper-slide tw:aspect-square tw:rounded-[1.2rem] tw:overflow-hidden tw:bg-[#f8f8f8] tw:cursor-pointer hover:tw:opacity-80 tw:border-2 tw:border-transparent tw:transition-all tw:duration-300{% if is_variant_image and section.settings.hide_variants %} thumbnail-list_item--variant{% endif %}"
+            data-media-id="{{ media.id }}"
+            data-index="{{ forloop.index0 }}"
+          >
+            <div class="tw:w-full tw:h-full tw:cursor-pointer">
+              <img
+                src="{{ media | image_url: width: 200 }}"
+                alt="{{ media.alt | escape }}"
+                width="200"
+                height="200"
+                class="tw:w-full tw:h-full tw:object-cover"
+                loading="lazy"
+              >
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <button class="thumb-btn-next tw:flex-shrink-0 tw:cursor-pointer">
+      <svg
+        class="tw:w-[2.4rem] tw:h-[2.4rem] tw:transition-all tw:duration-300 tw:text-grayscale-300 tw:hover:text-grayscale-950"
+        focusable="false"
+        aria-hidden="true"
+      >
+        <use href="#chevron-right"></use>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- ========================================== -->
+<!-- ЛАЙТБОКС -->
+<!-- ========================================== -->
+<div class="weblegko-lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <div class="lb-counter" id="lightboxCounter">1 / 1</div>
+
+  <div class="swiper lightbox-swiper">
+    <div class="swiper-wrapper" id="lightboxWrapper">
+      <!-- Заполняется JS -->
+    </div>
+  </div>
+
+  <button class="lb-btn-prev">
+    <svg viewBox="0 0 24 24">
+      <path d="M15 19l-7-7 7-7"/>
+    </svg>
+  </button>
+  <button class="lb-btn-next">
+    <svg viewBox="0 0 24 24">
+      <path d="M9 5l7 7-7 7"/>
+    </svg>
+  </button>
+
+  <div class="lb-caption" id="lightboxCaption">{{ product.title | escape }}</div>
+
+  <div class="lb-progress">
+    <div class="lb-progress-bar" id="lightboxProgress"></div>
+  </div>
+</div>
+
+<!-- ========================================== -->
+<!-- SWIPER + СВОЙ ЛАЙТБОКС -->
+<!-- ========================================== -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // ==========================================
+    // ДАННЫЕ — через JSON
+    // ==========================================
+    const images = {{ product.media | json }};
+    const productTitle = {{ product.title | json }};
+
+    const imageData = images.map(function(media) {
+      return {
+        src: media.src,
+        alt: media.alt || productTitle,
+        width: media.width || 1200,
+        height: media.height || 1200
+      };
+    });
+
+    let currentIndex = 0;
+    let isZoomed = false;
+    let lightboxSwiper = null;
+    let mainSwiper = null;
+    let thumbSwiper = null;
+
+    // ==========================================
+    // ОБНОВЛЕНИЕ КАПШН И КАУНТЕРА
+    // ==========================================
+    function updateLightboxInfo(index, total) {
+      const counter = document.getElementById('lightboxCounter');
+      const caption = document.getElementById('lightboxCaption');
+
+      if (counter) {
+        counter.textContent = (index + 1) + ' / ' + total;
+      }
+
+      if (caption) {
+        caption.textContent = imageData[index]?.alt || productTitle;
+      }
+    }
+
+    // ==========================================
+    // SWIPER ГАЛЛЕРЕЯ
+    // ==========================================
+    function initGallerySwiper() {
+      if (typeof Swiper === 'undefined') {
+        setTimeout(initGallerySwiper, 100);
+        return;
+      }
+
+      mainSwiper = new Swiper('.main-swiper', {
+        slidesPerView: 1,
+        spaceBetween: 8,
+        thumbs: {
+          swiper: null,
+        },
+      });
+
+      thumbSwiper = new Swiper('.thumb-swiper', {
+        slidesPerView: 5,
+        spaceBetween: 8,
+        navigation: {
+          nextEl: '.thumb-btn-next',
+          prevEl: '.thumb-btn-prev',
+        },
+        breakpoints: {
+          0: { slidesPerView: 4, spaceBetween: 8 },
+          768: { slidesPerView: 3, spaceBetween: 16 },
+          1024: { slidesPerView: 4, spaceBetween: 16 },
+          1280: { slidesPerView: 5, spaceBetween: 16 },
+        },
+      });
+
+      mainSwiper.params.thumbs.swiper = thumbSwiper;
+      mainSwiper.thumbs.init();
+
+      // ==========================================
+      // КЛИК ПО ТУМБНЕЙЛУ → ПЕРЕКЛЮЧАЕТ СЛАЙДЕР
+      // ==========================================
+      document.querySelectorAll('.thumb-swiper .swiper-slide').forEach(function(slide, index) {
+        slide.addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (mainSwiper) {
+            mainSwiper.slideTo(index, 300);
+          }
+        });
+      });
+
+      // ==========================================
+      // КЛИК ПО ГЛАВНОМУ СЛАЙДЕРУ → ОТКРЫВАЕТ ЛАЙТБОКС
+      // ==========================================
+      const mainSlider = document.querySelector('.main-swiper');
+      if (mainSlider) {
+        mainSlider.addEventListener('click', function(e) {
+          if (e.target.closest('.gallery-btn-prev') || e.target.closest('.gallery-btn-next')) {
+            return;
+          }
+          const activeIndex = mainSwiper ? mainSwiper.activeIndex : 0;
+          openLightbox(activeIndex);
+        });
+      }
+
+      // ==========================================
+      // КЛИК ПО ЛУПЕ → ОТКРЫВАЕТ ЛАЙТБОКС
+      // ==========================================
+      const zoomIcon = document.querySelector('.zoom-icon');
+      if (zoomIcon) {
+        zoomIcon.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const activeIndex = mainSwiper ? mainSwiper.activeIndex : 0;
+          openLightbox(activeIndex);
+        });
+      }
+
+      // ==========================================
+      // ПАРАЛЛАКС ЭФФЕКТ
+      // ==========================================
+     const wrapper = document.querySelector('.main-swiper-wrapper');
+      if (wrapper) {
+        wrapper.addEventListener('mousemove', function(e) {
+          const rect = this.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
+          const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
+
+          const activeSlide = mainSwiper?.slides[mainSwiper.activeIndex];
+          if (activeSlide) {
+            const img = activeSlide.querySelector('img');
+            if (img) {
+              img.style.transform = 'scale(1.05) translate(' + x + 'px, ' + y + 'px)';
+            }
+          }
+        });
+
+        wrapper.addEventListener('mouseleave', function() {
+          const activeSlide = mainSwiper?.slides[mainSwiper.activeIndex];
+          if (activeSlide) {
+            const img = activeSlide.querySelector('img');
+            if (img) {
+              img.style.transform = 'scale(1) translate(0, 0)';
+            }
+          }
+        });
+      } 
+
+      // Скрываем варианты, если нужно
+      {% if section.settings.hide_variants %}
+        document.querySelectorAll('.variant-image-slide, .thumbnail-list_item--variant').forEach(el => {
+          if (el) el.style.display = 'none';
+        });
+
+        setTimeout(() => {
+          if (mainSwiper) mainSwiper.update();
+          if (thumbSwiper) thumbSwiper.update();
+        }, 100);
+      {% endif %}
+    }
+
+    // ==========================================
+    // ЛАЙТБОКС
+    // ==========================================
+    function initLightboxSwiper() {
+      const wrapper = document.getElementById('lightboxWrapper');
+      if (!wrapper) return;
+
+      wrapper.innerHTML = '';
+
+      const visibleImages = [];
+      const visibleIndices = [];
+
+      document.querySelectorAll('.main-swiper .swiper-slide').forEach(function(slide, index) {
+        if (slide && slide.style.display !== 'none') {
+          visibleImages.push(imageData[index]);
+          visibleIndices.push(index);
+        }
+      });
+
+      const finalImages = visibleImages.length > 0 ? visibleImages : imageData;
+      const finalIndices = visibleIndices.length > 0 ? visibleIndices : imageData.map((_, i) => i);
+
+      finalImages.forEach(function(img, i) {
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+        slide.dataset.realIndex = finalIndices[i];
+        const altSafe = img.alt ? img.alt.replace(/"/g, '&quot;').replace(/'/g, '&#39;') : '';
+        slide.innerHTML =
+          '<img src="' + img.src + '" alt="' + altSafe + '" data-index="' + finalIndices[i] + '" loading="lazy">';
+        wrapper.appendChild(slide);
+      });
+
+      if (lightboxSwiper) {
+        lightboxSwiper.destroy();
+        lightboxSwiper = null;
+      }
+
+      let initialSlideIndex = 0;
+      for (let i = 0; i < finalIndices.length; i++) {
+        if (finalIndices[i] === currentIndex) {
+          initialSlideIndex = i;
+          break;
+        }
+      }
+
+      setTimeout(function() {
+        lightboxSwiper = new Swiper('.lightbox-swiper', {
+          slidesPerView: 1,
+          spaceBetween: 0,
+          initialSlide: initialSlideIndex,
+          centeredSlides: true,
+          autoHeight: false,
+          resizeObserver: true,
+            speed: 800, 
+          navigation: {
+            nextEl: '.lb-btn-next',
+            prevEl: '.lb-btn-prev',
+          },
+          on: {
+            slideChange: function() {
+              const realIndex = this.realIndex;
+              const slide = this.slides[realIndex];
+              const originalIndex = parseInt(slide.dataset.realIndex) || 0;
+              currentIndex = originalIndex;
+
+              updateLightboxInfo(realIndex, finalImages.length);
+
+              this.slides.forEach(function(s) {
+                const img = s.querySelector('img');
+                if (img) {
+                  img.classList.remove('zoomed');
+                  img.style.transform = 'scale(1)';
+                }
+              });
+              isZoomed = false;
+            },
+            init: function() {
+              setTimeout(() => {
+                this.update();
+                this.slideTo(initialSlideIndex, 0);
+                const realIndex = this.realIndex;
+                updateLightboxInfo(realIndex, finalImages.length);
+              }, 50);
+            }
+          }
+        });
+     
+      }, 100);
+    }
+
+    function updateProgress(index, total) {
+      const progress = document.getElementById('lightboxProgress');
+      if (progress) {
+        const percent = ((index + 1) / total) * 100;
+        progress.style.width = percent + '%';
+      }
+    }
+
+    // ==========================================
+    // ОТКРЫТИЕ / ЗАКРЫТИЕ
+    // ==========================================
+    window.openLightbox = function(index) {
+      currentIndex = index;
+      const lightbox = document.getElementById('lightbox');
+      if (!lightbox) return;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      const total = imageData.length;
+      updateLightboxInfo(currentIndex, total);
+      initLightboxSwiper();
+    };
+
+    window.closeLightbox = function() {
+      const lightbox = document.getElementById('lightbox');
+      if (!lightbox) return;
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+      if (lightboxSwiper) {
+        lightboxSwiper.destroy();
+        lightboxSwiper = null;
+      }
+    };
+
+    window.lightboxPrev = function(e) {
+      if (e) e.preventDefault();
+      if (lightboxSwiper) lightboxSwiper.slidePrev();
+    };
+
+    window.lightboxNext = function(e) {
+      if (e) e.preventDefault();
+      if (lightboxSwiper) lightboxSwiper.slideNext();
+    };
+
+    // ==========================================
+    // ЗУМ
+    // ==========================================
+    document.addEventListener('click', function(e) {
+      const img = e.target.closest('.lightbox-swiper .swiper-slide img');
+      if (!img) return;
+      e.stopPropagation();
+      if (img.classList.contains('zoomed')) {
+        img.classList.remove('zoomed');
+        img.style.transform = 'scale(1)';
+        isZoomed = false;
+      } else {
+        img.classList.add('zoomed');
+        img.style.transform = 'scale(1.8)';
+        isZoomed = true;
+      }
+    });
+
+    // ==========================================
+    // КЛАВИШИ
+    // ==========================================
+    document.addEventListener('keydown', function(e) {
+      const lightbox = document.getElementById('lightbox');
+      if (!lightbox || !lightbox.classList.contains('active')) return;
+
+      if (e.key === 'Escape') {
+        closeLightbox();
+      } else if (e.key === 'ArrowRight' && lightboxSwiper) {
+        lightboxSwiper.slideNext();
+      } else if (e.key === 'ArrowLeft' && lightboxSwiper) {
+        lightboxSwiper.slidePrev();
+      }
+    });
+
+    // ==========================================
+    // ЗАКРЫТИЕ ПО КЛИКУ НА ФОН
+    // ==========================================
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox) {
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeLightbox();
+        }
+      });
+    }
+
+    // ==========================================
+    // ЗАПУСК
+    // ==========================================
+    initGallerySwiper();
+  });
+</script>

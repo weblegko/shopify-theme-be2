@@ -1,0 +1,66 @@
+{% comment %}
+  Renders a clean "Add to cart" button without dynamic checkout or pickup availability.
+  Usage: {% render 'weblegko-add-to-cart', product: product, section_id: section.id %}
+{% endcomment %}
+
+<product-form
+  class="tw:w-full"
+  data-section-id="{{ section_id }}"
+>
+  <div class="product-form__error-message-wrapper tw:hidden" role="alert" hidden>
+    <span class="svg-wrapper">{{- 'icon-error.svg' | inline_asset_content -}}</span>
+    <span class="product-form__error-message"></span>
+  </div>
+
+  {%- form 'product',
+    product,
+    id: product_form_id,
+    class: 'form tw:w-full',
+    novalidate: 'novalidate',
+    data-type: 'add-to-cart-form'
+  -%}
+    <input
+      type="hidden"
+      name="id"
+      value="{{ product.selected_or_first_available_variant.id }}"
+      {% if product.selected_or_first_available_variant.available == false
+        or product.selected_or_first_available_variant == null
+      %}
+        disabled
+      {% endif %}
+      class="product-variant-id"
+    >
+
+    <button
+      id="ProductSubmitButton-{{ section_id }}"
+      type="submit"
+      name="add"
+      class="tw:relative button button--secondary tw:flex tw:items-center tw:gap-[0.65rem] tw:w-full tw:disabled:tw:opacity-50 tw:disabled:tw:cursor-not-allowed"
+      {% if product.selected_or_first_available_variant.available == false
+        or product.selected_or_first_available_variant == null
+      %}
+        disabled
+      {% endif %}
+    >
+      <svg
+        class="tw:w-[2rem] tw:h-[2rem] tw:text-black"
+        focusable="false"
+        aria-hidden="true"
+      >
+        <use href="#cart"></use>
+      </svg>
+
+      <span>
+        {%- if product.selected_or_first_available_variant == null -%}
+          {{ 'products.product.unavailable' | t }}
+        {%- elsif product.selected_or_first_available_variant.available == false -%}
+          {{ 'products.product.sold_out' | t }}
+        {%- else -%}
+          {{ 'products.product.add_to_cart' | t }}
+        {%- endif -%}
+      </span>
+
+      {%- render 'loading-spinner' -%}
+    </button>
+  {%- endform -%}
+</product-form>

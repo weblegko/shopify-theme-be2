@@ -1,0 +1,48 @@
+{%- comment -%}
+  Сниппет формы поиска
+  Принимает параметры:
+  - input_id: уникальный ID для инпута (обязательно)
+  - show_button: показывать ли кнопку "Найти" (по умолчанию false)
+  - wrapper_class: дополнительные классы для обертки формы
+{%- endcomment -%}
+
+{%- assign input_id = input_id | default: 'Search-Input' -%}
+{%- assign show_button = show_button | default: false -%}
+ 
+<form
+  action="{{ routes.search_url }}"
+  method="get"
+  role="search"
+  class="tw:flex tw:items-center tw:gap-4 {{ wrapper_class }}"
+>
+  <div class="tw:relative tw:flex-1">
+    <!-- Иконка внутри инпута -->
+    <div class="tw:absolute tw:inset-y-0 tw:left-0 tw:flex tw:items-center tw:pl-4 tw:pointer-events-none">
+      <svg class="tw:w-[1.6rem] tw:h-[1.6rem] tw:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+    </div>
+    <!-- Сам инпут (стиль "таблетка") -->
+    <input
+      type="search"
+      name="q"
+      id="{{ input_id }}"
+      class="tw:w-full tw:bg-gray-100 tw:rounded-full tw:pl-14 tw:pr-4 tw:h-[4rem] tw:text-[1.4rem] tw:text-grayscale-950 tw:placeholder-gray-400 tw:focus:outline-none tw:focus:ring-1 tw:focus:ring-gray-400 tw:focus:ring-offset-0 tw:focus-visible:ring-offset-0 tw:transition-shadow"
+      placeholder="Search products..."
+      autocomplete="off"
+    >
+  </div>
+  <input type="hidden" name="type" value="product">
+
+  {% if show_button %}
+    <button
+      type="submit"
+      class="tw:font-poppins tw:bg-golden tw:text-black tw:px-6 tw:pt-1 tw:h-[4rem] tw:rounded-full tw:text-[1.4rem] tw:hover:bg-golden/80 tw:transition-colors tw:flex-shrink-0 tw:uppercase"
+    >
+    Search
+    </button>
+  {% else %}
+    <!-- Скрытая кнопка для сабмита по Enter на клавиатуре -->
+    <button type="submit" class="tw:sr-only">Search</button>
+  {% endif -%}
+</form>

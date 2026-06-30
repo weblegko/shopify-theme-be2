@@ -1,0 +1,332 @@
+<!-- sections/weblegko-doctor-quote.liquid -->
+
+<style>
+  /* ============================================ */
+  /* ПАДДИНГИ СЕКЦИИ (rem) - inline стили */
+  /* ============================================ */
+  .weblegko-doctor-padding {
+    padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
+    padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
+  }
+
+  @media screen and (min-width: 640px) {
+    .weblegko-doctor-padding {
+      padding-top: {{ section.settings.padding_top_tablet | default: 5 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 5 }}rem !important;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .weblegko-doctor-padding {
+      padding-top: {{ section.settings.padding_top_desktop | default: 8 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_desktop | default: 8 }}rem !important;
+    }
+  }
+
+  /* ============================================ */
+  /* КОЛОНКИ НА БРЕЙКПОИНТАХ (gap) */
+  /* ============================================ */
+
+  .weblegko-doctor-grid {
+    display: flex !important;
+    align-items: stretch !important;
+    gap: {{ section.settings.gap_mobile | default: 2 }}rem !important;
+  }
+
+  @media screen and (min-width: 640px) {
+    .weblegko-doctor-grid {
+      gap: {{ section.settings.gap_tablet | default: 3 }}rem !important;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .weblegko-doctor-grid {
+      gap: {{ section.settings.gap_desktop | default: 5 }}rem !important;
+    }
+  }
+
+  /* ============================================ */
+  /* РАЗМЕРЫ КОЛОНОК НА БРЕЙКПОИНТАХ */
+  /* ============================================ */
+
+  .weblegko-doctor-image-col {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .weblegko-doctor-content-col {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  @media screen and (min-width: 640px) {
+    .weblegko-doctor-image-col {
+      width: {{ section.settings.image_width_tablet | default: 45 }}% !important;
+      max-width: {{ section.settings.image_width_tablet | default: 45 }}% !important;
+    }
+
+    .weblegko-doctor-content-col {
+      width: {{ section.settings.content_width_tablet | default: 55 }}% !important;
+      max-width: {{ section.settings.content_width_tablet | default: 55 }}% !important;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .weblegko-doctor-image-col {
+      width: {{ section.settings.image_width_desktop | default: 53 }}% !important;
+      max-width: {{ section.settings.image_width_desktop | default: 53 }}% !important;
+    }
+
+    .weblegko-doctor-content-col {
+      width: {{ section.settings.content_width_desktop | default: 47 }}% !important;
+      max-width: {{ section.settings.content_width_desktop | default: 47 }}% !important;
+    }
+  }
+
+  /* Скрытие на мобилке */
+  .weblegko-doctor-section {
+    display: none !important;
+  }
+
+  @media screen and (min-width: 640px) {
+    .weblegko-doctor-section {
+      display: flex !important;
+    }
+  }
+</style>
+
+<!-- Скрываем на мобилке, показываем от 640px -->
+<section class="weblegko-doctor-section tw:bg-grayscale-50 tw:text-grayscale-950">
+  <div class="weblegko-doctor-padding tw:max-w-[112rem] tw:px-[1.6rem] tw:mx-auto tw:w-full">
+    <!-- Грид с flex для гибкости -->
+    <div class="weblegko-doctor-grid tw:flex-col tw:md:flex-row">
+      <!-- ЛЕВАЯ КОЛОНКА : Картинка доктора -->
+      <div class="weblegko-doctor-image-col tw:flex tw:items-center tw:justify-center">
+        {% if section.settings.doctor_image != blank %}
+          {%- assign img_width = 800 -%}
+          {%- assign img_height = img_width | divided_by: section.settings.doctor_image.aspect_ratio -%}
+          <img
+            src="{{ section.settings.doctor_image | image_url: width: 800 }}"
+            alt="{{ section.settings.doctor_name | default: 'Doctor' | escape }}"
+            width="{{ img_width }}"
+            height="{{ img_height }}"
+            class="tw:w-full tw:max-w-[55rem] tw:h-auto tw:object-contain"
+            loading="lazy"
+          >
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'tw:w-full tw:max-w-[55rem] tw:opacity-50' }}
+        {% endif %}
+      </div>
+
+      <!-- ПРАВАЯ КОЛОНКА : Контент -->
+      <div class="weblegko-doctor-content-col tw:flex tw:flex-col tw:justify-center tw:mt-[2rem] tw:md:mt-0">
+        <!-- Ряд 1: Желтая иконка апострофа -->
+        <div class="tw:mb-[2rem]">
+          <svg class="tw:w-[5.5rem] tw:h-[4.7rem] tw:text-golden" focusable="false" aria-hidden="true">
+            <use href="#quote"></use>
+          </svg>
+        </div>
+
+        <!-- Ряд 2: Текст цитаты -->
+        <div class="tw:flex tw:flex-col tw:gap-[1rem] tw:text-[2rem] tw:text-grayscale-700 tw:leading-[1.4] tw:tracking-[-0.04em] tw:font-medium">
+          {{ section.settings.quote_text }}
+        </div>
+
+        <!-- Ряд 3: Кнопка Learn More -->
+        {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+          <div class="tw:mt-[2rem]">
+            <a
+              href="{{ section.settings.button_link }}"
+              class="
+                tw:inline-flex tw:items-center tw:justify-center tw:rounded-full tw:transition-colors tw:duration-300 tw:ease-in-out
+                tw:hover:bg-golden tw:px-[1.6rem] tw:pt-1 tw:h-[3.6rem] tw:bg-white tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:font-medium tw:shadow-md
+              "
+            >
+              {{ section.settings.button_label }}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "WEBLEGKO DOCTOR QUOTE",
+  "tag": "section",
+  "class": "section-doctor-quote",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "doctor_image",
+      "label": "Doctor Image"
+    },
+    {
+      "type": "richtext",
+      "id": "quote_text",
+      "default": "<p>Dr. Eric Berg is a renowned expert in healthy ketosis and intermittent fasting. With over 15 million subscribers worldwide, Dr. Berg has dedicated his career to helping people achieve optimal health through natural nutrition.</p><p>All supplements are scientifically formulated with the highest quality natural ingredients, ensuring maximum effectiveness and safety.</p>",
+      "label": "Quote Text"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Learn More",
+      "label": "Button Label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "🖥️ Desktop (≥ 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "image_width_desktop",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "default": 53,
+      "unit": "%",
+      "label": "Image column width"
+    },
+    {
+      "type": "range",
+      "id": "content_width_desktop",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "default": 47,
+      "unit": "%",
+      "label": "Content column width"
+    },
+    {
+      "type": "range",
+      "id": "gap_desktop",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Gap between columns"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "💻 Tablet (640px - 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "image_width_tablet",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "default": 45,
+      "unit": "%",
+      "label": "Image column width"
+    },
+    {
+      "type": "range",
+      "id": "content_width_tablet",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "default": 55,
+      "unit": "%",
+      "label": "Content column width"
+    },
+    {
+      "type": "range",
+      "id": "gap_tablet",
+      "min": 0,
+      "max": 8,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Gap between columns"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile (< 640px)"
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 2,
+      "unit": "rem",
+      "label": "Gap between columns"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding bottom"
+    }
+  ],
+  "presets": [
+    {
+      "name": "WEBLEGKO DOCTOR QUOTE",
+      "category": "Home page"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,104 @@
+@media screen and (min-width: 750px) {
+    body {
+        font-size: 1.8rem;
+    }
+}
+
+
+.card__information {
+    text-align: center;
+}
+
+.card-information {
+    text-align: center !important;
+}
+
+.product__info-container .price-item.price-item--regular {
+    font-size: 3rem;
+}
+
+.product__description {
+    margin-top: 4rem;
+}
+
+.product__description h3 {
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+
+
+table:not([class]) {
+    font-size: 1.6rem;
+    box-shadow: none;
+    border-top: 1px solid var(--color-foreground);
+    border-bottom: 1px solid var(--color-foreground);
+}
+table:not([class]) td, table:not([class]) th {
+    padding: 0.6rem 1rem;
+}
+table:not([class]) tr th {
+    background: #f1f1f1;
+    border-left: none;
+    border-right: none;
+}
+table:not([class]) td {
+    border: none;
+}
+table:not([class]) tr:nth-child(odd) td {
+    background: #f1f1f1;
+}
+
+
+
+table.berg-prod {
+    font-size: 1.6rem;
+    box-shadow: none;
+    border-top: 1px solid var(--color-foreground);
+    border-bottom: 1px solid var(--color-foreground);
+}
+table.berg-prod td,
+table.berg-prod th {
+    padding: 0.6rem 1rem;
+}
+table.berg-prod tr th {
+    background: #f1f1f1;
+    border-left: none;
+    border-right: none;
+}
+table.berg-prod td {
+    border: none;
+}
+table.berg-prod tr:nth-child(odd) td {
+    background: #f1f1f1;
+}
+
+
+
+
+.shopify-policy__container {
+    max-width: 130ch;
+}
+
+.red {
+    color: red;
+    font-weight: 700;
+}
+
+.product__discount {
+    font-weight:700;
+    color: red;
+}
+
+
+.card_product-best-before {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color:rgb(211, 69, 4) !important;
+}
+
+.product-best-before {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color:rgb(211, 69, 4) !important;
+}

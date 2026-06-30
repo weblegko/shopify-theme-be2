@@ -1,0 +1,366 @@
+<!-- sections/about-doctor.liquid -->
+
+<style>
+  /* ============================================ */
+  /* ПАДДИНГИ СЕКЦИИ (rem) - inline стили */
+  /* ============================================ */
+  .weblegko-about-padding {
+    padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
+    padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
+  }
+
+  @media screen and (min-width: 640px) {
+    .weblegko-about-padding {
+      padding-top: {{ section.settings.padding_top_tablet | default: 5 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 5 }}rem !important;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .weblegko-about-padding {
+      padding-top: {{ section.settings.padding_top_desktop | default: 8 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_desktop | default: 8 }}rem !important;
+    }
+  }
+
+  /* ============================================ */
+  /* Скрытие лишних абзацев */
+  /* ============================================ */
+  .about-paragraph {
+    display: block !important;
+  }
+
+  .about-paragraph-hidden {
+    display: none !important;
+  }
+
+  .about-paragraph-animate {
+    animation: fadeGrowIn 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeGrowIn {
+    from {
+      opacity: 0;
+      transform: translateY(1.5rem) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+</style>
+
+<section class="tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem]">
+  <div class="weblegko-about-padding tw:max-w-[112rem] tw:mx-auto">
+    <!-- Заголовок -->
+    {%- if section.settings.heading != blank -%}
+      <h2 class="tw:font-inter tw:text-[1.8rem] tw:text-[#0a0a0a] tw:font-medium tw:leading-[1.56] tw:mb-[1rem]">
+        {{ section.settings.heading }}
+      </h2>
+    {%- endif -%}
+
+    <!-- Текст-анонс с абзацами -->
+    {%- if section.settings.text != blank -%}
+      <div 
+        id="about-text-container" 
+        class="tw:text-[1.4rem] tw:md:text-[1.6rem] tw:text-grayscale-600 tw:leading-[1.5] tw:tracking-[-0.04em] tw:flex tw:flex-col tw:gap-[1rem]"
+        data-desktop-initial="{{ section.settings.initial_paragraphs_desktop | default: 2 }}"
+        data-tablet-initial="{{ section.settings.initial_paragraphs_tablet | default: 2 }}"
+        data-mobile-initial="{{ section.settings.initial_paragraphs_mobile | default: 1 }}"
+      >
+        {%- assign paragraphs = section.settings.text | split: '</p>' -%}
+        {%- for paragraph in paragraphs -%}
+          {%- assign clean_paragraph = paragraph | append: '</p>' -%}
+          {%- if clean_paragraph != '</p>' -%}
+            <div class="about-paragraph about-paragraph-hidden">{{ clean_paragraph }}</div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Кнопка "Show More" -->
+    {%- if section.blocks.size == 0 and section.settings.text contains '</p>' -%}
+      <div class="tw:mt-[3rem] tw:flex tw:justify-center">
+        <button
+          type="button"
+          id="about-show-more-btn"
+          class="tw:shadow-md tw:pt-1 tw:inline-flex tw:items-center tw:justify-center tw:rounded-full tw:transition-colors tw:duration-300 tw:ease-in-out tw:hover:bg-golden tw:px-[1.6rem] tw:h-[3.6rem] tw:bg-white tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:font-medium disabled:tw:opacity-70 disabled:tw:cursor-not-allowed"
+        >
+          <!-- Спиннер -->
+          <svg
+            id="about-loader"
+            class="tw:hidden tw:animate-spin tw:mr-2 tw:h-5 tw:w-5 tw:text-goluboydark"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle class="tw:opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="tw:opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <span id="about-btn-text">{{ section.settings.button_label | default: 'Show More' }}</span>
+        </button>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  function initAboutText() {
+    const container = document.getElementById('about-text-container');
+    const btn = document.getElementById('about-show-more-btn');
+    const loader = document.getElementById('about-loader');
+    const btnText = document.getElementById('about-btn-text');
+
+    if (!container) return;
+
+    const paragraphs = container.querySelectorAll('.about-paragraph');
+    if (paragraphs.length === 0) {
+      if (btn) btn.style.display = 'none';
+      return;
+    }
+
+    // Получаем текущий брейкпоинт
+    function getCurrentBreakpoint() {
+      const width = window.innerWidth;
+      if (width < 640) return 'mobile';
+      if (width < 1024) return 'tablet';
+      return 'desktop';
+    }
+
+    // Получаем количество абзацев для текущего брейкпоинта
+    function getInitialCount() {
+      const breakpoint = getCurrentBreakpoint();
+      if (breakpoint === 'mobile') {
+        return parseInt(container.dataset.mobileInitial) || 1;
+      } else if (breakpoint === 'tablet') {
+        return parseInt(container.dataset.tabletInitial) || 2;
+      } else {
+        return parseInt(container.dataset.desktopInitial) || 2;
+      }
+    }
+
+    // Функция показа абзацев
+    function showParagraphs(count) {
+      let currentVisible = parseInt(container.dataset.visible) || 0;
+      const totalToShow = Math.min(currentVisible + count, paragraphs.length);
+
+      for (let i = currentVisible; i < totalToShow; i++) {
+        paragraphs[i].classList.remove('about-paragraph-hidden');
+        paragraphs[i].classList.add('about-paragraph-animate');
+      }
+
+      container.dataset.visible = totalToShow;
+
+      if (totalToShow >= paragraphs.length && btn) {
+        btn.style.display = 'none';
+      }
+    }
+
+    // Сброс
+    if (btn) {
+      btn.style.display = '';
+      btn.disabled = false;
+      if (loader) loader.classList.add('tw:hidden');
+      if (btnText) btnText.textContent = '{{ section.settings.button_label | default: "Show More" }}';
+    }
+
+    paragraphs.forEach((item) => {
+      item.classList.add('about-paragraph-hidden');
+      item.classList.remove('about-paragraph-animate');
+    });
+
+    container.dataset.visible = 0;
+
+    // Показываем начальное количество
+    const initialCount = getInitialCount();
+    showParagraphs(initialCount);
+
+    // Обработчик клика
+    if (btn) {
+      btn.onclick = function() {
+        if (btn.disabled) return;
+
+        btn.disabled = true;
+        if (loader) loader.classList.remove('tw:hidden');
+        if (btnText) btnText.textContent = 'Loading...';
+
+        setTimeout(function() {
+          if (loader) loader.classList.add('tw:hidden');
+          if (btnText) btnText.textContent = '{{ section.settings.button_label | default: "Show More" }}';
+          btn.disabled = false;
+
+          // Показываем все оставшиеся абзацы
+          const remaining = paragraphs.length - parseInt(container.dataset.visible);
+          showParagraphs(remaining);
+        }, 500);
+      };
+    }
+
+    // Обновляем при ресайзе (если изменился брейкпоинт)
+    let lastBreakpoint = getCurrentBreakpoint();
+    window.addEventListener('resize', function() {
+      const newBreakpoint = getCurrentBreakpoint();
+      if (newBreakpoint !== lastBreakpoint) {
+        lastBreakpoint = newBreakpoint;
+        
+        // Сбрасываем видимость
+        paragraphs.forEach((item) => {
+          item.classList.add('about-paragraph-hidden');
+          item.classList.remove('about-paragraph-animate');
+        });
+        container.dataset.visible = 0;
+        if (btn) btn.style.display = '';
+
+        // Показываем новое количество
+        const newCount = getInitialCount();
+        showParagraphs(newCount);
+      }
+    });
+  }
+
+  // ЗАПУСК
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAboutText);
+  } else {
+    initAboutText();
+  }
+
+  document.addEventListener('shopify:section:load', (e) => {
+    if (e.target.querySelector('#about-text-container')) {
+      initAboutText();
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "WEBLEGKO ABOUT DOCTOR",
+  "tag": "section",
+  "class": "section-about-doctor",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "More About Dr. Berg Supplements",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "default": "<p>Dr. Berg's supplements are formulated with the highest quality natural ingredients to support your health and wellness journey. Each product is carefully crafted based on years of research and clinical experience.</p><p>As the official UK distributor, we ensure that all products meet strict quality standards and are delivered fresh to your door. Our commitment to excellence means you can trust every supplement you purchase.</p><p>All of our products are third-party tested for purity and potency, giving you peace of mind with every purchase.</p><p>We offer fast, reliable shipping across the UK and Europe with tracking available for all orders.</p><p>Our customer support team is always ready to help you find the right supplements for your needs.</p>",
+      "label": "Text with paragraphs"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Show More",
+      "label": "Button label"
+    },
+    {
+      "type": "header",
+      "content": "🖥️ Desktop (≥ 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "initial_paragraphs_desktop",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 2,
+      "label": "Initial paragraphs to show"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "💻 Tablet (640px - 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "initial_paragraphs_tablet",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 2,
+      "label": "Initial paragraphs to show"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile (< 640px)"
+    },
+    {
+      "type": "range",
+      "id": "initial_paragraphs_mobile",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1,
+      "label": "Initial paragraphs to show"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding bottom"
+    }
+  ],
+  "presets": [
+    {
+      "name": "WEBLEGKO ABOUT DOCTOR",
+      "category": "Home page"
+    }
+  ]
+}
+{% endschema %}
