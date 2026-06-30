@@ -42,7 +42,7 @@
       "type": "weblegko-collection-product-grid",
       "name": "WEBLEGKO Collection Grid",
       "settings": {
-        "products_per_page": 16,
+        "products_per_page": 12,
         "col_gap_mobile": 10,
         "row_gap_mobile": 10,
         "col_gap_tablet": 16,
