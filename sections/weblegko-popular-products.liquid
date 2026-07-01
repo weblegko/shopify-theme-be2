@@ -162,14 +162,21 @@
     >
       {%- if section.settings.collection != blank -%}
         {%- assign product_count = 0 -%}
+        {%- assign skip_card_product_styles = false -%}
         {%- for product in section.settings.collection.products -%}
           {%- assign product_count = forloop.index -%}
+          {%- assign lazy_load = false -%}
+          {%- if forloop.index > 2 -%}
+            {%- assign lazy_load = true -%}
+          {%- endif -%}
           <div
-            class="grid__item
+            class="
+              grid__item
               {% if product_count > mobile_limit %}weblegko-popular-hide-mobile{% endif %}
               {% if product_count > tablet_limit %}weblegko-popular-hide-tablet{% endif %}
               {% if product_count > desktop_limit %}weblegko-popular-hide-desktop{% endif %}
-              {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+              {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}
+            "
             {% if settings.animations_reveal_on_scroll %}
               data-cascade
               style="--animation-order: {{ forloop.index }};"
@@ -188,6 +195,7 @@
               section_id: section.id
             %}
           </div>
+          {%- assign skip_card_product_styles = true -%}
         {%- endfor -%}
 
       {%- else -%}

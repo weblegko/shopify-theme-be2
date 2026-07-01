@@ -4,7 +4,7 @@
 @import "./fonts.css";
 @import "./weblegko-badges.css";
 @import "./weblegko-buttons.css";
-@import "./weblegko-lightbox.css";
+
 
 html {
   scrollbar-gutter: stable;
@@ -45,9 +45,3 @@ custom checkbox
 .cb-input:checked + .cb-box {
   background: #ffc356;
 }
-
-
-.a{
-  color:#fdb734;
-}
-

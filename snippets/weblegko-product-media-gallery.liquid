@@ -1,3 +1,8 @@
+{% comment %}
+  Кастомная галерея Weblegko с интеграцией архитектуры Dawn (Deferred Media)
+  Исправлена проблема с загрузкой видео в галерее
+{% endcomment %}
+
 <style>
   /* ============================================ */
   /* ГАЛЛЕРЕЯ */
@@ -5,35 +10,28 @@
   .weblegko-gallery {
     position: relative;
   }
-
   .weblegko-gallery .swiper-slide {
     aspect-ratio: 1 / 1;
   }
-
   .thumb-swiper {
     display: none;
   }
-
   .thumb-swiper.swiper-initialized {
     display: block;
   }
-
   .weblegko-gallery .thumb-swiper .swiper-slide {
     box-sizing: border-box;
     border: 2px solid transparent;
     transition: border-color 0.3s ease;
     cursor: pointer;
   }
-
   .weblegko-gallery .thumb-swiper .swiper-slide.swiper-slide-thumb-active {
     border-color: #00b5d1 !important;
     opacity: 1 !important;
   }
-
   .weblegko-gallery .thumb-swiper .swiper-slide:hover {
     border-color: #ffc356;
   }
-
   .gallery-btn-prev {
     left: 1rem;
   }
@@ -49,17 +47,17 @@
     overflow: hidden;
     cursor: default;
   }
-
   .main-swiper-wrapper .swiper-slide {
     overflow: hidden;
   }
-
-  .main-swiper-wrapper .swiper-slide img {
+  .main-swiper-wrapper .swiper-slide img.parallax-img {
     transition: transform 0.1s ease-out;
     will-change: transform;
     pointer-events: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
-
   .zoom-icon {
     position: absolute;
     top: 50%;
@@ -78,7 +76,6 @@
     z-index: 5;
     backdrop-filter: blur(4px);
   }
-
   .zoom-icon svg {
     width: 2.8rem;
     height: 2.8rem;
@@ -88,22 +85,272 @@
     stroke-linecap: round;
     stroke-linejoin: round;
   }
-
   .main-swiper-wrapper:hover .zoom-icon {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1.4);
+  }
+
+  /* Скрываем лупу для видео/3D */
+  .main-swiper-wrapper .swiper-slide[data-media-type='video'] .zoom-icon,
+  .main-swiper-wrapper .swiper-slide[data-media-type='external_video'] .zoom-icon,
+  .main-swiper-wrapper .swiper-slide[data-media-type='model'] .zoom-icon {
+    display: none;
+  }
+
+  /* ============================================ */
+  /* DAWN MEDIA STYLES (Интеграция видео/3D) */
+  /* ============================================ */
+
+  /* Плейсхолдер в галерее (НЕ deferred-media, чтобы Dawn не трогал) */
+  .weblegko-gallery .deferred-media-placeholder {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #000;
+  }
+  .weblegko-gallery .deferred-media-placeholder .deferred-media__poster {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: transparent;
+  }
+  .weblegko-gallery .deferred-media-placeholder .deferred-media__poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Deferred-media в лайтбоксе (нативный Dawn элемент) */
+  .weblegko-lightbox .deferred-media {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #000;
+  }
+
+  /* Общие стили для постера и кнопки Play */
+  .deferred-media__poster {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: transparent;
+  }
+  .deferred-media__poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .weblegko-deffered-media-button.deferred-media__poster-button {       
+    width: 8rem;
+    height: 8rem;
+    background: #00b5d1;   
+  }
+
+  .weblegko-deffered-media-button.deferred-media__poster-button svg {
+    width: 2.8rem;
+    height: 2.8rem;
+    fill: #fff;
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Видео/iframe/model-viewer внутри лайтбокса */
+  .weblegko-lightbox .deferred-media video,
+  .weblegko-lightbox .deferred-media iframe,
+  .weblegko-lightbox .deferred-media model-viewer {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border: 0;
   }
 
   /* ============================================ */
   /* ВАРИАНТЫ (HIDE VARIANT IMAGES) */
   /* ============================================ */
   .thumbnail-list_item--variant {
-    display: none;
+    display: none !important;
   }
 
   /* ============================================ */
-  /* АДАПТИВ */
+  /* СВОЙ ЛАЙТБОКС — FULLSCREEN */
   /* ============================================ */
+  .weblegko-lightbox {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255,255, 255, 1);    
+    z-index: 99999;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+    overflow: hidden;
+  }
+  .weblegko-lightbox.active {
+    display: block;
+    opacity: 1;
+  }
+  .weblegko-lightbox .swiper {
+    width: 100%;
+    height: 100%;
+  }
+  .weblegko-lightbox .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  .weblegko-lightbox .swiper-slide img.lb-img {
+    width: 100%;
+    height: 100%;
+    max-height: 95dvh;
+    object-fit: contain;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: transform 0.2s ease;
+    cursor: zoom-in;
+  }
+  .weblegko-lightbox .swiper-slide img.lb-img.zoomed {
+    cursor: zoom-out;
+    transform: scale(1.5);
+  }
+
+  /* Кнопки навигации */
+  .weblegko-lightbox .lb-btn-prev,
+  .weblegko-lightbox .lb-btn-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    width: 4.8rem;
+    height: 4.8rem;
+    border-radius: 50%;
+    background: rgba(0, 181, 209);
+    color: #000;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(0.75rem);
+    border: none;
+  }
+  .weblegko-lightbox .lb-btn-prev.swiper-button-disabled,
+  .weblegko-lightbox .lb-btn-next.swiper-button-disabled {
+    opacity: 0.1;
+    pointer-events: none;
+  }
+  .weblegko-lightbox .lb-btn-prev:hover,
+  .weblegko-lightbox .lb-btn-next:hover {
+    background: rgb(255, 195, 86);
+    color: #fff;
+  }
+  .weblegko-lightbox .lb-btn-prev {
+    left: 2rem;
+  }
+  .weblegko-lightbox .lb-btn-next {
+    right: 2rem;
+  }
+  .weblegko-lightbox .lb-btn-prev svg,
+  .weblegko-lightbox .lb-btn-next svg {
+    width: 2.4rem;
+    height: 2.4rem;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Закрытие */
+  .weblegko-lightbox .lb-close {
+    position: absolute;
+    top: 4rem;
+    right: 2rem;
+    z-index: 20;
+    width: 4.8rem;
+    height: 4.8rem;
+    border-radius: 50%;
+    background: rgba(0, 181, 209);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    padding: 0;
+    line-height: 1;
+    font-weight: 400;
+    border: none;
+  }
+  .weblegko-lightbox .lb-close:hover {
+    background: rgb(255, 195, 86);
+    color: #fff;
+  }
+
+  /* Счетчик, Подпись, Прогресс */
+  .weblegko-lightbox .lb-counter {
+    position: absolute;
+    top: 2.4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+  }
+  .weblegko-lightbox .lb-caption {
+    position: absolute;
+    bottom: 2.4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.4rem;
+    text-align: center;
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 0.8rem 2rem;
+    border-radius: 2rem;
+    backdrop-filter: blur(5px);
+  }
+  .weblegko-lightbox .lb-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+    height: 0.3rem;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.3);
+  }
+  .weblegko-lightbox .lb-progress .lb-progress-bar {
+    height: 100%;
+    background: #fff;
+    transition: width 0.3s ease;
+    width: 0%;
+  }
+
+  /* Адаптив */
   @media (max-width: 768px) {
     .zoom-icon {
       width: 4.4rem;
@@ -113,6 +360,24 @@
       width: 2rem;
       height: 2rem;
     }
+    .weblegko-lightbox .lb-counter {
+      top: 1.6rem;
+      font-size: 1.2rem;
+    }
+    .weblegko-lightbox .lb-caption {
+      bottom: 1.6rem;
+      font-size: 1.2rem;
+      padding: 0.6rem 1.4rem;
+      max-width: 90%;
+    }
+    .weblegko-lightbox .swiper-slide img.lb-img.zoomed {
+      transform: scale(1.4);
+    }
+  }
+  @media (max-width: 480px) {
+    .weblegko-lightbox .swiper-slide img.lb-img.zoomed {
+      transform: scale(1.2);
+    }
   }
 </style>
 
@@ -120,7 +385,7 @@
 <!-- ГАЛЛЕРЕЯ -->
 <!-- ========================================== -->
 <div class="weblegko-gallery" data-product-id="{{ product.id }}">
-  <!-- ГЛАВНЫЙ СЛАЙДЕР с параллаксом -->
+  <!-- ГЛАВНЫЙ СЛАЙДЕР -->
   <div class="tw:rounded-[1.6rem] tw:mb-[1.6rem] tw:p-[0.8rem] tw:bg-white main-swiper-wrapper">
     <div class="main-swiper tw:rounded-[0.8rem] tw:overflow-hidden">
       <div class="swiper-wrapper">
@@ -132,47 +397,60 @@
             endif
           -%}
           <div
-            class="swiper-slide tw:bg-[#f2f1ed] tw:select-none {% if is_variant_image and section.settings.hide_variants %} variant-image-slide{% endif %}"
+            class="swiper-slide tw:bg-[#f2f1ed] tw:select-none {% if is_variant_image and section.settings.hide_variants %} thumbnail-list_item--variant{% endif %}"
             data-media-id="{{ media.id }}"
+            data-media-type="{{ media.media_type }}"
+            data-index="{{ forloop.index0 }}"
           >
-            <img
-              src="{{ media | image_url: width: 800 }}"
-              alt="{{ media.alt | escape }}"
-              width="800"
-              height="800"
-              class="tw:w-full tw:h-full tw:object-cover tw:select-none tw:pointer-events-none"
-              loading="lazy"
-              draggable="false"
-            >
+            {% if media.media_type == 'image' %}
+              <img
+                src="{{ media | image_url: width: 800 }}"
+                alt="{{ media.alt | escape }}"
+                class="parallax-img tw:select-none tw:pointer-events-none"
+                loading="lazy"
+                draggable="false"
+              >
+              <div class="zoom-icon">
+                <svg focusable="false" aria-hidden="true">
+                  <use href="#search"></use>
+                </svg>
+              </div>
+            {% else %}
+              <!-- Видео и 3D модели (Плейсхолдер, НЕ deferred-media чтобы Dawn не трогал) -->
+              <div class="deferred-media-placeholder" data-media-id="{{ media.id }}">
+                <button class="deferred-media__poster" type="button">
+                  <span class="weblegko-deffered-media-button deferred-media__poster-button">
+                    {% if media.media_type == 'model' %}
+                      <svg viewBox="0 0 24 24">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                      </svg>
+                    {% else %}
+                      <svg viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    {% endif %}
+                  </span>
+                  <img
+                    src="{{ media.preview_image | image_url: width: 800 }}"
+                    alt="{{ media.alt | escape }}"
+                    loading="lazy"
+                  >
+                </button>
+              </div>
+            {% endif %}
           </div>
         {% endfor %}
       </div>
-    </div>
-
-    <!-- Иконка лупы -->
-    <div class="zoom-icon">
-      <svg
-        class="tw:w-[2.4rem] tw:h-[2.4rem] tw:transition-all tw:duration-300 tw:text-grayscale-300 tw:hover:text-grayscale-950"
-        focusable="false"
-        aria-hidden="true"
-      >
-        <use href="#search"></use>
-      </svg>
     </div>
   </div>
 
   <!-- ТУМБНЕЙЛЫ -->
   <div class="thumb-wrapper tw:relative tw:flex tw:items-center tw:gap-[1.6rem]">
     <button class="thumb-btn-prev tw:flex-shrink-0 tw:cursor-pointer">
-      <svg
-        class="tw:w-[2.4rem] tw:h-[2.4rem] tw:transition-all tw:duration-300 tw:text-grayscale-300 tw:hover:text-grayscale-950"
-        focusable="false"
-        aria-hidden="true"
-      >
+      <svg class="tw:w-[2.4rem] tw:h-[2.4rem]">
         <use href="#chevron-left"></use>
       </svg>
     </button>
-
     <div class="thumb-swiper tw:flex-1 tw:overflow-hidden">
       <div class="swiper-wrapper">
         {% for media in product.media %}
@@ -187,27 +465,28 @@
             data-media-id="{{ media.id }}"
             data-index="{{ forloop.index0 }}"
           >
-            <div class="tw:w-full tw:h-full tw:cursor-pointer">
-              <img
-                src="{{ media | image_url: width: 200 }}"
-                alt="{{ media.alt | escape }}"
-                width="200"
-                height="200"
-                class="tw:w-full tw:h-full tw:object-cover"
-                loading="lazy"
+            <img
+              src="{{ media.preview_image | image_url: width: 200 }}"
+              alt="{{ media.alt | escape }}"
+              class="tw:w-full tw:h-full tw:object-cover"
+              loading="lazy"
+            >
+            {% if media.media_type != 'image' %}
+              <span
+                class="thumb-badge"
+                style="position:absolute;bottom:5px;right:5px;background:rgba(0,0,0,0.6);padding:2px;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;"
               >
-            </div>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#fff">
+                  {% if media.media_type == 'model' %}<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>{% else %}<path d="M8 5v14l11-7z"/>{% endif %}
+                </svg>
+              </span>
+            {% endif %}
           </div>
         {% endfor %}
       </div>
     </div>
-
     <button class="thumb-btn-next tw:flex-shrink-0 tw:cursor-pointer">
-      <svg
-        class="tw:w-[2.4rem] tw:h-[2.4rem] tw:transition-all tw:duration-300 tw:text-grayscale-300 tw:hover:text-grayscale-950"
-        focusable="false"
-        aria-hidden="true"
-      >
+      <svg class="tw:w-[2.4rem] tw:h-[2.4rem]">
         <use href="#chevron-right"></use>
       </svg>
     </button>
@@ -215,7 +494,7 @@
 </div>
 
 <!-- ========================================== -->
-<!-- ЛАЙТБОКС -->
+<!-- ЛАЙТБОКС (Рендерится сразу, но скрыт) -->
 <!-- ========================================== -->
 <div class="weblegko-lightbox" id="lightbox">
   <button class="lb-close" onclick="closeLightbox()">✕</button>
@@ -223,7 +502,69 @@
 
   <div class="swiper lightbox-swiper">
     <div class="swiper-wrapper" id="lightboxWrapper">
-      <!-- Заполняется JS -->
+      {% for media in product.media %}
+        {%- liquid
+          assign is_variant_image = false
+          if variant_images contains media.src
+            assign is_variant_image = true
+          endif
+        -%}
+        <div
+          class="swiper-slide {% if is_variant_image and section.settings.hide_variants %} thumbnail-list_item--variant{% endif %}"
+          data-media-id="{{ media.id }}"
+          data-media-type="{{ media.media_type }}"
+          data-alt="{{ media.alt | escape }}"
+        >
+          {% if media.media_type == 'image' %}
+            <img
+              src="{{ media | image_url: width: 1920 }}"
+              alt="{{ media.alt | escape }}"
+              class="lb-img"
+              loading="lazy"
+            >
+          {% else %}
+            <!-- Нативный Dawn deferred-media для загрузки видео/3D -->
+            <deferred-media class="deferred-media" data-media-id="{{ media.id }}">
+              <button class="deferred-media__poster" type="button">
+                <span class="deferred-media__poster-button">
+                  {% if media.media_type == 'model' %}
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                  {% else %}
+                    <svg viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  {% endif %}
+                </span>
+                <img src="{{ media.preview_image | image_url: width: 1920 }}" alt="{{ media.alt | escape }}">
+              </button>
+              <template>
+                {% case media.media_type %}
+                  {% when 'external_video' %}
+                    {{
+                      media
+                      | external_video_url: autoplay: true, loop: section.settings.enable_video_looping
+                      | external_video_tag: iframe_style: 'width: 100%; height: 100%;'
+                    }}
+                  {% when 'video' %}
+                    {{
+                      media
+                      | media_tag:
+                        image_size: '2048x',
+                        autoplay: true,
+                        loop: section.settings.enable_video_looping,
+                        controls: true,
+                        preload: 'none'
+                    }}
+                  {% when 'model' %}
+                    {{ media | media_tag: image_size: '2048x', toggleable: true }}
+                {% endcase %}
+              </template>
+            </deferred-media>
+          {% endif %}
+        </div>
+      {% endfor %}
     </div>
   </div>
 
@@ -239,78 +580,41 @@
   </button>
 
   <div class="lb-caption" id="lightboxCaption">{{ product.title | escape }}</div>
-
-  <div class="lb-progress">
-    <div class="lb-progress-bar" id="lightboxProgress"></div>
-  </div>
+  <div class="lb-progress"><div class="lb-progress-bar" id="lightboxProgress"></div></div>
 </div>
 
 <!-- ========================================== -->
-<!-- SWIPER + СВОЙ ЛАЙТБОКС -->
+<!-- SWIPER + ЛОГИКА DAWN -->
 <!-- ========================================== -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // ==========================================
-    // ДАННЫЕ — через JSON
-    // ==========================================
-    const images = {{ product.media | json }};
-    const productTitle = {{ product.title | json }};
-
-    const imageData = images.map(function(media) {
-      return {
-        src: media.src,
-        alt: media.alt || productTitle,
-        width: media.width || 1200,
-        height: media.height || 1200
-      };
-    });
-
     let currentIndex = 0;
     let isZoomed = false;
     let lightboxSwiper = null;
     let mainSwiper = null;
     let thumbSwiper = null;
 
-    // ==========================================
-    // ОБНОВЛЕНИЕ КАПШН И КАУНТЕРА
-    // ==========================================
-    function updateLightboxInfo(index, total) {
-      const counter = document.getElementById('lightboxCounter');
-      const caption = document.getElementById('lightboxCaption');
-
-      if (counter) {
-        counter.textContent = (index + 1) + ' / ' + total;
-      }
-
-      if (caption) {
-        caption.textContent = imageData[index]?.alt || productTitle;
-      }
+    // Получаем видимые медиа (учитывая hide_variants)
+    function getVisibleMediaData() {
+      const slides = document.querySelectorAll('.main-swiper .swiper-slide:not(.thumbnail-list_item--variant)');
+      return Array.from(slides).map(slide => ({
+        id: slide.dataset.mediaId,
+        type: slide.dataset.mediaType,
+        alt: slide.querySelector('img')?.alt || {{ product.title | json }},
+        index: parseInt(slide.dataset.index)
+      }));
     }
 
     // ==========================================
     // SWIPER ГАЛЛЕРЕЯ
     // ==========================================
     function initGallerySwiper() {
-      if (typeof Swiper === 'undefined') {
-        setTimeout(initGallerySwiper, 100);
-        return;
-      }
+      if (typeof Swiper === 'undefined') { setTimeout(initGallerySwiper, 100); return; }
 
-      mainSwiper = new Swiper('.main-swiper', {
-        slidesPerView: 1,
-        spaceBetween: 8,
-        thumbs: {
-          swiper: null,
-        },
-      });
-
+      mainSwiper = new Swiper('.main-swiper', { slidesPerView: 1, spaceBetween: 8 });
       thumbSwiper = new Swiper('.thumb-swiper', {
-        slidesPerView: 5,
-        spaceBetween: 8,
-        navigation: {
-          nextEl: '.thumb-btn-next',
-          prevEl: '.thumb-btn-prev',
-        },
+        slidesPerView: 5, spaceBetween: 8,
+        navigation: { nextEl: '.thumb-btn-next', prevEl: '.thumb-btn-prev' },
         breakpoints: {
           0: { slidesPerView: 4, spaceBetween: 8 },
           768: { slidesPerView: 3, spaceBetween: 16 },
@@ -319,268 +623,195 @@
         },
       });
 
-      mainSwiper.params.thumbs.swiper = thumbSwiper;
+      mainSwiper.params.thumbs = { swiper: thumbSwiper };
       mainSwiper.thumbs.init();
 
-      // ==========================================
-      // КЛИК ПО ТУМБНЕЙЛУ → ПЕРЕКЛЮЧАЕТ СЛАЙДЕР
-      // ==========================================
-      document.querySelectorAll('.thumb-swiper .swiper-slide').forEach(function(slide, index) {
+      // Клик по тумбнейлу
+      document.querySelectorAll('.thumb-swiper .swiper-slide').forEach(function(slide) {
         slide.addEventListener('click', function(e) {
           e.stopPropagation();
-          if (mainSwiper) {
-            mainSwiper.slideTo(index, 300);
+          const index = parseInt(this.dataset.index);
+          const targetSlide = document.querySelector(`.main-swiper .swiper-slide[data-index="${index}"]`);
+          if (targetSlide && mainSwiper) {
+             mainSwiper.slideTo(Array.from(mainSwiper.slides).indexOf(targetSlide), 300);
           }
         });
       });
 
-      // ==========================================
-      // КЛИК ПО ГЛАВНОМУ СЛАЙДЕРУ → ОТКРЫВАЕТ ЛАЙТБОКС
-      // ==========================================
-      const mainSlider = document.querySelector('.main-swiper');
-      if (mainSlider) {
-        mainSlider.addEventListener('click', function(e) {
-          if (e.target.closest('.gallery-btn-prev') || e.target.closest('.gallery-btn-next')) {
-            return;
-          }
-          const activeIndex = mainSwiper ? mainSwiper.activeIndex : 0;
-          openLightbox(activeIndex);
+      // Клик по главному слайдеру -> Лайтбокс
+      document.querySelectorAll('.main-swiper .swiper-slide').forEach(function(slide) {
+        slide.addEventListener('click', function(e) {
+          const index = parseInt(this.dataset.index);
+          openLightbox(index);
         });
-      }
+      });
 
-      // ==========================================
-      // КЛИК ПО ЛУПЕ → ОТКРЫВАЕТ ЛАЙТБОКС
-      // ==========================================
+      // Клик по лупе
       const zoomIcon = document.querySelector('.zoom-icon');
       if (zoomIcon) {
         zoomIcon.addEventListener('click', function(e) {
           e.stopPropagation();
-          const activeIndex = mainSwiper ? mainSwiper.activeIndex : 0;
+          const activeIndex = mainSwiper ? parseInt(mainSwiper.slides[mainSwiper.activeIndex].dataset.index) : 0;
           openLightbox(activeIndex);
         });
       }
 
-      // ==========================================
-      // ПАРАЛЛАКС ЭФФЕКТ
-      // ==========================================
-     const wrapper = document.querySelector('.main-swiper-wrapper');
+      // Параллакс (только для картинок)
+      const wrapper = document.querySelector('.main-swiper-wrapper');
       if (wrapper) {
         wrapper.addEventListener('mousemove', function(e) {
+          const activeSlide = mainSwiper?.slides[mainSwiper.activeIndex];
+          if (!activeSlide || activeSlide.dataset.mediaType !== 'image') return;
+          
           const rect = this.getBoundingClientRect();
           const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
           const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
-
-          const activeSlide = mainSwiper?.slides[mainSwiper.activeIndex];
-          if (activeSlide) {
-            const img = activeSlide.querySelector('img');
-            if (img) {
-              img.style.transform = 'scale(1.05) translate(' + x + 'px, ' + y + 'px)';
-            }
-          }
+          const img = activeSlide.querySelector('img.parallax-img');
+          if (img) img.style.transform = 'scale(1.05) translate(' + x + 'px, ' + y + 'px)';
         });
 
         wrapper.addEventListener('mouseleave', function() {
           const activeSlide = mainSwiper?.slides[mainSwiper.activeIndex];
-          if (activeSlide) {
-            const img = activeSlide.querySelector('img');
-            if (img) {
-              img.style.transform = 'scale(1) translate(0, 0)';
-            }
-          }
+          if (!activeSlide) return;
+          const img = activeSlide.querySelector('img.parallax-img');
+          if (img) img.style.transform = 'scale(1) translate(0, 0)';
         });
-      } 
-
-      // Скрываем варианты, если нужно
-      {% if section.settings.hide_variants %}
-        document.querySelectorAll('.variant-image-slide, .thumbnail-list_item--variant').forEach(el => {
-          if (el) el.style.display = 'none';
-        });
-
-        setTimeout(() => {
-          if (mainSwiper) mainSwiper.update();
-          if (thumbSwiper) thumbSwiper.update();
-        }, 100);
-      {% endif %}
+      }
     }
 
     // ==========================================
     // ЛАЙТБОКС
     // ==========================================
-    function initLightboxSwiper() {
-      const wrapper = document.getElementById('lightboxWrapper');
-      if (!wrapper) return;
+    function updateLightboxUI(index, total) {
+      const counter = document.getElementById('lightboxCounter');
+      const caption = document.getElementById('lightboxCaption');
+      const progress = document.getElementById('lightboxProgress');
+      
+      const visibleData = getVisibleMediaData();
+      const currentMedia = visibleData[index];
 
-      wrapper.innerHTML = '';
+      if (counter) counter.textContent = (index + 1) + ' / ' + total;
+      if (caption) caption.textContent = currentMedia ? currentMedia.alt : {{ product.title | json }};
+      if (progress) progress.style.width = ((index + 1) / total * 100) + '%';
+    }
 
-      const visibleImages = [];
-      const visibleIndices = [];
+    function initLightboxSwiper(initialIndex) {
+      const visibleSlides = document.querySelectorAll('.weblegko-lightbox .swiper-slide:not(.thumbnail-list_item--variant)');
+      const total = visibleSlides.length;
+      if (total === 0) return;
 
-      document.querySelectorAll('.main-swiper .swiper-slide').forEach(function(slide, index) {
-        if (slide && slide.style.display !== 'none') {
-          visibleImages.push(imageData[index]);
-          visibleIndices.push(index);
+      // Находим реальный индекс слайда в Swiper
+      let realInitialIndex = 0;
+      visibleSlides.forEach((slide, i) => {
+        if (parseInt(slide.dataset.mediaId) === parseInt(document.querySelectorAll('.main-swiper .swiper-slide')[initialIndex]?.dataset.mediaId)) {
+          realInitialIndex = i;
         }
       });
 
-      const finalImages = visibleImages.length > 0 ? visibleImages : imageData;
-      const finalIndices = visibleIndices.length > 0 ? visibleIndices : imageData.map((_, i) => i);
+      if (lightboxSwiper) { lightboxSwiper.destroy(true, true); lightboxSwiper = null; }
 
-      finalImages.forEach(function(img, i) {
-        const slide = document.createElement('div');
-        slide.className = 'swiper-slide';
-        slide.dataset.realIndex = finalIndices[i];
-        const altSafe = img.alt ? img.alt.replace(/"/g, '&quot;').replace(/'/g, '&#39;') : '';
-        slide.innerHTML =
-          '<img src="' + img.src + '" alt="' + altSafe + '" data-index="' + finalIndices[i] + '" loading="lazy">';
-        wrapper.appendChild(slide);
-      });
-
-      if (lightboxSwiper) {
-        lightboxSwiper.destroy();
-        lightboxSwiper = null;
-      }
-
-      let initialSlideIndex = 0;
-      for (let i = 0; i < finalIndices.length; i++) {
-        if (finalIndices[i] === currentIndex) {
-          initialSlideIndex = i;
-          break;
-        }
-      }
-
-      setTimeout(function() {
+      setTimeout(() => {
         lightboxSwiper = new Swiper('.lightbox-swiper', {
-          slidesPerView: 1,
-          spaceBetween: 0,
-          initialSlide: initialSlideIndex,
-          centeredSlides: true,
-          autoHeight: false,
-          resizeObserver: true,
-            speed: 800, 
-          navigation: {
-            nextEl: '.lb-btn-next',
-            prevEl: '.lb-btn-prev',
-          },
+          slidesPerView: 1, spaceBetween: 0, initialSlide: realInitialIndex,
+          centeredSlides: true, autoHeight: false, speed: 800,
+          navigation: { nextEl: '.lb-btn-next', prevEl: '.lb-btn-prev' },
           on: {
             slideChange: function() {
-              const realIndex = this.realIndex;
-              const slide = this.slides[realIndex];
-              const originalIndex = parseInt(slide.dataset.realIndex) || 0;
-              currentIndex = originalIndex;
+              if (window.pauseAllMedia) window.pauseAllMedia(); // Пауза при смене
+              
+              const activeSlide = this.slides[this.activeIndex];
+              const deferredMedia = activeSlide.querySelector('deferred-media');
+              
+              // Загрузка видео/3D только для активного слайда
+              if (deferredMedia && !deferredMedia.classList.contains('active')) {
+                deferredMedia.loadContent();
+                deferredMedia.classList.add('active');
+              }
 
-              updateLightboxInfo(realIndex, finalImages.length);
-
-              this.slides.forEach(function(s) {
-                const img = s.querySelector('img');
-                if (img) {
-                  img.classList.remove('zoomed');
-                  img.style.transform = 'scale(1)';
-                }
+              // Сброс зума
+              this.slides.forEach(s => {
+                const img = s.querySelector('img.lb-img');
+                if (img) { img.classList.remove('zoomed'); img.style.transform = 'scale(1)'; }
               });
               isZoomed = false;
+
+              updateLightboxUI(this.activeIndex, this.slides.length);
             },
             init: function() {
-              setTimeout(() => {
-                this.update();
-                this.slideTo(initialSlideIndex, 0);
-                const realIndex = this.realIndex;
-                updateLightboxInfo(realIndex, finalImages.length);
-              }, 50);
+              const activeSlide = this.slides[this.activeIndex];
+              const deferredMedia = activeSlide.querySelector('deferred-media');
+              if (deferredMedia) {
+                deferredMedia.loadContent();
+                deferredMedia.classList.add('active');
+              }
+              updateLightboxUI(this.activeIndex, this.slides.length);
             }
           }
         });
-     
-      }, 100);
-    }
-
-    function updateProgress(index, total) {
-      const progress = document.getElementById('lightboxProgress');
-      if (progress) {
-        const percent = ((index + 1) / total) * 100;
-        progress.style.width = percent + '%';
-      }
+      }, 50);
     }
 
     // ==========================================
     // ОТКРЫТИЕ / ЗАКРЫТИЕ
     // ==========================================
     window.openLightbox = function(index) {
-      currentIndex = index;
       const lightbox = document.getElementById('lightbox');
       if (!lightbox) return;
+      
       lightbox.classList.add('active');
       document.body.style.overflow = 'hidden';
-
-      const total = imageData.length;
-      updateLightboxInfo(currentIndex, total);
-      initLightboxSwiper();
+      initLightboxSwiper(index);
     };
 
     window.closeLightbox = function() {
       const lightbox = document.getElementById('lightbox');
       if (!lightbox) return;
+      
       lightbox.classList.remove('active');
       document.body.style.overflow = '';
-      if (lightboxSwiper) {
-        lightboxSwiper.destroy();
-        lightboxSwiper = null;
-      }
-    };
+      
+      if (window.pauseAllMedia) window.pauseAllMedia();
 
-    window.lightboxPrev = function(e) {
-      if (e) e.preventDefault();
-      if (lightboxSwiper) lightboxSwiper.slidePrev();
-    };
+      // Полная очистка памяти: удаляем iframe/video/model-viewer из лайтбокса при закрытии
+      document.querySelectorAll('.weblegko-lightbox deferred-media').forEach(dm => {
+        const iframe = dm.querySelector('iframe');
+        const video = dm.querySelector('video');
+        const modelViewer = dm.querySelector('model-viewer');
+        if (iframe) iframe.remove();
+        if (video) { video.pause(); video.remove(); }
+        if (modelViewer) modelViewer.remove();
+        dm.removeAttribute('loaded'); // Сбрасываем атрибут, чтобы при следующем открытии видео загрузилось заново
+        dm.classList.remove('active');
+      });
 
-    window.lightboxNext = function(e) {
-      if (e) e.preventDefault();
-      if (lightboxSwiper) lightboxSwiper.slideNext();
+      if (lightboxSwiper) { lightboxSwiper.destroy(true, true); lightboxSwiper = null; }
     };
 
     // ==========================================
-    // ЗУМ
+    // ЗУМ, КЛАВИШИ, ФОН
     // ==========================================
     document.addEventListener('click', function(e) {
-      const img = e.target.closest('.lightbox-swiper .swiper-slide img');
+      const img = e.target.closest('.lightbox-swiper .swiper-slide img.lb-img');
       if (!img) return;
       e.stopPropagation();
       if (img.classList.contains('zoomed')) {
-        img.classList.remove('zoomed');
-        img.style.transform = 'scale(1)';
-        isZoomed = false;
+        img.classList.remove('zoomed'); img.style.transform = 'scale(1)'; isZoomed = false;
       } else {
-        img.classList.add('zoomed');
-        img.style.transform = 'scale(1.8)';
-        isZoomed = true;
+        img.classList.add('zoomed'); img.style.transform = 'scale(1.25)'; isZoomed = true;
       }
     });
 
-    // ==========================================
-    // КЛАВИШИ
-    // ==========================================
     document.addEventListener('keydown', function(e) {
       const lightbox = document.getElementById('lightbox');
       if (!lightbox || !lightbox.classList.contains('active')) return;
-
-      if (e.key === 'Escape') {
-        closeLightbox();
-      } else if (e.key === 'ArrowRight' && lightboxSwiper) {
-        lightboxSwiper.slideNext();
-      } else if (e.key === 'ArrowLeft' && lightboxSwiper) {
-        lightboxSwiper.slidePrev();
-      }
+      if (e.key === 'Escape') closeLightbox();
+      else if (e.key === 'ArrowRight' && lightboxSwiper) lightboxSwiper.slideNext();
+      else if (e.key === 'ArrowLeft' && lightboxSwiper) lightboxSwiper.slidePrev();
     });
 
-    // ==========================================
-    // ЗАКРЫТИЕ ПО КЛИКУ НА ФОН
-    // ==========================================
     const lightbox = document.getElementById('lightbox');
     if (lightbox) {
-      lightbox.addEventListener('click', function(e) {
-        if (e.target === this) {
-          closeLightbox();
-        }
-      });
+      lightbox.addEventListener('click', function(e) { if (e.target === this) closeLightbox(); });
     }
 
     // ==========================================

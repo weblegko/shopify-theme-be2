@@ -83,9 +83,9 @@
   {%- endif -%}
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
-  <div class="tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem]">
+  <div class="tw:!bg-seriy tw:text-grayscale-950 tw:px-[1.6rem]">
     <div class="product tw:!mx-auto tw:!max-w-[112rem] grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
-      <div class="tw:!max-w-[48%] grid__item product__media-wrapper tw:mb-[1rem] tw:md:mb-0">
+      <div class="tw:sm750:!max-w-[48%] grid__item product__media-wrapper tw:mb-[1rem] tw:md:mb-0">
         {% render 'weblegko-product-media-gallery', product: product, variant_images: variant_images %}
       </div>
       <div class="product__info-wrapper grid__item {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">

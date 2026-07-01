@@ -1,96 +1,96 @@
 <!-- sections/weblegko-premium-products.liquid -->
 
 {%- style -%}
-  /* Кастомная пагинация для премиум-слайдера */
-  .premium-pagination {   
-    margin-top: 3rem;
-  }
-  /* Кастомная пагинация для премиум-слайдера */
- .premium-pagination .custom-bullet {
-    width: 4rem !important;
-    height: 0.3rem !important;
-    border-radius: 0.2rem !important;
-    background: rgba(0, 0, 0, 0.15) !important;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
+   /* Кастомная пагинация для премиум-слайдера */
+   .premium-pagination {
+     margin-top: 3rem;
+   }
+   /* Кастомная пагинация для премиум-слайдера */
+  .premium-pagination .custom-bullet {
+     width: 4rem !important;
+     height: 0.3rem !important;
+     border-radius: 0.2rem !important;
+     background: rgba(0, 0, 0, 0.15) !important;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     position: relative;
+     overflow: hidden;
+   }
 
-  .premium-pagination .custom-bullet .bullet-progress {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    background: #1a1a1a;
-    border-radius: 0.2rem;
-    transition: width 0.3s ease;
-    width: 0%;
-  }
+   .premium-pagination .custom-bullet .bullet-progress {
+     position: absolute;
+     top: 0;
+     left: 0;
+     height: 100%;
+     background: #1a1a1a;
+     border-radius: 0.2rem;
+     transition: width 0.3s ease;
+     width: 0%;
+   }
 
-  .premium-pagination .custom-bullet.active .bullet-progress {
-    background: #1a1a1a;
-  }
+   .premium-pagination .custom-bullet.active .bullet-progress {
+     background: #1a1a1a;
+   }
 
-  .premium-pagination .custom-bullet:hover {
-    background: rgba(0, 0, 0, 0.25) !important;
-  }
+   .premium-pagination .custom-bullet:hover {
+     background: rgba(0, 0, 0, 0.25) !important;
+   }
 
-  /* Скрываем стандартные булеты Swiper */
-  .premium-pagination .swiper-pagination-bullet {
-    display: none !important;
-  }
+   /* Скрываем стандартные булеты Swiper */
+   .premium-pagination .swiper-pagination-bullet {
+     display: none !important;
+   }
 
-  /* ===== ОДИНАКОВАЯ ВЫСОТА СЛАЙДОВ ===== */
+   /* ===== ОДИНАКОВАЯ ВЫСОТА СЛАЙДОВ ===== */
 
-  /* Сбрасываем фиксированную высоту Swiper-контейнера */
-  .premiumSwiper.swiper {
-    height: auto !important;
-    user-select: none;
-  }
+   /* Сбрасываем фиксированную высоту Swiper-контейнера */
+   .premiumSwiper.swiper {
+     height: auto !important;
+     user-select: none;
+   }
 
-  /* Wrapper растягивается по содержимому, слайды выравниваются по высоте */
-  .premiumSwiper .swiper-wrapper {
-    height: auto !important;
-    align-items: stretch !important;
-  }
+   /* Wrapper растягивается по содержимому, слайды выравниваются по высоте */
+   .premiumSwiper .swiper-wrapper {
+     height: auto !important;
+     align-items: stretch !important;
+   }
 
-  /* Каждый слайд растягивается на всю высоту wrapper */
-  .premiumSwiper .swiper-slide {
-    height: auto !important;
-    align-self: stretch !important;
-    display: flex !important;
-  }
+   /* Каждый слайд растягивается на всю высоту wrapper */
+   .premiumSwiper .swiper-slide {
+     height: auto !important;
+     align-self: stretch !important;
+     display: flex !important;
+   }
 
-  /* Внутренний контейнер слайда — flex-column на всю высоту */
-  .premiumSwiper .swiper-slide > div {
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100% !important;
-    width: 100% !important;
-  }
+   /* Внутренний контейнер слайда — flex-column на всю высоту */
+   .premiumSwiper .swiper-slide > div {
+     display: flex !important;
+     flex-direction: column !important;
+     height: 100% !important;
+     width: 100% !important;
+   }
 
-  /* ============================================ */
-  /* ПАДДИНГИ СЕКЦИИ (rem) - inline стили */
-  /* ============================================ */
-  .weblegko-premium-padding {
-    padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
-    padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
-  }
+   /* ============================================ */
+   /* ПАДДИНГИ СЕКЦИИ (rem) - inline стили */
+   /* ============================================ */
+   .weblegko-premium-padding {
+     padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
+     padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
+   }
 
-  @media screen and (min-width: 640px) {
-    .weblegko-premium-padding {
-      padding-top: {{ section.settings.padding_top_tablet | default: 5 }}rem !important;
-      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 5 }}rem !important;
-    }
-  }
+   @media screen and (min-width: 640px) {
+     .weblegko-premium-padding {
+       padding-top: {{ section.settings.padding_top_tablet | default: 5 }}rem !important;
+       padding-bottom: {{ section.settings.padding_bottom_tablet | default: 5 }}rem !important;
+     }
+   }
 
-  @media screen and (min-width: 1024px) {
-    .weblegko-premium-padding {
-      padding-top: {{ section.settings.padding_top_desktop | default: 8 }}rem !important;
-      padding-bottom: {{ section.settings.padding_bottom_desktop | default: 8 }}rem !important;
-    }
-  }
+   @media screen and (min-width: 1024px) {
+     .weblegko-premium-padding {
+       padding-top: {{ section.settings.padding_top_desktop | default: 8 }}rem !important;
+       padding-bottom: {{ section.settings.padding_bottom_desktop | default: 8 }}rem !important;
+     }
+   }
 {%- endstyle -%}
 
 <section class="tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem]">
@@ -117,7 +117,12 @@
       <div class="tw:mx-auto tw:max-w-[112rem] swiper premiumSwiper tw:relative tw:!overflow-visible">
         <div class="swiper-wrapper">
           {%- if section.settings.collection != blank -%}
+            {%- assign skip_card_product_styles = false -%}
             {%- for product in section.settings.collection.products -%}
+              {%- assign lazy_load = false -%}
+              {%- if forloop.index > 2 -%}
+                {%- assign lazy_load = true -%}
+              {%- endif -%}
               <div class="swiper-slide tw:h-auto">
                 <div class="tw:h-[inherit]">
                   {% render 'card-product-premium',
@@ -134,6 +139,7 @@
                   %}
                 </div>
               </div>
+              {%- assign skip_card_product_styles = true -%}
             {%- endfor -%}
 
           {%- else -%}
@@ -164,187 +170,195 @@
 </section>
 
 <script>
-  function initPremiumSlider() {
-    if (typeof Swiper !== 'undefined') {
-      const sliderEl = document.querySelector('.premiumSwiper');
-      if (sliderEl && !sliderEl.classList.contains('swiper-initialized')) {
-        // Получаем количество реальных слайдов (без дублей)
-        const slides = sliderEl.querySelectorAll('.swiper-slide');
-        // Фильтруем дубли (у них есть класс swiper-slide-duplicate)
-        const realSlides = sliderEl.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate)');
-        const totalSlides = realSlides.length;
-        
-        // Определяем количество булетов (максимум 3)
-        const bulletsCount = Math.min(totalSlides, 3);
-        
-        // Получаем контейнер пагинации
-        const paginationEl = document.querySelector('.premium-pagination');
-        
-        // Очищаем контейнер
-        paginationEl.innerHTML = '';
-        
-        // Создаем кастомные булеты
-        for (let i = 0; i < bulletsCount; i++) {
-          const bullet = document.createElement('span');
-          bullet.className = 'custom-bullet';
-          bullet.dataset.index = i;
-          
-          // Создаем прогресс-бар
-          const progress = document.createElement('span');
-          progress.className = 'bullet-progress';
-          progress.style.width = '0%';
-          
-          bullet.appendChild(progress);
-          paginationEl.appendChild(bullet);
-        }
-        
-        // Получаем настройки отступов из схемы
-        const spaceBetweenMobile = {{ section.settings.space_between_mobile | default: 1 | times: 10 }};
-        const spaceBetweenTablet = {{ section.settings.space_between_tablet | default: 2 | times: 10 }};
-        const spaceBetweenDesktop = {{ section.settings.space_between_desktop | default: 2 | times: 10 }};
-        
-        // Инициализируем Swiper с отключенной пагинацией
-        const swiper = new Swiper('.premiumSwiper', {
-          slidesPerView: 1,
-          spaceBetween: spaceBetweenMobile,
-          loop: totalSlides > 3 ? true : false,
-          speed: 600,
-          autoplay: {
-            delay: 4000,
-            disableOnInteraction: false,
-          },
-          // Отключаем стандартную пагинацию
-          pagination: false,
-          breakpoints: {
-            0: {
-              slidesPerView: 1.045,
-              spaceBetween: spaceBetweenMobile,
-            },
-            640: {
-              slidesPerView: 2,
-              spaceBetween: spaceBetweenTablet,
-            },
-            1024: {
-              slidesPerView: 3,
-              spaceBetween: spaceBetweenDesktop,
-            },
-          },
-        });
-        
-        // Функция обновления булетов
-        function updateBullets(swiperInstance) {
-          // Используем realIndex для определения текущего слайда
-          let currentIndex = swiperInstance.realIndex;
-          
-          // Если loop включен, realIndex может быть больше общего количества
-          // Нормализуем индекс
-          if (totalSlides > 3) {
-            currentIndex = currentIndex % totalSlides;
+    function initPremiumSlider() {
+      if (typeof Swiper !== 'undefined') {
+        const sliderEl = document.querySelector('.premiumSwiper');
+        if (sliderEl && !sliderEl.classList.contains('swiper-initialized')) {
+          // Получаем количество реальных слайдов (без дублей)
+          const slides = sliderEl.querySelectorAll('.swiper-slide');
+          // Фильтруем дубли (у них есть класс swiper-slide-duplicate)
+          const realSlides = sliderEl.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate)');
+          const totalSlides = realSlides.length;
+
+
+          if (totalSlides === 0) {
+            // Скрываем пагинацию
+            const paginationEl = document.querySelector('.premium-pagination');
+            if (paginationEl) paginationEl.style.display = 'none';
+            return;
           }
-          
-          const bullets = document.querySelectorAll('.premium-pagination .custom-bullet');
-          
-          if (bullets.length === 0) return;
-          
-          const bulletsCount = bullets.length;
-          
-          bullets.forEach((bullet, idx) => {
-            // Определяем диапазон слайдов для этого булета
-            let start = Math.round((idx / bulletsCount) * totalSlides);
-            let end = Math.round(((idx + 1) / bulletsCount) * totalSlides);
-            
-            // Для последнего булета включаем все оставшиеся
-            if (idx === bulletsCount - 1) {
-              end = totalSlides;
+
+          // Определяем количество булетов (максимум 3)
+          const bulletsCount = Math.min(totalSlides, 3);
+
+          // Получаем контейнер пагинации
+          const paginationEl = document.querySelector('.premium-pagination');
+
+          // Очищаем контейнер
+          paginationEl.innerHTML = '';
+
+          // Создаем кастомные булеты
+          for (let i = 0; i < bulletsCount; i++) {
+            const bullet = document.createElement('span');
+            bullet.className = 'custom-bullet';
+            bullet.dataset.index = i;
+
+            // Создаем прогресс-бар
+            const progress = document.createElement('span');
+            progress.className = 'bullet-progress';
+            progress.style.width = '0%';
+
+            bullet.appendChild(progress);
+            paginationEl.appendChild(bullet);
+          }
+
+          // Получаем настройки отступов из схемы
+          const spaceBetweenMobile = {{ section.settings.space_between_mobile | default: 1 | times: 10 }};
+          const spaceBetweenTablet = {{ section.settings.space_between_tablet | default: 2 | times: 10 }};
+          const spaceBetweenDesktop = {{ section.settings.space_between_desktop | default: 2 | times: 10 }};
+
+          // Инициализируем Swiper с отключенной пагинацией
+          const swiper = new Swiper('.premiumSwiper', {
+            slidesPerView: 1,
+            spaceBetween: spaceBetweenMobile,
+            loop: totalSlides > 3 ? true : false,
+            speed: 600,
+            autoplay: {
+              delay: 4000,
+              disableOnInteraction: false,
+            },
+            // Отключаем стандартную пагинацию
+            pagination: false,
+            breakpoints: {
+              0: {
+                slidesPerView: 1.045,
+                spaceBetween: spaceBetweenMobile,
+              },
+              640: {
+                slidesPerView: 2,
+                spaceBetween: spaceBetweenTablet,
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: spaceBetweenDesktop,
+              },
+            },
+          });
+
+          // Функция обновления булетов
+          function updateBullets(swiperInstance) {
+            // Используем realIndex для определения текущего слайда
+            let currentIndex = swiperInstance.realIndex;
+
+            // Если loop включен, realIndex может быть больше общего количества
+            // Нормализуем индекс
+            if (totalSlides > 3) {
+              currentIndex = currentIndex % totalSlides;
             }
-            
-            // Проверяем активность
-            const isActive = currentIndex >= start && currentIndex < end;
-            bullet.classList.toggle('active', isActive);
-            
-            // Вычисляем прогресс
-            let progress = 0;
-            if (isActive) {
-              const positionInGroup = currentIndex - start;
-              const groupSize = end - start;
-              progress = (positionInGroup / groupSize) * 100;
-            } else if (currentIndex >= end) {
-              progress = 100;
-            }
-            
-            // Обновляем прогресс-бар
-            const progressBar = bullet.querySelector('.bullet-progress');
-            if (progressBar) {
-              progressBar.style.width = Math.min(Math.max(progress, 0), 100) + '%';
-            }
-            
-            // Обработчик клика
-            bullet.onclick = function() {
-              // Вычисляем target индекс
-              const targetIndex = Math.round((idx / bulletsCount) * totalSlides);
-              // Если loop включен, добавляем смещение
-              if (totalSlides > 3) {
-                // Находим ближайший слайд с нужным индексом в loop режиме
-                const slides = swiperInstance.slides;
-                let targetSlideIndex = -1;
-                for (let i = 0; i < slides.length; i++) {
-                  if (!slides[i].classList.contains('swiper-slide-duplicate')) {
-                    const slideIndex = parseInt(slides[i].getAttribute('data-swiper-slide-index'));
-                    if (slideIndex === targetIndex) {
-                      targetSlideIndex = i;
-                      break;
+
+            const bullets = document.querySelectorAll('.premium-pagination .custom-bullet');
+
+            if (bullets.length === 0) return;
+
+            const bulletsCount = bullets.length;
+
+            bullets.forEach((bullet, idx) => {
+              // Определяем диапазон слайдов для этого булета
+              let start = Math.round((idx / bulletsCount) * totalSlides);
+              let end = Math.round(((idx + 1) / bulletsCount) * totalSlides);
+
+              // Для последнего булета включаем все оставшиеся
+              if (idx === bulletsCount - 1) {
+                end = totalSlides;
+              }
+
+              // Проверяем активность
+              const isActive = currentIndex >= start && currentIndex < end;
+              bullet.classList.toggle('active', isActive);
+
+              // Вычисляем прогресс
+              let progress = 0;
+              if (isActive) {
+                const positionInGroup = currentIndex - start;
+                const groupSize = end - start;
+                progress = (positionInGroup / groupSize) * 100;
+              } else if (currentIndex >= end) {
+                progress = 100;
+              }
+
+              // Обновляем прогресс-бар
+              const progressBar = bullet.querySelector('.bullet-progress');
+              if (progressBar) {
+                progressBar.style.width = Math.min(Math.max(progress, 0), 100) + '%';
+              }
+
+              // Обработчик клика
+              bullet.onclick = function() {
+                // Вычисляем target индекс
+                const targetIndex = Math.round((idx / bulletsCount) * totalSlides);
+                // Если loop включен, добавляем смещение
+                if (totalSlides > 3) {
+                  // Находим ближайший слайд с нужным индексом в loop режиме
+                  const slides = swiperInstance.slides;
+                  let targetSlideIndex = -1;
+                  for (let i = 0; i < slides.length; i++) {
+                    if (!slides[i].classList.contains('swiper-slide-duplicate')) {
+                      const slideIndex = parseInt(slides[i].getAttribute('data-swiper-slide-index'));
+                      if (slideIndex === targetIndex) {
+                        targetSlideIndex = i;
+                        break;
+                      }
                     }
                   }
+                  if (targetSlideIndex !== -1) {
+                    swiperInstance.slideTo(targetSlideIndex);
+                  }
+                } else {
+                  swiperInstance.slideTo(targetIndex);
                 }
-                if (targetSlideIndex !== -1) {
-                  swiperInstance.slideTo(targetSlideIndex);
-                }
-              } else {
-                swiperInstance.slideTo(targetIndex);
-              }
-            };
+              };
+            });
+          }
+
+          // Обновляем булеты при событиях
+          swiper.on('init', function() {
+            setTimeout(() => updateBullets(this), 100);
           });
+
+          swiper.on('slideChange', function() {
+            updateBullets(this);
+          });
+
+          swiper.on('resize', function() {
+            updateBullets(this);
+          });
+
+          // Сохраняем ссылку
+          sliderEl.swiper = swiper;
         }
-        
-        // Обновляем булеты при событиях
-        swiper.on('init', function() {
-          setTimeout(() => updateBullets(this), 100);
-        });
-        
-        swiper.on('slideChange', function() {
-          updateBullets(this);
-        });
-        
-        swiper.on('resize', function() {
-          updateBullets(this);
-        });
-        
-        // Сохраняем ссылку
-        sliderEl.swiper = swiper;
       }
     }
-  }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initPremiumSlider);
-  } else {
-    initPremiumSlider();
-  }
-
-  document.addEventListener('shopify:section:load', function (e) {
-    if (e.target.querySelector('.premiumSwiper')) {
-      const oldSlider = e.target.querySelector('.premiumSwiper.swiper-initialized');
-      if (oldSlider && oldSlider.swiper) {
-        oldSlider.swiper.destroy(true, true);
-      }
-      // Очищаем пагинацию
-      const paginationEl = document.querySelector('.premium-pagination');
-      if (paginationEl) {
-        paginationEl.innerHTML = '';
-      }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initPremiumSlider);
+    } else {
       initPremiumSlider();
     }
-  });
+
+    document.addEventListener('shopify:section:load', function (e) {
+      if (e.target.querySelector('.premiumSwiper')) {
+        const oldSlider = e.target.querySelector('.premiumSwiper.swiper-initialized');
+        if (oldSlider && oldSlider.swiper) {
+          oldSlider.swiper.destroy(true, true);
+        }
+        // Очищаем пагинацию
+        const paginationEl = document.querySelector('.premium-pagination');
+        if (paginationEl) {
+          paginationEl.innerHTML = '';
+        }
+        initPremiumSlider();
+      }
+    });
 </script>
 
 {% schema %}
