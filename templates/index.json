@@ -226,6 +226,16 @@
         "show_rating": false,
         "quick_add": "standard"
       }
+    },
+    "weblegko_video_rJacM4": {
+      "type": "weblegko-video",
+      "name": "WEBLEGKO VIDEO",
+      "settings": {
+        "video": "shopify://files/videos/drberg.mp4",
+        "cover_image": "shopify://shop_images/drberg-video-poster.webp",
+        "description": "",
+        "enable_video_looping": false
+      }
     }
   },
   "order": [
@@ -234,6 +244,7 @@
     "weblegko_features_MpkF4r",
     "weblegko_premium_products_GDURBV",
     "weblegko_why_choose_us_WPtcQJ",
-    "weblegko_popular_products_WLyNrp"
+    "weblegko_popular_products_WLyNrp",
+    "weblegko_video_rJacM4"
   ]
 }
