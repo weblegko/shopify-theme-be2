@@ -9,12 +9,38 @@
  */
 {
   "sections": {
+    "weblegko_promo_slider_9KRL7C": {
+      "type": "weblegko-promo-slider",
+      "blocks": {
+        "slide_jLRc3N": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Grain_Free_Crackers_29.04.26_3200x1295px.webp",
+            "link": ""
+          }
+        },
+        "slide_y7Jzt7": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Potassium_TriBlend_11.05.26_3200x1295px.webp",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_jLRc3N",
+        "slide_y7Jzt7"
+      ],
+      "name": "WEBLEGKO PROMO SLIDER",
+      "settings": {}
+    },
     "weblegko_doctor_grid_3MNgjH": {
       "type": "weblegko-doctor-grid",
       "blocks": {
         "slide_ebQe4a": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/drberg-cosmetic.webp",
             "link": ""
           }
         }
@@ -24,6 +50,7 @@
       ],
       "name": "WEBLEGKO DOCTOR",
       "settings": {
+        "doctor_image": "shopify://shop_images/drberg.webp",
         "doctor_name": "Dr. Eric Berg",
         "doctor_profession": "Health & Nutrition Expert",
         "instagram_count": "2.7M followers",
@@ -41,6 +68,7 @@
     }
   },
   "order": [
+    "weblegko_promo_slider_9KRL7C",
     "weblegko_doctor_grid_3MNgjH"
   ]
 }
