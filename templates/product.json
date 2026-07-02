@@ -190,6 +190,19 @@
         "padding_bottom": 28
       }
     },
+    "weblegko_product_tabs_xrdTf6": {
+      "type": "weblegko-product-tabs",
+      "name": "WEBLEGKO PRODUCT TABS",
+      "settings": {
+        "heading": "",
+        "padding_top_desktop": 3.5,
+        "padding_bottom_desktop": 3.5,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
+      }
+    },
     "weblegko_related_products_6PjEw3": {
       "type": "weblegko-related-products",
       "name": "WEBLEGKO RELATED",
@@ -229,6 +242,7 @@
     "main",
     "weblegko_main_product_RUgmNA",
     "related-products",
+    "weblegko_product_tabs_xrdTf6",
     "weblegko_related_products_6PjEw3"
   ]
 }
