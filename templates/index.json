@@ -8,6 +8,39 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {},
-  "order": []
+  "sections": {
+    "weblegko_doctor_grid_3MNgjH": {
+      "type": "weblegko-doctor-grid",
+      "blocks": {
+        "slide_ebQe4a": {
+          "type": "slide",
+          "settings": {
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_ebQe4a"
+      ],
+      "name": "WEBLEGKO DOCTOR",
+      "settings": {
+        "doctor_name": "Dr. Eric Berg",
+        "doctor_profession": "Health & Nutrition Expert",
+        "instagram_count": "2.7M followers",
+        "youtube_count": "14M subscribers",
+        "info_heading": "Natural Vitamins",
+        "info_heading_italic": "Supplements",
+        "info_rating_value": "4.8",
+        "info_reviews_value": "15,255",
+        "info_description": "Quality vitamins and supplements trusted by millions worldwide —  now delivered to your door across the UK.",
+        "button_blue_label": "Shop All Products",
+        "button_blue_link": "",
+        "button_grey_label": "Shop All Products",
+        "button_grey_link": ""
+      }
+    }
+  },
+  "order": [
+    "weblegko_doctor_grid_3MNgjH"
+  ]
 }
