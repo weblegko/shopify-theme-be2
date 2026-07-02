@@ -73,7 +73,7 @@
       >
         {%- if card_product.featured_media -%}
           <div class="card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
-            <div class="media media--transparent media--hover-effect">
+            <div class="tw:scale-[80%] media media--transparent media--hover-effect">
               {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
               <img
                 srcset="
@@ -175,9 +175,9 @@
               {{ card_product.title | escape }}
             </a>
           </h3>
-          {%- if card_product.metafields.custom.product_short_description != blank -%}
+          {%- if card_product.metafields.custom.short_intro != blank -%}
             <p class="tw:min-h-[3.35rem] tw:!text-left tw:!mt-[0.6rem] tw:!text-[1.2rem] tw:!leading-[1.33] tw:!tracking-[-0.01em] tw:!text-grayscale-600 tw:!line-clamp-2 tw:!font-poppins">
-              {{ card_product.metafields.custom.product_short_description | truncate: 150 }}
+              {{ card_product.metafields.custom.short_intro | truncate: 150 }}
             </p>
           {%- endif -%}
 
@@ -338,19 +338,12 @@
           </div>      
 
           <!-- highlights -->
-          {%- liquid
-            assign highlights_data = card_product.metafields.custom.weblegko_highlights_group.value
 
-            assign highlights_has_content = false
+          {% assign highlights_data = card_product.metafields.custom.product_highlights.value %}
 
-            if highlights_data != blank
-              assign highlights_has_content = true
-            endif
-          -%}
-
-          {% if highlights_has_content %}
-            <ul class="weblegko-features-product--list tw:!mb-[2rem] tw:flex tw:flex-wrap tw:gap-[0.6rem] tw:list-none ">
-              {% for highlight in highlights_data.highlights_group.value %}
+          {% if highlights_data != blank %}
+            <ul class="weblegko-features-product--list tw:!mb-[2rem] tw:flex tw:flex-wrap tw:gap-[0.6rem] tw:list-none tw:w-full">
+              {% for highlight in highlights_data %}
                 <li class="tw:w-full">
                   <span class="tw:bg-white tw:flex tw:items-center tw:gap-2 tw:px-[1rem] tw:min-h-[3.2rem] tw:rounded-full tw:border tw:border-grayscale-100">
                     <svg
@@ -360,6 +353,7 @@
                     >
                       <use href="#check"></use>
                     </svg>
+
                     <span class="tw:text-left tw:my-[0.6rem] tw:text-[1.2rem] tw:leading-[1.33] tw:tracking-[-0.04em] tw:text-grayscale-950">
                       {{ highlight.description }}
                     </span>
@@ -368,6 +362,7 @@
               {% endfor %}
             </ul>
           {% endif %}
+          
 
           <a
             class="tw:mt-auto tw:mb-4 tw:tracking-[-0.04em] tw:font-medium tw:block tw:text-center tw:text-[1.2rem]"

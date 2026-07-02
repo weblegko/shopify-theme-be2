@@ -63,7 +63,7 @@
       >
         {%- if card_product.featured_media -%}
           <div class="card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
-            <div class="media media--transparent media--hover-effect">
+            <div class="tw:scale-[80%] media media--transparent media--hover-effect">
               {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
               <img
                 srcset="
@@ -164,9 +164,9 @@
               {{ card_product.title | escape }}
             </a>
           </h3>
-          {%- if card_product.metafields.custom.product_short_description != blank -%}
-            <p class="tw:!text-left tw:!mt-[0.6rem] tw:!text-[1.2rem] tw:!leading-[1.33] tw:!tracking-[-0.01em] tw:!text-grayscale-600 tw:!line-clamp-2 tw:!font-poppins">
-              {{ card_product.metafields.custom.product_short_description | truncate: 150 }}
+           {%- if card_product.metafields.custom.short_intro != blank -%}
+            <p class="tw:min-h-[3.35rem] tw:!text-left tw:!mt-[0.6rem] tw:!text-[1.2rem] tw:!leading-[1.33] tw:!tracking-[-0.01em] tw:!text-grayscale-600 tw:!line-clamp-2 tw:!font-poppins">
+              {{ card_product.metafields.custom.short_intro | truncate: 150 }}
             </p>
           {%- endif -%}
 

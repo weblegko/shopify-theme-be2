@@ -156,9 +156,9 @@
                     </a>
                   </div>
 
-                  {%- if product.metafields.custom.product_short_description != blank -%}
+                  {%- if product.metafields.custom.short_intro != blank -%}
                     <p class="tw:mb-[1rem] tw:!text-left tw:!mt-[0.6rem] tw:!text-[1.2rem] tw:!leading-[1.33] tw:!tracking-[-0.01em] tw:!text-grayscale-600 tw:!line-clamp-2 tw:!font-poppins">
-                      {{ product.metafields.custom.product_short_description | truncate: 150 }}
+                      {{ product.metafields.custom.short_intro | truncate: 200 }}
                     </p>
                   {%- endif -%}
 
@@ -166,9 +166,9 @@
                     {{ product.metafields.custom.best_before | metafield_tag }}
                   </div>
 
-                  <div class="product-short-intro">
+                  {% comment %} <div class="product-short-intro">
                     {{ product.metafields.custom.short_intro | metafield_tag }}
-                  </div>
+                  </div> {% endcomment %}
 
                   <!-- реклама 3х паков -->
                   {% comment %}
@@ -354,7 +354,7 @@
 
                 {%- when 'quantity_selector' -%}
     
-                  {% assign highlights_data = product.metafields.custom.product_highlights.value %}
+                    {% assign highlights_data = product.metafields.custom.product_highlights.value %}
 
                     {% if highlights_data != blank %}
                       <ul class="weblegko-features-product--list tw:!mb-[2rem] tw:flex tw:flex-wrap tw:gap-[0.6rem] tw:list-none">

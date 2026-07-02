@@ -11,8 +11,12 @@
 <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
 
 {%- if cart.item_count > 0 -%}
-  <div class="cart-count-bubble tw:!bg-goluboy tw:absolute tw:top-[0.4rem] tw:!left-[2.2rem] tw:flex tw:items-center tw:justify-center tw:min-w-[2rem] tw:h-[2rem] tw:rounded-full tw:bg-goluboy tw:text-white tw:text-[1.2rem] tw:font-bold tw:leading-none tw:px-[0.4rem] tw:border-2 tw:border-white tw:shadow-sm">
+  {% comment %} <div class="cart-count-bubble tw:!bg-goluboy tw:absolute tw:top-[0.4rem] tw:!left-[2.2rem] tw:flex tw:items-center tw:justify-center tw:min-w-[2rem] tw:h-[2rem] tw:rounded-full tw:bg-goluboy tw:text-white tw:text-[1.2rem] tw:font-bold tw:leading-none tw:px-[0.4rem] tw:border-2 tw:border-white tw:shadow-sm">
     <span aria-hidden="true">{{ cart.item_count }}</span>
+  </div> {% endcomment %}
+
+  <div class="cart-count-bubble tw:!bg-goluboy tw:absolute tw:top-[0.4rem] tw:!left-[2.2rem] tw:flex tw:items-center tw:justify-center tw:!w-[2rem] tw:!h-[2rem] tw:rounded-full tw:text-white tw:text-[1.2rem] tw:font-bold tw:leading-[1] tw:px-[0.4rem] tw:border-2 tw:border-white tw:shadow-sm">
+      <span class="tw:mt-1" aria-hidden="true">{{ cart.item_count }}</span>
   </div>
 {%- endif -%}
 
