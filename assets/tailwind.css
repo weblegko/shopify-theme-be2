@@ -327,6 +327,9 @@
   .tw\:\!mb-\[0rem\] {
     margin-bottom: 0rem !important;
   }
+  .tw\:\!mb-\[1rem\] {
+    margin-bottom: 1rem !important;
+  }
   .tw\:\!mb-\[2rem\] {
     margin-bottom: 2rem !important;
   }
@@ -687,9 +690,6 @@
   }
   .tw\:gap-2 {
     gap: calc(var(--tw-spacing) * 2);
-  }
-  .tw\:gap-3 {
-    gap: calc(var(--tw-spacing) * 3);
   }
   .tw\:gap-4 {
     gap: calc(var(--tw-spacing) * 4);
@@ -1129,9 +1129,6 @@
   .tw\:text-\[1\.8rem\] {
     font-size: 1.8rem;
   }
-  .tw\:text-\[1rem\] {
-    font-size: 1rem;
-  }
   .tw\:text-\[2\.4rem\] {
     font-size: 2.4rem;
   }
@@ -1148,10 +1145,6 @@
   .tw\:\!leading-\[1\.43\] {
     --tw-leading: 1.43 !important;
     line-height: 1.43 !important;
-  }
-  .tw\:leading-\[1\.1\] {
-    --tw-leading: 1.1;
-    line-height: 1.1;
   }
   .tw\:leading-\[1\.2\] {
     --tw-leading: 1.2;

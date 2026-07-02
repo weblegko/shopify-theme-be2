@@ -240,7 +240,7 @@
                     </div>
                   {%- endif -%}
                   {%- if cart.taxes_included or cart.duties_included or shop.shipping_policy.body != blank -%}
-                    <div class="product__tax caption rte">
+                    <div class="product__tax caption rte tw:!mb-[1rem]">
                       {%- if cart.duties_included and cart.taxes_included -%}
                         {{ 'products.product.duties_and_taxes_included' | t }}
                       {%- elsif cart.taxes_included -%}
@@ -353,36 +353,30 @@
                   </div>
 
                 {%- when 'quantity_selector' -%}
-                  {%- liquid
-                    assign highlights_data = product.metafields.custom.weblegko_highlights_group.value
+    
+                  {% assign highlights_data = product.metafields.custom.product_highlights.value %}
 
-                    assign highlights_has_content = false
+                    {% if highlights_data != blank %}
+                      <ul class="weblegko-features-product--list tw:!mb-[2rem] tw:flex tw:flex-wrap tw:gap-[0.6rem] tw:list-none">
+                        {% for highlight in highlights_data %}
+                          <li>
+                            <span class="tw:bg-white tw:inline-flex tw:items-center tw:gap-2 tw:px-[1rem] tw:min-h-[3.2rem] tw:rounded-full tw:border tw:border-grayscale-100">
+                              <svg
+                                class="tw:w-[1.6rem] tw:h-[1.6rem] tw:text-additional-green tw:flex-shrink-0"
+                                focusable="false"
+                                aria-hidden="true"
+                              >
+                                <use href="#check"></use>
+                              </svg>
 
-                    if highlights_data != blank
-                      assign highlights_has_content = true
-                    endif
-                  -%}
-
-                  {% if highlights_has_content %}
-                    <ul class="weblegko-features-product--list tw:!mb-[2rem] tw:flex tw:flex-wrap tw:gap-[0.6rem] tw:list-none">
-                      {% for highlight in highlights_data.highlights_group.value %}
-                        <li>
-                          <span class="tw:bg-white tw:inline-flex tw:items-center tw:gap-2 tw:px-[1rem] tw:min-h-[3.2rem] tw:rounded-full tw:border tw:border-grayscale-100">
-                            <svg
-                              class="tw:w-[1.6rem] tw:h-[1.6rem] tw:text-additional-green tw:flex-shrink-0"
-                              focusable="false"
-                              aria-hidden="true"
-                            >
-                              <use href="#check"></use>
-                            </svg>
-                            <span class="tw:my-[0.6rem] tw:text-[1.2rem] tw:leading-[1.33] tw:tracking-[-0.04em] tw:text-grayscale-950">
-                              {{ highlight.description }}
+                              <span class="tw:my-[0.6rem] tw:text-[1.2rem] tw:leading-[1.33] tw:tracking-[-0.04em] tw:text-grayscale-950">
+                                {{ highlight.description }}
+                              </span>
                             </span>
-                          </span>
-                        </li>
-                      {% endfor %}
-                    </ul>
-                  {% endif %}
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
 
                   <!-- меняем колво - товара для покупки -->
                 {%- when 'quantity_selector' -%}
