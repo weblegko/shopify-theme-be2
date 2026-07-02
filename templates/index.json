@@ -387,6 +387,145 @@
         "doctor_role": "Health & Nutrition Expert",
         "text": "Subscribe to our newsletter and receive exclusive offers and news! Fill out the form below or message us to stay updated on all the great deals and special offers."
       }
+    },
+    "weblegko_reviews_LqVbq8": {
+      "type": "weblegko-reviews",
+      "blocks": {
+        "review_Ve38Ge": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "review_author_name": "Catherine Draganov",
+            "review_post_time": "15 hours ago",
+            "review_title": "Love what I have from you of Dr. Berg",
+            "review_short_text": "I can only tell you that in the beginning I was interested in probiotics because I had problems with my microbiome. Then I discovered other products and I appreciate the fact that they are natural. But I follow the advice of Eric Berg and eat a big salad every day. Now…",
+            "review_link": ""
+          }
+        },
+        "review_URUiTb": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "review_author_name": "Catherine Draganov",
+            "review_post_time": "15 hours ago",
+            "review_title": "Love what I have from you of Dr. Berg",
+            "review_short_text": "I can only tell you that in the beginning I was interested in probiotics because I had problems with my microbiome. Then I discovered other products and I appreciate the fact that they are natural. But I follow the advice of Eric Berg and eat a big salad every day. Now…",
+            "review_link": ""
+          }
+        },
+        "review_wzGLwj": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "review_author_name": "Catherine Draganov",
+            "review_post_time": "15 hours ago",
+            "review_title": "Love what I have from you of Dr. Berg",
+            "review_short_text": "I can only tell you that in the beginning I was interested in probiotics because I had problems with my microbiome. Then I discovered other products and I appreciate the fact that they are natural. But I follow the advice of Eric Berg and eat a big salad every day. Now…",
+            "review_link": ""
+          }
+        },
+        "review_9EVnWH": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "review_author_name": "Catherine Draganov",
+            "review_post_time": "15 hours ago",
+            "review_title": "Love what I have from you of Dr. Berg",
+            "review_short_text": "I can only tell you that in the beginning I was interested in probiotics because I had problems with my microbiome. Then I discovered other products and I appreciate the fact that they are natural. But I follow the advice of Eric Berg and eat a big salad every day. Now…",
+            "review_link": ""
+          }
+        },
+        "review_WPNTfg": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "review_author_name": "Catherine Draganov",
+            "review_post_time": "15 hours ago",
+            "review_title": "Love what I have from you of Dr. Berg",
+            "review_short_text": "I can only tell you that in the beginning I was interested in probiotics because I had problems with my microbiome. Then I discovered other products and I appreciate the fact that they are natural. But I follow the advice of Eric Berg and eat a big salad every day. Now…",
+            "review_link": ""
+          }
+        },
+        "review_gibBn6": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "review_author_name": "Catherine Draganov",
+            "review_post_time": "15 hours ago",
+            "review_title": "Love what I have from you of Dr. Berg",
+            "review_short_text": "I can only tell you that in the beginning I was interested in probiotics because I had problems with my microbiome. Then I discovered other products and I appreciate the fact that they are natural. But I follow the advice of Eric Berg and eat a big salad every day. Now…",
+            "review_link": ""
+          }
+        },
+        "review_FQDgzP": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "review_author_name": "Catherine Draganov",
+            "review_post_time": "15 hours ago",
+            "review_title": "Love what I have from you of Dr. Berg",
+            "review_short_text": "I can only tell you that in the beginning I was interested in probiotics because I had problems with my microbiome. Then I discovered other products and I appreciate the fact that they are natural. But I follow the advice of Eric Berg and eat a big salad every day. Now…",
+            "review_link": ""
+          }
+        },
+        "review_ULt4qT": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "review_author_name": "Catherine Draganov",
+            "review_post_time": "15 hours ago",
+            "review_title": "Love what I have from you of Dr. Berg",
+            "review_short_text": "I can only tell you that in the beginning I was interested in probiotics because I had problems with my microbiome. Then I discovered other products and I appreciate the fact that they are natural. But I follow the advice of Eric Berg and eat a big salad every day. Now…",
+            "review_link": ""
+          }
+        },
+        "review_gL99eb": {
+          "type": "review",
+          "settings": {
+            "star_rating": 5,
+            "review_author_name": "Catherine Draganov",
+            "review_post_time": "15 hours ago",
+            "review_title": "Love what I have from you of Dr. Berg",
+            "review_short_text": "I can only tell you that in the beginning I was interested in probiotics because I had problems with my microbiome. Then I discovered other products and I appreciate the fact that they are natural. But I follow the advice of Eric Berg and eat a big salad every day. Now…",
+            "review_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_Ve38Ge",
+        "review_URUiTb",
+        "review_wzGLwj",
+        "review_9EVnWH",
+        "review_WPNTfg",
+        "review_gibBn6",
+        "review_FQDgzP",
+        "review_ULt4qT",
+        "review_gL99eb"
+      ],
+      "name": "WEBLEGKO REVIEWS",
+      "settings": {
+        "heading": "What Our Customers Say",
+        "rating_score": "4.8",
+        "review_count": "2,847",
+        "columns_desktop": 3,
+        "initial_items_desktop": 3,
+        "col_gap_desktop": 2.5,
+        "row_gap_desktop": 2.5,
+        "padding_top_desktop": 8,
+        "padding_bottom_desktop": 8,
+        "columns_tablet": 2,
+        "initial_items_tablet": 2,
+        "col_gap_tablet": 2,
+        "row_gap_tablet": 2,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "columns_mobile": 1,
+        "initial_items_mobile": 1,
+        "col_gap_mobile": 1.5,
+        "row_gap_mobile": 1.5,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
+      }
     }
   },
   "order": [
@@ -400,6 +539,7 @@
     "weblegko_doctor_quote_bwxJD8",
     "weblegko_secondary_slider_wnVzDR",
     "weblegko_resources_BKD78z",
-    "weblegko_newsletter_banner_wXPK7c"
+    "weblegko_newsletter_banner_wXPK7c",
+    "weblegko_reviews_LqVbq8"
   ]
 }
