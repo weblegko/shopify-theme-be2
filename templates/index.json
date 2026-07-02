@@ -114,11 +114,36 @@
         "padding_top_mobile": 3,
         "padding_bottom_mobile": 3
       }
+    },
+    "weblegko_premium_products_GDURBV": {
+      "type": "weblegko-premium-products",
+      "name": "WEBLEGKO PREMIUM",
+      "settings": {
+        "heading": "Premium Products",
+        "description": "Premium supplements for your health",
+        "collection": "b-vitamins",
+        "space_between_desktop": 2,
+        "padding_top_desktop": 8,
+        "padding_bottom_desktop": 8,
+        "space_between_tablet": 2,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "space_between_mobile": 1,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3,
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard"
+      }
     }
   },
   "order": [
     "weblegko_promo_slider_9KRL7C",
     "weblegko_doctor_grid_3MNgjH",
-    "weblegko_features_MpkF4r"
+    "weblegko_features_MpkF4r",
+    "weblegko_premium_products_GDURBV"
   ]
 }
