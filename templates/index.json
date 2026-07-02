@@ -356,7 +356,7 @@
         "heading": "Health Resources",
         "description": "Free Guides for Better Living",
         "columns_desktop": 2,
-        "initial_items_desktop": 2,
+        "initial_items_desktop": 4,
         "col_gap_desktop": 2,
         "row_gap_desktop": 2,
         "padding_top_desktop": 8,
