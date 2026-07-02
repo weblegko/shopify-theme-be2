@@ -232,6 +232,7 @@
       "name": "WEBLEGKO VIDEO",
       "settings": {
         "video": "shopify://files/videos/drberg.mp4",
+        "video_url": "",
         "cover_image": "shopify://shop_images/drberg-video-poster.webp",
         "description": "",
         "enable_video_looping": false
@@ -508,7 +509,7 @@
         "rating_score": "4.8",
         "review_count": "2,847",
         "columns_desktop": 3,
-        "initial_items_desktop": 3,
+        "initial_items_desktop": 6,
         "col_gap_desktop": 2.5,
         "row_gap_desktop": 2.5,
         "padding_top_desktop": 8,
