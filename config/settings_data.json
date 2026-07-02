@@ -1,8 +1,17 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
-    "logo": "shopify:\/\/shop_images\/logo-4.svg",
+    "logo": "shopify://shop_images/logo-drberg.svg",
     "logo_width": 150,
-    "favicon": "shopify:\/\/shop_images\/favicon.png",
+    "favicon": "shopify://shop_images/favicon.png",
     "type_header_font": "assistant_n4",
     "heading_scale": 100,
     "type_body_font": "assistant_n4",
@@ -99,7 +108,7 @@
     "sale_badge_color_scheme": "scheme-5",
     "sold_out_badge_color_scheme": "scheme-3",
     "brand_headline": "",
-    "brand_description": "<p><\/p>",
+    "brand_description": "<p></p>",
     "brand_image_width": 100,
     "social_facebook_link": "",
     "social_instagram_link": "",
@@ -122,36 +131,18 @@
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
-        "settings": { "color_scheme": "scheme-1" }
+        "settings": {
+          "color_scheme": "scheme-1"
+        }
       },
       "main-password-footer": {
         "type": "main-password-footer",
-        "settings": { "color_scheme": "scheme-1" }
+        "settings": {
+          "color_scheme": "scheme-1"
+        }
       }
     },
     "content_for_index": [],
-    "blocks": {
-      "5332588544499791172": {
-        "type": "shopify:\/\/apps\/hoppy-free-shipping\/blocks\/shipping_bar\/66159626-1fb8-4d18-901f-af7b6a63adaa",
-        "disabled": false,
-        "settings": {}
-      },
-      "152906827736512534": {
-        "type": "shopify:\/\/apps\/popupsmart-popup-a-b-testing\/blocks\/app-embed\/cca16dd6-0222-4342-9519-bc3a8c43228c",
-        "disabled": false,
-        "settings": { "hide_in_editor": false }
-      },
-      "2102808784413787648": {
-        "type": "shopify:\/\/apps\/kbite-back-in-stock-notify-me\/blocks\/main-app-embed\/147a6f7f-6771-4f9b-8dc6-c14e6b24f32c",
-        "disabled": false,
-        "settings": {}
-      },
-      "2647664283302970701": {
-        "type": "shopify:\/\/apps\/cookiebot-cmp\/blocks\/uc-banner\/42d95aba-03be-478d-adf0-7bb4f5efae78",
-        "disabled": false,
-        "settings": {}
-      }
-    },
     "color_schemes": {
       "scheme-1": {
         "settings": {
@@ -377,7 +368,7 @@
       "sale_badge_color_scheme": "scheme-4",
       "sold_out_badge_color_scheme": "scheme-3",
       "brand_headline": "",
-      "brand_description": "<p><\/p>",
+      "brand_description": "<p></p>",
       "brand_image_width": 100,
       "social_twitter_link": "",
       "social_facebook_link": "",
@@ -400,11 +391,15 @@
       "sections": {
         "main-password-header": {
           "type": "main-password-header",
-          "settings": { "color_scheme": "scheme-1" }
+          "settings": {
+            "color_scheme": "scheme-1"
+          }
         },
         "main-password-footer": {
           "type": "main-password-footer",
-          "settings": { "color_scheme": "scheme-1" }
+          "settings": {
+            "color_scheme": "scheme-1"
+          }
         }
       }
     }
