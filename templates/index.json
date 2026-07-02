@@ -8,42 +8,6 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {
-    "weblegko_popular_products_im3P7d": {
-      "type": "weblegko-popular-products",
-      "name": "WEBLEGKO POPULAR",
-      "settings": {
-        "heading": "Popular Products",
-        "description": "Premium supplements for your health",
-        "collection": "b-vitamins",
-        "products_to_show_desktop": 8,
-        "columns_desktop": 3,
-        "col_gap_desktop": 2,
-        "row_gap_desktop": 2,
-        "padding_top_desktop": 8,
-        "padding_bottom_desktop": 8,
-        "products_to_show_tablet": 4,
-        "columns_tablet": 2,
-        "col_gap_tablet": 1.5,
-        "row_gap_tablet": 1.5,
-        "padding_top_tablet": 5,
-        "padding_bottom_tablet": 5,
-        "products_to_show_mobile": 2,
-        "columns_mobile": 1,
-        "col_gap_mobile": 1,
-        "row_gap_mobile": 1,
-        "padding_top_mobile": 3,
-        "padding_bottom_mobile": 3,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "standard"
-      }
-    }
-  },
-  "order": [
-    "weblegko_popular_products_im3P7d"
-  ]
+  "sections": {},
+  "order": []
 }

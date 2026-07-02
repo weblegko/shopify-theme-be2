@@ -164,9 +164,9 @@
               {{ card_product.title | escape }}
             </a>
           </h3>
-          {%- if card_product.description != blank -%}
+          {%- if card_product.metafields.custom.product_short_description != blank -%}
             <p class="tw:!text-left tw:!mt-[0.6rem] tw:!text-[1.2rem] tw:!leading-[1.33] tw:!tracking-[-0.01em] tw:!text-grayscale-600 tw:!line-clamp-2 tw:!font-poppins">
-              {{ card_product.description | strip_html | strip_newlines | truncate: 150 }}
+              {{ card_product.metafields.custom.product_short_description | truncate: 150 }}
             </p>
           {%- endif -%}
 

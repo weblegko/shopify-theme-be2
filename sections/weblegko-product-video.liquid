@@ -31,124 +31,204 @@
       padding-right: {{ section.settings.padding_inline_desktop | default: 5 }}rem !important;
     }
   }
+
+  /* ============================================ */
+  /* ПЛЕЙСХОЛДЕР ДЛЯ АДМИНКИ */
+  /* ============================================ */
+  .weblegko-video-placeholder {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+    border-radius: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem;
+    overflow: hidden;
+  }
+
+  .weblegko-video-placeholder__icon {
+    width: 6.4rem;
+    height: 6.4rem;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .weblegko-video-placeholder__icon svg {
+    width: 3.2rem;
+    height: 3.2rem;
+    fill: none;
+    stroke: rgba(0, 0, 0, 0.4);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .weblegko-video-placeholder__text {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .weblegko-video-placeholder__hint {
+    color: rgba(0, 0, 0, 0.35);
+    font-size: 1.3rem;
+    text-align: center;
+    max-width: 80%;
+    line-height: 1.5;
+  }
 </style>
 
-{%- liquid
-  assign video_id = section.settings.video.id | default: section.settings.video_url.id
-  assign video_alt = section.settings.video.alt | default: section.settings.description
-  assign alt = 'sections.video.load_video' | t: description: video_alt | escape
-  assign poster = section.settings.video.preview_image | default: section.settings.cover_image
-  assign cover_url = section.settings.cover_image | image_url: width: 3840
+{%- liquid  
+  assign product_video = nil
+  for media in product.media
+    if media.media_type == 'video' or media.media_type == 'external_video'
+      assign product_video = media
+      break
+    endif
+  endfor
+-%}
 
-  if section.settings.video != null
-    assign ratio_diff = section.settings.video.aspect_ratio | minus: poster.aspect_ratio | abs
+{%- if product_video != nil -%}
+  {%- liquid
+    assign video_id = product_video.id
+    if product_video.media_type == 'external_video'
+      assign video_id = product_video.external_id
+    endif
+    
+    assign video_alt = product_video.alt | default: product.title
+    assign alt = video_alt | escape
+    assign poster = product_video.preview_image
+    
+    assign ratio_diff = product_video.aspect_ratio | minus: poster.aspect_ratio | abs
     if ratio_diff < 0.01 and ratio_diff > 0
       assign fix_ratio = true
     endif
-  endif
--%}
+  -%}
 
-{%- capture sizes -%}100%{%- endcapture -%}
-
-<div class="tw:px-[1.6rem] gradient">
-  <div class="tw:mx-auto tw:max-w-[112rem] weblegko-video-padding video-section isolate">
-    <div class="block">
-      {%- unless section.settings.heading == blank -%}
-        <div class="tw:mb-[1rem] {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          <h2 class="tw:text-grayscale-950 tw:text-[2.4rem] tw:sm:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.33] tw:lg:leading-[1.2] tw:text-center 
-            inline-richtext">{{ section.settings.heading }}</h2>
-        </div>
-      {%- endunless -%}
-    </div>
-    <deferred-media
-      class="video-section__media deferred-media{% if section.settings.full_width %} global-media-settings--full-width{% endif %}{% if fix_ratio %} media-fit-cover{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-      data-media-id="{{ video_id }}"
-      {% if poster != null %}
-        style="--ratio-percent: {{ 1 | divided_by: poster.aspect_ratio | times: 100 }}%;"
-      {% endif %}
-    >
-      <!-- ТРИГГЕР -->
-      <button
-        class="tw:w-full tw:absolute tw:inset-0 tw:overflow-hidden tw:aspect-video tw:cursor-pointer tw:bg-black tw:group"
-        id="Deferred-Poster-Modal-{{ video_id }}"
-        type="button"
-        aria-label="{{ alt }}"
+  <div class="tw:px-[1.6rem] gradient">
+    <div class="tw:mx-auto tw:max-w-[112rem] weblegko-video-padding video-section isolate">
+      <div class="block">
+        {%- unless section.settings.heading == blank -%}
+          <div class="tw:mb-[2.5rem] {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+            <h2 class="tw:text-grayscale-950 tw:text-[2.4rem] tw:sm:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.33] tw:lg:leading-[1.2] tw:text-center inline-richtext">{{ section.settings.heading }}</h2>
+          </div>
+        {%- endunless -%}
+      </div>
+      
+      <deferred-media
+        class="video-section__media deferred-media{% if section.settings.full_width %} global-media-settings--full-width{% endif %}{% if fix_ratio %} media-fit-cover{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        data-media-id="{{ video_id }}"        
       >
-        {%- if poster != null -%}
-          {%- if cover_url != null -%}
-            {%- assign img_width = 3840 -%}
-            {%- assign img_height = img_width | divided_by: poster.aspect_ratio -%}
-            <img
-              src="{{ cover_url }}"
-              alt="{{ alt }}"
-              width="{{ img_width }}"
-              height="{{ img_height }}"
-              class="tw:w-full tw:h-full tw:object-cover tw:transition-transform tw:duration-500 group-hover:tw:scale-105"
-              loading="lazy"
-            >
-          {%- else -%}
+        <!-- ТРИГГЕР (Кнопка с постером) -->
+        <button
+          class="tw:w-full tw:absolute tw:inset-0 tw:overflow-hidden tw:aspect-video tw:cursor-pointer tw:bg-black tw:group"
+          id="Deferred-Poster-Modal-{{ video_id }}"
+          type="button"
+          aria-label="{{ alt }}"
+        >
+          {%- if poster != null -%}
             {{
               poster
               | image_url: width: 3840
-              | image_tag: sizes: sizes, widths: '375, 750, 1100, 1500, 1780, 2000, 3000, 3840', alt: alt
+              | image_tag:
+                sizes: '100%',
+                widths: '375, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+                alt: alt,
+                class: 'tw:w-full tw:h-full tw:object-cover tw:transition-transform tw:duration-500 group-hover:tw:scale-105',
+                loading: 'lazy'
+            }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'tw:w-full tw:h-full tw:object-cover' }}
+          {%- endif -%}
+
+          <div class="tw:absolute tw:inset-0 tw:bg-black/30"></div>
+
+          <div class="tw:absolute tw:inset-0 tw:flex tw:flex-col tw:items-center tw:justify-center">
+            <div class="tw:hover:scale-105 tw:flex tw:items-center tw:gap-[0.8rem] tw:px-[1.6rem] tw:h-[4.4rem] tw:bg-black/30 tw:rounded-full tw:text-white tw:transition-all tw:duration-200 tw:hover:bg-goluboy">
+              <svg class="tw:w-[1.4rem] tw:h-[1.7rem]" focusable="false" aria-hidden="true">
+                <use href="#play"></use>
+              </svg>
+              <span class="tw:text-[1.4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.43]">Watch Video</span>
+            </div>
+          </div>
+        </button>
+
+        <!-- ШАБЛОН ВИДЕО (Загрузится только при клике) -->
+        <template>
+          {%- if product_video.media_type == 'external_video' -%}
+            {%- liquid
+              assign loop = ''
+              if section.settings.enable_video_looping
+                assign loop = '&loop=1&playlist=' | append: video_id
+              endif
+            -%}
+            {%- if product_video.host == 'youtube' -%}
+              <iframe
+                src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1{{ loop }}"
+                class="js-youtube"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                title="{{ alt }}"
+              ></iframe>
+            {%- else -%}
+              <iframe
+                src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1{{ loop }}"
+                class="js-vimeo"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                title="{{ alt }}"
+              ></iframe>
+            {%- endif -%}
+          {%- else -%}
+            {{
+              product_video
+              | media_tag:
+                autoplay: true,
+                loop: section.settings.enable_video_looping,
+                controls: true,
+                preload: 'none'
             }}
           {%- endif -%}
-        {%- else -%}
-          {{ 'lifestyle-1' | placeholder_svg_tag: 'tw:w-full tw:h-full tw:object-cover' }}
-        {%- endif -%}
-
-        <div class="tw:absolute tw:inset-0 tw:bg-black/30"></div>
-
-        <div class="tw:absolute tw:inset-0 tw:flex tw:flex-col tw:items-center tw:justify-center">
-          <div class="tw:hover:scale-105 tw:flex tw:items-center tw:gap-[0.8rem] tw:px-[1.6rem] tw:h-[4.4rem] tw:bg-black/30 tw:rounded-full tw:text-white tw:transition-all tw:duration-200 tw:hover:bg-goluboy">
-            <svg class="tw:w-[1.4rem] tw:h-[1.7rem]" focusable="false" aria-hidden="true">
-              <use href="#play"></use>
-            </svg>
-            <span class="tw:text-[1.4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.43]">Watch Video</span>
-          </div>
-        </div>
-      </button>
-
-      <template>
-        {%- if section.settings.video == null and section.settings.video_url != null -%}
-          {%- liquid
-            assign loop = ''
-            if section.settings.enable_video_looping
-              assign loop = '&loop=1&playlist=' | append: video_id
-            endif
-          -%}
-          {%- if section.settings.video_url.type == 'youtube' -%}
-            <iframe
-              src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1{{ loop }}"
-              class="js-youtube"
-              allow="autoplay; encrypted-media"
-              allowfullscreen
-              title="{{ section.settings.description | escape }}"
-            ></iframe>
-          {%- else -%}
-            <iframe
-              src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1{{ loop }}"
-              class="js-vimeo"
-              allow="autoplay; encrypted-media"
-              allowfullscreen
-              title="{{ section.settings.description | escape }}"
-            ></iframe>
-          {%- endif -%}
-        {%- else -%}
-          {{
-            section.settings.video
-            | video_tag:
-              image_size: '1100x',
-              autoplay: true,
-              loop: section.settings.enable_video_looping,
-              controls: true,
-              muted: false
-          }}
-        {%- endif -%}
-      </template>
-    </deferred-media>
+        </template>
+      </deferred-media>
+    </div>
   </div>
-</div>
+
+{%- elsif request.design_mode -%}
+  <!-- ПЛЕЙСХОЛДЕР ДЛЯ РЕДАКТОРА ТЕМ -->
+  <div class="tw:px-[1.6rem] gradient">
+    <div class="tw:mx-auto tw:max-w-[112rem] weblegko-video-padding video-section isolate">
+      <div class="block">
+        {%- unless section.settings.heading == blank -%}
+          <div class="tw:mb-[2.5rem]">
+            <h2 class="tw:text-grayscale-950 tw:text-[2.4rem] tw:sm:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.33] tw:lg:leading-[1.2] tw:text-center inline-richtext">{{ section.settings.heading }}</h2>
+          </div>
+        {%- endunless -%}
+      </div>
+      
+      <div class="weblegko-video-placeholder">
+        <div class="weblegko-video-placeholder__icon">
+          <svg viewBox="0 0 24 24">
+            <polygon points="23 7 16 12 23 17 23 7"></polygon>
+            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+          </svg>
+        </div>
+        <div class="weblegko-video-placeholder__text">No video available</div>
+        <div class="weblegko-video-placeholder__hint">
+          Add a video to this product's media to display it here
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
 
 {% schema %}
 {
@@ -166,74 +246,10 @@
       "label": "Heading"
     },
     {
-      "type": "select",
-      "id": "heading_size",
-      "options": [
-        {
-          "value": "h2",
-          "label": "Small"
-        },
-        {
-          "value": "h1",
-          "label": "Medium"
-        },
-        {
-          "value": "h0",
-          "label": "Large"
-        },
-        {
-          "value": "hxl",
-          "label": "Extra Large"
-        },
-        {
-          "value": "hxxl",
-          "label": "Extra Extra Large"
-        }
-      ],
-      "default": "h1",
-      "label": "Heading size"
-    },
-    {
       "type": "checkbox",
       "id": "enable_video_looping",
       "label": "Enable video looping",
       "default": false
-    },
-    {
-      "type": "header",
-      "content": "Video"
-    },
-    {
-      "type": "video",
-      "id": "video",
-      "label": "Video file"
-    },
-    {
-      "type": "header",
-      "content": "External video"
-    },
-    {
-      "type": "paragraph",
-      "content": "Use YouTube or Vimeo if you don't have a video file"
-    },
-    {
-      "type": "video_url",
-      "id": "video_url",
-      "accept": ["youtube", "vimeo"],
-      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-      "label": "Video URL",
-      "info": "YouTube or Vimeo link"
-    },
-    {
-      "type": "image_picker",
-      "id": "cover_image",
-      "label": "Cover image"
-    },
-    {
-      "type": "text",
-      "id": "description",
-      "label": "Video description",
-      "info": "Used for accessibility"
     },
     {
       "type": "header",

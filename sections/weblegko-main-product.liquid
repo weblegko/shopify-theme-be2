@@ -45,7 +45,7 @@
       .product__info-container > * + * {
           margin: 0.5rem 0;
       }
-     
+
     }
   {%- endstyle -%}
 
@@ -83,9 +83,9 @@
   {%- endif -%}
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
-  <div class="tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem]">
+  <div class="tw:!bg-seriy tw:text-grayscale-950 tw:px-[1.6rem]">
     <div class="product tw:!mx-auto tw:!max-w-[112rem] grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
-      <div class="tw:!max-w-[48%] grid__item product__media-wrapper tw:mb-[1rem] tw:md:mb-0">
+      <div class="tw:sm750:!max-w-[48%] grid__item product__media-wrapper tw:mb-[1rem] tw:md:mb-0">
         {% render 'weblegko-product-media-gallery', product: product, variant_images: variant_images %}
       </div>
       <div class="product__info-wrapper grid__item {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
@@ -143,15 +143,24 @@
                   </p>
                 {%- when 'title' -%}
                   <div class="tw:!mb-[0rem] product__title" {{ block.shopify_attributes }}>
-                    <h1 class="tw:font-medium tw:text-grayscale-950 tw:leading-[1.33] tw:tracking-[-0.04em] tw:text-[2.4rem]">
+                    <h1 class="visually-hidden">
                       {{ product.title | escape }}
                     </h1>
+                    <h2 class="tw:font-medium tw:text-grayscale-950 tw:leading-[1.33] tw:tracking-[-0.04em] tw:text-[2.4rem]">
+                      {{ product.title | escape }}
+                    </h2>
                     <a href="{{ product.url }}" class="product__title">
                       <h2 class="h1">
                         {{ product.title | escape }}
                       </h2>
                     </a>
                   </div>
+
+                  {%- if product.metafields.custom.product_short_description != blank -%}
+                    <p class="tw:mb-[1rem] tw:!text-left tw:!mt-[0.6rem] tw:!text-[1.2rem] tw:!leading-[1.33] tw:!tracking-[-0.01em] tw:!text-grayscale-600 tw:!line-clamp-2 tw:!font-poppins">
+                      {{ product.metafields.custom.product_short_description | truncate: 150 }}
+                    </p>
+                  {%- endif -%}
 
                   <div class="product-best-before">
                     {{ product.metafields.custom.best_before | metafield_tag }}
@@ -162,45 +171,49 @@
                   </div>
 
                   <!-- реклама 3х паков -->
-                  <h2 class="tw:mb-[1rem] tw:text-[2.4rem] tw:font-bold tw:tracking-[-0.04em] tw:leading-[1.2]">
-                    <span class="tw:italic tw:text-[#004c5a] tw:font-play"> Pack of 3 </span>
-                  </h2>
+                  {% comment %}
+                    <h2 class="tw:mb-[1rem] tw:text-[2.4rem] tw:font-bold tw:tracking-[-0.04em] tw:leading-[1.2]">
+                      <span class="tw:italic tw:text-[#004c5a] tw:font-play"> Pack of 3 </span>
+                    </h2>
+                  {% endcomment %}
 
                   <!-- Рейтинг звездами -->
-                  <div
-                    class="
-                      tw:mb-[2rem] tw:inline-flex tw:self-start tw:border tw:border-grayscale-50 tw:px-[1.2rem] tw:h-[3.6rem]
-                      tw:rounded-[0.8rem] tw:items-center tw:gap-[0.5rem]
-                    "
-                  >
-                    <!-- Звезды (Динамический вывод из настроек) -->
-                    <div class="tw:flex tw:gap-1">
-                      {%- for i in (1..5) -%}
-                        <svg class="tw:w-[1.8rem] tw:h-[1.8rem] tw:text-goluboydark">
-                          <use href="#star"></use>
-                        </svg>
-                      {%- endfor -%}
-                    </div>
+                  {% comment %}
+                    <div
+                      class="
+                        tw:mb-[2rem] tw:inline-flex tw:self-start tw:border tw:border-grayscale-50 tw:px-[1.2rem] tw:h-[3.6rem]
+                        tw:rounded-[0.8rem] tw:items-center tw:gap-[0.5rem]
+                      "
+                    >
+                      <!-- Звезды (Динамический вывод из настроек) -->
+                      <div class="tw:flex tw:gap-1">
+                        {%- for i in (1..5) -%}
+                          <svg class="tw:w-[1.8rem] tw:h-[1.8rem] tw:text-goluboydark">
+                            <use href="#star"></use>
+                          </svg>
+                        {%- endfor -%}
+                      </div>
 
-                    <span class="tw:text-[1.4rem] tw:ml-[0.8rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-grayscale-800">
-                      4.8
-                    </span>
+                      <span class="tw:text-[1.4rem] tw:ml-[0.8rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-grayscale-800">
+                        4.8
+                      </span>
 
-                    <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="1" cy="1" r="1" fill="#80899C" />
-                    </svg>
-
-                    <span class="tw:text-[1.4rem] tw:leading-[1.] tw:tracking-[-0.04em] tw:text-grayscale-800 tw:truncate">
-                      {{- section.settings.info_reviews_value -}}
-                      <span>15,255 reviews</span>
-                    </span>
-
-                    <button type="button" class="tw:cursor-pointer">
-                      <svg class="tw:w-[1.8rem] tw:h-[1.8rem] tw:text-[#C6CAD2] tw:hover:text-goluboydark">
-                        <use href="#chevron-right"></use>
+                      <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="1" cy="1" r="1" fill="#80899C" />
                       </svg>
-                    </button>
-                  </div>
+
+                      <span class="tw:text-[1.4rem] tw:leading-[1.] tw:tracking-[-0.04em] tw:text-grayscale-800 tw:truncate">
+                        {{- section.settings.info_reviews_value -}}
+                        <span>15,255 reviews</span>
+                      </span>
+
+                      <button type="button" class="tw:cursor-pointer">
+                        <svg class="tw:w-[1.8rem] tw:h-[1.8rem] tw:text-[#C6CAD2] tw:hover:text-goluboydark">
+                          <use href="#chevron-right"></use>
+                        </svg>
+                      </button>
+                    </div>
+                  {% endcomment %}
 
                 {%- when 'price' -%}
                   <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
@@ -213,9 +226,11 @@
                   </div>
 
                   <!-- какаяй то ненужная информация -->
-                  <div class="tw:pt-[0.5rem] tw:text-[1.6rem] tw:leading-[1.5] tw:tracking-[-0.04em] tw:text-grayscale-400">
-                    Instead of £138 · Supplement · 60 Capsules · 2 month supply
-                  </div>
+                  {% comment %}
+                    <div class="tw:pt-[0.5rem] tw:text-[1.6rem] tw:leading-[1.5] tw:tracking-[-0.04em] tw:text-grayscale-400">
+                      Instead of £138 · Supplement · 60 Capsules · 2 month supply
+                    </div>
+                  {% endcomment %}
 
                   </div>
 
@@ -337,71 +352,42 @@
                     </details>
                   </div>
 
-                  <!-- статические пункты пока что !!!! -->
-                   {%- when 'quantity_selector' -%}
-                  <ul class="weblegko-features-product--list tw:!mb-[2rem] tw:flex tw:flex-wrap tw:gap-[0.6rem] tw:list-none">
-                    <li>
-                      <span class="tw:bg-white tw:inline-flex tw:items-center tw:gap-2 tw:px-[1rem] tw:min-h-[3.2rem] tw:rounded-full tw:border tw:border-grayscale-100">
-                        <svg
-                          class="tw:w-[1.6rem] tw:h-[1.6rem] tw:text-additional-green tw:flex-shrink-0"
-                          focusable="false"
-                          aria-hidden="true"
-                        >
-                          <use href="#check"></use>
-                        </svg>
-                        <span class="tw:my-[0.6rem] tw:text-[1.2rem] tw:leading-[1.33] tw:tracking-[-0.04em] tw:text-grayscale-950">
-                          Only supplement targeting every aging hallmark
-                        </span>
-                      </span>
-                    </li>
-                    <li>
-                      <span class="tw:bg-white tw:inline-flex tw:items-center tw:gap-2 tw:px-[1rem] tw:min-h-[3.2rem] tw:rounded-full tw:border tw:border-grayscale-100">
-                        <svg
-                          class="tw:w-[1.6rem] tw:h-[1.6rem] tw:text-additional-green tw:flex-shrink-0"
-                          focusable="false"
-                          aria-hidden="true"
-                        >
-                          <use href="#check"></use>
-                        </svg>
-                        <span class="tw:my-[0.6rem] tw:text-[1.2rem] tw:leading-[1.33] tw:tracking-[-0.04em] tw:text-grayscale-950">
-                          Restore cellular energy and activate autophagy
-                        </span>
-                      </span>
-                    </li>
-                    <li>
-                      <span class="tw:bg-white tw:inline-flex tw:items-center tw:gap-2 tw:px-[1rem] tw:min-h-[3.2rem] tw:rounded-full tw:border tw:border-grayscale-100">
-                        <svg
-                          class="tw:w-[1.6rem] tw:h-[1.6rem] tw:text-additional-green tw:flex-shrink-0"
-                          focusable="false"
-                          aria-hidden="true"
-                        >
-                          <use href="#check"></use>
-                        </svg>
-                        <span class="tw:my-[0.6rem] tw:text-[1.2rem] tw:leading-[1.33] tw:tracking-[-0.04em] tw:text-grayscale-950">
-                          NSF Certified for Sport
-                        </span>
-                      </span>
-                    </li>
-                    <li>
-                      <span class="tw:bg-white tw:inline-flex tw:items-center tw:gap-2 tw:px-[1rem] tw:min-h-[3.2rem] tw:rounded-full tw:border tw:border-grayscale-100">
-                        <svg
-                          class="tw:w-[1.6rem] tw:h-[1.6rem] tw:text-additional-green tw:flex-shrink-0"
-                          focusable="false"
-                          aria-hidden="true"
-                        >
-                          <use href="#check"></use>
-                        </svg>
-                        <span class="tw:my-[0.6rem] tw:text-[1.2rem] tw:leading-[1.33] tw:tracking-[-0.04em] tw:text-grayscale-950">
-                          90-day money-back guarantee
-                        </span>
-                      </span>
-                    </li>
-                  </ul>
+                {%- when 'quantity_selector' -%}
+                  {%- liquid
+                    assign highlights_data = product.metafields.custom.weblegko_highlights_group.value
+
+                    assign highlights_has_content = false
+
+                    if highlights_data != blank
+                      assign highlights_has_content = true
+                    endif
+                  -%}
+
+                  {% if highlights_has_content %}
+                    <ul class="weblegko-features-product--list tw:!mb-[2rem] tw:flex tw:flex-wrap tw:gap-[0.6rem] tw:list-none">
+                      {% for highlight in highlights_data.highlights_group.value %}
+                        <li>
+                          <span class="tw:bg-white tw:inline-flex tw:items-center tw:gap-2 tw:px-[1rem] tw:min-h-[3.2rem] tw:rounded-full tw:border tw:border-grayscale-100">
+                            <svg
+                              class="tw:w-[1.6rem] tw:h-[1.6rem] tw:text-additional-green tw:flex-shrink-0"
+                              focusable="false"
+                              aria-hidden="true"
+                            >
+                              <use href="#check"></use>
+                            </svg>
+                            <span class="tw:my-[0.6rem] tw:text-[1.2rem] tw:leading-[1.33] tw:tracking-[-0.04em] tw:text-grayscale-950">
+                              {{ highlight.description }}
+                            </span>
+                          </span>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
 
                   <!-- меняем колво - товара для покупки -->
                 {%- when 'quantity_selector' -%}
                   <div class="tw:flex tw:items-center tw:gap-[1rem]">
-                    {% render 'weblegko-quantity-selector',
+                    {% render 'weblegko-simple-quantity-selector',
                       product: product,
                       section_id: section.id,
                       product_form_id: product_form_id,
@@ -410,7 +396,7 @@
 
                     <!-- только кастомная кнопка добавить в корзину -->
                 {%- when 'buy_buttons' -%}
-                  {% render 'weblegko-add-to-cart',
+                  {% render 'weblegko-simple-add-to-cart',
                     product: product,
                     section_id: section.id,
                     product_form_id: product_form_id
