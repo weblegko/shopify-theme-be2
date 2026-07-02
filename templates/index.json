@@ -259,6 +259,39 @@
         "padding_top_mobile": 3,
         "padding_bottom_mobile": 3
       }
+    },
+    "weblegko_secondary_slider_wnVzDR": {
+      "type": "weblegko-secondary-slider",
+      "blocks": {
+        "slide_ePmjrU": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Grain_Free_Crackers_29.04.26_3200x1295px.webp",
+            "link": ""
+          }
+        },
+        "slide_tLyPUn": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Potassium_TriBlend_11.05.26_3200x1295px.webp",
+            "link": ""
+          }
+        },
+        "slide_8BtPRj": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/drberg-cosmetic.webp",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_ePmjrU",
+        "slide_tLyPUn",
+        "slide_8BtPRj"
+      ],
+      "name": "WEBLEGKO SECONDARY SLIDER",
+      "settings": {}
     }
   },
   "order": [
@@ -269,6 +302,7 @@
     "weblegko_why_choose_us_WPtcQJ",
     "weblegko_popular_products_WLyNrp",
     "weblegko_video_rJacM4",
-    "weblegko_doctor_quote_bwxJD8"
+    "weblegko_doctor_quote_bwxJD8",
+    "weblegko_secondary_slider_wnVzDR"
   ]
 }
