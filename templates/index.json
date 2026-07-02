@@ -200,7 +200,7 @@
       "settings": {
         "heading": "Popular Products",
         "description": "Premium supplements for your health",
-        "collection": "b-vitamins",
+        "collection": "popular-products",
         "products_to_show_desktop": 6,
         "columns_desktop": 3,
         "col_gap_desktop": 2,
