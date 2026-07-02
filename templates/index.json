@@ -374,6 +374,19 @@
         "padding_top_mobile": 3,
         "padding_bottom_mobile": 3
       }
+    },
+    "weblegko_newsletter_banner_wXPK7c": {
+      "type": "weblegko-newsletter-banner",
+      "name": "WEBLEGKO NEWSLETTER",
+      "settings": {
+        "bg_image": "shopify://shop_images/whychooseus-background.webp",
+        "heading_line_1": "Stay",
+        "heading_line_2": "Updated",
+        "avatar": "shopify://shop_images/drberg-avatar.webp",
+        "doctor_name": "Dr. Eric Berg",
+        "doctor_role": "Health & Nutrition Expert",
+        "text": "Subscribe to our newsletter and receive exclusive offers and news! Fill out the form below or message us to stay updated on all the great deals and special offers."
+      }
     }
   },
   "order": [
@@ -386,6 +399,7 @@
     "weblegko_video_rJacM4",
     "weblegko_doctor_quote_bwxJD8",
     "weblegko_secondary_slider_wnVzDR",
-    "weblegko_resources_BKD78z"
+    "weblegko_resources_BKD78z",
+    "weblegko_newsletter_banner_wXPK7c"
   ]
 }
