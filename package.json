@@ -5,7 +5,7 @@
   "scripts": {
     "watch": "npx @tailwindcss/cli -i ./src/styles/tailwind.css -o ./assets/tailwind.css --watch",
     "build": "npx @tailwindcss/cli -i ./src/styles/tailwind.css -o ./assets/tailwind.css --minify",
-    "shop": "shopify theme dev --store=drbergnzdev.myshopify.com --theme-editor-sync --ignore=config/settings_data.json --ignore=templates/product.json",
+    "shop": "shopify theme dev --store=britishtigerhealth.myshopify.com --theme-editor-sync --ignore=config/settings_data.json --ignore=templates/product.json",
     "open-browser": "wait-on http://127.0.0.1:9292 && opn http://127.0.0.1:9292/?hr=9292",
     "dev": "concurrently \"npm run watch\" \"npm run shop\" \"npm run open-browser\"",
     "fonts": "node .scripts/fonts.js",
