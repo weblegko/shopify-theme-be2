@@ -292,6 +292,88 @@
       ],
       "name": "WEBLEGKO SECONDARY SLIDER",
       "settings": {}
+    },
+    "weblegko_resources_BKD78z": {
+      "type": "weblegko-resources",
+      "blocks": {
+        "resource_xgqcMn": {
+          "type": "resource",
+          "settings": {
+            "resource_image": "shopify://shop_images/essential-definitions.webp",
+            "badge": "Free PDF Document",
+            "title": "Essential Definitions for Healthy Living",
+            "publish_date": "2025-06-20",
+            "category": "Health Resources",
+            "button_label": "Learn More",
+            "button_link": ""
+          }
+        },
+        "resource_ATr3dW": {
+          "type": "resource",
+          "settings": {
+            "resource_image": "shopify://shop_images/how-junk-foods.webp",
+            "badge": "Free PDF Document",
+            "title": "Essential Definitions for Healthy Living",
+            "publish_date": "2025-06-20",
+            "category": "Health Resources",
+            "button_label": "Learn More",
+            "button_link": ""
+          }
+        },
+        "resource_ztbHzn": {
+          "type": "resource",
+          "settings": {
+            "resource_image": "shopify://shop_images/how-to-make-yogurt.webp",
+            "badge": "Free PDF Document",
+            "title": "Essential Definitions for Healthy Living",
+            "publish_date": "2025-06-20",
+            "category": "Health Resources",
+            "button_label": "Learn More",
+            "button_link": ""
+          }
+        },
+        "resource_igYWpq": {
+          "type": "resource",
+          "settings": {
+            "resource_image": "shopify://shop_images/beginners-guide-to-healthy.webp",
+            "badge": "Free PDF Document",
+            "title": "Essential Definitions for Healthy Living",
+            "publish_date": "2025-06-20",
+            "category": "Health Resources",
+            "button_label": "Learn More",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "resource_xgqcMn",
+        "resource_ATr3dW",
+        "resource_ztbHzn",
+        "resource_igYWpq"
+      ],
+      "name": "WEBLEGKO RESOURCES",
+      "settings": {
+        "heading": "Health Resources",
+        "description": "Free Guides for Better Living",
+        "columns_desktop": 2,
+        "initial_items_desktop": 2,
+        "col_gap_desktop": 2,
+        "row_gap_desktop": 2,
+        "padding_top_desktop": 8,
+        "padding_bottom_desktop": 8,
+        "columns_tablet": 2,
+        "initial_items_tablet": 2,
+        "col_gap_tablet": 1.5,
+        "row_gap_tablet": 1.5,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "columns_mobile": 1,
+        "initial_items_mobile": 1,
+        "col_gap_mobile": 1.5,
+        "row_gap_mobile": 1.5,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
+      }
     }
   },
   "order": [
@@ -303,6 +385,7 @@
     "weblegko_popular_products_WLyNrp",
     "weblegko_video_rJacM4",
     "weblegko_doctor_quote_bwxJD8",
-    "weblegko_secondary_slider_wnVzDR"
+    "weblegko_secondary_slider_wnVzDR",
+    "weblegko_resources_BKD78z"
   ]
 }
