@@ -158,7 +158,7 @@
 
                   {%- if product.metafields.custom.short_intro != blank -%}
                     <p class="tw:mb-[1rem] tw:!text-left tw:!mt-[0.6rem] tw:!text-[1.2rem] tw:!leading-[1.33] tw:!tracking-[-0.01em] tw:!text-grayscale-600 tw:!line-clamp-2 tw:!font-poppins">
-                      {{ product.metafields.custom.short_intro.value | truncate: 200 }}
+                      {{ product.metafields.custom.short_intro | truncate: 200 }}
                        
                     </p>
                   {%- endif -%}
