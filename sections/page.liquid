@@ -1,28 +1,29 @@
 {{ 'section-main-page.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
-
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
+     .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 1 }}rem;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 1 }}rem;
     }
-  }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}rem;
+        padding-bottom: {{ section.settings.padding_bottom }}rem;
+      } 
+    }
 {%- endstyle -%}
 
-<div class="color-{{ section.settings.color_scheme }} gradient">
-  <div class="page-width page-width--narrow section-{{ section.id }}-padding">
-    <h2 class="page-title {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+<div class="tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem]">
+  <div class="tw:max-w-[112rem] tw:mx-auto section-{{ section.id }}-padding">
+    <h2 class="typo {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
       {%- if section.settings.page.title != blank -%}
         {{ section.settings.page.title | escape }}
       {%- else -%}
         {{ 'sections.page.title' | t }}
-      {%- endif -%}
+      {%- endif -%}      
     </h2>
+    
     <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
       {%- if section.settings.page.content != blank -%}
         {{ section.settings.page.content }}
@@ -91,21 +92,21 @@
       "type": "range",
       "id": "padding_top",
       "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
+      "max": 10,
+      "step": 0.5,
+      "unit": "rem",
       "label": "t:sections.all.padding.padding_top",
-      "default": 36
+      "default": 3.5
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
+      "max": 10,
+      "step": 0.5,
+      "unit": "rem",
       "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
+      "default": 1.5
     }
   ],
   "presets": [

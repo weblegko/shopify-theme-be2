@@ -392,5 +392,11 @@
       initAutoRem({ baseSiteWidth: 1440, baseFontSize: 10 }); // для Dawn baseFontSize = 10
       initViewport({ breakpoint: 1440, designWidth: 1440 });
     </script>
-  </body>
+
+    
+  {% if request.page_type == 'policy' %}
+    {{ 'weblegko-policy.css' | asset_url | stylesheet_tag }}
+  {% endif %}
+
+</body>
 </html>

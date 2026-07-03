@@ -102,3 +102,71 @@ table.berg-prod tr:nth-child(odd) td {
     font-weight: 700;
     color:rgb(211, 69, 4) !important;
 }
+
+
+
+/*===========================================================================
+policy
+=============================================================================*/
+/* ===========================
+   Shopify Policy Pages
+=========================== */
+
+body.template-policy .shopify-policy__container {
+  max-width: 112rem !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 5.6rem 1.6rem 8rem !important;
+
+  background: transparent !important;
+  color: var(--color-grayscale-950) !important;
+
+  box-sizing: border-box;
+}
+
+body.template-policy .shopify-policy__title {
+  margin-bottom: 3.2rem !important;
+}
+
+body.template-policy .shopify-policy__title h1 {
+  margin: 0 !important;
+
+  font-size: 4.8rem !important;
+  line-height: 1.1 !important;
+  font-weight: 700 !important;
+}
+
+body.template-policy .shopify-policy__body {
+  max-width: none !important;
+}
+
+body.template-policy .shopify-policy__body h2 {
+  margin: 4rem 0 1.6rem !important;
+}
+
+body.template-policy .shopify-policy__body h3 {
+  margin: 3.2rem 0 1.2rem !important;
+}
+
+body.template-policy .shopify-policy__body p,
+body.template-policy .shopify-policy__body li {
+  font-size: 1.6rem !important;
+  line-height: 1.7 !important;
+}
+
+body.template-policy .shopify-policy__body ul,
+body.template-policy .shopify-policy__body ol {
+  padding-left: 2rem !important;
+  margin: 1.6rem 0 !important;
+}
+
+body.template-policy .shopify-policy__body table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+}
+
+body.template-policy .shopify-policy__body th,
+body.template-policy .shopify-policy__body td {
+  border: 1px solid #ddd !important;
+  padding: 1rem !important;
+}
