@@ -33,8 +33,9 @@
       "type": "weblegko-footer",
       "name": "WEBLEGKO Footer",
       "settings": {
-        "newsletter_heading": "Sign up to our Newsletter,<br> for the latest Promotions,<br> New Products and Sales!",
-        "menu": "footer",
+        "newsletter_heading": "Sign up to our Newsletter, for the latest Promotions, New Products and Sales!",
+        "menu": "main-menu",
+        "newsletter_enable": true,
         "show_policy": true,
         "footer_email": "hello@yourstore.com",
         "info_text_1": "<p>Life Is Real, So Take Real Supplements™</p>",
