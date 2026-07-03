@@ -103,8 +103,8 @@
                   {%- endif -%}
                 </small>
               </div>
-            {%- else -%}
-              {%- if settings.cart_type == 'drawer' -%}
+            {%- else -%}              
+              {%- if settings.cart_type == 'drawer' or settings.cart_type == 'notification' -%}
                 <form action="{{ routes.cart_url }}" method="post" id="cart-drawer-form">
                   <div class="cart__ctas" {{ block.shopify_attributes }}>
                     <button
