@@ -592,7 +592,7 @@
       ],
       "name": "WEBLEGKO FAQ",
       "settings": {
-        "heading": "Frequently Asked Questions",
+        "heading": "FAQ",
         "rating_score": "4.8",
         "review_count": "2,847",
         "gap_desktop": 1,
@@ -601,9 +601,9 @@
         "gap_tablet": 2,
         "padding_top_tablet": 5,
         "padding_bottom_tablet": 5,
-        "gap_mobile": 1.5,
-        "padding_top_mobile": 3,
-        "padding_bottom_mobile": 3
+        "gap_mobile": 1,
+        "padding_top_mobile": 5,
+        "padding_bottom_mobile": 5
       }
     },
     "weblegko_about_doctor_dGg4rC": {
@@ -620,8 +620,8 @@
         "padding_top_tablet": 5,
         "padding_bottom_tablet": 5,
         "initial_paragraphs_mobile": 1,
-        "padding_top_mobile": 3,
-        "padding_bottom_mobile": 3
+        "padding_top_mobile": 5,
+        "padding_bottom_mobile": 5
       }
     }
   },
