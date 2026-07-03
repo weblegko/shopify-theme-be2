@@ -513,7 +513,7 @@
         "col_gap_desktop": 2.5,
         "row_gap_desktop": 2.5,
         "padding_top_desktop": 13,
-        "padding_bottom_desktop": 7,
+        "padding_bottom_desktop": 6,
         "columns_tablet": 2,
         "initial_items_tablet": 2,
         "col_gap_tablet": 2,
