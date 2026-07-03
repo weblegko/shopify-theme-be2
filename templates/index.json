@@ -61,9 +61,9 @@
         "info_reviews_value": "15,255",
         "info_description": "Quality vitamins and supplements trusted by millions worldwide —  now delivered to your door across the UK.",
         "button_blue_label": "Shop All Products",
-        "button_blue_link": "",
+        "button_blue_link": "shopify://collections/all-products",
         "button_grey_label": "Shop All Products",
-        "button_grey_link": ""
+        "button_grey_link": "shopify://collections/all-products"
       }
     },
     "weblegko_features_MpkF4r": {
@@ -111,8 +111,8 @@
         "columns_mobile": 1,
         "col_gap_mobile": 0.5,
         "row_gap_mobile": 1,
-        "padding_top_mobile": 0,
-        "padding_bottom_mobile": 2.5
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
       }
     },
     "weblegko_premium_products_GDURBV": {
@@ -128,9 +128,9 @@
         "space_between_tablet": 2,
         "padding_top_tablet": 5,
         "padding_bottom_tablet": 5,
-        "space_between_mobile": 2,
-        "padding_top_mobile": 2,
-        "padding_bottom_mobile": 7,
+        "space_between_mobile": 1,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3,
         "image_ratio": "square",
         "image_shape": "default",
         "show_secondary_image": false,
@@ -215,10 +215,10 @@
         "padding_bottom_tablet": 5,
         "products_to_show_mobile": 2,
         "columns_mobile": 1,
-        "col_gap_mobile": 2,
-        "row_gap_mobile": 2,
+        "col_gap_mobile": 1,
+        "row_gap_mobile": 1,
         "padding_top_mobile": 3,
-        "padding_bottom_mobile": 5,
+        "padding_bottom_mobile": 3,
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": false,
@@ -372,8 +372,8 @@
         "initial_items_mobile": 1,
         "col_gap_mobile": 1.5,
         "row_gap_mobile": 1.5,
-        "padding_top_mobile": 5,
-        "padding_bottom_mobile": 5
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
       }
     },
     "weblegko_newsletter_banner_wXPK7c": {
@@ -521,11 +521,11 @@
         "padding_top_tablet": 5,
         "padding_bottom_tablet": 5,
         "columns_mobile": 1,
-        "initial_items_mobile": 3,
+        "initial_items_mobile": 1,
         "col_gap_mobile": 1.5,
         "row_gap_mobile": 1.5,
-        "padding_top_mobile": 5,
-        "padding_bottom_mobile": 5
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
       }
     },
     "weblegko_faq_hNt83A": {
@@ -592,7 +592,7 @@
       ],
       "name": "WEBLEGKO FAQ",
       "settings": {
-        "heading": "FAQ",
+        "heading": "Frequently Asked Questions",
         "rating_score": "4.8",
         "review_count": "2,847",
         "gap_desktop": 1,
@@ -601,9 +601,9 @@
         "gap_tablet": 2,
         "padding_top_tablet": 5,
         "padding_bottom_tablet": 5,
-        "gap_mobile": 1,
-        "padding_top_mobile": 5,
-        "padding_bottom_mobile": 5
+        "gap_mobile": 1.5,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
       }
     },
     "weblegko_about_doctor_dGg4rC": {
@@ -619,9 +619,9 @@
         "initial_paragraphs_tablet": 2,
         "padding_top_tablet": 5,
         "padding_bottom_tablet": 5,
-        "initial_paragraphs_mobile": 2,
-        "padding_top_mobile": 5,
-        "padding_bottom_mobile": 5
+        "initial_paragraphs_mobile": 1,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
       }
     }
   },
