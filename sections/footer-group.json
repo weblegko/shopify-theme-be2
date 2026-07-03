@@ -34,7 +34,7 @@
       "name": "WEBLEGKO Footer",
       "settings": {
         "newsletter_heading": "Sign up to our Newsletter, for the latest Promotions, New Products and Sales!",
-        "menu": "footer",
+        "menu": "main-menu",
         "newsletter_enable": true,
         "show_policy": true,
         "footer_email": "hello@yourstore.com",
