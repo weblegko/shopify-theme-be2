@@ -42,8 +42,8 @@
         "show_rating": false,
         "quick_add": "standard",
         "enable_filtering": false,
-        "filter_type": "horizontal",
-        "enable_sorting": false
+        "filter_type": "drawer",
+        "enable_sorting": true
       }
     },
     "product-grid": {
