@@ -569,8 +569,8 @@
         "question_EhX4zE": {
           "type": "question",
           "settings": {
-            "question": "Do you offer discounts for bulk orders?",
-            "answer": "<p>Yes, we offer volume discounts for bulk orders over $500. Please contact our sales team at sales@yourstore.com for a custom quote based on your requirements.</p>"
+            "question": "Do you ship internationally?",
+            "answer": "<p>We currently ship to UK addresses only. For European orders, please visit the official Dr. Berg European reseller website at drberg.eu.</p>"
           }
         },
         "question_TJpCEa": {
