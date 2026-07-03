@@ -576,8 +576,8 @@
         "question_TJpCEa": {
           "type": "question",
           "settings": {
-            "question": "Is my personal information secure?",
-            "answer": "<p>Absolutely! We use industry-standard SSL encryption to protect your data. We never store your payment information, and we never share your personal details with third parties.</p>"
+            "question": "Do you offer free shipping?",
+            "answer": "<p>Yes! We offer free standard shipping on all UK orders over £150. For orders below this amount, standard shipping fees apply and will be calculated at checkout.</p>"
           }
         }
       },
