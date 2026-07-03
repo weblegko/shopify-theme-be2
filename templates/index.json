@@ -534,8 +534,8 @@
         "question_bcChJc": {
           "type": "question",
           "settings": {
-            "question": "What is your return policy?",
-            "answer": "<p>We accept returns within 30 days of purchase. Items must be in their original condition, unused, and with all tags attached. Refunds are processed within 5-7 business days.</p>"
+            "question": "How do I place an order?",
+            "answer": "<p>Simply browse our product pages and click “Add to Cart” for the items you wish to purchase. Once ready, proceed to the checkout where you can enter your shipping and payment details securely.</p>"
           }
         },
         "question_yMpaJN": {
