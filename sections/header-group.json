@@ -61,7 +61,7 @@
       "name": "WEBLEGKO Header",
       "settings": {
         "menu": "main-menu",
-        "social_telegram_link": "https://t.me/#",
+        "social_telegram_link": "https://t.me/your_channel",
         "color_scheme": "scheme-1",
         "menu_color_scheme": "",
         "enable_country_selector": false,
