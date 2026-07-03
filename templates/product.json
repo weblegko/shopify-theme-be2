@@ -110,6 +110,10 @@
           "type": "title",
           "settings": {}
         },
+        "description_JAXTDx": {
+          "type": "description",
+          "settings": {}
+        },
         "price_nGRg7g": {
           "type": "price",
           "settings": {}
@@ -123,6 +127,7 @@
         },
         "quantity_selector_bGXLbk": {
           "type": "quantity_selector",
+          "disabled": true,
           "settings": {}
         },
         "buy_buttons_cW6cPf": {
@@ -131,10 +136,6 @@
             "show_dynamic_checkout": false,
             "show_gift_card_recipient": true
           }
-        },
-        "description_JAXTDx": {
-          "type": "description",
-          "settings": {}
         },
         "share_XdbrrD": {
           "type": "share",
@@ -147,26 +148,18 @@
       "block_order": [
         "text_4Riaxt",
         "title_Qbk3hz",
+        "description_JAXTDx",
         "price_nGRg7g",
         "variant_picker_LDjPp7",
         "quantity_selector_bGXLbk",
         "buy_buttons_cW6cPf",
-        "description_JAXTDx",
         "share_XdbrrD"
       ],
       "name": "WEBLEGKO MAIN PRODUCT",
       "settings": {
         "enable_sticky_info": false,
         "color_scheme": "scheme-1",
-        "media_size": "small",
-        "constrain_to_viewport": true,
-        "media_fit": "contain",
-        "gallery_layout": "thumbnail_slider",
-        "mobile_thumbnails": "hide",
-        "media_position": "left",
         "image_zoom": "lightbox",
-        "hide_variants": true,
-        "enable_video_looping": false,
         "padding_top": 0,
         "padding_bottom": 0
       }
