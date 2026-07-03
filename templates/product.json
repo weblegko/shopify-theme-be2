@@ -200,7 +200,7 @@
         "col_gap_desktop": 2,
         "row_gap_desktop": 2,
         "padding_top_desktop": 6,
-        "padding_bottom_desktop": 6,
+        "padding_bottom_desktop": 4,
         "columns_tablet": 2,
         "col_gap_tablet": 1,
         "row_gap_tablet": 1.5,
