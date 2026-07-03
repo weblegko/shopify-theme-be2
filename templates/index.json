@@ -555,8 +555,8 @@
         "question_dBzAgE": {
           "type": "question",
           "settings": {
-            "question": "What payment methods do you accept?",
-            "answer": "<p>We accept all major credit cards (Visa, MasterCard, American Express), PayPal, Apple Pay, Google Pay, and Shop Pay. All transactions are secure and encrypted.</p>"
+            "question": "Do you offer next-day or tracked delivery?",
+            "answer": "<p>Yes, we offer tracked delivery options at checkout. We currently do not offer guaranteed next-day delivery, but most UK orders arrive within 2–4 business days of dispatch.</p><p>However, please note that Royal Mail Tracked 24® and Tracked 48® services do not guarantee delivery within 24 or 48 hours, respectively. These are aimed delivery times, and actual delivery may take longer due to factors such as:</p><p>• Operational delays within the postal network</p><p>• Weather conditions or traffic disruptions</p><p>• Delivery to remote or rural areas, which may experience longer transit times</p><p>For more details, please refer to Royal Mail’s Terms and Conditions for Tracked 24 and Tracked 48.</p>"
           }
         },
         "question_J4yVjw": {
