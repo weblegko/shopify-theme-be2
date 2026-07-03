@@ -111,8 +111,8 @@
         "columns_mobile": 1,
         "col_gap_mobile": 0.5,
         "row_gap_mobile": 1,
-        "padding_top_mobile": 3,
-        "padding_bottom_mobile": 3
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 2.5
       }
     },
     "weblegko_premium_products_GDURBV": {
@@ -128,9 +128,9 @@
         "space_between_tablet": 2,
         "padding_top_tablet": 5,
         "padding_bottom_tablet": 5,
-        "space_between_mobile": 1,
-        "padding_top_mobile": 3,
-        "padding_bottom_mobile": 3,
+        "space_between_mobile": 2,
+        "padding_top_mobile": 2,
+        "padding_bottom_mobile": 7,
         "image_ratio": "square",
         "image_shape": "default",
         "show_secondary_image": false,
@@ -215,10 +215,10 @@
         "padding_bottom_tablet": 5,
         "products_to_show_mobile": 2,
         "columns_mobile": 1,
-        "col_gap_mobile": 1,
-        "row_gap_mobile": 1,
+        "col_gap_mobile": 2,
+        "row_gap_mobile": 2,
         "padding_top_mobile": 3,
-        "padding_bottom_mobile": 3,
+        "padding_bottom_mobile": 5,
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": false,
@@ -372,8 +372,8 @@
         "initial_items_mobile": 1,
         "col_gap_mobile": 1.5,
         "row_gap_mobile": 1.5,
-        "padding_top_mobile": 3,
-        "padding_bottom_mobile": 3
+        "padding_top_mobile": 5,
+        "padding_bottom_mobile": 5
       }
     },
     "weblegko_newsletter_banner_wXPK7c": {
@@ -521,11 +521,11 @@
         "padding_top_tablet": 5,
         "padding_bottom_tablet": 5,
         "columns_mobile": 1,
-        "initial_items_mobile": 1,
+        "initial_items_mobile": 3,
         "col_gap_mobile": 1.5,
         "row_gap_mobile": 1.5,
-        "padding_top_mobile": 3,
-        "padding_bottom_mobile": 3
+        "padding_top_mobile": 5,
+        "padding_bottom_mobile": 5
       }
     },
     "weblegko_faq_hNt83A": {
