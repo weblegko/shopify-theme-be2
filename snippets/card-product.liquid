@@ -166,7 +166,7 @@
           </h3>
            {%- if card_product.metafields.custom.short_intro != blank -%}
             <p class="tw:min-h-[3.35rem] tw:!text-left tw:!mt-[0.6rem] tw:!text-[1.2rem] tw:!leading-[1.33] tw:!tracking-[-0.01em] tw:!text-grayscale-600 tw:!line-clamp-2 tw:!font-poppins">
-              {{ card_product.metafields.custom.short_intro | truncate: 150 }}
+              {{ card_product.metafields.custom.short_intro | metafield_text | truncate: 150 }}
             </p>
           {%- endif -%}
 

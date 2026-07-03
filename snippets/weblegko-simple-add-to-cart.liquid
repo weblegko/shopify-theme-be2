@@ -63,4 +63,10 @@
       {%- render 'loading-spinner' -%}
     </button>
   {%- endform -%}
+
+  {%- if block.settings.show_dynamic_checkout -%}
+    <div class="tw:mt-[1.2rem] tw:w-full">
+      {{ form | payment_button }}
+    </div>
+  {%- endif -%}
 </product-form>

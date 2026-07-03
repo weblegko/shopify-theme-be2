@@ -294,17 +294,14 @@
   .tw\:\!mt-\[0\.6rem\] {
     margin-top: 0.6rem !important;
   }
-  .tw\:mt-0\.5 {
-    margin-top: calc(var(--tw-spacing) * 0.5);
-  }
   .tw\:mt-1 {
     margin-top: var(--tw-spacing);
   }
-  .tw\:mt-2 {
-    margin-top: calc(var(--tw-spacing) * 2);
-  }
   .tw\:mt-\[0\.5rem\] {
     margin-top: 0.5rem;
+  }
+  .tw\:mt-\[1\.2rem\] {
+    margin-top: 1.2rem;
   }
   .tw\:mt-\[1\.5rem\] {
     margin-top: 1.5rem;
@@ -459,9 +456,6 @@
   .tw\:h-\[2\.4rem\] {
     height: 2.4rem;
   }
-  .tw\:h-\[2\.5rem\] {
-    height: 2.5rem;
-  }
   .tw\:h-\[2rem\] {
     height: 2rem;
   }
@@ -548,9 +542,6 @@
   }
   .tw\:w-\[2\.4rem\] {
     width: 2.4rem;
-  }
-  .tw\:w-\[2\.5rem\] {
-    width: 2.5rem;
   }
   .tw\:w-\[2rem\] {
     width: 2rem;
@@ -1169,10 +1160,6 @@
   .tw\:\!leading-\[1\.43\] {
     --tw-leading: 1.43 !important;
     line-height: 1.43 !important;
-  }
-  .tw\:leading-1 {
-    --tw-leading: var(--tw-spacing);
-    line-height: var(--tw-spacing);
   }
   .tw\:leading-\[1\.2\] {
     --tw-leading: 1.2;
