@@ -32,7 +32,7 @@
         "padding_bottom_tablet": 5,
         "col_gap_mobile": 1,
         "row_gap_mobile": 1,
-        "padding_top_mobile": 3,
+        "padding_top_mobile": 0,
         "padding_bottom_mobile": 3,
         "color_scheme": "",
         "image_ratio": "adapt",
