@@ -423,6 +423,9 @@
   .tw\:aspect-\[142\/40\] {
     aspect-ratio: 142/40;
   }
+  .tw\:aspect-\[358\/532\] {
+    aspect-ratio: 358/532;
+  }
   .tw\:aspect-square {
     aspect-ratio: 1 / 1;
   }
@@ -1912,6 +1915,11 @@
   .tw\:xl\:px-0 {
     @media (width >= 1280px) {
       padding-inline: 0;
+    }
+  }
+  .tw\:xl\:\!text-\[4rem\] {
+    @media (width >= 1280px) {
+      font-size: 4rem !important;
     }
   }
   .tw\:xl\:text-\[4rem\] {
