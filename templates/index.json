@@ -121,7 +121,7 @@
       "settings": {
         "heading": "Premium Products",
         "description": "Premium supplements for your health",
-        "collection": "b-vitamins",
+        "collection": "premium-products",
         "space_between_desktop": 2,
         "padding_top_desktop": 8,
         "padding_bottom_desktop": 8,
