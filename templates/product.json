@@ -213,25 +213,6 @@
         "padding_bottom_mobile": 3
       }
     },
-    "related-products": {
-      "type": "related-products",
-      "disabled": true,
-      "settings": {
-        "heading": "You may also like",
-        "heading_size": "h2",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "columns_mobile": "2",
-        "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "padding_top": 36,
-        "padding_bottom": 28
-      }
-    },
     "weblegko_product_tabs_xrdTf6": {
       "type": "weblegko-product-tabs",
       "name": "WEBLEGKO PRODUCT TABS",
@@ -247,6 +228,7 @@
     },
     "weblegko_related_products_6PjEw3": {
       "type": "weblegko-related-products",
+      "disabled": true,
       "name": "WEBLEGKO RELATED",
       "settings": {
         "heading": "Customers Also Bought",
@@ -277,6 +259,24 @@
         "show_rating": false,
         "quick_add": "standard"
       }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 3,
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
     }
   },
   "order": [
@@ -284,8 +284,8 @@
     "main",
     "weblegko_main_product_RUgmNA",
     "weblegko_features_6hWnMc",
-    "related-products",
     "weblegko_product_tabs_xrdTf6",
-    "weblegko_related_products_6PjEw3"
+    "weblegko_related_products_6PjEw3",
+    "related-products"
   ]
 }
