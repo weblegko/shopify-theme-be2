@@ -1922,11 +1922,6 @@
       font-size: 4rem !important;
     }
   }
-  .tw\:xl\:text-\[4rem\] {
-    @media (width >= 1280px) {
-      font-size: 4rem;
-    }
-  }
   .tw\:\[\&_svg\]\:h-full {
     & svg {
       height: 100%;
