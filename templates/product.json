@@ -264,7 +264,7 @@
       "type": "related-products",
       "settings": {
         "heading": "Customers Also Bought",
-        "heading_size": "h2",
+        "heading_size": "h1",
         "products_to_show": 6,
         "columns_desktop": 3,
         "columns_mobile": "1",
