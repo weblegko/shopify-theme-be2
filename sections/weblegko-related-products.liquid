@@ -87,35 +87,22 @@
       gap: {{ section.settings.row_gap_desktop | default: 2 }}rem {{ section.settings.col_gap_desktop | default: 2 }}rem !important;
     }
   }
-
-  .section-related-weblegko{
-    max-height: 1000rem;
-    visibility: visible;
-    height: initial;
-    transition: all 1s ease-in-out;
-  }
-
-  /* Скрываем секцию если нет товаров */
-  .weblegko-related--hidden {
-    max-height: 0;
-    visibility: hidden;
-    opacity:0;
-    height: 0;
-  } 
   
 </style>
 
-<section class="section-related-weblegko tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem] ">
-  <div class="weblegko-related-padding tw:max-w-[112rem] tw:mx-auto">
-
-       <product-recommendations
-      class="related-products {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-      data-url="{{ routes.product_recommendations_url }}?limit={{ products_limit }}&intent=related"
+<div class="tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem] tw:max-w-[112rem] tw:mx-auto">  
+      
+<product-recommendations
+      class="related-products isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      data-url="{{ routes.product_recommendations_url }}?limit={{ section.settings.products_to_show }}"
       data-section-id="{{ section.id }}"
       data-product-id="{{ product.id }}"
-    >
+    >    
+    
+      {% if recommendations.performed and recommendations.products_count > 0 %}
+        <div class="weblegko-related-padding ">   
 
-       <!-- Заголовок -->
+        <!-- Заголовок -->
     {%- if section.settings.heading != blank -%}
       <div class="tw:flex tw:flex-col tw:items-center tw:gap-[1rem] tw:mb-[2.5rem] tw:md:mb-[3rem]">
         <h2 class="tw:text-[2.4rem] tw:sm:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.33] tw:lg:leading-[1.2] tw:text-center">
@@ -131,7 +118,6 @@
       </div>
     {%- endif -%}
 
-      {% if recommendations.performed and recommendations.products_count > 0 %}
         <ul
           id="weblegko-related-grid"
           role="list"
@@ -155,13 +141,14 @@
           {%- assign skip_card_product_styles = true -%}
         {% endfor %}
       </ul>
+      </div>
     {% endif %}
   </product-recommendations>
   {% if section.settings.image_shape == 'arch' %}
     {{ 'mask-arch.svg' | inline_asset_content }}
   {%- endif -%}
+
 </div>
-</section>
 {% schema %}
 {
   "name": "WEBLEGKO RELATED",
