@@ -101,45 +101,21 @@
     visibility: hidden;
     opacity:0;
     height: 0;
-  }
-
-  /* ============================================ */
-  /* Скрытие лишних карточек на брейкпоинтах */
-  /* ============================================ */
-
-  /* Мобильные (< 640px) */
-  @media screen and (max-width: 639px) {
-    .weblegko-hide-mobile {
-      display: none !important;
-    }
-  }
-
-  /* Планшеты (640px - 1023px) */
-  @media screen and (min-width: 640px) and (max-width: 1023px) {
-    .weblegko-hide-tablet {
-      display: none !important;
-    }
-  }
-
-  /* Десктопы (>= 1024px) */
-  @media screen and (min-width: 1024px) {
-    .weblegko-hide-desktop {
-      display: none !important;
-    }
-  }
+  } 
+  
 </style>
-
-{%- comment -%}
-  Определяем сколько товаров показывать на каждом брейкпоинте
-{%- endcomment -%}
-{%- assign products_limit = section.settings.products_to_show | default: 12 -%}
-{%- assign desktop_limit = section.settings.products_to_show_desktop | default: products_limit -%}
-{%- assign tablet_limit = section.settings.products_to_show_tablet | default: products_limit -%}
-{%- assign mobile_limit = section.settings.products_to_show_mobile | default: products_limit -%}
 
 <section class="section-related-weblegko tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem] ">
   <div class="weblegko-related-padding tw:max-w-[112rem] tw:mx-auto">
-    <!-- Заголовок -->
+
+       <product-recommendations
+      class="related-products {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      data-url="{{ routes.product_recommendations_url }}?limit={{ products_limit }}&intent=related"
+      data-section-id="{{ section.id }}"
+      data-product-id="{{ product.id }}"
+    >
+
+       <!-- Заголовок -->
     {%- if section.settings.heading != blank -%}
       <div class="tw:flex tw:flex-col tw:items-center tw:gap-[1rem] tw:mb-[2.5rem] tw:md:mb-[3rem]">
         <h2 class="tw:text-[2.4rem] tw:sm:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.33] tw:lg:leading-[1.2] tw:text-center">
@@ -151,80 +127,41 @@
               {{ section.settings.description }}
             </span>
           </div>
-        {%- endif -%}
+       {%- endif -%}
       </div>
     {%- endif -%}
 
-    <!-- Сетка товаров через product-recommendations -->
-    <product-recommendations
-      class="related-products"
-      data-url="{{ routes.product_recommendations_url }}?limit={{ products_limit }}&intent=related"
-      data-section-id="{{ section.id }}"
-      data-product-id="{{ product.id }}"
-    >
       {% if recommendations.performed and recommendations.products_count > 0 %}
         <ul
           id="weblegko-related-grid"
           role="list"
           class="product-grid"
         >
-          {% assign skip_card_product_styles = false %}
 
-          {%- comment -%}
-            Показываем все товары, но скрываем лишние через CSS на разных брейкпоинтах
-          {%- endcomment -%}
-          {% for recommendation in recommendations.products %}
-            {%- assign item_index = forloop.index -%}
-            <li
-              class="
-                grid__item
-                {% if item_index > mobile_limit %}weblegko-hide-mobile{% endif %}
-                {% if item_index > tablet_limit %}weblegko-hide-tablet{% endif %}
-                {% if item_index > desktop_limit %}weblegko-hide-desktop{% endif %}
-              "
-            >
-              {% render 'card-product',
-                card_product: recommendation,
-                media_aspect_ratio: section.settings.image_ratio,
-                image_shape: section.settings.image_shape,
-                show_secondary_image: section.settings.show_secondary_image,
-                show_vendor: section.settings.show_vendor,
-                show_rating: section.settings.show_rating,
-                skip_styles: skip_card_product_styles,
-                quick_add: section.settings.quick_add,
-                section_id: section.id
-              %}
-            </li>
-            {%- assign skip_card_product_styles = true -%}
-          {% endfor %}
-        </ul>
-      {% endif %}
-    </product-recommendations>
-  </div>
+        {% assign skip_card_product_styles = false %}
+        {% for recommendation in recommendations.products %}
+          <li class="grid__item">
+            {% render 'card-product',
+              card_product: recommendation,
+              media_aspect_ratio: section.settings.image_ratio,
+              image_shape: section.settings.image_shape,
+              show_secondary_image: section.settings.show_secondary_image,
+              show_vendor: section.settings.show_vendor,
+              show_rating: section.settings.show_rating,
+              quick_add: section.settings.quick_add,
+              skip_styles: skip_card_product_styles
+            %}
+          </li>
+          {%- assign skip_card_product_styles = true -%}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </product-recommendations>
+  {% if section.settings.image_shape == 'arch' %}
+    {{ 'mask-arch.svg' | inline_asset_content }}
+  {%- endif -%}
+</div>
 </section>
-
-<!-- 10 попыток за 5 секунд на загрузку товаров через аякс -->
-<script>
-  let attempts = 0;
-  let maxAttempts = 10;
-  const section = document.querySelector('.section-related-weblegko');
-  section.classList.add('weblegko-related--hidden');
-  let timer = setInterval(() => {
-    attempts++;
-    if (document.querySelector('#weblegko-related-grid')) {
-      console.log('есть товары - показываем');
-      section.classList.remove('weblegko-related--hidden');
-      clearInterval(timer);
-    } else {
-      console.log('нет товаров - скрываем');
-      section.classList.add('weblegko-related--hidden');
-      if (attempts >= maxAttempts) {
-        clearInterval(timer);
-      }
-    }
-  }, 500);
-</script>
-
 {% schema %}
 {
   "name": "WEBLEGKO RELATED",
@@ -262,16 +199,7 @@
     {
       "type": "header",
       "content": "🖥️ Desktop (≥ 1024px)"
-    },
-    {
-      "type": "range",
-      "id": "products_to_show_desktop",
-      "min": 1,
-      "max": 20,
-      "step": 1,
-      "default": 6,
-      "label": "Number of products to show"
-    },
+    },    
     {
       "type": "range",
       "id": "columns_desktop",
@@ -324,16 +252,7 @@
     {
       "type": "header",
       "content": "💻 Tablet (640px - 1024px)"
-    },
-    {
-      "type": "range",
-      "id": "products_to_show_tablet",
-      "min": 1,
-      "max": 20,
-      "step": 1,
-      "default": 8,
-      "label": "Number of products to show"
-    },
+    },    
     {
       "type": "range",
       "id": "columns_tablet",
@@ -386,16 +305,7 @@
     {
       "type": "header",
       "content": "📱 Mobile (< 640px)"
-    },
-    {
-      "type": "range",
-      "id": "products_to_show_mobile",
-      "min": 1,
-      "max": 20,
-      "step": 1,
-      "default": 4,
-      "label": "Number of products to show"
-    },
+    },    
     {
       "type": "range",
       "id": "columns_mobile",
