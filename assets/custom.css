@@ -172,13 +172,22 @@ body.template-policy .shopify-policy__body td {
 }
 
 /* PDF Dowloads */
-.pdf-row {
-    display: flex;
+@media (max-width: 678px){
+    .main-page-title {font-size: 3rem;}
 }
 
+.pdf-row {
+    display: block;
+}
+
+@media (min-width: 678px){
+    .pdf-row {
+        display: flex;
+    }
+}
 .pdf-col-1,
-.pdf-col-1 {
-    padding: 0 4rem;
+.pdf-col-2 {
+    padding: 0 3rem;
 }
 
 .btn-download-pdf {
@@ -191,3 +200,4 @@ body.template-policy .shopify-policy__body td {
     padding: 1rem;
     margin: 1rem 0;
 }
+
