@@ -338,11 +338,11 @@
           "settings": {
             "resource_image": "shopify://shop_images/beginners-guide-to-healthy.webp",
             "badge": "Free PDF Document",
-            "title": "Essential Definitions for Healthy Living",
+            "title": "Beginner’s Guide to Healthy Fertilizer and Composting",
             "publish_date": "2025-06-20",
             "category": "Health Resources",
             "button_label": "Learn More",
-            "button_link": ""
+            "button_link": "/pages/beginner-s-guide-to-healthy-fertilizer-and-composting"
           }
         }
       },
