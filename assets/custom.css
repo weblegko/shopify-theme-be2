@@ -170,3 +170,24 @@ body.template-policy .shopify-policy__body td {
   border: 1px solid #ddd !important;
   padding: 1rem !important;
 }
+
+/* PDF Dowloads */
+.pdf-row {
+    display: flex;
+}
+
+.pdf-col-1,
+.pdf-col-1 {
+    padding: 0 4rem;
+}
+
+.btn-download-pdf {
+    display: inline-block;
+    color: #fff !important;
+    border-radius: 1rem;
+    background-color: #00b5d1;
+    text-decoration: none !important;
+    font-weight: 500;
+    padding: 1rem;
+    margin: 1rem 0;
+}
