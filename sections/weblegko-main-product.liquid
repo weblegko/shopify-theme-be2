@@ -32,18 +32,17 @@
     }
 
     @media screen and (min-width: 750px) {
-      .section-{{ section.id }}-padding {
-        padding-top: {{ section.settings.padding_top }}rem;
-        padding-bottom: {{ section.settings.padding_bottom }}rem;
-      }
+        .section-{{ section.id }}-padding {
+          padding-top: {{ section.settings.padding_top }}rem;
+          padding-bottom: {{ section.settings.padding_bottom }}rem;
+        }
 
-       .product__info-wrapper {
-        padding: 0 0 0 3rem;
-      }
-
-      .product__info-container > * + * {
-          margin: 0.5rem 0;
-      }
+        .product__info-wrapper {
+          padding: 0 0 0 3rem;
+        }
+        .product__info-container > * + * {
+            margin: 0.5rem 0;
+        }
 
     }
   {%- endstyle -%}
@@ -158,9 +157,7 @@
                 {%- when 'description' -%}
                   {%- if product.metafields.custom.short_intro != blank -%}
                     <p class="tw:mb-[1rem] tw:!text-left tw:!mt-[0.6rem] tw:!text-[1.2rem] tw:!leading-[1.33] tw:!tracking-[-0.01em] tw:!text-grayscale-600 tw:!line-clamp-2 tw:!font-poppins">
-
                       {{ product.metafields.custom.short_intro | metafield_text | truncate: 200 }}
-
                     </p>
                   {%- endif -%}
 
@@ -181,44 +178,70 @@
                     </h2>
                   {% endcomment %}
 
-                  <!-- Рейтинг звездами -->
-                  {% comment %}
+                {%- when 'rating' -%}
+                  {% assign all_reviews = shop.metaobjects.custom_product_review.values %}
+                  {% assign review_count = 0 %}
+                  {% assign total_rating = 0 %}
+
+                  {% comment %} 1. Считаем сумму рейтингов и количество {% endcomment %}
+                  {% for review in all_reviews %}
+                    {% assign gid_parts = review.product | split: '/' %}
+                    {% assign review_product_id = gid_parts | last | plus: 0 %}
+                    {% assign current_product_id = product.id | plus: 0 %}
+
+                    {% if review_product_id == current_product_id %}
+                      {% assign review_count = review_count | plus: 1 %}
+                      {% assign total_rating = total_rating | plus: review.rating %}
+                    {% endif %}
+                  {% endfor %}
+
+                  {% comment %} 2. Если отзывы есть, выводим блок {% endcomment %}
+                  {% if review_count > 0 %}
+                    {% comment %} times: 1.0 нужен, чтобы деление было дробным (например, 4.8), а не целым (4) {% endcomment %}
+                    {% assign average_rating = total_rating | times: 1.0 | divided_by: review_count %}
+                    {% assign rounded_rating = average_rating | round %}
+
                     <div
                       class="
                         tw:mb-[2rem] tw:inline-flex tw:self-start tw:border tw:border-grayscale-50 tw:px-[1.2rem] tw:h-[3.6rem]
                         tw:rounded-[0.8rem] tw:items-center tw:gap-[0.5rem]
                       "
                     >
-                      <!-- Звезды (Динамический вывод из настроек) -->
+                      <!-- Звезды (Динамический вывод) -->
                       <div class="tw:flex tw:gap-1">
                         {%- for i in (1..5) -%}
-                          <svg class="tw:w-[1.8rem] tw:h-[1.8rem] tw:text-goluboydark">
+                          <svg
+                            class="tw:w-[1.8rem] tw:h-[1.8rem] {% if i <= rounded_rating %}tw:text-goluboydark{% else %}tw:text-grayscale-200{% endif %}"
+                          >
                             <use href="#star"></use>
                           </svg>
                         {%- endfor -%}
                       </div>
 
+                      <!-- Цифра рейтинга (например, 4.8) -->
                       <span class="tw:text-[1.4rem] tw:ml-[0.8rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-grayscale-800">
-                        4.8
+                        {{ average_rating | round: 1 }}
                       </span>
 
+                      <!-- Точка-разделитель -->
                       <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="1" cy="1" r="1" fill="#80899C" />
                       </svg>
 
-                      <span class="tw:text-[1.4rem] tw:leading-[1.] tw:tracking-[-0.04em] tw:text-grayscale-800 tw:truncate">
-                        {{- section.settings.info_reviews_value -}}
-                        <span>15,255 reviews</span>
+                      <!-- Количество отзывов -->
+                      <span class="tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-grayscale-800 tw:truncate">
+                        {{ review_count }} reviews
                       </span>
 
+                      <!-- Кнопка перехода -->
                       <button type="button" class="tw:cursor-pointer">
                         <svg class="tw:w-[1.8rem] tw:h-[1.8rem] tw:text-[#C6CAD2] tw:hover:text-goluboydark">
                           <use href="#chevron-right"></use>
                         </svg>
                       </button>
                     </div>
-                  {% endcomment %}
-
+                  {% endif %}
+                
                 {%- when 'price' -%}
                   <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                     {%- render 'weblegko-product-price',
@@ -655,7 +678,7 @@
                     block: block,
                     product_form_id: product_form_id
                   %}
-                {%- when 'rating' -%}
+                {% comment %} {%- when 'rating' -%}
                   {%- if product.metafields.reviews.rating.value != blank -%}
                     <div class="rating-wrapper">
                       {% liquid
@@ -692,7 +715,8 @@
                         </span>
                       </p>
                     </div>
-                  {%- endif -%}
+                  {%- endif -%} {% endcomment %}
+
                 {%- when 'complementary' -%}
                   <product-recommendations
                     class="complementary-products quick-add-hidden{% if block.settings.make_collapsible_row %} is-accordion{% endif %}{% if block.settings.enable_quick_add %} complementary-products-contains-quick-add{% endif %}"

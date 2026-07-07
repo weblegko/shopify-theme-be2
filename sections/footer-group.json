@@ -33,11 +33,10 @@
       "type": "weblegko-footer",
       "name": "WEBLEGKO Footer",
       "settings": {
-        "newsletter_heading": "Sign up to our Newsletter, for the latest Promotions, New Products and Sales!",
-        "menu": "main-menu",
-        "newsletter_enable": true,
+        "newsletter_heading": "Sign up to our Newsletter,<br> for the latest Promotions,<br> New Products and Sales!",
+        "menu": "footer",
         "show_policy": true,
-        "footer_email": "support@drberg.uk",
+        "footer_email": "hello@yourstore.com",
         "info_text_1": "<p>Life Is Real, So Take Real Supplements™</p>",
         "info_text_2": "<p>Promotions and discounts cannot be stacked. Promotional codes are not valid on Subscriptions.</p>",
         "info_text_3": "<p>These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>"
