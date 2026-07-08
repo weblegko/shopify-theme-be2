@@ -119,7 +119,7 @@
       "type": "weblegko-premium-products",
       "name": "WEBLEGKO PREMIUM",
       "settings": {
-        "heading": "Premium Products",
+        "heading": "Popular Products",
         "description": "Premium supplements for your health",
         "collection": "premium-products",
         "space_between_desktop": 2,
