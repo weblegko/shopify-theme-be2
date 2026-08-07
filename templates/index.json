@@ -528,15 +528,42 @@
         "padding_bottom_mobile": 3
       }
     },
+    "weblegko_faq_meta_home_3iQdcG": {
+      "type": "weblegko-faq-meta-home",
+      "name": "WEBLEGKO FAQ META HOME",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "hide_categories": false,
+        "homepage_mode": false,
+        "questions_limit": 4,
+        "button_text": "More FAQ",
+        "faq_page": "faq",
+        "rating_score": "4.8",
+        "review_count": "2,847",
+        "gap_categories_desktop": 2.5,
+        "gap_items_desktop": 2.5,
+        "padding_top_desktop": 8,
+        "padding_bottom_desktop": 8,
+        "gap_categories_tablet": 2,
+        "gap_items_tablet": 2,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "gap_categories_mobile": 1.5,
+        "gap_items_mobile": 1.5,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
+      }
+    },
     "weblegko_faq_meta_GzDXE4": {
       "type": "weblegko-faq-meta",
+      "disabled": true,
       "name": "WEBLEGKO FAQ META",
       "settings": {
         "heading": "Frequently Asked Questions",
         "disable_jsonld": true,
         "hide_categories": true,
         "homepage_mode": true,
-        "questions_limit": 0,
+        "questions_limit": 6,
         "button_text": "More FAQ",
         "faq_page": "faq",
         "rating_score": "4.8",
@@ -587,6 +614,7 @@
     "weblegko_resources_BKD78z",
     "weblegko_newsletter_banner_wXPK7c",
     "weblegko_reviews_LqVbq8",
+    "weblegko_faq_meta_home_3iQdcG",
     "weblegko_faq_meta_GzDXE4",
     "weblegko_about_doctor_dGg4rC"
   ]
