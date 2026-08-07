@@ -555,85 +555,6 @@
         "padding_bottom_mobile": 3
       }
     },
-    "weblegko_faq_hNt83A": {
-      "type": "weblegko-faq",
-      "blocks": {
-        "question_bcChJc": {
-          "type": "question",
-          "settings": {
-            "question": "How do I place an order?",
-            "answer": "<p>Simply browse our product pages and click “Add to Cart” for the items you wish to purchase. Once ready, proceed to the checkout where you can enter your shipping and payment details securely.</p>"
-          }
-        },
-        "question_yMpaJN": {
-          "type": "question",
-          "settings": {
-            "question": "When will my order be dispatched?",
-            "answer": "<p>Orders are typically dispatched within 1–2 business days (Monday–Friday), excluding UK public holidays. You will receive a dispatch confirmation email once your order is on its way.</p>"
-          }
-        },
-        "question_JUHcmJ": {
-          "type": "question",
-          "settings": {
-            "question": "Why don’t you sell all Dr. Berg products on your site?",
-            "answer": "<p>As an authorised UK reseller, we carefully select products that comply with UK and EU regulations, including restrictions on ingredients, dosages, and labelling requirements. Some products available in the US are not currently approved for sale in the UK due to:</p><p>• Customs and import restrictions, especially on animal-derived or controlled ingredients</p><p>• Compliance with UK food supplement laws and dosage limits</p><p>• Packaging and labelling standards mandated by UK authorities</p><p>We understand it’s frustrating not to find every product from the US site. Please be assured that both Britannia Tiger Health Ltd (Dr Berg UK) and Dr Berg Nutritionals are working diligently to bring more products into the UK market. Dr Berg is also expanding its UK-based production to better serve customers here with formulations tailored for local regulations.</p><p>Thank you for your understanding and patience as we continue to grow our UK product range.</p>"
-          }
-        },
-        "question_dBzAgE": {
-          "type": "question",
-          "settings": {
-            "question": "Do you offer next-day or tracked delivery?",
-            "answer": "<p>Yes, we offer tracked delivery options at checkout. We currently do not offer guaranteed next-day delivery, but most UK orders arrive within 2–4 business days of dispatch.</p><p>However, please note that Royal Mail Tracked 24® and Tracked 48® services do not guarantee delivery within 24 or 48 hours, respectively. These are aimed delivery times, and actual delivery may take longer due to factors such as:</p><p>• Operational delays within the postal network</p><p>• Weather conditions or traffic disruptions</p><p>• Delivery to remote or rural areas, which may experience longer transit times</p><p>For more details, please refer to Royal Mail’s Terms and Conditions for Tracked 24 and Tracked 48.</p>"
-          }
-        },
-        "question_J4yVjw": {
-          "type": "question",
-          "settings": {
-            "question": "What should I do if my parcel hasn’t arrived?",
-            "answer": "<p>If your parcel hasn’t arrived within 5 days of dispatch, please first check the tracking information provided in your dispatch confirmation email (if applicable).</p><p>We recommend you also check with your neighbours and contact your local delivery office, as parcels are sometimes left with them for safekeeping.</p><p>Please note that customers are responsible for tracking their orders and ensuring that delivery details are correct at the time of purchase.</p><p>If tracking shows your parcel as delivered but you have not received it, please contact us immediately at support@drberg.uk. We will initiate an investigation with Royal Mail to locate your parcel and advise you on the next steps.</p><p>Delivery times can sometimes be delayed due to factors beyond our control, including postal service disruptions or delivery to a safe place.</p>"
-          }
-        },
-        "question_EhX4zE": {
-          "type": "question",
-          "settings": {
-            "question": "Do you ship internationally?",
-            "answer": "<p>We currently ship to UK addresses only. For European orders, please visit the official Dr. Berg European reseller website at drberg.eu.</p>"
-          }
-        },
-        "question_TJpCEa": {
-          "type": "question",
-          "settings": {
-            "question": "Do you offer free shipping?",
-            "answer": "<p>Yes! We offer free standard shipping on all UK orders over £150. For orders below this amount, standard shipping fees apply and will be calculated at checkout.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "question_bcChJc",
-        "question_yMpaJN",
-        "question_JUHcmJ",
-        "question_dBzAgE",
-        "question_J4yVjw",
-        "question_EhX4zE",
-        "question_TJpCEa"
-      ],
-      "disabled": true,
-      "name": "WEBLEGKO FAQ",
-      "settings": {
-        "heading": "Frequently Asked Questions",
-        "rating_score": "4.8",
-        "review_count": "2,847",
-        "gap_desktop": 1,
-        "padding_top_desktop": 6,
-        "padding_bottom_desktop": 6.5,
-        "gap_tablet": 2,
-        "padding_top_tablet": 5,
-        "padding_bottom_tablet": 5,
-        "gap_mobile": 1.5,
-        "padding_top_mobile": 3,
-        "padding_bottom_mobile": 3
-      }
-    },
     "weblegko_about_doctor_dGg4rC": {
       "type": "weblegko-about-doctor",
       "name": "WEBLEGKO ABOUT DOCTOR",
@@ -667,7 +588,6 @@
     "weblegko_newsletter_banner_wXPK7c",
     "weblegko_reviews_LqVbq8",
     "weblegko_faq_meta_GzDXE4",
-    "weblegko_faq_hNt83A",
     "weblegko_about_doctor_dGg4rC"
   ]
 }
