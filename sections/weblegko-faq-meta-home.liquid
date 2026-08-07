@@ -75,13 +75,7 @@
         <h2 class="tw:font-poppins tw:text-[2.4rem] tw:sm:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.2] tw:text-center">
           {{ section.settings.heading }}
         </h2>
-        {%- if section.settings.rating_score != blank and section.settings.review_count != blank -%}
-          <div class="tw:mx-auto tw:inline-flex tw:items-center tw:justify-center tw:gap-2 tw:py-[0.8rem] tw:px-[2rem] tw:bg-[#e5dccb] tw:rounded-full">
-            <span class="tw:pt-1 tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-center">
-              Rated {{ section.settings.rating_score }}/5 based on {{ section.settings.review_count }} reviews
-            </span>
-          </div>
-        {%- endif -%}
+        
       </div>
     {%- endif -%}
 
