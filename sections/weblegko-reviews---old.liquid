@@ -1,0 +1,576 @@
+<!-- sections/custom-reviews.liquid -->
+
+<style>
+  /* ============================================ */
+  /* ПАДДИНГИ СЕКЦИИ (rem) - inline стили */
+  /* ============================================ */
+  .weblegko-reviews-padding {
+    padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
+    padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
+  }
+
+  @media screen and (min-width: 640px) {
+    .weblegko-reviews-padding {
+      padding-top: {{ section.settings.padding_top_tablet | default: 5 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 5 }}rem !important;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .weblegko-reviews-padding {
+      padding-top: {{ section.settings.padding_top_desktop | default: 8 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_desktop | default: 8 }}rem !important;
+    }
+  }
+
+  /* ============================================ */
+  /* GRID С БРЕЙКПОИНТАМИ (колонки, gap, initial items) */
+  /* ============================================ */
+
+  #reviews-grid {
+    display: grid !important;
+    grid-template-columns: repeat({{ section.settings.columns_mobile | default: 1 }}, 1fr) !important;
+    gap: {{ section.settings.row_gap_mobile | default: 1.5 }}rem {{ section.settings.col_gap_mobile | default: 1.5 }}rem !important;
+    --grid-cols: {{ section.settings.columns_mobile | default: 1 }};
+    --initial-items: {{ section.settings.initial_items_mobile | default: 1 }};
+  }
+
+  @media screen and (min-width: 640px) and (max-width: 1023px) {
+    #reviews-grid {
+      grid-template-columns: repeat({{ section.settings.columns_tablet | default: 2 }}, 1fr) !important;
+      gap: {{ section.settings.row_gap_tablet | default: 2 }}rem {{ section.settings.col_gap_tablet | default: 2 }}rem !important;
+      --grid-cols: {{ section.settings.columns_tablet | default: 2 }};
+      --initial-items: {{ section.settings.initial_items_tablet | default: 2 }};
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    #reviews-grid {
+      grid-template-columns: repeat({{ section.settings.columns_desktop | default: 3 }}, 1fr) !important;
+      gap: {{ section.settings.row_gap_desktop | default: 2.5 }}rem {{ section.settings.col_gap_desktop | default: 2.5 }}rem !important;
+      --grid-cols: {{ section.settings.columns_desktop | default: 3 }};
+      --initial-items: {{ section.settings.initial_items_desktop | default: 3 }};
+    }
+  }
+
+  /* ============================================ */
+  /* Анимация "вырастания" карточки снизу */
+  /* ============================================ */
+  @keyframes fadeGrowIn {
+    from {
+      opacity: 0;
+      transform: translateY(2rem) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .review-item-animate {
+    animation: fadeGrowIn 0.5s ease-out forwards;
+  }
+</style>
+
+<!-- Фолбэк для отключенного JS: показываем все карточки и прячем кнопку -->
+<noscript>
+  <style>
+    .review-item.tw\:hidden {
+      display: block !important;
+    }
+    #reviews-show-more-btn {
+      display: none !important;
+    }
+  </style>
+</noscript>
+
+<section class="tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem]">
+  <div class="weblegko-reviews-padding tw:max-w-[112rem] tw:mx-auto">
+    <!-- Заголовок секции -->
+    {%- if section.settings.heading != blank -%}
+      <div class="tw:flex tw:flex-col tw:items-center tw:gap-[1rem] tw:mb-[2.5rem] tw:md:mb-[3rem]">
+        <h2 class="tw:text-[2.4rem] tw:sm:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.2] tw:text-center">
+          {{ section.settings.heading }}
+        </h2>
+
+        {%- if section.settings.rating_score != blank and section.settings.review_count != blank -%}
+          <div class="tw:mx-auto tw:inline-flex tw:items-center tw:justify-center tw:gap-2 tw:py-[0.8rem] tw:px-[2rem] tw:bg-[#e5dccb] tw:rounded-full">
+            <span class="tw:pt-1 tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-center">
+              Rated {{ section.settings.rating_score }}/5 based on {{ section.settings.review_count }} reviews
+            </span>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Сетка карточек -->
+    <div
+      id="reviews-grid"
+      class="{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      {% if settings.animations_reveal_on_scroll %}
+        data-cascade
+        style="--animation-order: {{ forloop.index }};"
+      {% endif %}
+    >
+      {%- for block in section.blocks -%}
+        <div class="review-item tw:hidden" {{ block.shopify_attributes }}>
+          <!-- card -->
+          <a
+            href="{{ block.settings.review_link | default: '#' }}"
+            class="tw:hover:shadow-lg tw:hover:scale-[101%] tw:transition-all tw:duration-300 tw:bg-white tw:rounded-[1.2rem] tw:p-[1.5rem] tw:h-full tw:flex tw:flex-col"
+          >
+            <!-- Звезды (Динамический вывод из настроек) -->
+            <div class="tw:flex tw:gap-1 tw:mb-4">
+              {%- for i in (1..block.settings.star_rating) -%}
+                <svg class="tw:w-[1.8rem] tw:h-[1.8rem] tw:text-goluboydark">
+                  <use href="#star"></use>
+                </svg>
+              {%- endfor -%}
+            </div>
+
+            <!-- Автор и время -->
+            <div class="tw:block tw:mb-4">
+              <span class="tw:text-[1.6rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.5]">
+                {{ block.settings.review_author_name }},
+              </span>
+              <span>&nbsp;</span>
+              <span class="tw:text-[1.6rem] tw:text-[#bcb4a4] tw:tracking-[-0.04em] tw:leading-[1.5]">
+                {{ block.settings.review_post_time }}
+              </span>
+            </div>
+
+            <!-- Заголовок отзыва -->
+            <div class="tw:text-[2rem] tw:leading-[1.4] tw:tracking-[-0.04em] tw:font-medium tw:flex-1 tw:mb-3">
+              "{{ block.settings.review_title }}"
+            </div>
+
+            <!-- Короткий текст отзыва -->
+            <div class="tw:text-[1.6rem] tw:text-[#8b867a] tw:leading-[1.5] tw:tracking-[-0.04em] tw:font-medium tw:flex-1 tw:mb-6">
+              "{{ block.settings.review_short_text }}"
+            </div>
+
+            <!-- Кнопка ссылка на отзыв -->
+            <div class="tw:mt-auto tw:flex tw:items-center tw:justify-center tw:rounded-[0.8rem] tw:transition-colors tw:duration-300 tw:ease-in-out tw:hover:bg-golden tw:pt-1 tw:px-[1.6rem] tw:h-[3.6rem] tw:bg-grayscale-50 tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:font-medium">
+              <span>Read more</span>
+            </div>
+          </a>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <!-- Кнопка Show More -->
+    {%- if section.blocks.size > 0 -%}
+      <div class="tw:flex tw:justify-center">
+        <button
+          type="button"
+          id="reviews-show-more-btn"
+          class="tw:mt-[2.5rem] tw:md:mt-[4rem] tw:inline-flex tw:items-center tw:justify-center tw:rounded-full tw:transition-colors tw:duration-300 tw:ease-in-out tw:hover:bg-golden tw:px-[1.6rem] tw:pt-1 tw:h-[3.6rem] tw:bg-white tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:font-medium tw:shadow-md disabled:tw:opacity-70 disabled:tw:cursor-not-allowed"
+        >
+          <!-- Спиннер загрузки -->
+          <svg
+            id="reviews-loader"
+            class="tw:hidden tw:animate-spin tw:mr-2 tw:h-5 tw:w-5 tw:text-goluboydark"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle class="tw:opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="tw:opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+
+          <span id="reviews-btn-text">Show More Reviews</span>
+        </button>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  function initReviews() {
+    const grid = document.getElementById('reviews-grid');
+    const btn = document.getElementById('reviews-show-more-btn');
+    const loader = document.getElementById('reviews-loader');
+    const btnText = document.getElementById('reviews-btn-text');
+
+    if (!grid || !btn) return;
+
+    const items = grid.querySelectorAll('.review-item');
+
+    if (items.length === 0) {
+      btn.style.display = 'none';
+      return;
+    }
+
+    // Сброс при Hot Reload
+    btn.style.display = '';
+    btn.disabled = false;
+    if (loader) loader.classList.add('tw:hidden');
+    if (btnText) btnText.textContent = 'Show More Reviews';
+
+    items.forEach((item) => {
+      item.classList.add('tw:hidden');
+      item.classList.remove('review-item-animate');
+    });
+
+    grid.dataset.visible = 0;
+
+    function getCSSVar(varName) {
+      return parseInt(getComputedStyle(grid).getPropertyValue(varName)) || 1;
+    }
+
+    function showItems(count) {
+      let currentVisible = parseInt(grid.dataset.visible) || 0;
+      const totalToShow = Math.min(currentVisible + count, items.length);
+
+      for (let i = currentVisible; i < totalToShow; i++) {
+        items[i].classList.remove('tw:hidden');
+        items[i].classList.add('review-item-animate');
+      }
+
+      grid.dataset.visible = totalToShow;
+
+      if (totalToShow >= items.length) {
+        btn.style.display = 'none';
+      }
+    }
+
+    const initialItems = getCSSVar('--initial-items');
+    showItems(initialItems);
+  }
+
+  // Глобальный слушатель (Event Delegation)
+  if (!window.reviewsListenerAdded) {
+    document.addEventListener('click', function (e) {
+      const btn = e.target.closest('#reviews-show-more-btn');
+      if (btn && !btn.disabled) {
+        const grid = document.getElementById('reviews-grid');
+        const loader = document.getElementById('reviews-loader');
+        const btnText = document.getElementById('reviews-btn-text');
+
+        if (!grid) return;
+
+        btn.disabled = true;
+        if (loader) loader.classList.remove('tw:hidden');
+        if (btnText) btnText.textContent = 'Loading...';
+
+        setTimeout(function () {
+          if (loader) loader.classList.add('tw:hidden');
+          if (btnText) btnText.textContent = 'Show More Reviews';
+          btn.disabled = false;
+
+          const gridCols = parseInt(getComputedStyle(grid).getPropertyValue('--grid-cols')) || 1;
+
+          let currentVisible = parseInt(grid.dataset.visible) || 0;
+          const items = grid.querySelectorAll('.review-item');
+          const totalToShow = Math.min(currentVisible + gridCols, items.length);
+
+          for (let i = currentVisible; i < totalToShow; i++) {
+            items[i].classList.remove('tw:hidden');
+            items[i].classList.add('review-item-animate');
+          }
+
+          grid.dataset.visible = totalToShow;
+
+          if (totalToShow >= items.length) {
+            btn.style.display = 'none';
+          }
+        }, 1000);
+      }
+    });
+    window.reviewsListenerAdded = true;
+  }
+
+  // ЗАПУСК
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReviews);
+  } else {
+    initReviews();
+  }
+
+  document.addEventListener('shopify:section:load', (e) => {
+    if (e.target.querySelector('#reviews-grid')) {
+      initReviews();
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "WEBLEGKO REVIEWS",
+  "tag": "section",
+  "class": "section-reviews",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "What Our Customers Say",
+      "label": "Heading"
+    },
+    {
+      "type": "header",
+      "content": "Reviews Statistics"
+    },
+    {
+      "type": "text",
+      "id": "rating_score",
+      "default": "4.8",
+      "label": "Average rating score (e.g., 4.8)"
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "default": "2,847",
+      "label": "Total number of reviews (e.g., 2,847)"
+    },
+    {
+      "type": "header",
+      "content": "🖥️ Desktop (≥ 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3,
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "initial_items_desktop",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 3,
+      "label": "Initial items to show"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_desktop",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 2.5,
+      "unit": "rem",
+      "label": "Column gap"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_desktop",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 2.5,
+      "unit": "rem",
+      "label": "Row gap (vertical)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "💻 Tablet (640px - 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2,
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "initial_items_tablet",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 2,
+      "label": "Initial items to show"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_tablet",
+      "min": 0,
+      "max": 4,
+      "step": 0.5,
+      "default": 2,
+      "unit": "rem",
+      "label": "Column gap"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_tablet",
+      "min": 0,
+      "max": 4,
+      "step": 0.5,
+      "default": 2,
+      "unit": "rem",
+      "label": "Row gap (vertical)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile (< 640px)"
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 1,
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "initial_items_mobile",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 1,
+      "label": "Initial items to show"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_mobile",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "default": 1.5,
+      "unit": "rem",
+      "label": "Column gap"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_mobile",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "default": 1.5,
+      "unit": "rem",
+      "label": "Row gap (vertical)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding bottom"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "range",
+          "id": "star_rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5,
+          "label": "Star rating"
+        },
+        {
+          "type": "text",
+          "id": "review_author_name",
+          "default": "Catherine Draganov",
+          "label": "Author name"
+        },
+        {
+          "type": "text",
+          "id": "review_post_time",
+          "default": "15 hours ago",
+          "label": "Review time"
+        },
+        {
+          "type": "text",
+          "id": "review_title",
+          "default": "Love what I have from you of Dr. Berg",
+          "label": "Review title"
+        },
+        {
+          "type": "textarea",
+          "id": "review_short_text",
+          "default": "I can only tell you that in the beginning I was interested in probiotics because I had problems with my microbiome. Then I discovered other products and I appreciate the fact that they are natural. But I follow the advice of Eric Berg and eat a big salad every day. Now…",
+          "label": "Review short text"
+        },
+        {
+          "type": "url",
+          "id": "review_link",
+          "label": "Review link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "WEBLEGKO REVIEWS",
+      "category": "Home page",
+      "blocks": [
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" }
+      ]
+    }
+  ]
+}
+{% endschema %}
