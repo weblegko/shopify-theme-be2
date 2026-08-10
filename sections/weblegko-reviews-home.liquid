@@ -107,6 +107,10 @@
       {%- for review in all_reviews -%}
         {{ review.rating.value }}
         {{ review.name }}
+        {{ review.time }}
+        {{ review.title }}
+        {{ review.text }}
+
         {% comment %} <div class="review-item tw:hidden" {{ block.shopify_attributes }}>
           <!-- card -->
           <a
