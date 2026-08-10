@@ -105,7 +105,6 @@
       {%- assign all_reviews = shop.metaobjects.reviews.values -%}
 
       {%- for review in all_reviews -%}
-        TEST
         {{ review.rating.value }}
         {{ review.name }}
         {% comment %} <div class="review-item tw:hidden" {{ block.shopify_attributes }}>
