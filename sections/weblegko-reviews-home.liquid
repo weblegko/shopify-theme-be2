@@ -108,12 +108,12 @@
         <div class="review-item tw:hidden" {{ block.shopify_attributes }}>
           <!-- card -->
           <a
-            href="{{ block.settings.review_link | default: '#' }}"
+            href="#"
             class="tw:hover:shadow-lg tw:hover:scale-[101%] tw:transition-all tw:duration-300 tw:bg-white tw:rounded-[1.2rem] tw:p-[1.5rem] tw:h-full tw:flex tw:flex-col"
           >
             <!-- Звезды (Динамический вывод из настроек) -->
             <div class="tw:flex tw:gap-1 tw:mb-4">
-              {%- for i in (1..block.settings.star_rating) -%}
+              {%- for i in (1..review.rating) -%}
                 <svg class="tw:w-[1.8rem] tw:h-[1.8rem] tw:text-goluboydark">
                   <use href="#star"></use>
                 </svg>
