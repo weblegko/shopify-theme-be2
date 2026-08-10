@@ -1,9 +1,9 @@
 <!-- sections/custom-reviews.liquid -->
 
 <style>
-  /* ============================================ */
-  /* ПАДДИНГИ СЕКЦИИ (rem) - inline стили */
-  /* ============================================ */
+
+  /* ПАДДИНГИ СЕКЦИИ (rem) */
+
   .drberg-reviews-padding {
     padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
     padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
@@ -23,10 +23,8 @@
     }
   }
 
-  /* ============================================ */
+  
   /* GRID С БРЕЙКПОИНТАМИ (колонки, gap, initial items) */
-  /* ============================================ */
-
   #reviews-grid {
     display: grid !important;
     grid-template-columns: repeat({{ section.settings.columns_mobile | default: 1 }}, 1fr) !important;
