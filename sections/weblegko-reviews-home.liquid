@@ -105,7 +105,8 @@
       {%- assign all_reviews = shop.metaobjects.reviews.values -%}
 
       {%- for review in all_reviews -%}
-        <div class="review-item tw:hidden" {{ block.shopify_attributes }}>
+        TEST
+        {% comment %} <div class="review-item tw:hidden" {{ block.shopify_attributes }}>
           <!-- card -->
           <a
             href="#"
@@ -146,7 +147,7 @@
               <span>Read more</span>
             </div>
           </a>
-        </div>
+        </div> {% endcomment %}
       {%- endfor -%}
     </div>
 
