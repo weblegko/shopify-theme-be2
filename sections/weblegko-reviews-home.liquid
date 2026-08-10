@@ -114,7 +114,9 @@
           >
             <!-- Звезды (Динамический вывод из настроек) -->
             <div class="tw:flex tw:gap-1 tw:mb-4">
-              {%- for i in (1..review.rating.value) -%}
+              {%- assign rating = review.rating.value | floor -%}
+
+              {%- for i in (1..rating) -%}
                 <svg class="tw:w-[1.8rem] tw:h-[1.8rem] tw:text-goluboydark">
                   <use href="#star"></use>
                 </svg>
