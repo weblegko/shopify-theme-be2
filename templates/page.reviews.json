@@ -11,7 +11,29 @@
   "sections": {
     "weblegko-faq": {
       "type": "weblegko-faq-meta",
-      "settings": {}
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "disable_jsonld": false,
+        "hide_categories": false,
+        "homepage_mode": false,
+        "questions_limit": 0,
+        "button_text": "More FAQ",
+        "faq_page": "",
+        "rating_score": "4.8",
+        "review_count": "2,847",
+        "gap_categories_desktop": 2.5,
+        "gap_items_desktop": 2.5,
+        "padding_top_desktop": 8,
+        "padding_bottom_desktop": 8,
+        "gap_categories_tablet": 2,
+        "gap_items_tablet": 2,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "gap_categories_mobile": 1.5,
+        "gap_items_mobile": 1.5,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
+      }
     }
   },
   "order": [
