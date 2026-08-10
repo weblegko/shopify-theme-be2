@@ -121,7 +121,7 @@
             <!-- Звезды (Динамический вывод из настроек) -->
             {{ review.rating.rev_rating }}
             <div class="tw:flex tw:gap-1 tw:mb-4">
-              {%- for i in (1..review.rating.rev_rating) -%}
+              {%- for i in (1..review.rev_rating) -%}
                 <svg class="tw:w-[1.8rem] tw:h-[1.8rem] tw:text-goluboydark">
                   <use href="#star"></use>
                 </svg>
