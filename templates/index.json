@@ -389,33 +389,6 @@
         "text": "Subscribe to our newsletter and receive exclusive offers and news! Fill out the form below or message us to stay updated on all the great deals and special offers."
       }
     },
-    "weblegko_reviews_home_eGYRAy": {
-      "type": "weblegko-reviews-home",
-      "name": "DRBERG REVIEWS",
-      "settings": {
-        "heading": "What Our Customers Say",
-        "rating_score": "4.8",
-        "review_count": "2,847",
-        "columns_desktop": 3,
-        "initial_items_desktop": 3,
-        "col_gap_desktop": 2.5,
-        "row_gap_desktop": 2.5,
-        "padding_top_desktop": 8,
-        "padding_bottom_desktop": 8,
-        "columns_tablet": 2,
-        "initial_items_tablet": 2,
-        "col_gap_tablet": 2,
-        "row_gap_tablet": 2,
-        "padding_top_tablet": 5,
-        "padding_bottom_tablet": 5,
-        "columns_mobile": 1,
-        "initial_items_mobile": 1,
-        "col_gap_mobile": 1.5,
-        "row_gap_mobile": 1.5,
-        "padding_top_mobile": 3,
-        "padding_bottom_mobile": 3
-      }
-    },
     "weblegko_faq_meta_home_n7zqAP": {
       "type": "weblegko-faq-meta-home",
       "name": "DRBERG FAQ META HOME",
@@ -459,6 +432,33 @@
         "padding_top_mobile": 3,
         "padding_bottom_mobile": 3
       }
+    },
+    "weblegko_reviews_home_k36CCc": {
+      "type": "weblegko-reviews-home",
+      "name": "DRBERG REVIEWS HOME",
+      "settings": {
+        "heading": "What Our Customers Say",
+        "rating_score": "4.8",
+        "review_count": "2,847",
+        "columns_desktop": 3,
+        "initial_items_desktop": 3,
+        "col_gap_desktop": 2.5,
+        "row_gap_desktop": 2.5,
+        "padding_top_desktop": 8,
+        "padding_bottom_desktop": 8,
+        "columns_tablet": 2,
+        "initial_items_tablet": 2,
+        "col_gap_tablet": 2,
+        "row_gap_tablet": 2,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "columns_mobile": 1,
+        "initial_items_mobile": 1,
+        "col_gap_mobile": 1.5,
+        "row_gap_mobile": 1.5,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
+      }
     }
   },
   "order": [
@@ -473,7 +473,7 @@
     "weblegko_secondary_slider_wnVzDR",
     "weblegko_resources_BKD78z",
     "weblegko_newsletter_banner_wXPK7c",
-    "weblegko_reviews_home_eGYRAy",
+    "weblegko_reviews_home_k36CCc",
     "weblegko_faq_meta_home_n7zqAP",
     "weblegko_about_doctor_dGg4rC"
   ]
