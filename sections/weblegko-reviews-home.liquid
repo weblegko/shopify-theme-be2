@@ -105,13 +105,8 @@
       {%- assign all_reviews = shop.metaobjects.reviews.values | sort: 'position' -%}
 
       {%- for review in all_reviews -%}
-        {{ review.rating.value }}
-        {{ review.name }}
-        {{ review.time }}
-        {{ review.title }}
-        {{ review.text }}
 
-        {% comment %} <div class="review-item tw:hidden" {{ block.shopify_attributes }}>
+        <div class="review-item tw:hidden" {{ block.shopify_attributes }}>
           <!-- card -->
           <a
             href="#"
@@ -119,7 +114,7 @@
           >
             <!-- Звезды (Динамический вывод из настроек) -->
             <div class="tw:flex tw:gap-1 tw:mb-4">
-              {%- for i in (1..review.rating) -%}
+              {%- for i in (1..review.rating.value) -%}
                 <svg class="tw:w-[1.8rem] tw:h-[1.8rem] tw:text-goluboydark">
                   <use href="#star"></use>
                 </svg>
@@ -129,30 +124,32 @@
             <!-- Автор и время -->
             <div class="tw:block tw:mb-4">
               <span class="tw:text-[1.6rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.5]">
-                {{ block.settings.review_author_name }},
+                {{ review.name }},
               </span>
               <span>&nbsp;</span>
               <span class="tw:text-[1.6rem] tw:text-[#bcb4a4] tw:tracking-[-0.04em] tw:leading-[1.5]">
-                {{ block.settings.review_post_time }}
+                {{ review.time }}
               </span>
             </div>
 
             <!-- Заголовок отзыва -->
             <div class="tw:text-[2rem] tw:leading-[1.4] tw:tracking-[-0.04em] tw:font-medium tw:flex-1 tw:mb-3">
-              "{{ block.settings.review_title }}"
+              "{{ review.title }}"
             </div>
 
             <!-- Короткий текст отзыва -->
             <div class="tw:text-[1.6rem] tw:text-[#8b867a] tw:leading-[1.5] tw:tracking-[-0.04em] tw:font-medium tw:flex-1 tw:mb-6">
-              "{{ block.settings.review_short_text }}"
+              "{{ review.text }}"
             </div>
 
             <!-- Кнопка ссылка на отзыв -->
             <div class="tw:mt-auto tw:flex tw:items-center tw:justify-center tw:rounded-[0.8rem] tw:transition-colors tw:duration-300 tw:ease-in-out tw:hover:bg-golden tw:pt-1 tw:px-[1.6rem] tw:h-[3.6rem] tw:bg-grayscale-50 tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:font-medium">
               <span>Read more</span>
             </div>
+
           </a>
-        </div> {% endcomment %}
+        </div>
+
       {%- endfor -%}
     </div>
 
