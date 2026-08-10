@@ -528,16 +528,16 @@
         "padding_bottom_mobile": 3
       }
     },
-    "weblegko_faq_meta_home_3iQdcG": {
+    "weblegko_faq_meta_home_n7zqAP": {
       "type": "weblegko-faq-meta-home",
-      "name": "WEBLEGKO FAQ META HOME",
+      "name": "DRBERG FAQ META HOME",
       "settings": {
         "heading": "Frequently Asked Questions",
         "hide_categories": false,
         "homepage_mode": false,
         "questions_limit": 6,
         "button_text": "More FAQ",
-        "faq_page": "faq",
+        "faq_page": "",
         "rating_score": "4.8",
         "review_count": "2,847",
         "gap_categories_desktop": 2.5,
@@ -586,7 +586,7 @@
     "weblegko_resources_BKD78z",
     "weblegko_newsletter_banner_wXPK7c",
     "weblegko_reviews_LqVbq8",
-    "weblegko_faq_meta_home_3iQdcG",
+    "weblegko_faq_meta_home_n7zqAP",
     "weblegko_about_doctor_dGg4rC"
   ]
 }
