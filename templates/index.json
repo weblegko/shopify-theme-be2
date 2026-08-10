@@ -537,7 +537,7 @@
         "homepage_mode": false,
         "questions_limit": 6,
         "button_text": "More FAQ",
-        "faq_page": "",
+        "faq_page": "faq",
         "rating_score": "4.8",
         "review_count": "2,847",
         "gap_categories_desktop": 2.5,
