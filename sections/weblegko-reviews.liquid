@@ -84,14 +84,8 @@
     >
 
       {%- assign all_reviews = shop.metaobjects.reviews.values | sort: 'position' -%}
-      {%- assign items_shown = 0 -%}
 
       {%- for review in all_reviews -%}
-
-        {%- comment -%} ПРОВЕРКА ЛИМИТА {%- endcomment -%}
-        {%- if items_shown >= 6 -%}
-            {%- break -%}
-        {%- endif -%}
 
         <div class="review-item">
           <!-- card -->
@@ -127,30 +121,14 @@
             <div class="tw:text-[1.6rem] tw:text-[#8b867a] tw:leading-[1.5] tw:tracking-[-0.04em] tw:font-medium tw:flex-1 tw:mb-6">
               "{{ review.text }}"
             </div>
-
-            {% comment %} <div class="tw:mt-auto tw:flex tw:items-center tw:justify-center tw:rounded-[0.8rem] tw:transition-colors tw:duration-300 tw:ease-in-out tw:hover:bg-golden tw:pt-1 tw:px-[1.6rem] tw:h-[3.6rem] tw:bg-grayscale-50 tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:font-medium">
-              <span>Read more</span>
-            </div> {% endcomment %}
+            
 
           </div>
 
         </div>
 
-        {%- assign items_shown = items_shown | plus: 1 -%}
-
       {%- endfor -%}
     </div>
-
-    <!-- Кнопка Show More -->
-    
-      <div class="tw:flex tw:justify-center">
-        <a href="#"
-          id="reviews-show-more-btn"
-          class="tw:mt-[2.5rem] tw:md:mt-[4rem] tw:inline-flex tw:items-center tw:justify-center tw:rounded-full tw:transition-colors tw:duration-300 tw:ease-in-out tw:hover:bg-golden tw:px-[1.6rem] tw:pt-1 tw:h-[3.6rem] tw:bg-white tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:font-medium tw:shadow-md disabled:tw:opacity-70 disabled:tw:cursor-not-allowed"
-        >
-          <span id="reviews-btn-text">Show More Reviews</span>
-        </a>
-      </div>
 
   </div>
 </section>
