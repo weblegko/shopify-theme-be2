@@ -116,7 +116,7 @@
             <div class="tw:flex tw:gap-1 tw:mb-4">
               {%- assign rating = review.rating.value | floor -%}
 
-              {%- for i in (1..rating) -%}
+              {%- for i in (1..5) -%}
                 <svg class="tw:w-[1.8rem] tw:h-[1.8rem] tw:text-goluboydark">
                   <use href="#star"></use>
                 </svg>
