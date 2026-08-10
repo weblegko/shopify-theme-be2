@@ -4,20 +4,20 @@
   /* ============================================ */
   /* ПАДДИНГИ СЕКЦИИ (rem) - inline стили */
   /* ============================================ */
-  .weblegko-reviews-padding {
+  .drberg-reviews-padding {
     padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
     padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
   }
 
   @media screen and (min-width: 640px) {
-    .weblegko-reviews-padding {
+    .drberg-reviews-padding {
       padding-top: {{ section.settings.padding_top_tablet | default: 5 }}rem !important;
       padding-bottom: {{ section.settings.padding_bottom_tablet | default: 5 }}rem !important;
     }
   }
 
   @media screen and (min-width: 1024px) {
-    .weblegko-reviews-padding {
+    .drberg-reviews-padding {
       padding-top: {{ section.settings.padding_top_desktop | default: 8 }}rem !important;
       padding-bottom: {{ section.settings.padding_bottom_desktop | default: 8 }}rem !important;
     }
@@ -72,20 +72,9 @@
   }
 </style>
 
-<!-- Фолбэк для отключенного JS: показываем все карточки и прячем кнопку -->
-<noscript>
-  <style>
-    .review-item.tw\:hidden {
-      display: block !important;
-    }
-    #reviews-show-more-btn {
-      display: none !important;
-    }
-  </style>
-</noscript>
 
 <section class="tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem]">
-  <div class="weblegko-reviews-padding tw:max-w-[112rem] tw:mx-auto">
+  <div class="drberg-reviews-padding tw:max-w-[112rem] tw:mx-auto">
     <!-- Заголовок секции -->
     {%- if section.settings.heading != blank -%}
       <div class="tw:flex tw:flex-col tw:items-center tw:gap-[1rem] tw:mb-[2.5rem] tw:md:mb-[3rem]">
@@ -185,114 +174,6 @@
   </div>
 </section>
 
-<script>
-  function initReviews() {
-    const grid = document.getElementById('reviews-grid');
-    const btn = document.getElementById('reviews-show-more-btn');
-    const loader = document.getElementById('reviews-loader');
-    const btnText = document.getElementById('reviews-btn-text');
-
-    if (!grid || !btn) return;
-
-    const items = grid.querySelectorAll('.review-item');
-
-    if (items.length === 0) {
-      btn.style.display = 'none';
-      return;
-    }
-
-    // Сброс при Hot Reload
-    btn.style.display = '';
-    btn.disabled = false;
-    if (loader) loader.classList.add('tw:hidden');
-    if (btnText) btnText.textContent = 'Show More Reviews';
-
-    items.forEach((item) => {
-      item.classList.add('tw:hidden');
-      item.classList.remove('review-item-animate');
-    });
-
-    grid.dataset.visible = 0;
-
-    function getCSSVar(varName) {
-      return parseInt(getComputedStyle(grid).getPropertyValue(varName)) || 1;
-    }
-
-    function showItems(count) {
-      let currentVisible = parseInt(grid.dataset.visible) || 0;
-      const totalToShow = Math.min(currentVisible + count, items.length);
-
-      for (let i = currentVisible; i < totalToShow; i++) {
-        items[i].classList.remove('tw:hidden');
-        items[i].classList.add('review-item-animate');
-      }
-
-      grid.dataset.visible = totalToShow;
-
-      if (totalToShow >= items.length) {
-        btn.style.display = 'none';
-      }
-    }
-
-    const initialItems = getCSSVar('--initial-items');
-    showItems(initialItems);
-  }
-
-  // Глобальный слушатель (Event Delegation)
-  if (!window.reviewsListenerAdded) {
-    document.addEventListener('click', function (e) {
-      const btn = e.target.closest('#reviews-show-more-btn');
-      if (btn && !btn.disabled) {
-        const grid = document.getElementById('reviews-grid');
-        const loader = document.getElementById('reviews-loader');
-        const btnText = document.getElementById('reviews-btn-text');
-
-        if (!grid) return;
-
-        btn.disabled = true;
-        if (loader) loader.classList.remove('tw:hidden');
-        if (btnText) btnText.textContent = 'Loading...';
-
-        setTimeout(function () {
-          if (loader) loader.classList.add('tw:hidden');
-          if (btnText) btnText.textContent = 'Show More Reviews';
-          btn.disabled = false;
-
-          const gridCols = parseInt(getComputedStyle(grid).getPropertyValue('--grid-cols')) || 1;
-
-          let currentVisible = parseInt(grid.dataset.visible) || 0;
-          const items = grid.querySelectorAll('.review-item');
-          const totalToShow = Math.min(currentVisible + gridCols, items.length);
-
-          for (let i = currentVisible; i < totalToShow; i++) {
-            items[i].classList.remove('tw:hidden');
-            items[i].classList.add('review-item-animate');
-          }
-
-          grid.dataset.visible = totalToShow;
-
-          if (totalToShow >= items.length) {
-            btn.style.display = 'none';
-          }
-        }, 1000);
-      }
-    });
-    window.reviewsListenerAdded = true;
-  }
-
-  // ЗАПУСК
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initReviews);
-  } else {
-    initReviews();
-  }
-
-  document.addEventListener('shopify:section:load', (e) => {
-    if (e.target.querySelector('#reviews-grid')) {
-      initReviews();
-    }
-  });
-</script>
 
 {% schema %}
 {
