@@ -104,7 +104,7 @@
 
       {%- assign all_reviews = shop.metaobjects.reviews.values -%}
 
-      {%- for block in section.blocks -%}
+      {%- for review in all_reviews -%}
         <div class="review-item tw:hidden" {{ block.shopify_attributes }}>
           <!-- card -->
           <a
