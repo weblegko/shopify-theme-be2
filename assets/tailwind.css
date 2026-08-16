@@ -1849,6 +1849,11 @@
       padding-left: 2rem;
     }
   }
+  .tw\:lg\:text-left {
+    @media (width >= 1024px) {
+      text-align: left;
+    }
+  }
   .tw\:lg\:text-\[1\.4rem\] {
     @media (width >= 1024px) {
       font-size: 1.4rem;
