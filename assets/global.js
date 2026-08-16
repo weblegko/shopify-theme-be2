@@ -1330,3 +1330,21 @@ class CartPerformance {
     );
   }
 }
+
+
+// Глобальные функции для блокировки скролла без поломки Sticky
+window.scrollPosition = 0;
+ 
+window.lockBodyScroll = function() {
+  window.scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${window.scrollPosition}px`;
+  document.body.style.width = '100%';
+};
+ 
+window.unlockBodyScroll = function() {
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.width = '';
+  window.scrollTo(0, window.scrollPosition);
+};

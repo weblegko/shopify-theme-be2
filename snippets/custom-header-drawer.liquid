@@ -1,0 +1,195 @@
+{% comment %}
+  Кастомный Header drawer (Чистый Vanilla JS + Tailwind)
+  Поддержка 3 уровней меню, аккаунта и соцсетей.
+{% endcomment %}
+ 
+<div id="CustomDrawer" class="tw:hidden tw:fixed tw:inset-0 tw:z-[100]">
+   
+  <!-- Затемнение (Overlay) -->
+  <div id="CustomDrawerOverlay" class="tw:absolute tw:inset-0 tw:bg-black/50 tw:opacity-0 tw:transition-opacity tw:duration-300 tw:ease-in-out">
+    <span class="tw:hidden tw:opacity-100">overlay</span>        
+  </div>
+ 
+  <!-- Сама панель меню -->
+  <aside id="CustomDrawerPanel" class="tw:absolute tw:top-0 tw:right-0 tw:h-full tw:w-[40rem] tw:max-w-[85%] tw:bg-white tw:shadow-2xl tw:translate-x-full tw:transition-transform tw:duration-300 tw:ease-in-out tw:flex tw:flex-col">
+     
+    <!-- Шапка драйвера -->
+    <div class="tw:flex tw:justify-between tw:items-center tw:p-6 tw:border-b tw:border-gray-100">
+      <span class="tw:text-[1.6rem] tw:font-poppins tw:font-semibold tw:uppercase tw:tracking-wider">Menu</span>
+      <button id="CustomDrawerClose" class="tw:p-2 tw:hover:bg-gray-100 tw:rounded-full tw:transition-colors">
+        <svg class="tw:w-8 tw:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+ 
+    <!-- Навигация (Скроллится только здесь) -->
+    <nav class="tw:flex-1 tw:overflow-y-auto tw:p-6">
+      <ul class="tw:flex tw:flex-col tw:gap-2">
+        {%- for link in section.settings.menu.links -%}
+          <li class="tw:border-b tw:border-gray-100 tw:pb-2">
+            {%- if link.links != blank -%}
+               {% comment %} --- 1-й уровень (Выпадашка) ---  {% endcomment %}
+              <details class="tw:group">
+                <summary class="tw:cursor-pointer tw:flex tw:justify-between tw:items-center tw:py-3 tw:text-[1.6rem] tw:font-medium tw:list-none [&::-webkit-details-marker]:hidden">
+                  {{ link.title | escape }}
+                  <svg class="tw:w-6 tw:h-6 tw:transition-transform tw:group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </summary>
+                <ul class="tw:pl-4 tw:mt-2 tw:flex tw:flex-col tw:gap-1">
+                  {%- for childlink in link.links -%}
+                    <li>
+                      {%- if childlink.links == blank -%}
+                         {% comment %} --- 2-й уровень (Простая ссылка) ---  {% endcomment %}
+                        <a href="{{ childlink.url }}" class="tw:block tw:py-2 tw:text-[1.4rem] tw:text-gray-600 tw:hover:text-black tw:transition-colors">
+                          {{ childlink.title | escape }}
+                        </a>
+                      {%- else -%}
+                         {% comment %} --- 2-й уровень (Выпадашка) ---  {% endcomment %}
+                        <details class="tw:group/sub">
+                          <summary class="tw:cursor-pointer tw:flex tw:justify-between tw:items-center tw:py-2 tw:text-[1.4rem] tw:text-gray-600 tw:hover:text-black tw:transition-colors tw:list-none [&::-webkit-details-marker]:hidden">
+                            {{ childlink.title | escape }}
+                            <svg class="tw:w-5 tw:h-5 tw:transition-transform tw:group-open/sub:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                          </summary>
+                          <ul class="tw:pl-4 tw:mt-1 tw:flex tw:flex-col tw:gap-1">
+                            {%- for grandchildlink in childlink.links -%}
+                               {% comment %} --- 3-й уровень (Простая ссылка) ---  {% endcomment %}
+                              <li>
+                                <a href="{{ grandchildlink.url }}" class="tw:block tw:py-1.5 tw:text-[1.4rem] tw:text-gray-500 tw:hover:text-black tw:transition-colors">
+                                  {{ grandchildlink.title | escape }}
+                                </a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        </details>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </details>
+            {%- else -%}
+               {% comment %} --- 1-й уровень (Простая ссылка) ---  {% endcomment %}
+              <a href="{{ link.url }}" class="tw:block tw:py-3 tw:text-[1.6rem] tw:font-medium tw:hover:text-golden tw:transition-colors">
+                {{ link.title | escape }}
+              </a>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+ 
+    <!-- Подвал драйвера (Аккаунт + Соцсети) -->
+    <div class="tw:py-6 tw:px-8 tw:border-t tw:border-gray-100 tw:flex tw:flex-col tw:gap-6">
+       
+      {%- if shop.customer_accounts_enabled -%}
+        <a
+          href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+          class="tw:flex tw:items-center tw:gap-3 tw:text-[1.4rem] tw:font-medium tw:text-gray-700 tw:hover:text-black tw:transition-colors"
+          rel="nofollow"
+        >
+          <svg class="tw:w-[2.4rem] tw:h-[2.4rem]" focusable="false" aria-hidden="true">
+            <use href="#profile"></use>
+          </svg>
+          {%- liquid
+            if customer
+              echo 'customer.account_fallback' | t
+            else
+              echo 'customer.log_in' | t
+            endif
+          -%}
+        </a>
+      {%- endif -%}            
+ 
+      <!-- СОЦИАЛЬНЫЕ СЕТИ -->
+      <div class="tw:flex tw:items-center tw:gap-8">
+        {%- if settings.social_instagram_link != blank -%}
+          <a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" aria-label="Instagram" class="tw:opacity-85 tw:hover:opacity-100 tw:transition-opacity">
+            <div class="tw:w-[2.4rem] tw:h-[2.4rem]">
+              <img src="{{ 'instagram.webp' | asset_url }}" alt="Instagram" class="tw:w-full tw:h-full tw:object-cover" loading="lazy" width="60" height="60">
+            </div>
+          </a>
+        {%- endif -%}
+ 
+        {%- if section.settings.social_telegram_link != blank -%}
+          <a href="{{ section.settings.social_telegram_link }}" target="_blank" rel="noopener" aria-label="Telegram" class="tw:opacity-85 tw:hover:opacity-100 tw:transition-opacity">
+            <svg class="tw:w-[2.4rem] tw:h-[2.4rem]" focusable="false" aria-hidden="true">
+              <use href="#telegram"></use>
+            </svg>
+          </a>
+        {%- endif -%}
+ 
+        {%- if settings.social_facebook_link != blank -%}
+          <a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener" aria-label="Facebook" class="tw:opacity-85 tw:hover:opacity-100 tw:transition-opacity">
+            <svg class="tw:w-[2.4rem] tw:h-[2.4rem]" focusable="false" aria-hidden="true">
+              <use href="#facebook"></use>
+            </svg>
+          </a>
+        {%- endif -%}
+      </div>
+       
+    </div>
+  </aside>
+</div>
+ 
+<script>
+  (function() {
+    const drawer = document.getElementById('CustomDrawer');
+    const overlay = document.getElementById('CustomDrawerOverlay');
+    const panel = document.getElementById('CustomDrawerPanel');
+    const closeBtn = document.getElementById('CustomDrawerClose');
+    const triggers = document.querySelectorAll('[data-custom-drawer-trigger]');
+ 
+    if (!drawer || triggers.length === 0) return;
+     
+    // Переносим драйвер в корень <body>
+    document.body.appendChild(drawer);
+ 
+       // Переменная для сохранения позиции скролла
+    let scrollPosition = 0;
+ 
+    function openDrawer() {
+      drawer.classList.remove('tw:hidden');
+       
+      requestAnimationFrame(() => {
+        overlay.classList.remove('tw:opacity-0');
+        overlay.classList.add('tw:opacity-100');
+        panel.classList.remove('tw:translate-x-full');
+      });
+       
+      // Используем глобальную функцию
+      window.lockBodyScroll();
+    }
+ 
+    function closeDrawer() {
+      overlay.classList.add('tw:opacity-0');
+      overlay.classList.remove('tw:opacity-100');
+      panel.classList.add('tw:translate-x-full');
+       
+      // Используем глобальную функцию
+      window.unlockBodyScroll();
+       
+      setTimeout(() => {
+        drawer.classList.add('tw:hidden');
+      }, 300);
+    }
+ 
+    triggers.forEach(trigger => {
+      trigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        openDrawer();
+      });
+    });
+ 
+    closeBtn.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+ 
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && !drawer.classList.contains('tw:hidden')) {
+        closeDrawer();
+      }
+    });
+  })();
+</script>

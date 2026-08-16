@@ -78,7 +78,7 @@
     top: 0;
     left: 0;
     right: 0;
-    position: fixed; /* This is for fixing a Safari z-index issue. PR #2147 */
+    position: sticky; /* This is for fixing a Safari z-index issue. PR #2147 */
   }
 {%- endstyle -%}
 
@@ -313,6 +313,7 @@
       </a>
 
       {% comment %} Драйвер {% endcomment %}
+      {% comment %}
       <div class="tw:flex tw:lg990:hidden">
         {%- liquid
           if section.settings.menu != blank
@@ -320,9 +321,22 @@
           endif
         -%}
       </div>
+      {% endcomment %}
+
+      <div class="tw:flex tw:lg990:hidden tw:ml-5">
+        <button data-custom-drawer-trigger class="header__icon header__icon--menu link focus-inset" aria-label="Menu">
+          {{- 'icon-burger.svg' | inline_asset_content -}}
+        </button>
+      </div>
+
+
     </div>
   </header>
 </{{ header_tag }}>
+
+{% comment %} Кастомный Меню-драйвер (меню+оверлей) {% endcomment %}
+{% render 'custom-header-drawer', menu: section.settings.menu %}
+
 
 {%- if settings.cart_type == 'notification' -%}
   {%- render 'cart-notification',

@@ -28,7 +28,10 @@ class DetailsModal extends HTMLElement {
     this.onBodyClickEvent = this.onBodyClickEvent || this.onBodyClick.bind(this);
     event.target.closest('details').setAttribute('open', true);
     document.body.addEventListener('click', this.onBodyClickEvent);
-    document.body.classList.add('overflow-hidden');
+    
+    // КОММЕНТИРУЕМ НАТИВНЫЙ И ДОБАВЛЯЕМ СВОЙ
+    // document.body.classList.add('overflow-hidden');
+    window.lockBodyScroll();
 
     trapFocus(
       this.detailsContainer.querySelector('[tabindex="-1"]'),
@@ -40,7 +43,10 @@ class DetailsModal extends HTMLElement {
     removeTrapFocus(focusToggle ? this.summaryToggle : null);
     this.detailsContainer.removeAttribute('open');
     document.body.removeEventListener('click', this.onBodyClickEvent);
-    document.body.classList.remove('overflow-hidden');
+
+    // КОММЕНТИРУЕМ НАТИВНЫЙ И ДОБАВЛЯЕМ СВОЙ
+    // document.body.classList.remove('overflow-hidden');
+    window.unlockBodyScroll();
   }
 }
 
