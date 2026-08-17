@@ -1914,6 +1914,16 @@
       margin-left: 0;
     }
   }
+  .tw\:sm\:block {
+    @media (width >= 640px) {
+      display: block;
+    }
+  }
+  .tw\:sm\:hidden {
+    @media (width >= 640px) {
+      display: none;
+    }
+  }
   .tw\:sm\:h-\[4rem\] {
     @media (width >= 640px) {
       height: 4rem;
