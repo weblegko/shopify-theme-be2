@@ -2009,6 +2009,11 @@
       display: block;
     }
   }
+  .tw\:md\:flex {
+    @media (width >= 768px) {
+      display: flex;
+    }
+  }
   .tw\:md\:hidden {
     @media (width >= 768px) {
       display: none;
