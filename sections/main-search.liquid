@@ -75,7 +75,7 @@
       </h1>
       <div class="template-search__search">
         {%- if settings.predictive_search_enabled -%}
-          <predictive-search data-loading-text="{{ 'accessibility.loading' | t }}">
+          <predictive-search data-loading-text="{{ 'accessibility.loading' | t }}" data-min-chars="{{ settings.predictive_search_min_chars | default: 2 }}">
         {%- endif -%}
         <main-search>
           <form action="{{ routes.search_url }}" method="get" role="search" class="search">

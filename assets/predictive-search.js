@@ -11,6 +11,9 @@ class PredictiveSearch extends SearchForm {
     this.abortController = new AbortController();
     this.searchTerm = "";
 
+    // ДОБАВЛЕННАЯ СТРОКА ДЛЯ ЧТЕНИЯ АТТРИБУТА ИЗ ВЕРСТКИ
+    this.minChars = parseInt(this.getAttribute('data-min-chars')) || 2;
+
     this.setupEventListeners();
   }
 
@@ -46,15 +49,29 @@ class PredictiveSearch extends SearchForm {
       return;
     }
 
+    // НОВОЕ ПРАВИЛО: Проверка на минимальное количество символов
+    if (this.searchTerm.length < this.minChars) {
+      this.close();
+      return;
+    }
+
     this.getSearchResults(this.searchTerm);
   }
 
   onFormSubmit(event) {
-    if (
-      !this.getQuery().length ||
-      this.querySelector('[aria-selected="true"] a')
-    )
+    // if (
+    //   !this.getQuery().length ||
+    //   this.querySelector('[aria-selected="true"] a')
+    // )
+    //   event.preventDefault();
+
+    // Получаем текущий запрос
+    const currentQuery = this.getQuery();
+ 
+    // ПОЯВИЛАСЬ ЛОГИКА ПРОВЕРКИ: Если запрос пустой ИЛИ его длина меньше minChars — отменяем отправку формы
+    if (!currentQuery.length || currentQuery.length < this.minChars || this.querySelector('[aria-selected="true"] a')) {
       event.preventDefault();
+    }
   }
 
   onFormReset(event) {
@@ -77,9 +94,11 @@ class PredictiveSearch extends SearchForm {
       this.onChange();
     } else if (this.getAttribute("results") === "true") {
       this.open();
-    } else {
-      this.getSearchResults(this.searchTerm);
-    }
+    // ИЗМЕНЕННАЯ ЛОГИКА
+    } else if (currentSearchTerm.length >= this.minChars) {
+     // Запрашиваем результаты только если символов достаточно
+     this.getSearchResults(this.searchTerm);
+   }
   }
 
   onFocusOut() {
@@ -118,10 +137,19 @@ class PredictiveSearch extends SearchForm {
     );
     const currentButtonText = searchForTextElement?.innerText;
     if (currentButtonText) {
-      if (currentButtonText.match(new RegExp(previousTerm, "g")).length > 1) {
+      
+      // if (currentButtonText.match(new RegExp(previousTerm, "g")).length > 1) {
+      //   // The new term matches part of the button text and not just the search term, do not replace to avoid mistakes
+      //   return;
+      // }
+
+      // ДОБАВЛЕНА ЗАЩИТА ОТ null: сначала проверяем, что match нашел совпадения
+      const matchResult = currentButtonText.match(new RegExp(previousTerm, "g"));
+      if (matchResult && matchResult.length > 1) {
         // The new term matches part of the button text and not just the search term, do not replace to avoid mistakes
         return;
       }
+
       const newButtonText = currentButtonText.replace(previousTerm, newTerm);
       searchForTextElement.innerText = newButtonText;
     }

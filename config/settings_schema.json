@@ -1363,6 +1363,15 @@
     "name": "t:settings_schema.search_input.name",
     "settings": [
       {
+        "type": "range",
+        "id": "predictive_search_min_chars",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "label": "Minimum characters to search",
+        "default": 2
+      },
+      {
         "type": "checkbox",
         "id": "predictive_search_enabled",
         "default": true,

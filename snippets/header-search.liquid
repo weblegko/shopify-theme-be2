@@ -36,7 +36,7 @@
         tabindex="-1"
       >
         {%- if settings.predictive_search_enabled -%}
-          <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+          <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}" data-min-chars="{{ settings.predictive_search_min_chars | default: 2 }}">
         {%- else -%}
           <search-form class="search-modal__form">
         {%- endif -%}
