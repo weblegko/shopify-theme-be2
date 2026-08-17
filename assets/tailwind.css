@@ -677,6 +677,15 @@
   .tw\:max-w-7xl {
     max-width: var(--tw-container-7xl);
   }
+  .tw\:max-w-\[20rem\] {
+    max-width: 20rem;
+  }
+  .tw\:max-w-\[25rem\] {
+    max-width: 25rem;
+  }
+  .tw\:max-w-\[30rem\] {
+    max-width: 30rem;
+  }
   .tw\:max-w-\[32rem\] {
     max-width: 32rem;
   }
