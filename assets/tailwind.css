@@ -416,6 +416,18 @@
   .tw\:ml-\[0\.8rem\] {
     margin-left: 0.8rem;
   }
+  .tw\:ml-\[2rem\] {
+    margin-left: 2rem;
+  }
+  .tw\:ml-\[3rem\] {
+    margin-left: 3rem;
+  }
+  .tw\:box-border {
+    box-sizing: border-box;
+  }
+  .tw\:box-content {
+    box-sizing: content-box;
+  }
   .tw\:\!line-clamp-2 {
     overflow: hidden !important;
     display: -webkit-box !important;
@@ -470,6 +482,9 @@
   .tw\:\!h-\[2rem\] {
     height: 2rem !important;
   }
+  .tw\:h-4 {
+    height: calc(var(--tw-spacing) * 4);
+  }
   .tw\:h-5 {
     height: calc(var(--tw-spacing) * 5);
   }
@@ -512,8 +527,20 @@
   .tw\:h-\[3\.2rem\] {
     height: 3.2rem;
   }
+  .tw\:h-\[3\.3rem\] {
+    height: 3.3rem;
+  }
+  .tw\:h-\[3\.4rem\] {
+    height: 3.4rem;
+  }
+  .tw\:h-\[3\.5rem\] {
+    height: 3.5rem;
+  }
   .tw\:h-\[3\.6rem\] {
     height: 3.6rem;
+  }
+  .tw\:h-\[3rem\] {
+    height: 3rem;
   }
   .tw\:h-\[4\.4rem\] {
     height: 4.4rem;
@@ -539,8 +566,17 @@
   .tw\:h-\[6rem\] {
     height: 6rem;
   }
+  .tw\:h-\[7\.6rem\] {
+    height: 7.6rem;
+  }
+  .tw\:h-\[8rem\] {
+    height: 8rem;
+  }
   .tw\:h-\[10rem\] {
     height: 10rem;
+  }
+  .tw\:h-\[12rem\] {
+    height: 12rem;
   }
   .tw\:h-\[19\.8rem\] {
     height: 19.8rem;
@@ -692,11 +728,17 @@
   .tw\:max-w-\[40rem\] {
     max-width: 40rem;
   }
+  .tw\:max-w-\[50rem\] {
+    max-width: 50rem;
+  }
   .tw\:max-w-\[54rem\] {
     max-width: 54rem;
   }
   .tw\:max-w-\[55rem\] {
     max-width: 55rem;
+  }
+  .tw\:max-w-\[60rem\] {
+    max-width: 60rem;
   }
   .tw\:max-w-\[85\%\] {
     max-width: 85%;
@@ -792,6 +834,9 @@
   }
   .tw\:items-start {
     align-items: flex-start;
+  }
+  .tw\:items-stretch {
+    align-items: stretch;
   }
   .tw\:justify-between {
     justify-content: space-between;
@@ -1154,6 +1199,9 @@
   .tw\:px-\[1\.2rem\] {
     padding-inline: 1.2rem;
   }
+  .tw\:px-\[1\.5rem\] {
+    padding-inline: 1.5rem;
+  }
   .tw\:px-\[1\.6rem\] {
     padding-inline: 1.6rem;
   }
@@ -1165,6 +1213,9 @@
   }
   .tw\:px-\[2rem\] {
     padding-inline: 2rem;
+  }
+  .tw\:px-\[3rem\] {
+    padding-inline: 3rem;
   }
   .tw\:\!py-1 {
     padding-block: var(--tw-spacing) !important;
@@ -1255,6 +1306,9 @@
   }
   .tw\:pl-\[1rem\] {
     padding-left: 1rem;
+  }
+  .tw\:pl-\[3rem\] {
+    padding-left: 3rem;
   }
   .tw\:\!text-center {
     text-align: center !important;
@@ -1439,6 +1493,9 @@
   }
   .tw\:text-golden {
     color: #ffc356;
+  }
+  .tw\:text-goluboy {
+    color: #00b5d1;
   }
   .tw\:text-goluboydark {
     color: #0091A8;

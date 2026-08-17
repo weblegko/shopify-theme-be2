@@ -112,9 +112,12 @@
       assign localization_forms = true
     endif
   -%}
+
+
+
   <header
     id="site-header"
-    class="tw:bg-white tw:border-b tw:border-black/10 tw:px-[1.6rem] tw:sm:px-[2.4rem] tw:h-[5.6rem] tw:shadow-md tw:flex tw:justify-between tw:items-center "
+    class="tw:bg-white tw:border-b tw:border-black/10 tw:px-[1.6rem] tw:sm:px-[2.4rem] tw:h-[6rem] tw:shadow-md tw:flex tw:justify-between tw:items-center "
   >
     <div class="tw:flex tw:items-center tw:gap-4 ">
       {%- if request.page_type == 'index' -%}
@@ -144,15 +147,14 @@
       {%- if request.page_type == 'index' -%}
         </h1>
       {%- endif -%}
-
-      {%- liquid
-        if section.settings.menu != blank
-          render 'header-dropdown-menu'
-        endif
-      %}
+      
+      <div class="tw:ml-[2rem]">
+        {% render 'custom-header-search' %}
+      </div>
+      
     </div>
 
-    {% render 'custom-header-search' %}
+    
 
     <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
       <div class="tw:mr-[3rem] desktop-localization-wrapper">
@@ -333,7 +335,18 @@
 
 
     </div>
+
   </header>
+
+  <div class="tw:bg-white tw:px-[1.5rem]">
+  {%- liquid
+      if section.settings.menu != blank
+        render 'header-dropdown-menu'
+      endif
+  %}
+  </div>
+
+
 </{{ header_tag }}>
 
 {% comment %} Кастомный Меню-драйвер (меню+оверлей) {% endcomment %}
