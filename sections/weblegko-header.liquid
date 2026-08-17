@@ -135,14 +135,14 @@
             settings.logo
             | image_url: width: 600
             | image_tag:
-              class: 'h-[inherit] tw:hidden tw:sm:block tw:w-auto object-cover',
+              class: 'h-[inherit] tw:w-auto object-cover',
               heights: '80, 100',
               width: settings.logo_width,
               alt: logo_alt
           }}
 
           
-          <img src="{{ 'logo-drberg-mini.svg' | asset_url }}" class="tw:block tw:sm:hidden " alt="Logo" />
+          {% comment %} <img src="{{ 'logo-drberg-mini.svg' | asset_url }}" class="tw:block tw:sm:hidden " alt="Logo" /> {% endcomment %}
 
         {%- else -%}
           <span class="tw:text-3xl tw:md:text-4xl tw:font-bold tw:tracking-tight">{{ shop.name }}</span>
