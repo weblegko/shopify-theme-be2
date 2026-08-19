@@ -1,0 +1,152 @@
+<style>
+  .card-media {
+    margin: 1rem;
+  }
+
+  .card-media-circle {
+    border-radius: 50%;
+    border: 1px solid #dedede;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
+    height: 128px;
+    width: 128px;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px){
+    .card-media-circle {
+      height: 16rem;
+      width: 16rem;
+    }
+  }
+  
+  .card-media-circle img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    transition: all 0.3s;
+  }
+
+  .card-media:hover .card-media-circle img {
+    transform: scale(1.05);
+  }
+
+  .card-media-title {
+    text-align: center;
+    line-height: 1;
+    margin-top: 2rem;
+  }
+
+  .collection-view {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    width: 100%;
+  }
+  .collection-view svg {
+    margin-left: 1rem;
+  }
+
+</style>
+
+<section class="tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem] tw:py-[3.5rem]">
+  <div class="tw:max-w-[112rem] tw:mx-auto">
+    
+    
+    {%- if section.settings.heading != blank -%}
+      <div class="tw:md:flex tw:items-center tw:justify-between tw:gap-[1rem] tw:mb-[3rem]">
+        <h2 class="tw:font-poppins tw:text-[2.4rem] tw:sm:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.2]">
+          {{ section.settings.heading }}
+        </h2>
+        <a href="/collections" class="link">View all collections</a>
+      </div>
+    {%- endif -%}
+    
+    <div
+      class="tw:flex tw:flex-wrap tw:justify-center tw:md:justify-between {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      {% if settings.animations_reveal_on_scroll %}
+        data-cascade
+        style="--animation-order: {{ forloop.index }};"
+      {% endif %}
+    >
+      {%- for block in section.blocks -%}
+        
+        {% if block.settings.link != blank %}
+          <a href="{{ block.settings.link }}" class="card-media">
+        {% endif %}
+        
+          <div class="card-media-circle">
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | image_url: width: 320  }}" alt="{{ block.settings.title }}" />
+            {% endif %}
+          </div>
+
+          <div class="card-media-title">{{ block.settings.title }}</div>
+
+          <div class="collection-view">
+            View collection
+            <svg width="18" height="19" viewBox="0 0 17.99 18.62" aria-hidden="true" focusable="false" role="presentation" class="icon"><path d="M4.77 9.31h7.81M8.86 5.17l4 4.14-4 4.14" fill="none" stroke="currentColor" stroke-width="1.25"></path><ellipse cx="9" cy="9.31" rx="8.37" ry="8.69" fill="none" stroke="currentColor" stroke-width="1.25"></ellipse></svg>
+          </div>
+
+        {% if block.settings.link != blank %}
+          </a>
+        {% endif %}
+
+      {%- endfor -%}
+
+    </div>
+
+  </div>
+</section>
+
+
+
+{% schema %}
+{
+  "name": "DRBERG POPULA COLLECTIONS",
+  "tag": "section",
+  "class": "section-popular-cllectins",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Browse popular collections",
+      "label": "Heading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collections",
+      "name": "Collections",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Sleep Supprt",
+          "label": "Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image", 
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Collection URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRBERG POPULA COLLECTIONS",
+      "category": "Home page",
+      "blocks": [
+        { "type": "collections" }        
+      ]
+    }
+  ]
+
+}
+{% endschema %}
