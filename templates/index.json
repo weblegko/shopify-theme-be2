@@ -463,12 +463,28 @@
     "weblegko_popular_collections_TG39MY": {
       "type": "weblegko-popular-collections",
       "blocks": {
-        "collections_qJHPfP": {
+        "collections_MPNPnj": {
           "type": "collections",
           "settings": {
-            "title": "Hair, Skin & Nails",
-            "image": "shopify://shop_images/beauty-hair.webp",
-            "link": "shopify://collections/wellness"
+            "title": "Sleep Support",
+            "image": "shopify://shop_images/sleep-support.webp",
+            "link": "shopify://collections/supplements"
+          }
+        },
+        "collections_FU6p4Q": {
+          "type": "collections",
+          "settings": {
+            "title": "Bundles & Kits",
+            "image": "shopify://shop_images/bundles-kits.webp",
+            "link": "shopify://collections/bundles"
+          }
+        },
+        "collections_djQyXz": {
+          "type": "collections",
+          "settings": {
+            "title": "Electrolytes",
+            "image": "shopify://shop_images/electrolytes.webp",
+            "link": "shopify://collections/electrolytes"
           }
         },
         "collections_dcypkb": {
@@ -487,38 +503,22 @@
             "link": "shopify://collections/supplements"
           }
         },
-        "collections_djQyXz": {
+        "collections_qJHPfP": {
           "type": "collections",
           "settings": {
-            "title": "Electrolytes",
-            "image": "shopify://shop_images/electrolytes.webp",
-            "link": "shopify://collections/electrolytes"
-          }
-        },
-        "collections_FU6p4Q": {
-          "type": "collections",
-          "settings": {
-            "title": "Bundles & Kits",
-            "image": "shopify://shop_images/bundles-kits.webp",
-            "link": "shopify://collections/bundles"
-          }
-        },
-        "collections_MPNPnj": {
-          "type": "collections",
-          "settings": {
-            "title": "Sleep Support",
-            "image": "shopify://shop_images/sleep-support.webp",
-            "link": "shopify://collections/supplements"
+            "title": "Hair, Skin & Nails",
+            "image": "shopify://shop_images/beauty-hair.webp",
+            "link": "shopify://collections/wellness"
           }
         }
       },
       "block_order": [
-        "collections_qJHPfP",
+        "collections_MPNPnj",
+        "collections_FU6p4Q",
+        "collections_djQyXz",
         "collections_dcypkb",
         "collections_gBzAbw",
-        "collections_djQyXz",
-        "collections_FU6p4Q",
-        "collections_MPNPnj"
+        "collections_qJHPfP"
       ],
       "name": "DRBERG POPULA COLLECTIONS",
       "settings": {
