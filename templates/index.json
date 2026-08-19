@@ -115,6 +115,71 @@
         "padding_bottom_mobile": 3
       }
     },
+    "weblegko_popular_collections_TG39MY": {
+      "type": "weblegko-popular-collections",
+      "blocks": {
+        "collections_MPNPnj": {
+          "type": "collections",
+          "settings": {
+            "title": "Sleep Support",
+            "image": "shopify://shop_images/sleep-support.webp",
+            "link": "shopify://collections/supplements"
+          }
+        },
+        "collections_FU6p4Q": {
+          "type": "collections",
+          "settings": {
+            "title": "Bundles & Kits",
+            "image": "shopify://shop_images/bundles-kits.webp",
+            "link": "shopify://collections/bundles"
+          }
+        },
+        "collections_djQyXz": {
+          "type": "collections",
+          "settings": {
+            "title": "Electrolytes",
+            "image": "shopify://shop_images/electrolytes.webp",
+            "link": "shopify://collections/electrolytes"
+          }
+        },
+        "collections_gBzAbw": {
+          "type": "collections",
+          "settings": {
+            "title": "Supplements",
+            "image": "shopify://shop_images/supplements.webp",
+            "link": "shopify://collections/supplements"
+          }
+        },
+        "collections_dcypkb": {
+          "type": "collections",
+          "settings": {
+            "title": "Energy Support",
+            "image": "shopify://shop_images/energy-support.webp",
+            "link": "shopify://collections/electrolytes"
+          }
+        },
+        "collections_qJHPfP": {
+          "type": "collections",
+          "settings": {
+            "title": "Hair, Skin & Nails",
+            "image": "shopify://shop_images/beauty-hair.webp",
+            "link": "shopify://collections/wellness"
+          }
+        }
+      },
+      "block_order": [
+        "collections_MPNPnj",
+        "collections_FU6p4Q",
+        "collections_djQyXz",
+        "collections_gBzAbw",
+        "collections_dcypkb",
+        "collections_qJHPfP"
+      ],
+      "name": "DRBERG POPULA COLLECTIONS",
+      "settings": {
+        "heading": "Browse popular collections"
+      }
+    },
     "weblegko_premium_products_GDURBV": {
       "type": "weblegko-premium-products",
       "name": "WEBLEGKO PREMIUM",
@@ -459,71 +524,6 @@
         "padding_top_mobile": 3,
         "padding_bottom_mobile": 3
       }
-    },
-    "weblegko_popular_collections_TG39MY": {
-      "type": "weblegko-popular-collections",
-      "blocks": {
-        "collections_MPNPnj": {
-          "type": "collections",
-          "settings": {
-            "title": "Sleep Support",
-            "image": "shopify://shop_images/sleep-support.webp",
-            "link": "shopify://collections/supplements"
-          }
-        },
-        "collections_FU6p4Q": {
-          "type": "collections",
-          "settings": {
-            "title": "Bundles & Kits",
-            "image": "shopify://shop_images/bundles-kits.webp",
-            "link": "shopify://collections/bundles"
-          }
-        },
-        "collections_djQyXz": {
-          "type": "collections",
-          "settings": {
-            "title": "Electrolytes",
-            "image": "shopify://shop_images/electrolytes.webp",
-            "link": "shopify://collections/electrolytes"
-          }
-        },
-        "collections_gBzAbw": {
-          "type": "collections",
-          "settings": {
-            "title": "Supplements",
-            "image": "shopify://shop_images/supplements.webp",
-            "link": "shopify://collections/supplements"
-          }
-        },
-        "collections_dcypkb": {
-          "type": "collections",
-          "settings": {
-            "title": "Energy Support",
-            "image": "shopify://shop_images/energy-support.webp",
-            "link": "shopify://collections/electrolytes"
-          }
-        },
-        "collections_qJHPfP": {
-          "type": "collections",
-          "settings": {
-            "title": "Hair, Skin & Nails",
-            "image": "shopify://shop_images/beauty-hair.webp",
-            "link": "shopify://collections/wellness"
-          }
-        }
-      },
-      "block_order": [
-        "collections_MPNPnj",
-        "collections_FU6p4Q",
-        "collections_djQyXz",
-        "collections_gBzAbw",
-        "collections_dcypkb",
-        "collections_qJHPfP"
-      ],
-      "name": "DRBERG POPULA COLLECTIONS",
-      "settings": {
-        "heading": "Browse popular collections"
-      }
     }
   },
   "order": [
@@ -531,6 +531,7 @@
     "weblegko_doctor_grid_3MNgjH",
     "weblegko_features_MpkF4r",
     "weblegko_premium_products_GDURBV",
+    "weblegko_popular_collections_TG39MY",
     "weblegko_why_choose_us_WPtcQJ",
     "weblegko_popular_products_WLyNrp",
     "weblegko_video_rJacM4",
@@ -540,7 +541,6 @@
     "weblegko_newsletter_banner_wXPK7c",
     "weblegko_reviews_home_k36CCc",
     "weblegko_faq_meta_home_n7zqAP",
-    "weblegko_about_doctor_dGg4rC",
-    "weblegko_popular_collections_TG39MY"
+    "weblegko_about_doctor_dGg4rC"
   ]
 }
