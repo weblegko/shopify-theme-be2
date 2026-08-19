@@ -487,20 +487,20 @@
             "link": "shopify://collections/electrolytes"
           }
         },
-        "collections_dcypkb": {
-          "type": "collections",
-          "settings": {
-            "title": "Energy Support",
-            "image": "shopify://shop_images/energy-support.webp",
-            "link": "shopify://collections/electrolytes"
-          }
-        },
         "collections_gBzAbw": {
           "type": "collections",
           "settings": {
             "title": "Supplements",
             "image": "shopify://shop_images/supplements.webp",
             "link": "shopify://collections/supplements"
+          }
+        },
+        "collections_dcypkb": {
+          "type": "collections",
+          "settings": {
+            "title": "Energy Support",
+            "image": "shopify://shop_images/energy-support.webp",
+            "link": "shopify://collections/electrolytes"
           }
         },
         "collections_qJHPfP": {
@@ -516,8 +516,8 @@
         "collections_MPNPnj",
         "collections_FU6p4Q",
         "collections_djQyXz",
-        "collections_dcypkb",
         "collections_gBzAbw",
+        "collections_dcypkb",
         "collections_qJHPfP"
       ],
       "name": "DRBERG POPULA COLLECTIONS",
