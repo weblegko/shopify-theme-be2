@@ -50,6 +50,7 @@
       ],
       "name": "DRBERG DOCTOR",
       "settings": {
+        "doctor_image": "shopify://shop_images/drberg.webp",
         "doctor_name": "Dr. Eric Berg",
         "doctor_profession": "Health & Nutrition Expert",
         "instagram_count": "2.7M followers",
@@ -60,9 +61,9 @@
         "info_reviews_value": "15,255",
         "info_description": "Quality vitamins and supplements trusted by millions worldwide —  now delivered to your door across the UK.",
         "button_blue_label": "Shop All Products",
-        "button_blue_link": "",
+        "button_blue_link": "shopify://collections/all-products",
         "button_grey_label": "Shop All Products",
-        "button_grey_link": ""
+        "button_grey_link": "shopify://collections/all-products"
       }
     },
     "drberg_features_WDxRJL": {
