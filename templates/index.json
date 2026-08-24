@@ -118,6 +118,18 @@
     "drberg_collections_FiWJ8h": {
       "type": "drberg-collections",
       "blocks": {
+        "collection_yaMwFd": {
+          "type": "collection",
+          "settings": {
+            "collection": "electrolytes"
+          }
+        },
+        "collection_6GtWG9": {
+          "type": "collection",
+          "settings": {
+            "collection": "bundles"
+          }
+        },
         "collection_gFbUpq": {
           "type": "collection",
           "settings": {
@@ -126,6 +138,8 @@
         }
       },
       "block_order": [
+        "collection_yaMwFd",
+        "collection_6GtWG9",
         "collection_gFbUpq"
       ],
       "name": "DRBERG COLLECTIONS",
