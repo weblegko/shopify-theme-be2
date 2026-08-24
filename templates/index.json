@@ -118,6 +118,12 @@
     "drberg_collections_FiWJ8h": {
       "type": "drberg-collections",
       "blocks": {
+        "collection_a4YPrV": {
+          "type": "collection",
+          "settings": {
+            "collection": "energy-support"
+          }
+        },
         "collection_KREnFf": {
           "type": "collection",
           "settings": {
@@ -144,6 +150,7 @@
         }
       },
       "block_order": [
+        "collection_a4YPrV",
         "collection_KREnFf",
         "collection_gFbUpq",
         "collection_6GtWG9",
