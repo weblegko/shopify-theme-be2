@@ -1,0 +1,143 @@
+/* === Drberg Footer Section Styles === */
+
+.drberg-footer {
+  @apply tw:bg-seriy tw:relative tw:px-[1.6rem];
+}
+
+.drberg-footer__container {
+  @apply tw:mx-auto tw:!pt-[5rem] tw:!pb-[6rem];
+}
+
+.drberg-footer__container--wider {
+  @apply tw:max-w-[112rem];
+}
+
+/* Ряды */
+.drberg-footer__row {
+  @apply tw:flex tw:flex-col tw:lg:flex-row tw:gap-6 tw:lg:gap-20;
+}
+
+.drberg-footer__row--bottom {
+  @apply tw:gap-12 tw:lg:gap-20 tw:pt-20;
+}
+
+/* Колонки */
+.drberg-footer__col {
+  @apply tw:w-full tw:lg:w-1/2;
+}
+
+.drberg-footer__inner-row {
+  @apply tw:flex tw:flex-row tw:gap-12 tw:lg:gap-20;
+}
+
+/* Подписка */
+.drberg-footer__newsletter-heading {
+  @apply tw:text-[2.4rem] tw:xl:!text-[4rem] tw:leading-[1.2] tw:tracking-[-0.04em] tw:font-medium tw:mb-[2rem];
+}
+
+.drberg-footer__newsletter-form-wrapper {
+  @apply tw:flex tw:flex-col tw:gap-4;
+}
+
+.drberg-footer__newsletter-input-row {
+  @apply tw:flex tw:gap-4 tw:mb-[1.2rem];
+}
+
+.drberg-footer__newsletter-input {
+  @apply tw:max-w-[32rem] tw:w-full tw:bg-white tw:rounded-full tw:px-6 tw:h-[3.6rem] tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-grayscale-950 tw:placeholder-grayscale-500 tw:focus:outline-none tw:focus:ring-1 tw:focus:ring-gray-400 tw:focus:ring-offset-0 tw:focus-visible:ring-offset-0 tw:transition-shadow;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.drberg-footer__newsletter-btn {
+  @apply tw:pt-0.5 tw:bg-goluboy tw:text-white tw:px-6 tw:h-[3.6rem] tw:rounded-full tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:font-medium tw:hover:bg-goluboydark tw:transition-colors tw:flex-shrink-0;
+}
+
+/* Чекбокс */
+.drberg-footer__cb-label {
+  @apply tw:flex tw:items-center tw:gap-[0.8rem] tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-grayscale-950;
+}
+
+.drberg-footer__cb-box {
+  @apply tw:bg-white tw:shrink-0 tw:w-[1.8rem] tw:h-[1.8rem] tw:border-2 tw:border-slate-200 tw:rounded-[0.4rem] tw:flex tw:items-center tw:justify-center tw:transition;
+}
+
+.drberg-footer__cb-icon {
+  @apply tw:w-[1.8rem] tw:h-[1.8rem] tw:scale-150 tw:translate-x-1/6 tw:-translate-y-1/5;
+}
+
+/* Сообщения формы */
+.drberg-footer__form-error {
+  @apply tw:text-red-500 tw:text-[1.2rem];
+}
+
+.drberg-footer__form-success {
+  @apply tw:text-green-600 tw:text-[1.4rem] tw:font-medium;
+}
+
+/* Меню и ссылки */
+.drberg-footer__menu-col {
+  @apply tw:w-full tw:sm:w-1/2;
+}
+
+.drberg-footer__menu-list {
+  @apply tw:flex tw:flex-col tw:gap-[1.3rem] tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em];
+}
+
+.drberg-footer__link {
+  @apply tw:text-grayscale-500 tw:hover:text-grayscale-950 tw:transition-colors;
+}
+
+.drberg-footer__link--active {
+  @apply tw:text-golden;
+}
+
+.drberg-footer__policies-col {
+  @apply tw:w-full tw:sm:w-1/2 tw:flex tw:flex-col tw:justify-between;
+}
+
+.drberg-footer__policies-list {
+  @apply tw:flex tw:flex-col tw:gap-[1.3rem] tw:mb-8 tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em];
+}
+
+/* Соцсети */
+.drberg-footer__socials-wrapper {
+  @apply tw:mt-[3rem];
+}
+
+.drberg-footer__socials {
+  @apply tw:flex tw:items-center tw:gap-10 tw:mb-[2rem] tw:xl:mb-[3rem];
+}
+
+.drberg-footer__social-link {
+  @apply tw:opacity-90 tw:hover:opacity-100 tw:transition-opacity;
+}
+
+.drberg-footer__social-icon {
+  @apply tw:w-[2.4rem] tw:h-[2.4rem] tw:xl:w-[2rem] tw:xl:h-[2rem];
+}
+
+.drberg-footer__social-img {
+  @apply tw:w-full tw:h-full tw:object-cover;
+}
+
+/* Почта */
+.drberg-footer__email-row {
+  @apply tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em];
+}
+
+.drberg-footer__email-label {
+  @apply tw:text-grayscale-500 tw:block tw:xl:inline;
+}
+
+.drberg-footer__email-link {
+  @apply tw:text-grayscale-950 tw:hover:text-grayscale-500 tw:transition-colors;
+}
+
+/* Нижний блок инфо */
+.drberg-footer__info-col {
+  @apply tw:flex tw:flex-col tw:gap-[1rem] tw:w-full tw:lg:w-1/2 tw:text-grayscale-500 tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em];
+}
+
+.drberg-footer__empty-col {
+  @apply tw:hidden tw:lg:block tw:lg:w-1/2;
+}

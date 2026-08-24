@@ -1,0 +1,100 @@
+<script src="{{ 'drberg-promo-slider.js' | asset_url }}" defer="defer"></script>
+
+<section class="drberg-promo-slider">  
+   {% comment %} Главный контейнер Swiper  {% endcomment %}
+  <div class="swiper myPromoSwiper drberg-promo-slider__swiper">
+    <div class="swiper-wrapper">
+      
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          
+           {% comment %} ОДИН СЛАЙД  {% endcomment %}
+          <div class="swiper-slide drberg-promo-slider__slide" {{ block.shopify_attributes }}>
+            
+            {% if block.settings.link != blank %}
+              <a href="{{ block.settings.link }}" class="drberg-promo-slider__link group">
+            {% endif %}
+              
+              {% if block.settings.image != blank %}
+                {%- assign img_width = 1200 -%}
+                {%- assign img_height = img_width | divided_by: block.settings.image.aspect_ratio -%}
+                {{ 
+                  block.settings.image 
+                  | image_url: width: 1200 
+                  | image_tag: 
+                      class: 'drberg-promo-slider__image',
+                      loading: 'lazy',
+                      widths: '600, 900, 1200',
+                      width: img_width,
+                      height: img_height,
+                      alt: block.settings.image.alt | default: 'Промо слайд'
+                }}
+              {% else %}
+                {{ 'lifestyle-2' | placeholder_svg_tag: 'drberg-promo-slider__image-placeholder' }}
+              {% endif %}
+
+            {% if block.settings.link != blank %}
+              </a>
+            {% endif %}
+
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="swiper-slide drberg-promo-slider__empty">
+          Добавьте слайды в настройках секции
+        </div>
+      {% endif %}
+
+    </div>
+    
+     {% comment %} СТРЕЛКА ВЛЕВО (Chevron Left)  {% endcomment %}
+    <button class="promo-button-prev drberg-promo-slider__btn drberg-promo-slider__btn--prev" aria-label="Предыдущий слайд">
+      <svg class="drberg-promo-slider__btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+
+     {% comment %} СТРЕЛКА ВПРАВО (Chevron Right)  {% endcomment %}
+    <button class="promo-button-next drberg-promo-slider__btn drberg-promo-slider__btn--next" aria-label="Следующий слайд">
+      <svg class="drberg-promo-slider__btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRBERG PROMO SLIDER",
+  "class": "section-promo-slider",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Слайд",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Изображение"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Ссылка (на товар или коллекцию)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRBERG PROMO SLIDER",
+      "category": "Page",
+      "blocks": [
+        { "type": "slide" }        
+      ]
+    }
+  ]
+}
+{% endschema %}

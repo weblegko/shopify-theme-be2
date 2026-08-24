@@ -55,9 +55,9 @@
         "padding_bottom": 20
       }
     },
-    "weblegko-header": {
-      "type": "weblegko-header",
-      "name": "WEBLEGKO Header",
+    "drberg-header": {
+      "type": "drberg-header",
+      "name": "DRBERG HEADER",
       "settings": {
         "menu": "main-menu",
         "social_telegram_link": "https://t.me/your_channel",
@@ -72,6 +72,6 @@
   "order": [
     "announcement-bar",
     "header",
-    "weblegko-header"
+    "drberg-header"
   ]
 }

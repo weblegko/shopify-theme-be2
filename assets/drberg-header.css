@@ -1,0 +1,65 @@
+/* === Native Dawn Header Styles (перенесено из <style>) === */
+header-drawer {
+  justify-self: start;
+  margin-left: 1.4rem;
+  margin-right: -1rem;
+}
+
+.header__icon .icon-hamburger {
+  height: 3.2rem;
+  width: 3.2rem;
+}
+
+.eco-icon:hover {
+  transform: scale(1.1);
+}
+
+.menu-drawer-container {
+  display: flex;
+}
+
+.list-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-left: 1.5rem;
+}
+
+.list-menu--inline {
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+
+summary.list-menu__item {
+  padding-right: 2.7rem;
+}
+
+.list-menu__item {
+  display: flex;
+  align-items: center;
+  line-height: 143%;
+  letter-spacing: -0.04em;
+  text-align: center;
+}
+
+.list-menu__item--link {
+  text-decoration: none;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  line-height: calc(1 + 0.8 / var(--font-body-scale));
+}
+
+@media screen and (min-width: 750px) {
+  .list-menu__item--link {
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+  }
+}
+
+/* === Sticky Header Fix === */
+.section-header {
+  top: 0;
+  left: 0;
+  right: 0;
+  position: sticky; /* Safari z-index issue. PR #2147 */
+}

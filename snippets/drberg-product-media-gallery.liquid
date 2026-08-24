@@ -1,0 +1,221 @@
+{% comment %}
+  Кастомная галерея Weblegko с интеграцией архитектуры Dawn (Deferred Media)
+  Скрипт вынесен в assets
+{% endcomment %}
+
+{{ 'drberg-product-media-gallery.css' | asset_url | stylesheet_tag }}
+
+{% comment %} Передаем Liquid переменные в JavaScript  {% endcomment %}
+<script>
+  window.drbergGalleryConfig = {
+    productTitle: {{ product.title | json }},
+    productId: {{ product.id | json }}
+  };
+</script>
+
+<script src="{{ 'drberg-product-media-gallery.js' | asset_url }}" defer="defer"></script>
+
+<div class="drberg-gallery" data-product-id="{{ product.id }}">
+   {% comment %} ГЛАВНЫЙ СЛАЙДЕР {% endcomment %}
+  <div class="drberg-gallery__main-wrapper main-swiper-wrapper">
+    <div class="main-swiper drberg-gallery__main-swiper">
+      <div class="swiper-wrapper">
+        {% for media in product.media %}
+          {%- liquid
+            assign is_variant_image = false
+            if variant_images contains media.src
+              assign is_variant_image = true
+            endif
+          -%}
+          <div
+            class="swiper-slide drberg-gallery__main-slide {% if is_variant_image and section.settings.hide_variants %} thumbnail-list_item--variant{% endif %}"
+            data-media-id="{{ media.id }}"
+            data-media-type="{{ media.media_type }}"
+            data-index="{{ forloop.index0 }}"
+          >
+            {% if media.media_type == 'image' %}
+              <img
+                src="{{ media | image_url: width: 800 }}"
+                alt="{{ media.alt | escape }}"
+                class="parallax-img drberg-gallery__main-img"
+                width="800"
+                height="800"
+                loading="lazy"
+                draggable="false"
+              >
+              <div class="zoom-icon">
+                <svg focusable="false" aria-hidden="true">
+                  <use href="#search"></use>
+                </svg>
+              </div>
+            {% else %}
+              {% comment %} Видео и 3D модели (Плейсхолдер, НЕ deferred-media чтобы Dawn не трогал)  {% endcomment %}
+              <div class="deferred-media-placeholder" data-media-id="{{ media.id }}">
+                <button class="deferred-media__poster" type="button">
+                  <span class="weblegko-deffered-media-button deferred-media__poster-button">
+                    {% if media.media_type == 'model' %}
+                      <svg viewBox="0 0 24 24">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                      </svg>
+                    {% else %}
+                      <svg viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    {% endif %}
+                  </span>
+                  <img
+                    src="{{ media.preview_image | image_url: width: 800 }}"
+                    alt="{{ media.alt | escape }}"
+                    width="800"
+                    height="800"
+                    loading="lazy"
+                  >
+                </button>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  {% comment %} Thummbnails {% endcomment %}
+  <div class="drberg-gallery__thumb-wrapper thumb-wrapper">
+    <button class="drberg-gallery__thumb-btn thumb-btn-prev">
+      <svg class="drberg-gallery__thumb-btn-icon">
+        <use href="#chevron-left"></use>
+      </svg>
+    </button>
+    <div class="drberg-gallery__thumb-swiper thumb-swiper">
+      <div class="swiper-wrapper">
+        {% for media in product.media %}
+          {%- liquid
+            assign is_variant_image = false
+            if variant_images contains media.src
+              assign is_variant_image = true
+            endif
+          -%}
+          <div
+            class="swiper-slide drberg-gallery__thumb-slide {% if is_variant_image and section.settings.hide_variants %} thumbnail-list_item--variant{% endif %}"
+            data-media-id="{{ media.id }}"
+            data-index="{{ forloop.index0 }}"
+          >
+            <img
+              src="{{ media.preview_image | image_url: width: 200 }}"
+              alt="{{ media.alt | escape }}"
+              class="drberg-gallery__thumb-img"
+              width="200"
+              height="200"
+              loading="lazy"
+            >
+            {% if media.media_type != 'image' %}
+              <span
+                class="thumb-badge"
+                style="position:absolute;bottom:5px;right:5px;background:rgba(0,0,0,0.6);padding:2px;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;"
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#fff">
+                  {% if media.media_type == 'model' %}<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>{% else %}<path d="M8 5v14l11-7z"/>{% endif %}
+                </svg>
+              </span>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <button class="drberg-gallery__thumb-btn thumb-btn-next">
+      <svg class="drberg-gallery__thumb-btn-icon">
+        <use href="#chevron-right"></use>
+      </svg>
+    </button>
+  </div>
+</div>
+
+{% comment %} Lightbox {% endcomment %}
+<div class="weblegko-lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <div class="lb-counter" id="lightboxCounter">1 / 1</div>
+
+  <div class="swiper lightbox-swiper">
+    <div class="swiper-wrapper" id="lightboxWrapper">
+      {% for media in product.media %}
+        {%- liquid
+          assign is_variant_image = false
+          if variant_images contains media.src
+            assign is_variant_image = true
+          endif
+        -%}
+        <div
+          class="swiper-slide {% if is_variant_image and section.settings.hide_variants %} thumbnail-list_item--variant{% endif %}"
+          data-media-id="{{ media.id }}"
+          data-media-type="{{ media.media_type }}"
+          data-alt="{{ media.alt | escape }}"
+        >
+          {% if media.media_type == 'image' %}
+            <img
+              src="{{ media | image_url: width: 1920 }}"
+              alt="{{ media.alt | escape }}"
+              class="lb-img"
+              width="1920"
+              height="1080"
+              loading="lazy"
+            >
+          {% else %}
+            <!-- Нативный Dawn deferred-media для загрузки видео/3D -->
+            <deferred-media class="deferred-media" data-media-id="{{ media.id }}">
+              <button class="deferred-media__poster" type="button">
+                <span class="deferred-media__poster-button">
+                  {% if media.media_type == 'model' %}
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                  {% else %}
+                    <svg viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  {% endif %}
+                </span>
+                <img src="{{ media.preview_image | image_url: width: 1920 }}" alt="{{ media.alt | escape }}" width="1920" height="1080">
+              </button>
+              <template>
+                {% case media.media_type %}
+                  {% when 'external_video' %}
+                    {{
+                      media
+                      | external_video_url: autoplay: true, loop: section.settings.enable_video_looping
+                      | external_video_tag: iframe_style: 'width: 100%; height: 100%;'
+                    }}
+                  {% when 'video' %}
+                    {{
+                      media
+                      | media_tag:
+                        image_size: '2048x',
+                        autoplay: true,
+                        loop: section.settings.enable_video_looping,
+                        controls: true,
+                        preload: 'none'
+                    }}
+                  {% when 'model' %}
+                    {{ media | media_tag: image_size: '2048x', toggleable: true }}
+                {% endcase %}
+              </template>
+            </deferred-media>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <button class="lb-btn-prev">
+    <svg viewBox="0 0 24 24">
+      <path d="M15 19l-7-7 7-7"/>
+    </svg>
+  </button>
+  <button class="lb-btn-next">
+    <svg viewBox="0 0 24 24">
+      <path d="M9 5l7 7-7 7"/>
+    </svg>
+  </button>
+
+  <div class="lb-caption" id="lightboxCaption">{{ product.title | escape }}</div>
+  <div class="lb-progress"><div class="lb-progress-bar" id="lightboxProgress"></div></div>
+</div>

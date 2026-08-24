@@ -1,0 +1,320 @@
+{%- liquid
+  assign is_homepage = false
+  assign is_product = false
+  assign is_collection = false
+  assign is_cart = false
+  
+  if template == 'index'
+    assign is_homepage = true
+  endif
+  
+  if template == 'product'
+    assign is_product = true
+  endif
+  
+  if template == 'collection'
+    assign is_collection = true
+  endif
+  
+  if template == 'cart'
+    assign is_cart = true
+  endif
+-%}
+
+<footer class="drberg-footer">
+  <div class="{% if is_homepage or is_product %}drberg-footer__container--wider {% else %}page-width {% endif %} drberg-footer__container">
+   
+     {% comment %} ПЕРВЫЙ РЯД (50% / 50%)  {% endcomment %}
+   
+    <div class="drberg-footer__row">
+       {% comment %} 1.1: Подписка (Левая половина)  {% endcomment %}
+      {%- if section.settings.newsletter_enable -%}
+        <div class="drberg-footer__col">
+          {%- if section.settings.newsletter_heading != blank -%}
+            <h2 class="drberg-footer__newsletter-heading inline-richtext">
+              {{ section.settings.newsletter_heading }}
+            </h2>
+          {%- endif -%}
+
+          {%- form 'customer', id: 'ContactFooter', class: 'newsletter-form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="drberg-footer__newsletter-form-wrapper">
+              <div class="drberg-footer__newsletter-input-row">
+                <input
+                  id="NewsletterForm--{{ section.id }}"
+                  type="email"
+                  name="contact[email]"
+                  class="drberg-footer__newsletter-input"
+                  value="{{ form.email }}"
+                  placeholder="{{ 'newsletter.label' | t }}"
+                  aria-required="true"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  autocomplete="email"
+                  {% if form.errors %}
+                    autofocus
+                    aria-invalid="true"
+                    aria-describedby="ContactFooter-error"
+                  {% elsif form.posted_successfully? %}
+                    aria-describedby="ContactFooter-success"
+                  {% endif %}
+                  required
+                >
+                <label class="visually-hidden" for="NewsletterForm--{{ section.id }}">
+                  {{ 'newsletter.label' | t }}
+                </label>
+                <button
+                  type="submit"
+                  class="drberg-footer__newsletter-btn"
+                  name="commit"
+                  id="Subscribe"
+                  aria-label="{{ 'newsletter.button_label' | t }}"
+                >
+                  <span>Subscribe</span>
+                </button>
+              </div>
+
+               {% comment %} Чекбокс согласия  {% endcomment %}
+              <label class="cb drberg-footer__cb-label">
+                <input
+                  type="checkbox"
+                  required
+                  name="subscribe-check"
+                  class="cb-input"
+                >
+                <span class="cb-box drberg-footer__cb-box">
+                  <svg class="cb-icon drberg-footer__cb-icon">
+                    <use href="#check"></use>
+                  </svg>
+                </span>
+                <span> I agree to the terms and conditions </span>
+              </label>
+
+              {%- if form.errors -%}
+                <small class="drberg-footer__form-error form__message" id="ContactFooter-error">
+                  <span class="svg-wrapper">
+                    {{- 'icon-error.svg' | inline_asset_content -}}
+                  </span>
+                  {{- form.errors.translated_fields.email | capitalize }}
+                  {{ form.errors.messages.email -}}
+                </small>
+              {%- endif -%}
+
+              {%- if form.posted_successfully? -%}
+                <h3
+                  class="drberg-footer__form-success form__message"
+                  id="ContactFooter-success"
+                  tabindex="-1"
+                  autofocus
+                >
+                  <span class="svg-wrapper">
+                    {{- 'icon-success.svg' | inline_asset_content -}}
+                  </span>
+                  {{- 'newsletter.success' | t }}
+                </h3>
+              {%- endif -%}
+            </div>
+          {%- endform -%}
+        </div>
+      {%- endif -%}
+
+       {% comment %} 1.2: Меню, Ссылки, Соцсети (Правая половина)  {% endcomment %}
+      <div class="drberg-footer__col">
+        <div class="drberg-footer__inner-row">
+           {% comment %} 1.2.1: Меню футера  {% endcomment %}
+          <div class="drberg-footer__menu-col">
+            {%- if section.settings.menu != blank -%}
+              <ul class="drberg-footer__menu-list">
+                {%- for link in section.settings.menu.links -%}
+                  <li>
+                    <a
+                      href="{{ link.url }}"
+                      class="drberg-footer__link {% if link.active %}drberg-footer__link--active{% endif %}"
+                    >
+                      {{ link.title | escape }}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </div>
+
+           {% comment %} 1.2.2: Политики + Соцсети + Почта  {% endcomment %}
+          <div class="drberg-footer__policies-col">
+             {% comment %} Сверху: Политики (Dynamic)  {% endcomment %}
+            {%- if section.settings.show_policy -%}
+              <ul class="drberg-footer__policies-list">
+                {%- for policy in shop.policies -%}
+                  {%- if policy != blank -%}
+                    <li>
+                      <a
+                        href="{{ policy.url }}"
+                        class="drberg-footer__link"
+                      >
+                        {{- policy.title | escape -}}
+                      </a>
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+
+             {% comment %} Снизу: Соцсети и Почта  {% endcomment %}
+            <div class="drberg-footer__socials-wrapper">
+              <div class="drberg-footer__socials">
+                {%- if settings.social_instagram_link != blank -%}
+                  <a
+                    href="{{ settings.social_instagram_link }}"
+                    class="drberg-footer__social-link"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="Instagram"
+                  >
+                    <!-- Иконка Instagram -->
+                    <div class="eco-icon drberg-footer__social-icon">
+                      <img
+                        src="{{ 'instagram.webp' | asset_url }}"
+                        alt="Instagram"
+                        class="drberg-footer__social-img"
+                        loading="lazy"
+                        width="60"
+                        height="60"
+                      >
+                    </div>
+                  </a>
+                {%- endif -%}
+                <a
+                  href="https://telegram.org"
+                  class="drberg-footer__social-link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Telegram"
+                >
+                  <svg
+                    class="eco-icon drberg-footer__social-icon"
+                    focusable="false"
+                    aria-hidden="true"
+                  >
+                    <use href="#telegram"></use>
+                  </svg>
+                </a>
+                {%- if settings.social_facebook_link != blank -%}
+                  <a
+                    href="{{ settings.social_facebook_link }}"
+                    class="drberg-footer__social-link"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="Facebook"
+                  >
+                    <svg
+                      class="eco-icon drberg-footer__social-icon"
+                      focusable="false"
+                      aria-hidden="true"
+                    >
+                      <use href="#facebook"></use>
+                    </svg>
+                  </a>
+                {%- endif -%}
+              </div>
+              {%- if section.settings.footer_email != blank -%}
+                <div class="drberg-footer__email-row">
+                  <span class="drberg-footer__email-label">E-mail us:</span>
+                  <a
+                    href="mailto:{{ section.settings.footer_email }}"
+                    class="drberg-footer__email-link"
+                  >
+                    {{ section.settings.footer_email }}
+                  </a>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+     {% comment %} ВТОРОЙ РЯД (50% / 50%)  {% endcomment %}
+  
+    <div class="drberg-footer__row drberg-footer__row--bottom">
+       {% comment %} 2.1: Серый информативный текст  {% endcomment %}
+      <div class="drberg-footer__info-col">
+        {{ section.settings.info_text_1 }}
+        {{ section.settings.info_text_2 }}
+        {{ section.settings.info_text_3 }}
+      </div>
+
+       {% comment %} 2.2: Пустая колонка для макета  {% endcomment %}
+      <div class="drberg-footer__empty-col"></div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "DRBERG FOOTER",
+  "class": "section-footer",  
+  "settings": [
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "default": "Sign up to our Newsletter,<br> for the latest Promotions,<br> New Products and Sales!",
+      "label": "Heading"
+    },
+    {
+      "type": "header",
+      "content": "Navigation & Links"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "footer",
+      "label": "Footer menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "newsletter_enable",
+      "default": true,
+      "label": "t:sections.footer.settings.newsletter_enable.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policy",
+      "default": true,
+      "label": "Show store policies"
+    },
+    {
+      "type": "text",
+      "id": "footer_email",
+      "label": "Email address",
+      "default": "hello@yourstore.com"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Information"
+    },
+    {
+      "type": "richtext",
+      "id": "info_text_1",
+      "label": "Info paragraph #1",
+      "default": "<p>Life Is Real, So Take Real Supplements™</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "info_text_2",
+      "label": "Info paragraph #2",
+      "default": "<p>Promotions and discounts cannot be stacked. Promotional codes are not valid on Subscriptions.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "info_text_3",
+      "label": "Info paragraph #3",
+      "default": "<p>These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>"
+    }
+  ]
+}
+{% endschema %}

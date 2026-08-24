@@ -1,0 +1,109 @@
+/* === Drberg Newsletter Banner Section Styles === */
+
+.drberg-newsletter {
+  @apply tw:z-0 tw:relative tw:w-full tw:p-[1.6rem] tw:flex tw:items-center tw:overflow-hidden;
+  background: linear-gradient(180deg, #00b5d1 0%, #048498 100%);
+}
+
+.drberg-newsletter__bg-image {
+  @apply tw:absolute tw:inset-0 tw:w-full tw:h-full tw:object-cover tw:z-0;
+}
+
+.drberg-newsletter__inner {
+  @apply tw:relative tw:z-10 tw:w-full tw:flex tw:flex-col tw:xs:flex-row tw:justify-between tw:gap-[10rem] tw:xs:gap-[3rem];
+}
+
+.drberg-newsletter__heading {
+  @apply tw:text-white tw:text-[4rem] tw:font-medium tw:leading-[1.2] tw:tracking-[-0.04em];
+}
+
+.drberg-newsletter__heading-italic {
+  @apply tw:italic;
+}
+
+.drberg-newsletter__card {
+  @apply tw:bg-white tw:rounded-2xl tw:p-[1.6rem] tw:w-full tw:h-[54rem] tw:max-w-[54rem] tw:flex tw:flex-col tw:min-h-[42rem];
+}
+
+.drberg-newsletter__card-header {
+  @apply tw:flex tw:items-center tw:gap-[2rem] tw:mb-[2rem];
+}
+
+.drberg-newsletter__avatar-wrapper {
+  @apply tw:w-[10rem] tw:h-[10rem] tw:shrink-0 tw:rounded-lg tw:overflow-hidden tw:bg-gray-200;
+}
+
+.drberg-newsletter__avatar {
+  @apply tw:w-full tw:h-full tw:object-cover;
+}
+
+.drberg-newsletter__avatar-placeholder {
+  @apply tw:w-full tw:h-full;
+}
+
+.drberg-newsletter__doctor-name {
+  @apply tw:mb-2 tw:text-[1.8rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.33] tw:text-grayscale-800;
+}
+
+.drberg-newsletter__doctor-role {
+  @apply tw:text-[1.4rem] tw:text-grayscale-300 tw:tracking-[-0.04em] tw:leading-[1.43];
+}
+
+.drberg-newsletter__card-text {
+  @apply tw:text-[1.8rem] tw:text-grayscale-500 tw:leading-[1.33] tw:tracking-[-0.04em] tw:flex-1 tw:mb-[2rem];
+}
+
+.drberg-newsletter__form-wrapper {
+  @apply tw:mt-auto;
+}
+
+.drberg-newsletter__form-inner {
+  @apply tw:flex tw:flex-col tw:gap-[1.6rem];
+}
+
+.drberg-newsletter__label {
+  @apply tw:mb-2 tw:block tw:text-[1.4rem] tw:text-grayscale-400 tw:tracking-[-0.04em] tw:leading-[1.43];
+}
+
+.drberg-newsletter__input {
+  @apply tw:w-full tw:border tw:border-grayscale-100 tw:rounded-[0.8rem] tw:px-4 tw:h-[3.6rem] tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:placeholder-grayscale-500 tw:focus:outline-none tw:focus:ring-2 tw:focus:ring-black;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.drberg-newsletter__cb-label {
+  @apply tw:flex tw:items-center tw:gap-[0.8rem] tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-grayscale-950;
+}
+
+.drberg-newsletter__cb-box {
+  @apply tw:bg-white tw:shrink-0 tw:w-[1.8rem] tw:h-[1.8rem] tw:border-2 tw:border-slate-200 tw:rounded-[0.4rem] tw:flex tw:items-center tw:justify-center tw:transition;
+}
+
+.drberg-newsletter__cb-icon {
+  @apply tw:w-[1.8rem] tw:h-[1.8rem] tw:scale-150 tw:translate-x-1/6 tw:-translate-y-1/5;
+}
+
+.drberg-newsletter__cb-text {
+  @apply tw:text-[1.4rem] tw:tracking-[-0.04em] tw:leading-[1.43];
+}
+
+.drberg-newsletter__cb-text-muted {
+  @apply tw:text-grayscale-400;
+}
+
+.drberg-newsletter__privacy-link {
+  @apply tw:text-grayscale-950;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+}
+
+.drberg-newsletter__success {
+  @apply tw:text-green-600 tw:text-[1.4rem] tw:font-medium tw:leading-[1.43] tw:tracking-[-0.04em];
+}
+
+.drberg-newsletter__error {
+  @apply tw:text-red-500 tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:block;
+}
+
+.drberg-newsletter__btn {
+  @apply tw:w-full tw:bg-goluboy tw:text-white tw:h-[4.8rem] tw:rounded-[0.8rem] tw:transition-colors tw:duration-300 tw:tracking-[-0.04em] tw:leading-[1.5] tw:text-[1.6rem] tw:font-medium tw:hover:bg-goluboydark;
+}

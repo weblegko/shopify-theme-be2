@@ -1,0 +1,41 @@
+/* === Drberg Product Media Gallery Snippet Styles === */
+
+.drberg-gallery__main-wrapper {
+  @apply tw:rounded-[1.6rem] tw:mb-[1.6rem] tw:p-[0.8rem] tw:bg-white;
+}
+
+.drberg-gallery__main-swiper {
+  @apply tw:rounded-[0.8rem] tw:overflow-hidden;
+}
+
+.drberg-gallery__main-slide {
+  @apply tw:bg-[#f2f1ed] tw:select-none;
+}
+
+.drberg-gallery__main-img {
+  @apply tw:select-none tw:pointer-events-none;
+}
+
+.drberg-gallery__thumb-wrapper {
+  @apply tw:relative tw:flex tw:items-center tw:gap-[1.6rem];
+}
+
+.drberg-gallery__thumb-btn {
+  @apply tw:flex-shrink-0 tw:cursor-pointer;
+}
+
+.drberg-gallery__thumb-btn-icon {
+  @apply tw:w-[2.4rem] tw:h-[2.4rem];
+}
+
+.drberg-gallery__thumb-swiper {
+  @apply tw:flex-1 tw:overflow-hidden;
+}
+
+.drberg-gallery__thumb-slide {
+  @apply tw:aspect-square tw:rounded-[1.2rem] tw:overflow-hidden tw:bg-[#f8f8f8] tw:cursor-pointer tw:hover:opacity-80 tw:border-2 tw:border-transparent tw:transition-all tw:duration-300;
+}
+
+.drberg-gallery__thumb-img {
+  @apply tw:w-full tw:h-full tw:object-cover;
+}

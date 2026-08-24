@@ -1,0 +1,9 @@
+.card__information {
+  grid-row-start: 2;
+  padding: 1.3rem 0rem 0rem 0rem;
+}
+/* Добавляем z-index для кнопки, чтобы она была поверх */
+.quick-add {
+  position: relative;
+  z-index: 2;
+}

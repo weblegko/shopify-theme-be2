@@ -1,0 +1,14 @@
+/* === Drberg Header Search Snippet Styles === */
+
+/* BEM Tailwind Mapping */
+.drberg-header-search {
+  @apply tw:lg:!hidden;
+}
+
+.drberg-header-search__icon {
+  @apply tw:w-[2.4rem] tw:h-[2.4rem] tw:xl:w-[2rem] tw:xl:h-[2rem];
+}
+
+.drberg-header-search__button-icon {
+  @apply tw:w-[2rem] tw:h-[2rem];
+}

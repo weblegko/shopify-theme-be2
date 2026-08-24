@@ -1,0 +1,70 @@
+/* === Drberg Why Us Section Styles === */
+
+.drberg-why {
+  @apply tw:hidden tw:md:block tw:relative tw:overflow-hidden tw:text-white;
+}
+
+.drberg-why__bg-image {
+  @apply tw:absolute tw:inset-0 tw:w-full tw:h-full tw:object-cover tw:z-0;
+}
+
+.drberg-why__bg-placeholder {
+  @apply tw:absolute tw:inset-0 tw:bg-grayscale-950 tw:z-0;
+}
+
+.drberg-why__overlay {
+  @apply tw:absolute tw:inset-0 tw:bg-black/50 tw:z-[1];
+}
+
+.drberg-why__container {
+  @apply tw:relative tw:z-0 tw:max-w-[112rem] tw:mx-auto tw:px-[1.6rem] tw:xl:px-0;
+}
+
+.drberg-why__header {
+  @apply tw:flex tw:flex-col tw:items-center tw:gap-[1rem] tw:mb-[3rem] tw:md:mb-[3.5rem];
+}
+
+.drberg-why__heading {
+  @apply tw:text-[2.4rem] tw:md:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.33] tw:lg:leading-[1.2] tw:text-center;
+}
+
+.drberg-why__badge {
+  @apply tw:mx-auto tw:inline-flex tw:items-center tw:justify-center tw:gap-2 tw:py-[0.8rem] tw:px-[2rem] tw:bg-white/20 tw:backdrop-blur-sm tw:rounded-full;
+}
+
+.drberg-why__badge-text {
+  @apply tw:pt-1 tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-center;
+}
+
+.drberg-why__grid {
+  @apply tw:grid tw:grid-cols-2 tw:gap-[1rem];
+}
+
+/* Карточка (Эффект стекла) */
+.drberg-why__card {
+  @apply tw:flex tw:flex-col tw:items-center tw:text-center tw:p-[2rem] tw:rounded-[1.2rem] tw:bg-white/8 tw:backdrop-blur-md tw:border tw:border-white/20 tw:transition-all tw:duration-300 tw:hover:bg-white/20 tw:h-full;
+}
+
+.drberg-why__icon-wrapper {
+  @apply tw:w-[6rem] tw:h-[6rem] tw:flex tw:items-center tw:justify-center tw:mb-[2rem] tw:drop-shadow-lg;
+}
+
+.drberg-why__icon {
+  @apply tw:w-full tw:h-full tw:object-contain;
+}
+
+.drberg-why__icon-placeholder {
+  @apply tw:w-[5rem] tw:h-[5rem] tw:flex tw:items-center tw:justify-center tw:mb-[2rem] tw:bg-white/20 tw:rounded-full;
+}
+
+.drberg-why__icon-placeholder-svg {
+  @apply tw:w-[2.4rem] tw:h-[2.4rem] tw:opacity-70;
+}
+
+.drberg-why__card-title {
+  @apply tw:text-[2rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.4] tw:mb-[1rem];
+}
+
+.drberg-why__card-text {
+  @apply tw:text-[1.6rem] tw:text-white/60 tw:leading-[1.5] tw:tracking-[-0.04em];
+}

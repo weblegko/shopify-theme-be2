@@ -1,0 +1,51 @@
+/* === Weblegko Doctor Quote Section Styles === */
+
+.drberg-doctor-quote {
+  @apply tw:bg-grayscale-50 tw:text-grayscale-950;
+}
+
+.drberg-doctor-quote__container {
+  @apply tw:max-w-[112rem] tw:px-[1.6rem] tw:mx-auto tw:w-full;
+}
+
+.drberg-doctor-quote__grid {
+  @apply tw:flex tw:flex-col tw:md:flex-row;
+}
+
+/* Левая колонка */
+.drberg-doctor-quote__image-col {
+  @apply tw:flex tw:items-center tw:justify-center;
+}
+
+.drberg-doctor-quote__image {
+  @apply tw:w-full tw:max-w-[55rem] tw:h-auto tw:object-contain;
+}
+
+.drberg-doctor-quote__image-placeholder {
+  @apply tw:w-full tw:max-w-[55rem] tw:opacity-50;
+}
+
+/* Правая колонка */
+.drberg-doctor-quote__content {
+  @apply tw:flex tw:flex-col tw:justify-center tw:mt-[2rem] tw:md:mt-0;
+}
+
+.drberg-doctor-quote__icon-wrapper {
+  @apply tw:mb-[2rem];
+}
+
+.drberg-doctor-quote__icon {
+  @apply tw:w-[5.5rem] tw:h-[4.7rem] tw:text-golden;
+}
+
+.drberg-doctor-quote__text {
+  @apply tw:flex tw:flex-col tw:gap-[1rem] tw:text-[2rem] tw:text-grayscale-700 tw:leading-[1.4] tw:tracking-[-0.04em] tw:font-medium;
+}
+
+.drberg-doctor-quote__btn-wrapper {
+  @apply tw:mt-[2rem];
+}
+
+.drberg-doctor-quote__btn {
+  @apply tw:inline-flex tw:items-center tw:justify-center tw:rounded-full tw:transition-colors tw:duration-300 tw:ease-in-out tw:hover:bg-golden tw:px-[1.6rem] tw:pt-1 tw:h-[3.6rem] tw:bg-white tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:font-medium tw:shadow-md;
+}

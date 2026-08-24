@@ -1,0 +1,108 @@
+<div class="drberg-breadcrumbs-wrapper">
+  <div class="breadcrumbs drberg-breadcrumbs" role="navigation" aria-label="Breadcrumbs">
+    <ol class="drberg-breadcrumbs__list">
+      <li class="drberg-breadcrumbs__item drberg-breadcrumbs__item--home">
+        <a href="/" class="drberg-breadcrumbs__link--home">
+          <svg class="drberg-breadcrumbs__icon" focusable="false" aria-hidden="true">
+            <use href="#home"></use>
+          </svg>
+          <span class="drberg-breadcrumbs__sr-text">Home</span>
+        </a>
+        <span class="drberg-breadcrumbs__separator">/</span>
+      </li>
+
+      {%- comment -%} ЛОГИКА ДЛЯ КОЛЛЕКЦИЙ {%- endcomment -%}
+
+      {%- if collection -%}
+        {%- comment -%} Если есть текущая коллекция {%- endcomment -%}
+        <li class="drberg-breadcrumbs__item">
+          {%- if collection.handle != 'all' -%}
+            <a
+              href="{{ collection.url }}"
+              class="drberg-breadcrumbs__link"
+            >
+              {{ collection.title }}
+            </a>
+          {%- else -%}
+            <span class="drberg-breadcrumbs__text">All products</span>
+          {%- endif -%}
+          <span class="drberg-breadcrumbs__separator">/</span>
+        </li>
+
+      {%- elsif product.collections.first -%}
+        {%- comment -%} Если нет текущей коллекции, но есть первая коллекция товара {%- endcomment -%}
+        <li class="drberg-breadcrumbs__item">
+          <a
+            href="{{ product.collections.first.url }}"
+            class="drberg-breadcrumbs__link"
+          >
+            {{ product.collections.first.title }}
+          </a>
+          <span class="drberg-breadcrumbs__separator">/</span>
+        </li>
+
+      {%- elsif request.page_type == 'product' -%}
+        {%- comment -%} Если товар без коллекции, показываем каталог {%- endcomment -%}
+        <li class="drberg-breadcrumbs__item">
+          <a
+            href="/collections/all"
+            class="drberg-breadcrumbs__link"
+          >
+            Catalog
+          </a>
+          <span class="drberg-breadcrumbs__separator">/</span>
+        </li>
+      {%- endif -%}
+
+      {%- comment -%} ПОСЛЕДНИЙ ЭЛЕМЕНТ - НАЗВАНИЕ ТОВАРА {%- endcomment -%}
+      <li class="drberg-breadcrumbs__current" title="{{ product.title }}">
+        {{ product.title }}
+      </li>
+    </ol>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "DRBERG BREADCRUMBS",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "Show breadcrumbs",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "home_label",
+      "label": "Home label",
+      "default": "Главная"
+    },
+    {
+      "type": "text",
+      "id": "catalog_label",
+      "label": "Catalog label (for products without collection)",
+      "default": "Каталог"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_current_collection",
+      "label": "Show current collection if available",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_all_collections",
+      "label": "Show full collection hierarchy",
+      "default": false,
+      "info": "Shows: Home > Parent > Child > Product"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRBERG BREADCRUMBS",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

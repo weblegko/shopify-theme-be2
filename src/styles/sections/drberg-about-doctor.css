@@ -1,0 +1,37 @@
+/* === weblegko About Doctor Section Styles === */
+
+.drberg-about {
+  @apply tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem];
+}
+
+.drberg-about__container {
+  @apply tw:max-w-[112rem] tw:mx-auto;
+}
+
+.drberg-about__heading {
+  @apply tw:font-inter tw:text-[1.8rem] tw:text-[#0a0a0a] tw:font-medium tw:leading-[1.56] tw:mb-[1rem];
+}
+
+.drberg-about__text-container {
+  @apply tw:text-[1.4rem] tw:md:text-[1.6rem] tw:text-grayscale-600 tw:leading-[1.5] tw:tracking-[-0.04em] tw:flex tw:flex-col tw:gap-[1rem];
+}
+
+.drberg-about__btn-wrapper {
+  @apply tw:mt-[3rem] tw:flex tw:justify-center;
+}
+
+.drberg-about__btn {
+  @apply tw:shadow-md tw:pt-1 tw:inline-flex tw:items-center tw:justify-center tw:rounded-full tw:transition-colors tw:duration-300 tw:ease-in-out tw:hover:bg-golden tw:px-[1.6rem] tw:h-[3.6rem] tw:bg-white tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:font-medium tw:disabled:opacity-70 tw:disabled:cursor-not-allowed;
+}
+
+.drberg-about__loader {
+  @apply tw:hidden tw:animate-spin tw:mr-2 tw:h-5 tw:w-5 tw:text-goluboydark;
+}
+
+.drberg-about__loader-circle {
+  @apply tw:opacity-25;
+}
+
+.drberg-about__loader-path {
+  @apply tw:opacity-75;
+}

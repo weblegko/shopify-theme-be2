@@ -1,0 +1,47 @@
+  /* Кастомная пагинация: полосочки без закруглений по центру */
+  .secondary-slider-pagination {
+    position: absolute;
+    bottom: 2rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    display: flex !important;
+    justify-content: center !important;
+    width: auto !important;
+    gap: 0.8rem;
+    z-index: 20;
+  }
+
+  .secondary-slider-pagination .custom-bullet {
+    width: 4rem !important;
+    height: 0.2rem !important;
+    border-radius: 0 !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .secondary-slider-pagination .custom-bullet .bullet-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #ffffff !important;
+    border-radius: 0;
+    transition: width 0.3s ease;
+    width: 0%;
+  }
+
+  .secondary-slider-pagination .custom-bullet.active .bullet-progress {
+    background: #ffffff !important;
+  }
+
+  .secondary-slider-pagination .custom-bullet:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+  }
+
+  /* Скрываем стандартные булеты Swiper */
+  .secondary-slider-pagination .swiper-pagination-bullet {
+    display: none !important;
+  }

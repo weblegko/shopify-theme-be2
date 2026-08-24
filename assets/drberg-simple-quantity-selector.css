@@ -1,0 +1,72 @@
+  .weblegko-quantity {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 9999px;
+    overflow: hidden;
+    width: fit-content;
+    min-width: 10.8rem;   
+    border: 1px solid #e5e7eb;
+  }
+
+  .weblegko-quantity .quantity__button {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    flex-shrink: 0;
+    padding: 0;
+  }
+
+  .weblegko-quantity .quantity__button:hover {
+    background: #ffc356;
+  }
+
+  .weblegko-quantity .quantity__button .svg-wrapper {
+    width: 1.6rem;
+    height: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .weblegko-quantity .quantity__button .svg-wrapper svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .weblegko-quantity .quantity__input {
+    width: 2rem;
+    height: 4rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+    border: none;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent;
+    padding: 0;
+    -moz-appearance: textfield;
+  }
+
+  .weblegko-quantity .quantity__input::-webkit-outer-spin-button,
+  .weblegko-quantity .quantity__input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .weblegko-quantity .quantity__input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .product-form__input {
+    flex: 0 0 0;
+    margin: 0;
+  }

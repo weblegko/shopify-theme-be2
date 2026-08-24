@@ -1,0 +1,48 @@
+{%- comment -%}
+  Сниппет формы поиска
+  Принимает параметры:
+  - input_id: уникальный ID для инпута (обязательно)
+  - show_button: показывать ли кнопку "Найти" (по умолчанию false)
+  - wrapper_class: дополнительные классы для обертки формы
+{%- endcomment -%}
+
+{%- assign input_id = input_id | default: 'Search-Input' -%}
+{%- assign show_button = show_button | default: false -%}
+ 
+<form
+  action="{{ routes.search_url }}"
+  method="get"
+  role="search"
+  class="drberg-search-form {{ wrapper_class }}"
+>
+  <div class="drberg-search-form__input-wrapper">
+    
+    <div class="drberg-search-form__icon-wrapper">
+      <svg class="drberg-search-form__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+    </div>
+    
+    <input
+      type="search"
+      name="q"
+      id="{{ input_id }}"
+      class="drberg-search-form__input"
+      placeholder="Search products..."
+      autocomplete="off"
+    >
+  </div>
+  <input type="hidden" name="type" value="product">
+
+  {% if show_button %}
+    <button
+      type="submit"
+      class="drberg-search-form__button"
+    >
+    Search
+    </button>
+  {% else %}
+     {% comment %} Скрытая кнопка для сабмита по Enter на клавиатуре  {% endcomment %}
+    <button type="submit" class="drberg-search-form__button--hidden">Search</button>
+  {% endif -%}
+</form>

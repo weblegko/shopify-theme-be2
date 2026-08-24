@@ -1,0 +1,291 @@
+<style> 
+  .drberg-doctor-padding {
+    padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
+    padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
+  }
+
+  @media screen and (min-width: 640px) {
+    .drberg-doctor-padding {
+      padding-top: {{ section.settings.padding_top_tablet | default: 5 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 5 }}rem !important;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .drberg-doctor-padding {
+      padding-top: {{ section.settings.padding_top_desktop | default: 8 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_desktop | default: 8 }}rem !important;
+    }
+  }
+  .drberg-doctor-grid {
+    display: flex !important;
+    align-items: stretch !important;
+    gap: {{ section.settings.gap_mobile | default: 2 }}rem !important;
+  }
+
+  @media screen and (min-width: 640px) {
+    .drberg-doctor-grid {
+      gap: {{ section.settings.gap_tablet | default: 3 }}rem !important;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .drberg-doctor-grid {
+      gap: {{ section.settings.gap_desktop | default: 5 }}rem !important;
+    }
+  }
+  @media screen and (min-width: 640px) {
+    .drberg-doctor-image-col {
+      width: {{ section.settings.image_width_tablet | default: 45 }}% !important;
+      max-width: {{ section.settings.image_width_tablet | default: 45 }}% !important;
+    }
+
+    .drberg-doctor-content-col {
+      width: {{ section.settings.content_width_tablet | default: 55 }}% !important;
+      max-width: {{ section.settings.content_width_tablet | default: 55 }}% !important;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .drberg-doctor-image-col {
+      width: {{ section.settings.image_width_desktop | default: 53 }}% !important;
+      max-width: {{ section.settings.image_width_desktop | default: 53 }}% !important;
+    }
+
+    .drberg-doctor-content-col {
+      width: {{ section.settings.content_width_desktop | default: 47 }}% !important;
+      max-width: {{ section.settings.content_width_desktop | default: 47 }}% !important;
+    }
+  } 
+</style>
+
+
+<section class="drberg-doctor-quote">
+  <div class="drberg-doctor-padding drberg-doctor-quote__container">    
+    <div class="drberg-doctor-grid drberg-doctor-quote__grid">
+       {% comment %} ЛЕВАЯ КОЛОНКА : Картинка доктора  {% endcomment %}
+      <div class="drberg-doctor-image-col drberg-doctor-quote__image-col">
+        {% if section.settings.doctor_image != blank %}
+          {%- assign img_width = 800 -%}
+          {%- assign img_height = img_width | divided_by: section.settings.doctor_image.aspect_ratio -%}
+          <img
+            src="{{ section.settings.doctor_image | image_url: width: 800 }}"
+            alt="{{ section.settings.doctor_name | default: 'Doctor' | escape }}"
+            width="{{ img_width }}"
+            height="{{ img_height }}"
+            class="drberg-doctor-quote__image"
+            loading="lazy"
+          >
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'drberg-doctor-quote__image-placeholder' }}
+        {% endif %}
+      </div>
+
+       {% comment %} ПРАВАЯ КОЛОНКА : Контент  {% endcomment %}
+      <div class="drberg-doctor-content-col drberg-doctor-quote__content">
+         {% comment %} Ряд 1: Желтая иконка апострофа  {% endcomment %}
+        <div class="drberg-doctor-quote__icon-wrapper">
+          <svg class="drberg-doctor-quote__icon" focusable="false" aria-hidden="true">
+            <use href="#quote"></use>
+          </svg>
+        </div>
+
+         {% comment %} Ряд 2: Текст цитаты  {% endcomment %}
+        <div class="drberg-doctor-quote__text">
+          {{ section.settings.quote_text }}
+        </div>
+
+         {% comment %} Ряд 3: Кнопка Learn More  {% endcomment %}
+        {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+          <div class="drberg-doctor-quote__btn-wrapper">
+            <a
+              href="{{ section.settings.button_link }}"
+              class="drberg-doctor-quote__btn"
+            >
+              {{ section.settings.button_label }}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRBERG DOCTOR QUOTE",
+  "tag": "section",
+  "class": "section-doctor-quote",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "doctor_image",
+      "label": "Doctor Image"
+    },
+    {
+      "type": "richtext",
+      "id": "quote_text",
+      "default": "<p>Dr. Eric Berg is a renowned expert in healthy ketosis and intermittent fasting. With over 15 million subscribers worldwide, Dr. Berg has dedicated his career to helping people achieve optimal health through natural nutrition.</p><p>All supplements are scientifically formulated with the highest quality natural ingredients, ensuring maximum effectiveness and safety.</p>",
+      "label": "Quote Text"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Learn More",
+      "label": "Button Label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "🖥️ Desktop (≥ 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "image_width_desktop",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "default": 53,
+      "unit": "%",
+      "label": "Image column width"
+    },
+    {
+      "type": "range",
+      "id": "content_width_desktop",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "default": 47,
+      "unit": "%",
+      "label": "Content column width"
+    },
+    {
+      "type": "range",
+      "id": "gap_desktop",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Gap between columns"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "💻 Tablet (640px - 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "image_width_tablet",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "default": 45,
+      "unit": "%",
+      "label": "Image column width"
+    },
+    {
+      "type": "range",
+      "id": "content_width_tablet",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "default": 55,
+      "unit": "%",
+      "label": "Content column width"
+    },
+    {
+      "type": "range",
+      "id": "gap_tablet",
+      "min": 0,
+      "max": 8,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Gap between columns"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile (< 640px)"
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 2,
+      "unit": "rem",
+      "label": "Gap between columns"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding bottom"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRBERG DOCTOR QUOTE",
+      "category": "Page"
+    }
+  ]
+}
+{% endschema %}

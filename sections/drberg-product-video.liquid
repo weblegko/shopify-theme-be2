@@ -1,0 +1,322 @@
+{{ 'video-section.css' | asset_url | stylesheet_tag }}
+{{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+{{ 'drberg-prod-video.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .drberg-video-padding {
+    padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
+    padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
+    padding-left: {{ section.settings.padding_inline_mobile | default: 1.6 }}rem !important;
+    padding-right: {{ section.settings.padding_inline_mobile | default: 1.6 }}rem !important;
+  }
+
+  @media screen and (min-width: 640px) {
+    .drberg-video-padding {
+      padding-top: {{ section.settings.padding_top_tablet | default: 5 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 5 }}rem !important;
+      padding-left: {{ section.settings.padding_inline_tablet | default: 3 }}rem !important;
+      padding-right: {{ section.settings.padding_inline_tablet | default: 3 }}rem !important;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .drberg-video-padding {
+      padding-top: {{ section.settings.padding_top_desktop | default: 8 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_desktop | default: 8 }}rem !important;
+      padding-left: {{ section.settings.padding_inline_desktop | default: 5 }}rem !important;
+      padding-right: {{ section.settings.padding_inline_desktop | default: 5 }}rem !important;
+    }
+  }
+</style>
+
+{%- liquid  
+  assign product_video = nil
+  for media in product.media
+    if media.media_type == 'video' or media.media_type == 'external_video'
+      assign product_video = media
+      break
+    endif
+  endfor
+-%}
+
+{%- if product_video != nil -%}
+  {%- liquid
+    assign video_id = product_video.id
+    if product_video.media_type == 'external_video'
+      assign video_id = product_video.external_id
+    endif
+    
+    assign video_alt = product_video.alt | default: product.title
+    assign alt = video_alt | escape
+    assign poster = product_video.preview_image
+    
+    assign ratio_diff = product_video.aspect_ratio | minus: poster.aspect_ratio | abs
+    if ratio_diff < 0.01 and ratio_diff > 0
+      assign fix_ratio = true
+    endif
+  -%}
+
+  <div class="drberg-video__wrapper gradient">
+    <div class="drberg-video-padding drberg-video__container video-section isolate">
+      <div class="drberg-video__header-wrapper">
+        {%- unless section.settings.heading == blank -%}
+          <div class="drberg-video__header {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+            <h2 class="drberg-video__heading inline-richtext">{{ section.settings.heading }}</h2>
+          </div>
+        {%- endunless -%}
+      </div>
+      
+      <deferred-media
+        class="video-section__media deferred-media{% if section.settings.full_width %} global-media-settings--full-width{% endif %}{% if fix_ratio %} media-fit-cover{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        data-media-id="{{ video_id }}"        
+      >
+         {% comment %} ТРИГГЕР (Кнопка с постером)  {% endcomment %}
+        <button
+          class="drberg-video__poster-btn group"
+          id="Deferred-Poster-Modal-{{ video_id }}"
+          type="button"
+          aria-label="{{ alt }}"
+        >
+          {%- if poster != null -%}
+            {{
+              poster
+              | image_url: width: 3840
+              | image_tag:
+                sizes: '100%',
+                widths: '375, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+                alt: alt,
+                class: 'drberg-video__poster-img',
+                loading: 'lazy'
+            }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'drberg-video__poster-placeholder' }}
+          {%- endif -%}
+
+          <div class="drberg-video__overlay"></div>
+
+          <div class="drberg-video__play-wrapper">
+            <div class="drberg-video__play-btn">
+              <svg class="drberg-video__play-icon" focusable="false" aria-hidden="true">
+                <use href="#play"></use>
+              </svg>
+              <span class="drberg-video__play-text">Watch Video</span>
+            </div>
+          </div>
+        </button>
+
+        {% comment %} ШАБЛОН ВИДЕО (Загрузится только при клике)  {% endcomment %}
+        <template>
+          {%- if product_video.media_type == 'external_video' -%}
+            {%- liquid
+              assign loop = ''
+              if section.settings.enable_video_looping
+                assign loop = '&loop=1&playlist=' | append: video_id
+              endif
+            -%}
+            {%- if product_video.host == 'youtube' -%}
+              <iframe
+                src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1{{ loop }}"
+                class="js-youtube"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                title="{{ alt }}"
+              ></iframe>
+            {%- else -%}
+              <iframe
+                src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1{{ loop }}"
+                class="js-vimeo"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                title="{{ alt }}"
+              ></iframe>
+            {%- endif -%}
+          {%- else -%}
+            {{
+              product_video
+              | media_tag:
+                autoplay: true,
+                loop: section.settings.enable_video_looping,
+                controls: true,
+                preload: 'none'
+            }}
+          {%- endif -%}
+        </template>
+      </deferred-media>
+    </div>
+  </div>
+
+{%- elsif request.design_mode -%} 
+  <div class="drberg-video__wrapper gradient">
+    <div class="drberg-video-padding drberg-video__container video-section isolate">
+      <div class="drberg-video__header-wrapper">
+        {%- unless section.settings.heading == blank -%}
+          <div class="drberg-video__header">
+            <h2 class="drberg-video__heading inline-richtext">{{ section.settings.heading }}</h2>
+          </div>
+        {%- endunless -%}
+      </div>
+      
+      <div class="drberg-video-placeholder">
+        <div class="drberg-video-placeholder__icon">
+          <svg viewBox="0 0 24 24">
+            <polygon points="23 7 16 12 23 17 23 7"></polygon>
+            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+          </svg>
+        </div>
+        <div class="drberg-video-placeholder__text">No video available</div>
+        <div class="drberg-video-placeholder__hint">
+          Add a video to this product's media to display it here
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "DRBERG PROD VIDEO",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Product Video",
+      "label": "Heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_video_looping",
+      "label": "Enable video looping",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "🖥️ Desktop (≥ 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "padding_inline_desktop",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Horizontal padding (left/right)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "💻 Tablet (640px - 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "padding_inline_tablet",
+      "min": 0,
+      "max": 8,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Horizontal padding (left/right)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile (< 640px)"
+    },
+    {
+      "type": "range",
+      "id": "padding_inline_mobile",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 1.5,
+      "unit": "rem",
+      "label": "Horizontal padding (left/right)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding bottom"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRBERG PROD VIDEO",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

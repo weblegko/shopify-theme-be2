@@ -1,0 +1,318 @@
+<link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-weblegko-search.css' | asset_url }}" media="print" onload="this.media='all'">
+<link
+  rel="stylesheet"
+  href="{{ 'component-weblegko-menu-drawer.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+>
+<link
+  rel="stylesheet"
+  href="{{ 'component-cart-notification.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+>
+{% comment %} <link rel="stylesheet" href="{{ 'drberg-header.css' | asset_url }}" media="print" onload="this.media='all'"> {% endcomment %}
+{{ 'drberg-header.css' | asset_url | stylesheet_tag }}  
+<script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  for block in section.blocks
+    if block.type == '@app'
+      assign has_app_block = true
+    endif
+  endfor
+-%}
+
+{% liquid
+  assign header_tag = 'div'
+%}
+
+<{{ header_tag }} class="header-wrapper color-{{ section.settings.color_scheme }} gradient">
+  {%- liquid
+    assign social_links = false
+    assign localization_forms = false
+
+    if settings.social_twitter_link != blank or settings.social_facebook_link != blank or settings.social_pinterest_link != blank or settings.social_instagram_link != blank or settings.social_youtube_link != blank or settings.social_vimeo_link != blank or settings.social_tiktok_link != blank or settings.social_tumblr_link != blank or settings.social_snapchat_link != blank
+      assign social_links = true
+    endif
+
+    if localization.available_countries.size > 1 and section.settings.enable_country_selector or section.settings.enable_language_selector and localization.available_languages.size > 1
+      assign localization_forms = true
+    endif
+  -%}
+
+  <header id="site-header" class="drberg-header">
+    <div class="drberg-header__left">
+      {%- if request.page_type == 'index' -%}
+        <h1 class="header__heading">
+      {%- endif -%}
+      
+      <a href="{{ routes.root_url }}" class="drberg-header__logo">
+        {%- if settings.logo != blank -%}
+          {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+          {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+          {{
+            settings.logo
+            | image_url: width: 600
+            | image_tag:
+              class: 'drberg-header__logo-img',
+              heights: '80, 100',
+              width: settings.logo_width,
+              alt: logo_alt
+          }}
+        {%- else -%}
+          <span class="drberg-header__logo-text">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+      
+      {%- if request.page_type == 'index' -%}
+        </h1>
+      {%- endif -%}
+      
+      <div class="drberg-header__search">
+        {% render 'custom-header-search' %}
+      </div>
+    </div>
+
+    <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
+      <div class="drberg-header__localization desktop-localization-wrapper">
+        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+          <localization-form class="small-hide medium-hide" data-prevent-hide>
+            {%- form 'localization', id: 'HeaderCountryForm', class: 'localization-form' -%}
+              <div>
+                <h2 class="visually-hidden" id="HeaderCountryLabel">{{ 'localization.country_label' | t }}</h2>
+                {%- render 'country-localization', localPosition: 'HeaderCountry' -%}
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {% endif %}
+
+        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+          <localization-form class="small-hide medium-hide" data-prevent-hide>
+            {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}
+              <div>
+                <h2 class="visually-hidden" id="HeaderLanguageLabel">{{ 'localization.language_label' | t }}</h2>
+                {%- render 'language-localization', localPosition: 'HeaderLanguage' -%}
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {%- endif -%}
+      </div>
+
+      <!-- Social links -->
+      <div class="drberg-header__socials">
+        {%- if settings.social_instagram_link != blank -%}
+          <a href="{{ settings.social_instagram_link }}" class="drberg-header__social-link" target="_blank" rel="noopener" aria-label="Instagram">
+            <div class="eco-icon drberg-header__icon">
+              <img src="{{ 'instagram.webp' | asset_url }}" alt="Instagram" class="drberg-header__social-img" loading="lazy" width="60" height="60">
+            </div>
+          </a>
+        {%- endif -%}
+
+        {%- if section.settings.social_telegram_link != blank -%}
+          <a href="{{ section.settings.social_telegram_link }}" class="drberg-header__social-link" target="_blank" rel="noopener" aria-label="Telegram">
+            <svg class="eco-icon drberg-header__icon" focusable="false" aria-hidden="true">
+              <use href="#telegram"></use>
+            </svg>
+          </a>
+        {%- endif -%}
+        
+        {%- if settings.social_facebook_link != blank -%}
+          <a href="{{ settings.social_facebook_link }}" class="drberg-header__social-link" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg class="eco-icon drberg-header__icon" focusable="false" aria-hidden="true">
+              <use href="#facebook"></use>
+            </svg>
+          </a>
+        {%- endif -%}
+      </div>
+
+      {% render 'drberg-header-search', input_id: 'Search-In-Modal' %}
+
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}" rel="nofollow">
+          {%- if section.settings.enable_customer_avatar -%}
+            <account-icon>
+              {%- if customer and customer.has_avatar? -%}
+                {{ customer | avatar }}
+              {%- else -%}
+                <svg class="eco-icon drberg-header__icon" focusable="false" aria-hidden="true">
+                  <use href="#profile"></use>
+                </svg>
+              {%- endif -%}
+            </account-icon>
+          {%- else -%}
+            <svg class="eco-icon drberg-header__icon" focusable="false" aria-hidden="true">
+              <use href="#profile"></use>
+            </svg>
+          {%- endif -%}
+
+          <span class="visually-hidden">
+            {%- liquid
+              if customer
+                echo 'customer.account_fallback' | t
+              else
+                echo 'customer.log_in' | t
+              endif
+            -%}
+          </span>
+        </a>
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when '@app' -%}
+            {% render block %}
+        {%- endcase -%}
+      {%- endfor -%}
+
+      <!-- Cart -->
+      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset drberg-header__cart" id="cart-icon-bubble">
+        <svg class="eco-icon drberg-header__icon drberg-header__icon--shrink" focusable="false" aria-hidden="true">
+          <use href="#cart"></use>
+        </svg>
+
+        <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+
+        {%- if cart.item_count > 0 -%}
+          <div class="cart-count-bubble drberg-header__cart-bubble">
+            <span class="drberg-header__cart-count" aria-hidden="true">{{ cart.item_count }}</span>
+            <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+          </div>
+        {%- endif -%}
+      </a>
+
+      <!-- Drawer -->
+      <div class="drberg-header__burger-wrapper">
+        <button data-custom-drawer-trigger class="header__icon header__icon--menu link focus-inset" aria-label="Menu">
+          {{- 'icon-burger.svg' | inline_asset_content -}}
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="drberg-header__dropdown">
+    {%- liquid
+      if section.settings.menu != blank
+        render 'header-dropdown-menu'
+      endif
+    %}
+  </div>
+
+</{{ header_tag }}>
+
+{% comment %} Menu darwer (menu+overlay) {% endcomment %}
+{% render 'custom-header-drawer', menu: section.settings.menu %}
+
+{%- if settings.cart_type == 'notification' -%}
+  {%- render 'cart-notification', color_scheme: section.settings.color_scheme, desktop_menu_type: section.settings.menu_type_desktop -%}
+{%- endif -%}
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    {% if settings.logo %}
+      "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
+    {% endif %}
+    "sameAs": [
+      {{ settings.social_twitter_link | json }},
+      {{ settings.social_facebook_link | json }},
+      {{ settings.social_pinterest_link | json }},
+      {{ settings.social_instagram_link | json }},
+      {{ settings.social_tiktok_link | json }},
+      {{ settings.social_tumblr_link | json }},
+      {{ settings.social_snapchat_link | json }},
+      {{ settings.social_youtube_link | json }},
+      {{ settings.social_vimeo_link | json }}
+    ],
+    "url": {{ request.origin | append: page.url | json }}
+  }
+</script>
+
+{%- if request.page_type == 'index' -%}
+  {% assign potential_action_target = request.origin | append: routes.search_url | append: '?q={search_term_string}' %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ request.origin | append: page.url | json }}
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "DRBERG HEADER",
+  "class": "section-header",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "t:sections.header.settings.menu.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__1.content"
+    },
+    {
+      "type": "text",
+      "id": "social_telegram_link",
+      "label": "Telegram Social Link",
+      "info": "Например: https://t.me/your_channel",
+      "default": "https://t.me/your_channel"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "menu_color_scheme",
+      "label": "t:sections.header.settings.menu_color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__utilities.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "default": false,
+      "label": "t:sections.header.settings.enable_country_selector.label",
+      "info": "t:sections.header.settings.enable_country_selector.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "default": false,
+      "label": "t:sections.header.settings.enable_language_selector.label",
+      "info": "t:sections.header.settings.enable_language_selector.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_customer_avatar",
+      "default": true,
+      "label": "t:sections.header.settings.enable_customer_avatar.label",
+      "info": "t:sections.header.settings.enable_customer_avatar.info"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,375 @@
+<section class="drberg-doctor">
+  <div class="drberg-doctor__container">
+     {% comment %} ЛЕВАЯ КОЛОНКА: Фото доктора  {% endcomment %}
+    <div class="drberg-doctor__left">
+      <div class="drberg-doctor__image-wrapper">
+         {% comment %} Фото  {% endcomment %}
+        {%- if section.settings.doctor_image != blank -%}
+          {%- assign img_width = 800 -%}
+          {%- assign img_height = img_width | divided_by: section.settings.doctor_image.aspect_ratio -%}
+          <img
+            src="{{ section.settings.doctor_image | image_url: width: 800 }}"
+            alt="{{ section.settings.doctor_name | escape }}"
+            class="drberg-doctor__image"
+            loading="lazy"
+            width="{{ img_width }}"
+            height="{{ img_height }}"
+          >
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'drberg-doctor__image-placeholder' }}
+        {%- endif -%}
+
+         {% comment %} Бейдж Имя и Профессия (Правый верхний угол)  {% endcomment %}
+        {%- if section.settings.doctor_name != blank -%}
+          <div class="drberg-doctor__badge-name">
+            <h2 class="drberg-doctor__name">
+              {{ section.settings.doctor_name }}
+            </h2>
+            {%- if section.settings.doctor_profession != blank -%}
+              <p class="drberg-doctor__profession">
+                {{ section.settings.doctor_profession }}
+              </p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+         {% comment %} Бейджи Соцсетей (Нижний левый угол)  {% endcomment %}
+        <div class="drberg-doctor__socials">
+          {%- if section.settings.instagram_count != blank -%}
+            <div class="drberg-doctor__social-card">
+               {% comment %} Иконка Instagram  {% endcomment %}
+              <div class="drberg-doctor__social-icon-wrapper">
+                <img
+                  src="{{ 'instagram.webp' | asset_url }}"
+                  alt="Instagram"
+                  class="drberg-doctor__social-icon"
+                  loading="lazy"
+                  width="60"
+                  height="60"
+                >
+              </div>
+
+              <span class="drberg-doctor__social-text">
+                {{- section.settings.instagram_count -}}
+              </span>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.youtube_count != blank -%}
+            <div class="drberg-doctor__social-card">
+               {% comment %} Иконка YouTube  {% endcomment %}
+              <div class="drberg-doctor__social-icon-wrapper">
+                <img
+                  src="{{ 'youtube-around.webp' | asset_url }}"
+                  alt="Youtube"
+                  class="drberg-doctor__social-icon"
+                  loading="lazy"
+                  width="60"
+                  height="60"
+                >
+              </div>
+
+              <span class="drberg-doctor__social-text">
+                {{- section.settings.youtube_count -}}
+              </span>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+     {% comment %} ПРАВАЯ КОЛОНКА: Инфо и Слайдер  {% endcomment %}
+    <div class="drberg-doctor__right">
+       {% comment %} Ряд 1: Карточка с информацией  {% endcomment %}
+      <div class="drberg-doctor__info-card">
+        {%- if section.settings.info_heading != blank -%}
+          <div class="drberg-doctor__info-header">
+            <h2 class="drberg-doctor__info-heading">
+              <span>{{ section.settings.info_heading }}</span><br>
+              {%- if section.settings.info_heading_italic != blank -%}
+                <span class="drberg-doctor__info-heading-amp">&</span>
+                <span class="drberg-doctor__info-heading-italic">
+                  {{ section.settings.info_heading_italic -}}
+                </span>
+              {%- endif -%}
+            </h2>
+
+            {%- if section.settings.youtube_count != blank -%}
+              <div class="drberg-doctor__youtube-badge">
+                <svg class="tw:w-[2rem] tw:h-[2rem]">
+                  <use href="#runo-left"></use>
+                </svg>
+
+                <span class="drberg-doctor__youtube-icon-wrapper">
+                  <svg class="tw:w-[2rem] tw:h-[2rem]">
+                    <use href="#youtube"></use>
+                  </svg>
+
+                  <span class="drberg-doctor__youtube-text">
+                    {{- section.settings.youtube_count -}}
+                  </span>
+                </span>
+
+                <svg class="tw:w-[2rem] tw:h-[2rem]">
+                  <use href="#runo-right"></use>
+                </svg>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+         {% comment %} Рейтинг звездами  {% endcomment %}
+        <div class="drberg-doctor__rating">
+           {% comment %} Звезды (Динамический вывод из настроек)  {% endcomment %}
+          <div class="drberg-doctor__stars">
+            {%- for i in (1..5) -%}
+              <svg class="drberg-doctor__star-icon">
+                <use href="#star"></use>
+              </svg>
+            {%- endfor -%}
+          </div>
+          {%- if section.settings.info_rating_value != blank -%}
+            <span class="drberg-doctor__rating-value">
+              {{- section.settings.info_rating_value -}}
+            </span>
+          {%- endif -%}
+          <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="1" cy="1" r="1" fill="#80899C" />
+          </svg>
+          {%- if section.settings.info_reviews_value != blank -%}
+            <span class="drberg-doctor__reviews-value">
+              {{- section.settings.info_reviews_value -}}
+              <span> reviews</span>
+            </span>
+          {%- endif -%}
+
+          <button type="button" class="drberg-doctor__rating-arrow">
+            <svg class="drberg-doctor__rating-arrow-icon">
+              <use href="#chevron-right"></use>
+            </svg>
+          </button>
+        </div>
+
+        {%- if section.settings.info_description != blank -%}
+          <div class="drberg-doctor__description">
+            {{ section.settings.info_description }}
+          </div>
+        {%- endif -%}
+
+        <!-- Кнопки -->
+        <div class="drberg-doctor__buttons">
+          {%- if section.settings.button_blue_label != blank -%}
+            <a
+              href="{{ section.settings.button_blue_link }}"
+              class="drberg-doctor__btn-blue"
+            >
+              <span>{{ section.settings.button_blue_label }}</span>
+              <svg
+                class="drberg-doctor__btn-blue-icon"
+                focusable="false"
+                aria-hidden="true"
+              >
+                <use href="#arror-up"></use>
+              </svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.button_grey_label != blank -%}
+            <a
+              href="{{ section.settings.button_grey_link }}"
+              class="drberg-doctor__btn-grey"
+            >
+              {{ section.settings.button_grey_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
+       {% comment %} Ряд 2: Слайдер  {% endcomment %}
+      <div class="drberg-doctor__slider-wrapper">
+        <div class="swiper doctorSwiper tw:w-full tw:h-full">
+          <div class="swiper-wrapper">
+            {% if section.blocks.size > 0 %}
+              {% for block in section.blocks %}
+                <div class="swiper-slide tw:relative tw:h-full" {{ block.shopify_attributes }}>
+                  {% if block.settings.link != blank %}
+                    <a href="{{ block.settings.link }}" class="tw:block tw:w-full tw:h-full group">
+                  {% endif %}
+                  {% if block.settings.image != blank %}
+                    {%- assign img_width = 800 -%}
+                    {%- assign img_height = img_width | divided_by: block.settings.image.aspect_ratio -%}
+                    {{
+                      block.settings.image
+                      | image_url: width: 800
+                      | image_tag:
+                        class: 'drberg-doctor__slide-image',
+                        loading: 'lazy',
+                        widths: '400, 600, 800',
+                        width: img_width,
+                        height: img_height,
+                        alt: block.settings.image.alt
+                      | default: 'Промо слайд'
+                    }}
+                  {% else %}
+                    {{ 'lifestyle-2' | placeholder_svg_tag: 'weblegko-doctor__slide-placeholder' }}
+                  {% endif %}
+                  {% if block.settings.link != blank %}
+                    </a>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            {% else %}
+              <div class="swiper-slide drberg-doctor__slide-empty">
+                Добавьте слайды
+              </div>
+            {% endif %}
+          </div>
+
+           {% comment %} Стрелки слайдера  {% endcomment %}
+          <button
+            class="doctor-button-prev drberg-doctor__slider-btn drberg-doctor__slider-btn--prev"
+            aria-label="Предыдущий слайд"
+          >
+            <svg class="drberg-doctor__slider-btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <button
+            class="doctor-button-next drberg-doctor__slider-btn drberg-doctor__slider-btn--next"
+            aria-label="Следующий слайд"
+          >
+            <svg class="drberg-doctor__slider-btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+ {% comment %} Подключаем внешний скрипт  {% endcomment %}
+<script src="{{ 'drberg-doctor-grid.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "DRBERG DOCTOR",
+  "tag": "section",
+  "class": "section-doctor",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Doctor Photo & Info"
+    },
+    {
+      "type": "image_picker",
+      "id": "doctor_image",
+      "label": "Doctor Photo"
+    },
+    {
+      "type": "text",
+      "id": "doctor_name",
+      "label": "Doctor Name",
+      "default": "Dr. Eric Berg"
+    },
+    {
+      "type": "text",
+      "id": "doctor_profession",
+      "label": "Profession",
+      "default": "Health & Nutrition Expert"
+    },
+    {
+      "type": "text",
+      "id": "instagram_count",
+      "label": "Instagram Followers",
+      "default": "2.7M followers"
+    },
+    {
+      "type": "text",
+      "id": "youtube_count",
+      "label": "Youtube Subscribers",
+      "default": "14M subscribers"
+    },
+    {
+      "type": "header",
+      "content": "Right Column Info"
+    },
+    {
+      "type": "text",
+      "id": "info_heading",
+      "label": "Heading part 1",
+      "default": "Natural Vitamins"
+    },
+    {
+      "type": "text",
+      "id": "info_heading_italic",
+      "label": "Heading part 2 Italic",
+      "default": "Supplements"
+    },
+    {
+      "type": "text",
+      "id": "info_rating_value",
+      "label": "Rating value (e.g. 5.0)",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "info_reviews_value",
+      "label": "Reviews value",
+      "default": "15,255"
+    },
+    {
+      "type": "textarea",
+      "id": "info_description",
+      "label": "Description",
+      "default": "Quality vitamins and supplements trusted by millions worldwide —  now delivered to your door across the UK."
+    },
+    {
+      "type": "text",
+      "id": "button_blue_label",
+      "label": "Blue Button Label",
+      "default": "Shop All Products"
+    },
+    {
+      "type": "url",
+      "id": "button_blue_link",
+      "label": "Blue Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_grey_label",
+      "label": "Grey Button Label",
+      "default": "Shop All Products"
+    },
+    {
+      "type": "url",
+      "id": "button_grey_link",
+      "label": "Grey Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slider Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRBERG DOCTOR",
+      "category": "Page",
+      "blocks": [{ "type": "slide" }]
+    }
+  ]
+}
+{% endschema %}

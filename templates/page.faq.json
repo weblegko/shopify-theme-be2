@@ -9,12 +9,12 @@
  */
 {
   "sections": {
-    "weblegko-faq": {
-      "type": "weblegko-faq-meta",
+    "drberg-faq": {
+      "type": "drberg-faq",
       "settings": {}
     }
   },
   "order": [
-    "weblegko-faq"
+    "drberg-faq"
   ]
 }

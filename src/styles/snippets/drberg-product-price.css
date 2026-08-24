@@ -1,0 +1,26 @@
+/* === Drberg Product Price Snippet Styles === */
+
+.drberg-product-price {
+  @apply tw:flex tw:justify-between tw:items-center;
+}
+
+.drberg-product-price__inner {
+  @apply tw:flex tw:flex-wrap tw:items-start tw:gap-[0.8rem];
+}
+
+.drberg-product-price__current {
+  @apply tw:text-[4rem] tw:font-medium tw:whitespace-nowrap tw:text-grayscale-950 tw:leading-[1.2] tw:tracking-[-0.04em];
+}
+
+.drberg-product-price__vat {
+  @apply tw:text-[1.8rem] tw:text-grayscale-400 tw:leading-[1.33] tw:tracking-[-0.04em] tw:whitespace-nowrap;
+}
+
+.drberg-product-price__vat-old {
+  @apply tw:line-through;
+}
+
+/* Бейдж скидки */
+.drberg-product-price__badge {
+  @apply tw:shrink-0 tw:bg-additional-green-light tw:text-additional-green tw:uppercase tw:px-3 tw:py-1 tw:rounded-sm;
+}

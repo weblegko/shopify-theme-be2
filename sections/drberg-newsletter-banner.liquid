@@ -1,0 +1,202 @@
+<section class="drberg-newsletter">
+   {% comment %} Фоновое изображение  {% endcomment %}
+  {%- if section.settings.bg_image != blank -%}
+    {%- assign img_width = 1920 -%}
+    {%- assign img_height = img_width | divided_by: section.settings.bg_image.aspect_ratio -%}
+    <img
+      src="{{ section.settings.bg_image | image_url: width: 1920 }}"
+      alt=""
+      width="{{ img_width }}"
+      height="{{ img_height }}"
+      class="drberg-newsletter__bg-image"
+      loading="lazy"
+    >
+  {%- endif -%}
+
+   {% comment %} Контент  {% endcomment %}
+  <div class="drberg-newsletter__inner">
+     {% comment %} ЛЕВАЯ ЧАСТЬ: Текст  {% endcomment %}
+    <h2 class="drberg-newsletter__heading">
+      <span>{{ section.settings.heading_line_1 -}}</span><br>
+      <span class="drberg-newsletter__heading-italic">{{ section.settings.heading_line_2 }}</span>
+    </h2>
+
+     {% comment %} ПРАВАЯ ЧАСТЬ: Карточка с формой  {% endcomment %}
+    <div class="drberg-newsletter__card">
+       {% comment %} Ряд 1: Аватар + Имя/Должность  {% endcomment %}
+      <div class="drberg-newsletter__card-header">
+        <div class="drberg-newsletter__avatar-wrapper">
+          {%- if section.settings.avatar != blank -%}
+            {%- assign avatar_width = 200 -%}
+            {%- assign avatar_height = avatar_width | divided_by: section.settings.avatar.aspect_ratio -%}
+            <img
+              src="{{ section.settings.avatar | image_url: width: 200 }}"
+              alt="Doctor"
+              width="{{ avatar_width }}"
+              height="{{ avatar_height }}"
+              class="drberg-newsletter__avatar"
+            >
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'drberg-newsletter__avatar-placeholder' }}
+          {%- endif -%}
+        </div>
+        <div>
+          <h3 class="drberg-newsletter__doctor-name">
+            {{ section.settings.doctor_name }}
+          </h3>
+          <p class="drberg-newsletter__doctor-role">
+            {{ section.settings.doctor_role }}
+          </p>
+        </div>
+      </div>
+
+       {% comment %} Ряд 2: Серый текст  {% endcomment %}
+      <div class="drberg-newsletter__card-text">
+        {{ section.settings.text }}
+      </div>
+
+       {% comment %} Ряд 3: Форма (Прижата к низу)  {% endcomment %}
+      <div class="drberg-newsletter__form-wrapper">
+        {%- form 'customer', id: 'BannerNewsletter', class: 'newsletter-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+
+          <div class="drberg-newsletter__form-inner">
+             {% comment %} Инпут с Label  {% endcomment %}
+            <div class="block">
+              <label
+                for="BannerEmail-{{ section.id }}"
+                class="drberg-newsletter__label"
+              >
+                Email
+              </label>
+              <input
+                id="BannerEmail-{{ section.id }}"
+                type="email"
+                name="contact[email]"
+                class="drberg-newsletter__input"
+                placeholder="Your email address"
+                required
+              >
+            </div>
+
+             {% comment %} Чекбокс согласия  {% endcomment %}
+            <label class="cb drberg-newsletter__cb-label">
+              <input
+                type="checkbox"
+                required
+                name="subscribe-check"
+                class="cb-input"
+              >
+              <span class="cb-box drberg-newsletter__cb-box">
+                <svg class="cb-icon drberg-newsletter__cb-icon">
+                  <use href="#check"></use>
+                </svg>
+              </span>
+
+              <span class="drberg-newsletter__cb-text">
+                <span class="drberg-newsletter__cb-text-muted">By clicking "Subscribe", I agree to the </span>
+                {%- for policy in shop.policies -%}
+                  {%- if policy.url contains 'privacy' or policy.type == 'privacy' -%}
+                    <a
+                      class="drberg-newsletter__privacy-link"
+                      href="{{ policy.url }}"
+                    >privacy policy
+                  </a>
+                  {%- endif -%}
+                {%- endfor -%}
+                .
+              </span>
+            </label>
+
+            {%- if form.posted_successfully? -%}
+              <h3
+                class="drberg-newsletter__success"
+                tabindex="-1"
+                autofocus
+              >
+                Thank you for subscribing!
+              </h3>
+            {%- endif -%}
+
+            {%- if form.errors -%}
+              <small
+                class="drberg-newsletter__error"
+                id="BannerNewsletter-error"
+              >
+                {{ form.errors.translated_fields.email | capitalize }}
+                {{ form.errors.messages.email }}
+              </small>
+            {%- endif -%}
+            
+            <button
+              type="submit"
+              class="drberg-newsletter__btn"
+            >
+              <span> Subscribe</span>
+            </button>
+          </div>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRBERG NEWSLETTER",
+  "tag": "section",
+  "class": "section-newsletter-banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "default": "Stay",
+      "label": "Heading Line 1"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "default": "Updated",
+      "label": "Heading Line 2"
+    },
+    {
+      "type": "header",
+      "content": "Doctor Card"
+    },
+    {
+      "type": "image_picker",
+      "id": "avatar",
+      "label": "Doctor Avatar (100x100px)"
+    },
+    {
+      "type": "text",
+      "id": "doctor_name",
+      "default": "Dr. Eric Berg",
+      "label": "Doctor Name"
+    },
+    {
+      "type": "text",
+      "id": "doctor_role",
+      "default": "Health & Nutrition Expert",
+      "label": "Doctor Role / Title"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "default": "Subscribe to our newsletter and receive exclusive offers and news! Fill out the form below or message us to stay updated on all the great deals and special offers.",
+      "label": "Description Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRBERG NEWSLETTER",
+      "category": "Page"
+    }
+  ]
+}
+{% endschema %}

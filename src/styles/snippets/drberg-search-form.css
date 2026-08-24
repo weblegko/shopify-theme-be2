@@ -1,0 +1,29 @@
+/* === Drberg Search Form Snippet Styles === */
+
+.drberg-search-form {
+  @apply tw:flex tw:items-center tw:gap-4;
+}
+
+.drberg-search-form__input-wrapper {
+  @apply tw:relative tw:flex-1;
+}
+
+.drberg-search-form__icon-wrapper {
+  @apply tw:absolute tw:inset-y-0 tw:left-0 tw:flex tw:items-center tw:pl-4 tw:pointer-events-none;
+}
+
+.drberg-search-form__icon {
+  @apply tw:w-[1.6rem] tw:h-[1.6rem] tw:text-gray-400;
+}
+
+.drberg-search-form__input {
+  @apply tw:w-full tw:bg-gray-100 tw:rounded-full tw:pl-14 tw:pr-4 tw:h-[4rem] tw:text-[1.4rem] tw:text-grayscale-950 tw:placeholder-gray-400 tw:focus:outline-none tw:focus:ring-1 tw:focus:ring-gray-400 tw:focus:ring-offset-0 tw:focus-visible:ring-offset-0 tw:transition-shadow;
+}
+
+.drberg-search-form__button {
+  @apply tw:font-poppins tw:bg-golden tw:text-black tw:px-6 tw:pt-1 tw:h-[4rem] tw:rounded-full tw:text-[1.4rem] tw:hover:bg-golden/80 tw:transition-colors tw:flex-shrink-0 tw:uppercase;
+}
+
+.drberg-search-form__button--hidden {
+  @apply tw:sr-only;
+}

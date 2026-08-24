@@ -1,0 +1,442 @@
+<script src="{{ 'drberg-resources.js' | asset_url }}" defer="defer"></script>
+
+<style>  
+  .drberg-resources-padding {
+    padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
+    padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
+  }
+  @media screen and (min-width: 640px) {
+    .drberg-resources-padding {
+      padding-top: {{ section.settings.padding_top_tablet | default: 5 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 5 }}rem !important;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .drberg-resources-padding {
+      padding-top: {{ section.settings.padding_top_desktop | default: 8 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_desktop | default: 8 }}rem !important;
+    }
+  }  
+  #drberg-resources-grid {
+    display: grid !important;
+    grid-template-columns: repeat({{ section.settings.columns_mobile | default: 1 }}, 1fr) !important;
+    gap: {{ section.settings.row_gap_mobile | default: 1.2 }}rem {{ section.settings.col_gap_mobile | default: 1.2 }}rem !important;
+    --grid-cols: {{ section.settings.columns_mobile | default: 1 }};
+    --initial-items: {{ section.settings.initial_items_mobile | default: 1 }};
+  }
+  @media screen and (min-width: 640px) and (max-width: 1023px) {
+    #drberg-resources-grid {
+      grid-template-columns: repeat({{ section.settings.columns_tablet | default: 2 }}, 1fr) !important;
+      gap: {{ section.settings.row_gap_tablet | default: 1.5 }}rem {{ section.settings.col_gap_tablet | default: 1.5 }}rem !important;
+      --grid-cols: {{ section.settings.columns_tablet | default: 2 }};
+      --initial-items: {{ section.settings.initial_items_tablet | default: 2 }};
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    #drberg-resources-grid {
+      grid-template-columns: repeat({{ section.settings.columns_desktop | default: 2 }}, 1fr) !important;
+      gap: {{ section.settings.row_gap_desktop | default: 2 }}rem {{ section.settings.col_gap_desktop | default: 2 }}rem !important;
+      --grid-cols: {{ section.settings.columns_desktop | default: 2 }};
+      --initial-items: {{ section.settings.initial_items_desktop | default: 2 }};
+    }
+  }
+   .drberg-resources__item.is-hidden {
+      display: block !important;
+    }
+    #drberg-resources-show-more-btn {
+      display: none !important;
+    }
+</style>
+
+<section class="drberg-resources">
+  <div class="drberg-resources-padding drberg-resources__container">
+ 
+    {%- if section.settings.heading != blank -%}
+      <div class="drberg-resources__header">
+        <h2 class="drberg-resources__heading">
+          {{ section.settings.heading }}
+        </h2>
+
+        {%- if section.settings.description != blank -%}
+          <div class="drberg-resources__badge">
+            <span class="drberg-resources__badge-text">
+              {{ section.settings.description }}
+            </span>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+     {% comment %} Сетка карточек  {% endcomment %}
+    <div
+      id="drberg-resources-grid"
+      class="{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      {% if settings.animations_reveal_on_scroll %}
+        data-cascade
+        style="--animation-order: {{ forloop.index }};"
+      {% endif %}
+    >
+      {%- for block in section.blocks -%}
+        <div class="drberg-resources__item is-hidden" {{ block.shopify_attributes }}>
+           {% comment %} КАРТОЧКА  {% endcomment %}
+          <a
+            href="{{ block.settings.button_link }}"
+            class="drberg-resources__card"
+          >
+            {% comment %} Левая часть: Картинка (47%)  {% endcomment %}
+            <div class="drberg-resources__card-left">
+              {%- if block.settings.resource_image != blank -%}
+                {%- assign img_width = 600 -%}
+                {%- assign img_height = img_width | divided_by: block.settings.resource_image.aspect_ratio -%}
+                <img
+                  src="{{ block.settings.resource_image | image_url: width: 600 }}"
+                  alt="{{ block.settings.title | escape }}"
+                  width="{{ img_width }}"
+                  height="{{ img_height }}"
+                  class="drberg-resources__card-img"
+                  loading="lazy"
+                >
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'drberg-resources__card-placeholder' }}
+              {%- endif -%}
+            </div>
+
+             {% comment %} Правая часть: Описание (53%)  {% endcomment %}
+            <div class="drberg-resources__card-right">
+              <div class="drberg-resources__card-info">
+                 {% comment %} Ряд 1: Бейджик  {% endcomment %}
+                {%- if block.settings.badge != blank -%}
+                  <div>
+                    <span class="drberg-resources__badge-tag">
+                      {{ block.settings.badge }}
+                    </span>
+                  </div>
+                {%- endif -%}
+
+                 {% comment %} Ряд 2: Заголовок  {% endcomment %}
+                {%- if block.settings.title != blank -%}
+                  <h3 class="drberg-resources__card-title">
+                    {{ block.settings.title }}
+                  </h3>
+                {%- endif -%}
+
+                {% comment %} Ряд 3: Дата  {% endcomment %}
+                {%- if block.settings.publish_date != blank -%}
+                  <p class="drberg-resources__card-date">
+                    <span class="drberg-resources__card-date-label">Published: </span>
+                    {{ block.settings.publish_date }}
+                  </p>
+                {%- endif -%}
+
+                 {% comment %} Ряд 4: Категория  {% endcomment %}
+                {%- if block.settings.category != blank -%}
+                  <p class="drberg-resources__card-category">
+                    <span class="drberg-resources__card-category-label">Categories:</span>
+                    {{ block.settings.category }}
+                  </p>
+                {%- endif -%}
+              </div>
+
+               {% comment %} Ряд 5: Кнопка (прижата к низу)  {% endcomment %}              
+                <div class="drberg-resources__card-btn">
+                  {{ block.settings.button_label | default: 'Learn More' }}
+                </div>              
+            </div>
+          </a>
+        </div>
+      {%- endfor -%}
+    </div>
+
+     {% comment %} Кнопка Show More  {% endcomment %}
+    {%- if section.blocks.size > 0 -%}
+      <div class="drberg-resources__more-wrapper">
+        <button
+          type="button"
+          id="drberg-resources-show-more-btn"
+          class="drberg-resources__more-btn"
+        >
+           {% comment %} Спиннер загрузки  {% endcomment %}
+          <svg
+            id="drberg-resources-loader"
+            class="drberg-resources__loader is-hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle class="drberg-resources__loader-circle" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="drberg-resources__loader-path" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <span id="drberg-resources-btn-text">Show More Resources</span>
+        </button>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRBERG RESOURCES",
+  "tag": "section",
+  "class": "section-resources",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Health Resources",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "default": "Free Guides for Better Living",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "🖥️ Desktop (≥ 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 2,
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "initial_items_desktop",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 2,
+      "label": "Initial items to show"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_desktop",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 2,
+      "unit": "rem",
+      "label": "Column gap"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_desktop",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 2,
+      "unit": "rem",
+      "label": "Row gap (vertical)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "💻 Tablet (640px - 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2,
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "initial_items_tablet",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 2,
+      "label": "Initial items to show"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_tablet",
+      "min": 0,
+      "max": 4,
+      "step": 0.5,
+      "default": 1.5,
+      "unit": "rem",
+      "label": "Column gap"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_tablet",
+      "min": 0,
+      "max": 4,
+      "step": 0.5,
+      "default": 1.5,
+      "unit": "rem",
+      "label": "Row gap (vertical)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile (< 640px)"
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 1,
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "initial_items_mobile",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 1,
+      "label": "Initial items to show"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_mobile",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "default": 1.5,
+      "unit": "rem",
+      "label": "Column gap"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_mobile",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "default": 1.5,
+      "unit": "rem",
+      "label": "Row gap (vertical)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding bottom"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "resource",
+      "name": "Resource",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "resource_image",
+          "label": "Resource Image"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "default": "Free PDF Document",
+          "label": "Badge Text"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Essential Definitions for Healthy Living",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "publish_date",
+          "default": "2025-06-20",
+          "label": "Published Date"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "default": "Health Resources",
+          "label": "Categories"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Learn More",
+          "label": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRBERG RESOURCES",
+      "category": "Page",
+      "blocks": [
+        { "type": "resource" },
+        { "type": "resource" },
+        { "type": "resource" },
+        { "type": "resource" }      
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,296 @@
+<style>  
+  .drberg-features-padding {
+    padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
+    padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
+  }
+  @media screen and (min-width: 640px) {
+    .drberg-features-padding {
+      padding-top: {{ section.settings.padding_top_tablet | default: 5 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 5 }}rem !important;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .drberg-features-padding {
+      padding-top: {{ section.settings.padding_top_desktop | default: 6 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_desktop | default: 6 }}rem !important;
+    }
+  }  
+  #drberg-features-grid {
+    display: grid !important;
+    grid-template-columns: repeat({{ section.settings.columns_mobile | default: 1 }}, 1fr) !important;
+    gap: {{ section.settings.row_gap_mobile | default: 1 }}rem {{ section.settings.col_gap_mobile | default: 0.5 }}rem !important;
+  }
+  @media screen and (min-width: 640px) and (max-width: 1023px) {
+    #drberg-features-grid {
+      grid-template-columns: repeat({{ section.settings.columns_tablet | default: 2 }}, 1fr) !important;
+      gap: {{ section.settings.row_gap_tablet | default: 1.5 }}rem {{ section.settings.col_gap_tablet | default: 1 }}rem !important;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    #drberg-features-grid {
+      grid-template-columns: repeat({{ section.settings.columns_desktop | default: 3 }}, 1fr) !important;
+      gap: {{ section.settings.row_gap_desktop | default: 2 }}rem {{ section.settings.col_gap_desktop | default: 2 }}rem !important;
+    }
+  }
+</style>
+
+<section class="drberg-features">
+  <div class="drberg-features-padding drberg-features__container">
+     {% comment %} Сетка карточек  {% endcomment %}
+    <div id="drberg-features-grid">
+      {%- for block in section.blocks -%}
+        <div
+          class="{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {% if settings.animations_reveal_on_scroll %}
+            data-cascade
+            style="--animation-order: {{ forloop.index }};"
+          {% endif %}
+          {{ block.shopify_attributes }}
+        >
+           {% comment %} КАРТОЧКА  {% endcomment %}
+          <div class="drberg-features__card">
+             {% comment %} Иконка  {% endcomment %}
+            {%- if block.settings.icon_svg != blank -%}
+              <div class="drberg-features__icon-wrapper">
+                {{ block.settings.icon_svg }}
+              </div>
+            {%- else -%}
+              <div class="drberg-features__icon-placeholder">
+                <svg
+                  class="drberg-features__placeholder-icon"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+            {%- endif -%}
+
+             {% comment %} Заголовок  {% endcomment %}
+            {%- if block.settings.title != blank -%}
+              <h3 class="drberg-features__title">
+                {{ block.settings.title }}
+              </h3>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRBERG FEATURES",
+  "tag": "section",
+  "class": "section-features",
+  "settings": [
+    {
+      "type": "header",
+      "content": "🖥️ Desktop (≥ 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3,
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_desktop",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 2,
+      "unit": "rem",
+      "label": "Column gap"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_desktop",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 2,
+      "unit": "rem",
+      "label": "Row gap (vertical)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 6,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 6,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "💻 Tablet (640px - 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2,
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_tablet",
+      "min": 0,
+      "max": 4,
+      "step": 0.5,
+      "default": 1,
+      "unit": "rem",
+      "label": "Column gap"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_tablet",
+      "min": 0,
+      "max": 4,
+      "step": 0.5,
+      "default": 1.5,
+      "unit": "rem",
+      "label": "Row gap (vertical)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile (< 640px)"
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 1,
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_mobile",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "default": 0.5,
+      "unit": "rem",
+      "label": "Column gap"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_mobile",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "default": 1,
+      "unit": "rem",
+      "label": "Row gap (vertical)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding bottom"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "icon_svg",
+          "label": "SVG Icon Code",
+          "info": "Paste your SVG code here. Use 'currentColor' for the stroke or fill."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Fast Delivery",
+          "label": "Feature Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRBERG FEATURES",
+      "category": "Page",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "title": "Lab Tested"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Free UK Delivery £40+"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "30-Day Returns"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

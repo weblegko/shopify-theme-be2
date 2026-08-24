@@ -1,0 +1,32 @@
+/* === Drberg Features Section Styles === */
+
+.drberg-features {
+  @apply tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem];
+}
+
+.drberg-features__container {
+  @apply tw:max-w-[112rem] tw:mx-auto;
+}
+
+/* Карточка */
+.drberg-features__card {
+  @apply tw:flex tw:flex-col tw:items-center tw:text-center tw:gap-[1rem];
+}
+
+/* Иконка */
+.drberg-features__icon-wrapper {
+  @apply tw:w-[4.8rem] tw:h-[4.8rem] tw:lg:w-[6.4rem] tw:lg:h-[6.4rem] tw:flex tw:items-center tw:justify-center tw:[&_svg]:w-full tw:[&_svg]:h-full;
+}
+
+.drberg-features__icon-placeholder {
+  @apply tw:w-[5rem] tw:h-[5rem] tw:flex tw:items-center tw:justify-center tw:mb-[2rem] tw:bg-grayscale-50 tw:rounded-full;
+}
+
+.drberg-features__placeholder-icon {
+  @apply tw:w-[2.4rem] tw:h-[2.4rem] tw:opacity-50;
+}
+
+/* Заголовок */
+.drberg-features__title {
+  @apply tw:text-[1.8rem] tw:lg:text-[2rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.33] tw:lg:leading-[1.4];
+}

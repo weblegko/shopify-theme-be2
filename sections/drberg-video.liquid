@@ -1,0 +1,175 @@
+{{ 'drberg-video.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'drberg-video.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign video_id = section.settings.video.id | default: section.settings.video_url.id
+  assign video_alt = section.settings.video.alt | default: section.settings.description
+  assign alt = 'sections.video.load_video' | t: description: video_alt | escape
+  assign poster = section.settings.video.preview_image | default: section.settings.cover_image
+  assign cover_url = section.settings.cover_image | image_url: width: 3000
+  assign is_native = false
+  if section.settings.video != null
+    assign is_native = true
+  endif
+  assign enable_loop = section.settings.enable_video_looping
+-%}
+
+ {% comment %} Секция скрыта на мобилке  {% endcomment %}
+<section class="drberg-video">
+  
+   {% comment %} ТРИГГЕР  {% endcomment %}
+  <div 
+    class="drberg-video__trigger group" 
+    id="VideoTrigger-{{ section.id }}"
+    data-enable-loop="{{ enable_loop }}"
+    data-video-id="{{ video_id }}"
+  >
+      {%- if poster != null -%}
+          {%- if cover_url != null -%}
+            {%- assign img_width = 3000 -%}
+            {%- assign img_height = img_width | divided_by: poster.aspect_ratio -%}
+            <img
+              src="{{ cover_url }}"
+              alt="{{ alt }}"
+              width="{{ img_width }}"
+              height="{{ img_height }}"
+              class="drberg-video__cover"
+              loading="lazy"
+            >
+          {%- else -%}
+            {{
+              poster
+              | image_url: width: 3840
+              | image_tag: sizes: sizes, widths: '375, 750, 1100, 1500, 1780, 2000, 3000, 3840', alt: alt
+            }}
+          {%- endif -%}
+        {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'drberg-video__cover-placeholder' }}
+    {%- endif -%}
+
+    <div class="drberg-video__overlay"></div>
+
+    <div class="drberg-video__play-wrapper">
+      <div class="drberg-video__play-btn">
+        <svg class="drberg-video__play-icon" focusable="false" aria-hidden="true">
+          <use href="#play"></use>
+        </svg>
+        <span class="drberg-video__play-text">Watch Video</span>
+      </div>
+    </div>
+  </div>
+
+  {% comment %} МОДАЛКА  {% endcomment %}
+  <div
+    class="drberg-video__modal"
+    id="VideoModal-{{ section.id }}"
+  >
+    <button
+      class="drberg-video__close-btn"
+      id="VideoModalClose-{{ section.id }}"
+      aria-label="Close video"
+      type="button"
+    >
+      <svg class="drberg-video__close-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <div class="video-modal__container drberg-video__modal-container">
+       {% comment %} Стандартный компонент deferred-media из Dawn  {% endcomment %}
+      <deferred-media
+        class="deferred-media"
+        data-media-id="{{ video_id }}"
+      >
+        <button
+          id="Deferred-Poster-{{ section.id }}"
+          class="deferred-media__poster"
+          type="button"
+          aria-label="{{ alt }}"
+        ></button>
+
+        <template>
+          {%- if is_native -%}
+            {{
+              section.settings.video
+              | video_tag:
+                image_size: '1100x',
+                autoplay: true,
+                loop: enable_loop,
+                controls: true,
+                muted: false
+            }}
+          {%- else -%}
+            {%- liquid
+              assign loop = ''
+              if enable_loop
+                assign loop = '&loop=1&playlist=' | append: video_id
+              endif
+            -%}
+            {%- if section.settings.video_url.type == 'youtube' -%}
+              <iframe
+                src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1{{ loop }}"
+                class="js-youtube"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                title="{{ section.settings.description | escape }}"
+              ></iframe>
+            {%- else -%}
+              <iframe
+                src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1{{ loop }}"
+                class="js-vimeo"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                title="{{ section.settings.description | escape }}"
+              ></iframe>
+            {%- endif -%}
+          {%- endif -%}
+        </template>
+      </deferred-media>
+    </div>
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "DRBERG VIDEO",
+  "tag": "section",
+  "class": "section-video",
+  "settings": [
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Native Shopify Video"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "accept": ["youtube", "vimeo"],
+      "label": "Or use YouTube/Vimeo URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "cover_image",
+      "label": "Cover Image (Poster)"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Video Alt Text / Description"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_video_looping",
+      "label": "Enable video looping",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRBERG VIDEO",
+      "category": "Page"
+    }
+  ]
+}
+{% endschema %}

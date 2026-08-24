@@ -1,0 +1,20 @@
+.weblegko-doctor-image-col {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.weblegko-doctor-content-col {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Скрытие на мобилке */
+.weblegko-doctor-section {
+  display: none !important;
+}
+
+@media screen and (min-width: 640px) {
+  .weblegko-doctor-section {
+    display: flex !important;
+  }
+}
