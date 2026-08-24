@@ -104,6 +104,17 @@
         "padding_bottom": 28
       }
     },
+    "drberg_breadcrumbs_LFTmip": {
+      "type": "drberg-breadcrumbs",
+      "name": "DRBERG BREADCRUMBS",
+      "settings": {
+        "show_breadcrumbs": true,
+        "home_label": "Главная",
+        "catalog_label": "Каталог",
+        "show_current_collection": true,
+        "show_all_collections": false
+      }
+    },
     "drberg_main_product_QR9jce": {
       "type": "drberg-main-product",
       "blocks": {
@@ -192,6 +203,7 @@
   "order": [
     "main",
     "related-products",
+    "drberg_breadcrumbs_LFTmip",
     "drberg_main_product_QR9jce",
     "drberg_product_tabs_g9rjQK",
     "drberg_related_products_njmGap"
