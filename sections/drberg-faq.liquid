@@ -32,7 +32,6 @@
     }
   }
 
-
    {% comment %} ОТСТУПЫ МЕЖДУ ВОПРОСАМИ (ITEMS)  {% endcomment %}
   .drberg-faq-item-gap {
     gap: {{ section.settings.gap_items_mobile | default: 1.5 }}rem !important;
@@ -69,13 +68,6 @@
         <h2 class="drberg-faq__heading">
           {{ section.settings.heading }}
         </h2>
-        {% comment %} {%- if section.settings.rating_score != blank and section.settings.review_count != blank -%}
-          <div class="drberg-faq__rating-badge">
-            <span class="drberg-faq__rating-text">
-              Rated {{ section.settings.rating_score }}/5 based on {{ section.settings.review_count }} reviews
-            </span>
-          </div>
-        {%- endif -%} {% endcomment %}
       </div>
     {%- endif -%}
 
@@ -90,65 +82,71 @@
       
       {%- for category in categories -%}
         
-        <div class="faq__category-block">
-          
-          {%- comment -%} ВЫВОД НАЗВАНИЯ КАТЕГОРИИ (если не скрыто) {%- endcomment -%}
-          {%- unless section.settings.hide_categories -%}
-            {%- if category.name != blank -%}
-              <h2 class="drberg-faq__category-title">
-                {{ category.name }}
-              </h2>
-            {%- endif -%}
-          {%- endunless -%}
-
-          {%- comment -%} КОНТЕЙНЕР ДЛЯ ВОПРОСОВ ВНУТРИ КАТЕГОРИИ {%- endcomment -%}
-          <div class="drberg-faq-item-gap drberg-faq__items">
-            
-            {%- for item in all_items -%}
-              {%- if item.category.value.system.handle == category.system.handle and item.published.value -%}
-                
-                {%- comment -%} ФИЛЬТР ДЛЯ ГЛАВНОЙ СТРАНИЦЫ (пропускаем вопросы без галочки show_on_homepage) {%- endcomment -%}
-                {%- if section.settings.homepage_mode and item.show_on_homepage.value != true -%}
-                  {%- continue -%}
-                {%- endif -%}
-
-                {%- comment -%} ПРОВЕРКА ЛИМИТА {%- endcomment -%}
-                {%- if faq_limit > 0 and items_shown >= faq_limit -%}
-                  {%- break -%}
-                {%- endif -%}
-
-                {%- assign rendered_answer = item.answer | metafield_tag -%}
-
-                <details class="faq-animate drberg-faq__item">
-                  <summary class="drberg-faq__summary">
-                    
-                    <h3 class="faq__question drberg-faq__question">
-                      {{ item.question }}
-                    </h3>
-
-                    <span class="drberg-faq__icon-wrapper">
-                      <svg class="faq-icon-plus drberg-faq__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6"></path>
-                      </svg>
-                      <svg class="faq-icon-minus drberg-faq__icon drberg-faq__icon--minus" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6"></path>
-                      </svg>
-                    </span>
-                  </summary>
-
-                  {%- comment -%} ВЫВОДИМ ОТРЕЕНДЕРЕННЫЙ ОТВЕТ {%- endcomment -%}
-                  <div class="faq-content typo drberg-faq__answer">
-                    {{ rendered_answer }}
-                  </div>
-                </details>
-
-                {%- assign items_shown = items_shown | plus: 1 -%}
-
+        {%- comment -%} СОБИРАЕМ ВОПРОСЫ В ПЕРЕМЕННУЮ, ЧТОБЫ ПРОВЕРИТЬ ИХ НАЛИЧИЕ {%- endcomment -%}
+        {%- capture category_items_html -%}
+          {%- for item in all_items -%}
+            {%- if item.category.value.system.handle == category.system.handle and item.published.value -%}
+              
+              {%- comment -%} ФИЛЬТР ДЛЯ ГЛАВНОЙ СТРАНИЦЫ {%- endcomment -%}
+              {%- if section.settings.homepage_mode and item.show_on_homepage.value != true -%}
+                {%- continue -%}
               {%- endif -%}
-            {%- endfor -%}
+
+              {%- comment -%} ПРОВЕРКА ЛИМИТА {%- endcomment -%}
+              {%- if faq_limit > 0 and items_shown >= faq_limit -%}
+                {%- break -%}
+              {%- endif -%}
+
+              {%- assign rendered_answer = item.answer | metafield_tag -%}
+
+              <details class="faq-animate drberg-faq__item">
+                <summary class="drberg-faq__summary">
+                  
+                  <h3 class="faq__question drberg-faq__question">
+                    {{ item.question }}
+                  </h3>
+
+                  <span class="drberg-faq__icon-wrapper">
+                    <svg class="faq-icon-plus drberg-faq__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6"></path>
+                    </svg>
+                    <svg class="faq-icon-minus drberg-faq__icon drberg-faq__icon--minus" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6"></path>
+                    </svg>
+                  </span>
+                </summary>
+
+                {%- comment -%} ВЫВОДИМ ОТРЕЕНДЕРЕННЫЙ ОТВЕТ {%- endcomment -%}
+                <div class="faq-content typo drberg-faq__answer">
+                  {{ rendered_answer }}
+                </div>
+              </details>
+
+              {%- assign items_shown = items_shown | plus: 1 -%}
+
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+
+        {%- comment -%} ВЫВОДИМ БЛОК КАТЕГОРИИ ТОЛЬКО ЕСЛИ ВНУТРИ ЕСТЬ ВОПРОСЫ {%- endcomment -%}
+        {%- assign category_items_trimmed = category_items_html | strip -%}
+        {%- if category_items_trimmed != blank -%}
+          <div class="faq__category-block">
             
+            {%- comment -%} ВЫВОД НАЗВАНИЯ КАТЕГОРИИ (если не скрыто) {%- endcomment -%}
+            {%- unless section.settings.hide_categories -%}
+              {%- if category.name != blank -%}
+                <h2 class="drberg-faq__category-title">
+                  {{ category.name }}
+                </h2>
+              {%- endif -%}
+            {%- endunless -%}
+
+            <div class="drberg-faq-item-gap drberg-faq__items">
+              {{ category_items_html }}
+            </div>
           </div>
-        </div>
+        {%- endif -%}
         
         {%- comment -%} Если достигли лимита, прерываем цикл категорий {%- endcomment -%}
         {%- if faq_limit > 0 and items_shown >= faq_limit -%}

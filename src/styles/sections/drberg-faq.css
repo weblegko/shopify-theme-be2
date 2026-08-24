@@ -20,6 +20,10 @@
   @apply tw:flex tw:flex-col;
 }
 
+.drberg-faq__category-title {
+  @apply tw:font-medium tw:sm:pb-3 tw:sm:pb-5 tw:text-[1.6rem] tw:sm:text-[2rem];
+}
+
 .drberg-faq__items {
   @apply tw:flex tw:flex-col;
 }

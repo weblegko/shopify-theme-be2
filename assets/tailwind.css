@@ -2352,6 +2352,20 @@
   display: flex;
   flex-direction: column;
 }
+.drberg-faq__category-title {
+  font-size: 1.6rem;
+  --tw-font-weight: var(--tw-font-weight-medium);
+  font-weight: var(--tw-font-weight-medium);
+  @media (width >= 640px) {
+    padding-bottom: calc(var(--tw-spacing) * 3);
+  }
+  @media (width >= 640px) {
+    padding-bottom: calc(var(--tw-spacing) * 5);
+  }
+  @media (width >= 640px) {
+    font-size: 2rem;
+  }
+}
 .drberg-faq__items {
   display: flex;
   flex-direction: column;
