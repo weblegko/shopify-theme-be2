@@ -37,15 +37,16 @@
     "drberg_doctor_grid_DkqAqJ": {
       "type": "drberg-doctor-grid",
       "blocks": {
-        "slide_7dYKXw": {
+        "slide_ebQe4a": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/drberg-cosmetic.webp",
             "link": ""
           }
         }
       },
       "block_order": [
-        "slide_7dYKXw"
+        "slide_ebQe4a"
       ],
       "name": "DRBERG DOCTOR",
       "settings": {
