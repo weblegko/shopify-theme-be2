@@ -12,15 +12,24 @@
     "drberg_promo_slider_gn63Wj": {
       "type": "drberg-promo-slider",
       "blocks": {
-        "slide_MggRhm": {
+        "slide_jLRc3N": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/drberg-cosmetic.webp",
+            "link": ""
+          }
+        },
+        "slide_y7Jzt7": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Potassium_TriBlend_11.05.26_3200x1295px.webp",
             "link": ""
           }
         }
       },
       "block_order": [
-        "slide_MggRhm"
+        "slide_jLRc3N",
+        "slide_y7Jzt7"
       ],
       "name": "DRBERG PROMO SLIDER",
       "settings": {}
