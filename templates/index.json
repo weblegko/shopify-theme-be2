@@ -8,7 +8,25 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {},
+  "sections": {
+    "drberg_promo_slider_gn63Wj": {
+      "type": "drberg-promo-slider",
+      "blocks": {
+        "slide_MggRhm": {
+          "type": "slide",
+          "settings": {
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_MggRhm"
+      ],
+      "name": "DRBERG PROMO SLIDER",
+      "settings": {}
+    }
+  },
   "order": [
+    "drberg_promo_slider_gn63Wj"
   ]
 }
