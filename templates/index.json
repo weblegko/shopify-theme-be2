@@ -393,10 +393,6 @@
       "type": "drberg-reviews",
       "name": "DRBERG REVIEWS",
       "settings": {
-        "homepage_mode": true,
-        "reviews_limit": 3,
-        "button_text": "Show More Reviews",
-        "button_link": "",
         "heading": "What Our Customers Say",
         "rating_score": "4.8",
         "review_count": "2,847",
