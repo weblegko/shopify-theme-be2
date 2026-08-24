@@ -11,7 +11,33 @@
   "sections": {
     "drberg-reviews": {
       "type": "drberg-reviews",
-      "settings": {}
+      "settings": {
+        "homepage_mode": false,
+        "reviews_limit": 1,
+        "button_text": "Show More Reviews",
+        "button_link": "",
+        "heading": "What Our Customers Say",
+        "rating_score": "4.8",
+        "review_count": "2,847",
+        "columns_desktop": 3,
+        "initial_items_desktop": 3,
+        "col_gap_desktop": 2.5,
+        "row_gap_desktop": 2.5,
+        "padding_top_desktop": 8,
+        "padding_bottom_desktop": 8,
+        "columns_tablet": 2,
+        "initial_items_tablet": 2,
+        "col_gap_tablet": 2,
+        "row_gap_tablet": 2,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "columns_mobile": 1,
+        "initial_items_mobile": 1,
+        "col_gap_mobile": 1.5,
+        "row_gap_mobile": 1.5,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
+      }
     }
   },
   "order": [
