@@ -9,16 +9,6 @@
  */
 {
   "sections": {
-    "breadcrumbs": {
-      "type": "drberg-breadcrumbs",
-      "settings": {
-        "show_breadcrumbs": true,
-        "home_label": "Главная",
-        "catalog_label": "Каталог",
-        "show_current_collection": true,
-        "show_all_collections": false
-      }
-    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -95,118 +85,6 @@
         "padding_bottom": 12
       }
     },
-    "weblegko_main_product_RUgmNA": {
-      "type": "drberg-main-product",
-      "blocks": {
-        "text_4Riaxt": {
-          "type": "text",
-          "disabled": true,
-          "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
-          }
-        },
-        "title_Qbk3hz": {
-          "type": "title",
-          "settings": {}
-        },
-        "description_JAXTDx": {
-          "type": "description",
-          "settings": {}
-        },
-        "price_nGRg7g": {
-          "type": "price",
-          "settings": {}
-        },
-        "variant_picker_LDjPp7": {
-          "type": "variant_picker",
-          "settings": {
-            "picker_type": "button",
-            "swatch_shape": "circle"
-          }
-        },
-        "quantity_selector_bGXLbk": {
-          "type": "quantity_selector",
-          "disabled": true,
-          "settings": {}
-        },
-        "buy_buttons_cW6cPf": {
-          "type": "buy_buttons",
-          "settings": {
-            "show_dynamic_checkout": false,
-            "show_gift_card_recipient": true
-          }
-        },
-        "share_XdbrrD": {
-          "type": "share",
-          "disabled": true,
-          "settings": {
-            "share_label": "Share"
-          }
-        }
-      },
-      "block_order": [
-        "text_4Riaxt",
-        "title_Qbk3hz",
-        "description_JAXTDx",
-        "price_nGRg7g",
-        "variant_picker_LDjPp7",
-        "quantity_selector_bGXLbk",
-        "buy_buttons_cW6cPf",
-        "share_XdbrrD"
-      ],
-      "name": "WEBLEGKO MAIN PRODUCT",
-      "settings": {
-        "enable_sticky_info": false,
-        "color_scheme": "scheme-1",
-        "image_zoom": "lightbox",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
-    "weblegko_product_tabs_xrdTf6": {
-      "type": "weblegko-product-tabs",
-      "name": "WEBLEGKO PRODUCT TABS",
-      "settings": {
-        "heading": "",
-        "padding_top_desktop": 4.5,
-        "padding_bottom_desktop": 3.5,
-        "padding_top_tablet": 5,
-        "padding_bottom_tablet": 5,
-        "padding_top_mobile": 3,
-        "padding_bottom_mobile": 3
-      }
-    },
-    "weblegko_related_products_6PjEw3": {
-      "type": "weblegko-related-products",
-      "name": "WEBLEGKO RELATED",
-      "settings": {
-        "heading": "Customers Also Bought",
-        "description": "You Might Also Like",
-        "products_to_show": 12,
-        "columns_desktop": 3,
-        "col_gap_desktop": 2,
-        "row_gap_desktop": 2,
-        "padding_top_desktop": 8,
-        "padding_bottom_desktop": 8,
-        "columns_tablet": 2,
-        "col_gap_tablet": 1.5,
-        "row_gap_tablet": 1.5,
-        "padding_top_tablet": 5,
-        "padding_bottom_tablet": 5,
-        "columns_mobile": 1,
-        "col_gap_mobile": 1,
-        "row_gap_mobile": 1,
-        "padding_top_mobile": 3,
-        "padding_bottom_mobile": 3,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": false,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "standard"
-      }
-    },
     "related-products": {
       "type": "related-products",
       "disabled": true,
@@ -226,111 +104,65 @@
         "padding_bottom": 28
       }
     },
-    "weblegko_faq_JBMWFf": {
-      "type": "weblegko-faq",
+    "drberg_main_product_QR9jce": {
+      "type": "drberg-main-product",
       "blocks": {
-        "question_TzdUrj": {
-          "type": "question",
+        "title_HkAzzw": {
+          "type": "title",
+          "settings": {}
+        },
+        "price_mmRbWn": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker_EqgENW": {
+          "type": "variant_picker",
           "settings": {
-            "question": "What is your return policy?",
-            "answer": "<p>We accept returns within 30 days of purchase. Items must be in their original condition, unused, and with all tags attached. Refunds are processed within 5-7 business days.</p>"
+            "picker_type": "button",
+            "swatch_shape": "circle"
           }
         },
-        "question_ErbxXr": {
-          "type": "question",
+        "buy_buttons_FJr3YQ": {
+          "type": "buy_buttons",
           "settings": {
-            "question": "How long does shipping take?",
-            "answer": "<p>Standard shipping typically takes 3-5 business days within the US. Express shipping is available for 1-2 business day delivery. International shipping times vary by destination.</p>"
-          }
-        },
-        "question_Ufk774": {
-          "type": "question",
-          "settings": {
-            "question": "Do you ship internationally?",
-            "answer": "<p>Yes, we ship to over 50 countries worldwide. International shipping rates and delivery times are calculated at checkout based on your location.</p>"
-          }
-        },
-        "question_ibkciR": {
-          "type": "question",
-          "settings": {
-            "question": "What payment methods do you accept?",
-            "answer": "<p>We accept all major credit cards (Visa, MasterCard, American Express), PayPal, Apple Pay, Google Pay, and Shop Pay. All transactions are secure and encrypted.</p>"
-          }
-        },
-        "question_KjLAW4": {
-          "type": "question",
-          "settings": {
-            "question": "How can I track my order?",
-            "answer": "<p>Once your order ships, you'll receive a confirmation email with a tracking number. You can also track your order in your account dashboard under 'Order History'.</p>"
-          }
-        },
-        "question_BW9Jrh": {
-          "type": "question",
-          "settings": {
-            "question": "Do you offer discounts for bulk orders?",
-            "answer": "<p>Yes, we offer volume discounts for bulk orders over $500. Please contact our sales team at sales@yourstore.com for a custom quote based on your requirements.</p>"
-          }
-        },
-        "question_zTAwmm": {
-          "type": "question",
-          "settings": {
-            "question": "Is my personal information secure?",
-            "answer": "<p>Absolutely! We use industry-standard SSL encryption to protect your data. We never store your payment information, and we never share your personal details with third parties.</p>"
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
           }
         }
       },
       "block_order": [
-        "question_TzdUrj",
-        "question_ErbxXr",
-        "question_Ufk774",
-        "question_ibkciR",
-        "question_KjLAW4",
-        "question_BW9Jrh",
-        "question_zTAwmm"
+        "title_HkAzzw",
+        "price_mmRbWn",
+        "variant_picker_EqgENW",
+        "buy_buttons_FJr3YQ"
       ],
-      "name": "WEBLEGKO FAQ",
+      "name": "DRBERG MAIN PRODUCT",
       "settings": {
-        "heading": "Frequently Asked Questions",
-        "rating_score": "4.8",
-        "review_count": "2,847",
-        "gap_desktop": 2.5,
-        "padding_top_desktop": 8,
-        "padding_bottom_desktop": 8,
-        "gap_tablet": 2,
-        "padding_top_tablet": 5,
-        "padding_bottom_tablet": 5,
-        "gap_mobile": 1.5,
-        "padding_top_mobile": 3,
-        "padding_bottom_mobile": 3
+        "enable_sticky_info": false,
+        "color_scheme": "scheme-1",
+        "image_zoom": "lightbox",
+        "padding_top": 0,
+        "padding_bottom": 1.5
       }
     },
-    "weblegko_about_doctor_nz4gJJ": {
-      "type": "drberg-about-doctor",
-      "name": "WEBLEGKO ABOUT DOCTOR",
+    "drberg_product_tabs_g9rjQK": {
+      "type": "drberg-product-tabs",
+      "name": "DRBERG PRODUCT TABS",
       "settings": {
-        "heading": "More About Dr. Berg Supplements",
-        "text": "<p>Dr. Berg's supplements are formulated with the highest quality natural ingredients to support your health and wellness journey. Each product is carefully crafted based on years of research and clinical experience.</p><p>As the official UK distributor, we ensure that all products meet strict quality standards and are delivered fresh to your door. Our commitment to excellence means you can trust every supplement you purchase.</p><p>All of our products are third-party tested for purity and potency, giving you peace of mind with every purchase.</p><p>We offer fast, reliable shipping across the UK and Europe with tracking available for all orders.</p><p>Our customer support team is always ready to help you find the right supplements for your needs.</p>",
-        "button_label": "Show More",
-        "initial_paragraphs_desktop": 2,
+        "heading": "Product Details",
         "padding_top_desktop": 8,
         "padding_bottom_desktop": 8,
-        "initial_paragraphs_tablet": 2,
         "padding_top_tablet": 5,
         "padding_bottom_tablet": 5,
-        "initial_paragraphs_mobile": 1,
         "padding_top_mobile": 3,
         "padding_bottom_mobile": 3
       }
     }
   },
   "order": [
-    "breadcrumbs",
     "main",
-    "weblegko_main_product_RUgmNA",
-    "weblegko_product_tabs_xrdTf6",
-    "weblegko_related_products_6PjEw3",
     "related-products",
-    "weblegko_faq_JBMWFf",
-    "weblegko_about_doctor_nz4gJJ"
+    "drberg_main_product_QR9jce",
+    "drberg_product_tabs_g9rjQK"
   ]
 }
