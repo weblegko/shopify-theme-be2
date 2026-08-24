@@ -69,13 +69,13 @@
         <h2 class="drberg-faq__heading">
           {{ section.settings.heading }}
         </h2>
-        {%- if section.settings.rating_score != blank and section.settings.review_count != blank -%}
+        {% comment %} {%- if section.settings.rating_score != blank and section.settings.review_count != blank -%}
           <div class="drberg-faq__rating-badge">
             <span class="drberg-faq__rating-text">
               Rated {{ section.settings.rating_score }}/5 based on {{ section.settings.review_count }} reviews
             </span>
           </div>
-        {%- endif -%}
+        {%- endif -%} {% endcomment %}
       </div>
     {%- endif -%}
 
