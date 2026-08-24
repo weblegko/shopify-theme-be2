@@ -1,0 +1,168 @@
+{{ 'weblegko-typo.css' | asset_url | stylesheet_tag }}
+{{ 'drberg-product-tabs.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'drberg-product-tabs.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  .drberg-tabs-padding {
+    padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
+    padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
+  }
+
+  @media screen and (min-width: 640px) {
+    .drberg-tabs-padding {
+      padding-top: {{ section.settings.padding_top_tablet | default: 5 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 5 }}rem !important;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .drberg-tabs-padding {
+      padding-top: {{ section.settings.padding_top_desktop | default: 8 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_desktop | default: 8 }}rem !important;
+    }
+  }
+</style>
+
+
+{%- liquid
+  assign tabs_data = product.description
+  assign has_content = false
+
+  if tabs_data != blank
+    assign has_content = true
+  endif
+-%}
+
+
+{% if has_content %}
+  <section class="drberg-tabs">
+    <div class="drberg-tabs-padding drberg-tabs__container">
+       {% comment %} Заголовок секции  {% endcomment %}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="drberg-tabs__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {%- endif -%}
+
+      <div class="drberg-tabs__header">
+         {% comment %} Кнопки табов  {% endcomment %}
+        <div class="drberg-tabs__list" role="tablist">
+          <button
+            class="drberg-tab-btn active"
+            data-tab="tab-1"
+            role="tab"
+            aria-selected="true"
+            aria-controls="tab-1"
+            id="btn-tab-1"
+          >
+            Summary
+          </button>
+        </div>
+      </div>
+
+      <div class="drberg-tabs__content-wrapper">
+      
+         {% comment %} TAB 1: DESCRIPTION (ВСЁ ОПИСАНИЕ)         {% endcomment %}
+      
+        <div class="typo drberg-tab-content active tab-content-inner" id="tab-1" role="tabpanel" aria-labelledby="btn-tab-1">
+          {{ tabs_data }}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "DRBERG PRODUCT TABS",
+  "tag": "section",
+  "class": "section-product-tabs",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Product Details",
+      "label": "Section Heading"
+    },
+    {
+      "type": "header",
+      "content": "🖥️ Desktop (≥ 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "💻 Tablet (640px - 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile (< 640px)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding bottom"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRBERG PRODUCT TABS",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

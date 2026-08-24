@@ -1,0 +1,180 @@
+/* === Weblegko Doctor Grid Section Styles === */
+
+.drberg-doctor {
+  @apply tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem];
+}
+
+.drberg-doctor__container {
+  @apply tw:flex tw:flex-col tw:lg:flex-row tw:gap-[1rem] tw:lg:gap-[1rem] tw:py-[1.6rem];
+}
+
+/* Левая колонка */
+.drberg-doctor__left {
+  @apply tw:w-full tw:lg:w-1/2;
+}
+
+.drberg-doctor__image-wrapper {
+  @apply tw:relative tw:lg:aspect-auto tw:lg:h-full tw:rounded-[0.8rem] tw:overflow-hidden tw:bg-[#f2f1ed];
+}
+
+.drberg-doctor__image {
+  @apply tw:aspect-[358/532] tw:xs:aspect-[700/812] tw:w-full tw:h-full tw:object-cover tw:object-bottom;
+}
+
+.drberg-doctor__image-placeholder {
+  @apply tw:w-full tw:h-full tw:object-cover;
+}
+
+/* Бейджи */
+.drberg-doctor__badge-name {
+  @apply tw:absolute tw:top-[0.5rem] tw:left-[0.5rem] tw:bg-white/90 tw:backdrop-blur-sm tw:px-[1.6rem] tw:py-[1rem] tw:rounded-[0.4rem] tw:shadow-md;
+  backdrop-filter: blur(20rem);
+}
+
+.drberg-doctor__name {
+  @apply tw:text-[1.4rem] tw:font-medium tw:text-grayscale-800 tw:leading-[1.43] tw:tracking-[-0.04em];
+}
+
+.drberg-doctor__profession {
+  @apply tw:text-[1.4rem] tw:text-grayscale-300 tw:leading-[1.43] tw:tracking-[-0.04em];
+}
+
+.drberg-doctor__socials {
+  @apply tw:absolute tw:bottom-[0.5rem] tw:right-[0.5rem] tw:flex tw:flex-col tw:gap-[0.5rem];
+}
+
+.drberg-doctor__social-card {
+  @apply tw:w-[15.5rem] tw:flex tw:justify-center tw:items-center tw:gap-[0.8rem] tw:bg-white/90 tw:px-[1.2rem] tw:py-[0.8rem] tw:rounded-[0.4rem];
+  backdrop-filter: blur(20rem);
+}
+
+.drberg-doctor__social-icon-wrapper {
+  @apply tw:w-[2rem] tw:h-[2rem] tw:shrink-0;
+}
+
+.drberg-doctor__social-icon {
+  @apply tw:w-full tw:h-full tw:object-cover;
+}
+
+.drberg-doctor__social-text {
+  @apply tw:text-[1.4rem] tw:text-grayscale-800 tw:font-medium tw:leading-[1.43] tw:tracking-[-0.04em] tw:whitespace-nowrap;
+}
+
+/* Правая колонка */
+.drberg-doctor__right {
+  @apply tw:w-full tw:lg:w-1/2 tw:flex tw:flex-col tw:gap-[1rem];
+}
+
+.drberg-doctor__info-card {
+  @apply tw:flex-1 tw:bg-white tw:p-[1.6rem] tw:lg:p-[2.4rem] tw:rounded-[0.8rem] tw:flex tw:flex-col;
+}
+
+.drberg-doctor__info-header {
+  @apply tw:flex tw:flex-col-reverse tw:sm:flex-row tw:gap-[2rem] tw:justify-between tw:items-start;
+}
+
+.drberg-doctor__info-heading {
+  @apply tw:text-[4rem] tw:lg:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.2] tw:text-grayscale-950;
+}
+
+.drberg-doctor__info-heading-amp {
+  @apply tw:text-[#004c5a];
+}
+
+.drberg-doctor__info-heading-italic {
+  @apply tw:italic tw:text-[#004c5a] tw:font-play;
+}
+
+.drberg-doctor__youtube-badge {
+  @apply tw:border tw:border-grayscale-50 tw:h-[3.6rem] tw:inline-flex tw:justify-center tw:items-center tw:bg-white/90 tw:px-[0.6rem] tw:py-[0.8rem] tw:rounded-[0.8rem];
+  backdrop-filter: blur(20rem);
+}
+
+.drberg-doctor__youtube-icon-wrapper {
+  @apply tw:flex tw:items-center tw:gap-[0.8rem];
+}
+
+.drberg-doctor__youtube-text {
+  @apply tw:text-[1.4rem] tw:text-grayscale-800 tw:font-medium tw:leading-[1.43] tw:tracking-[-0.04em] tw:whitespace-nowrap;
+}
+
+.drberg-doctor__rating {
+  @apply tw:inline-flex tw:self-start tw:border tw:border-grayscale-50 tw:px-[1.2rem] tw:h-[3.6rem] tw:rounded-[0.8rem] tw:items-center tw:gap-[0.5rem] tw:mt-[1.6rem];
+}
+
+.drberg-doctor__stars {
+  @apply tw:flex tw:gap-1;
+}
+
+.drberg-doctor__star-icon {
+  @apply tw:w-[1.8rem] tw:h-[1.8rem] tw:text-goluboydark;
+}
+
+.drberg-doctor__rating-value {
+  @apply tw:text-[1.4rem] tw:ml-[0.8rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-grayscale-800;
+}
+
+.drberg-doctor__reviews-value {
+  @apply tw:text-[1.4rem] tw:leading-[1.] tw:tracking-[-0.04em] tw:text-grayscale-800;
+}
+
+.drberg-doctor__rating-arrow {
+  @apply tw:cursor-pointer;
+}
+
+.drberg-doctor__rating-arrow-icon {
+  @apply tw:w-[1.8rem] tw:h-[1.8rem] tw:text-[#C6CAD2] tw:hover:text-goluboydark;
+}
+
+.drberg-doctor__description {
+  @apply tw:mt-[2rem] tw:mb-[2.4rem] tw:text-[1.6rem] tw:text-grayscale-600 tw:leading-[1.5] tw:tracking-[-0.04em];
+}
+
+.drberg-doctor__buttons {
+  @apply tw:mt-auto tw:flex tw:gap-[1.2rem];
+}
+
+.drberg-doctor__btn-blue {
+  @apply tw:xs:flex tw:hidden tw:w-full tw:items-center tw:justify-center tw:gap-4 tw:px-[2.4rem] tw:h-[4.8rem] tw:bg-goluboy tw:hover:bg-goluboydark tw:text-white tw:rounded-[0.8rem] tw:text-[1.6rem] tw:leading-[1.5] tw:font-medium tw:tracking-[-0.04em] tw:transition-colors tw:duration-200;
+}
+
+.drberg-doctor__btn-blue-icon {
+  @apply tw:w-[2.4rem] tw:h-[2.4rem];
+}
+
+.drberg-doctor__btn-grey {
+  @apply tw:flex tw:w-full tw:items-center tw:justify-center tw:px-[2.4rem] tw:h-[4.8rem] tw:bg-golden/10 tw:hover:bg-golden tw:hover:text-grayscale-950 tw:border tw:border-golden tw:text-golden tw:rounded-[0.8rem] tw:text-[1.6rem] tw:leading-[1.5] tw:font-medium tw:tracking-[-0.04em] tw:transition-colors tw:duration-200;
+}
+
+/* Слайдер */
+.drberg-doctor__slider-wrapper {
+  @apply tw:relative tw:w-full tw:h-[20.8rem] tw:md:h-[42.6rem] tw:bg-gray-100 tw:overflow-hidden tw:rounded-[0.8rem];
+}
+
+.drberg-doctor__slide-image {
+  @apply tw:w-full tw:h-full tw:object-cover tw:transition-transform tw:duration-500 tw:group-hover:scale-105;
+}
+
+.drberg-doctor__slide-placeholder {
+  @apply tw:w-full tw:h-full tw:object-cover tw:opacity-50;
+}
+
+.drberg-doctor__slide-empty {
+  @apply tw:flex tw:items-center tw:justify-center tw:bg-gray-200 tw:text-gray-500;
+}
+
+.drberg-doctor__slider-btn {
+  @apply tw:absolute tw:top-1/2 tw:-translate-y-1/2 tw:z-10 tw:w-[4rem] tw:h-[4rem] tw:flex tw:items-center tw:justify-center tw:text-white tw:hover:bg-black/10 tw:rounded-full tw:transition-all;
+}
+
+.drberg-doctor__slider-btn--prev {
+  @apply tw:left-2;
+}
+
+.drberg-doctor__slider-btn--next {
+  @apply tw:right-2;
+}
+
+.drberg-doctor__slider-btn-icon {
+  @apply tw:w-[2.4rem] tw:h-[2.4rem];
+}

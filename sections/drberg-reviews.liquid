@@ -1,0 +1,386 @@
+<style>  
+  .drberg-reviews-padding {
+    padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
+    padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
+  }
+  @media screen and (min-width: 640px) {
+    .drberg-reviews-padding {
+      padding-top: {{ section.settings.padding_top_tablet | default: 5 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 5 }}rem !important;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .drberg-reviews-padding {
+      padding-top: {{ section.settings.padding_top_desktop | default: 8 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_desktop | default: 8 }}rem !important;
+    }
+  }
+  #drberg-reviews-grid {
+    display: grid !important;
+    grid-template-columns: repeat({{ section.settings.columns_mobile | default: 1 }}, 1fr) !important;
+    gap: {{ section.settings.row_gap_mobile | default: 1.5 }}rem {{ section.settings.col_gap_mobile | default: 1.5 }}rem !important;
+    --grid-cols: {{ section.settings.columns_mobile | default: 1 }};
+    --initial-items: {{ section.settings.initial_items_mobile | default: 1 }};
+  }
+
+  @media screen and (min-width: 640px) and (max-width: 1023px) {
+    #drberg-reviews-grid {
+      grid-template-columns: repeat({{ section.settings.columns_tablet | default: 2 }}, 1fr) !important;
+      gap: {{ section.settings.row_gap_tablet | default: 2 }}rem {{ section.settings.col_gap_tablet | default: 2 }}rem !important;
+      --grid-cols: {{ section.settings.columns_tablet | default: 2 }};
+      --initial-items: {{ section.settings.initial_items_tablet | default: 2 }};
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    #drberg-reviews-grid {
+      grid-template-columns: repeat({{ section.settings.columns_desktop | default: 3 }}, 1fr) !important;
+      gap: {{ section.settings.row_gap_desktop | default: 2.5 }}rem {{ section.settings.col_gap_desktop | default: 2.5 }}rem !important;
+      --grid-cols: {{ section.settings.columns_desktop | default: 3 }};
+      --initial-items: {{ section.settings.initial_items_desktop | default: 3 }};
+    }
+  }
+</style>
+
+<section class="drberg-reviews">
+  <div class="drberg-reviews-padding drberg-reviews__container">
+     {% comment %} Заголовок секции  {% endcomment %}
+    {%- if section.settings.heading != blank -%}
+      <div class="drberg-reviews__header">
+        <h2 class="drberg-reviews__heading">
+          {{ section.settings.heading }}
+        </h2>
+
+        {%- if section.settings.rating_score != blank and section.settings.review_count != blank -%}
+          <div class="drberg-reviews__badge">
+            <span class="drberg-reviews__badge-text">
+              Rated {{ section.settings.rating_score }}/5 based on {{ section.settings.review_count }} reviews
+            </span>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+     {% comment %} Сетка карточек  {% endcomment %}
+    <div
+      id="drberg-reviews-grid"
+      class="{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      {% if settings.animations_reveal_on_scroll %}
+        data-cascade
+        style="--animation-order: {{ forloop.index }};"
+      {% endif %}
+    >
+
+      {%- assign all_reviews = shop.metaobjects.reviews.values | sort: 'position' -%}
+      {%- assign items_shown = 0 -%}
+      {%- assign limit = section.settings.reviews_limit | default: 3 | plus: 0 -%}
+
+      {%- for review in all_reviews -%}
+
+        {%- comment -%} ПРОВЕРКА ЛИМИТА (только если включен режим главной) {%- endcomment -%}
+        {%- if section.settings.homepage_mode and items_shown >= limit -%}
+            {%- break -%}
+        {%- endif -%}
+
+        <div class="drberg-reviews__item">
+           {% comment %} КАРТОЧКА  {% endcomment %}
+          <div class="drberg-reviews__card">
+             {% comment %} Звезды (Динамический вывод из настроек)  {% endcomment %}           
+            <div class="drberg-reviews__stars">
+              {%- for i in (1..review.rev_rating) -%}
+                <svg class="drberg-reviews__star">
+                  <use href="#star"></use>
+                </svg>
+              {%- endfor -%}
+            </div>
+
+            <div class="drberg-reviews__author">
+              <span class="drberg-reviews__author-name">
+                {{ review.name }}
+              </span>
+            </div>
+            
+            <div class="drberg-reviews__title">
+              "{{ review.title }}"
+            </div>
+
+            <div class="drberg-reviews__text">
+              "{{ review.text }}"
+            </div>
+          </div>
+        </div>
+
+        {%- assign items_shown = items_shown | plus: 1 -%}
+ 
+      {%- endfor -%}
+    </div>
+
+     {% comment %} Кнопка Show More (показывается только в режиме главной) {% endcomment %}
+    {%- if section.settings.homepage_mode and section.settings.button_link != blank -%}
+      <div class="drberg-reviews__btn-wrapper">
+        <a href="{{ section.settings.button_link }}" class="drberg-reviews__btn">
+          <span id="reviews-btn-text">{{ section.settings.button_text | default: 'Show More Reviews' }}</span>
+        </a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRBERG REVIEWS",
+  "tag": "section",
+  "class": "section-reviews",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Reviews Logic"
+    },
+    {
+      "type": "checkbox",
+      "id": "homepage_mode",
+      "label": "Режим главной страницы (лимит + кнопка)",
+      "default": true,
+      "info": "Включите, чтобы показывать лимитированное число отзывов и кнопку перехода. Выключите для страницы всех отзывов."
+    },
+    {
+      "type": "range",
+      "id": "reviews_limit",
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "default": 3,
+      "label": "Number of reviews to show on homepage"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "default": "Show More Reviews",
+      "label": "Button Text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link (All Reviews Page)"
+    },
+    {
+      "type": "header",
+      "content": "Section Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "What Our Customers Say",
+      "label": "Heading"
+    },
+    {
+      "type": "header",
+      "content": "Reviews Statistics"
+    },
+    {
+      "type": "text",
+      "id": "rating_score",
+      "default": "4.8",
+      "label": "Average rating score (e.g., 4.8)"
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "default": "2,847",
+      "label": "Total number of reviews (e.g., 2,847)"
+    },
+    {
+      "type": "header",
+      "content": "🖥️ Desktop (≥ 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3,
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "initial_items_desktop",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 3,
+      "label": "Initial items to show"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_desktop",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 2.5,
+      "unit": "rem",
+      "label": "Column gap"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_desktop",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 2.5,
+      "unit": "rem",
+      "label": "Row gap (vertical)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "💻 Tablet (640px - 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2,
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "initial_items_tablet",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 2,
+      "label": "Initial items to show"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_tablet",
+      "min": 0,
+      "max": 4,
+      "step": 0.5,
+      "default": 2,
+      "unit": "rem",
+      "label": "Column gap"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_tablet",
+      "min": 0,
+      "max": 4,
+      "step": 0.5,
+      "default": 2,
+      "unit": "rem",
+      "label": "Row gap (vertical)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile (< 640px)"
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 1,
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "initial_items_mobile",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 1,
+      "label": "Initial items to show"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_mobile",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "default": 1.5,
+      "unit": "rem",
+      "label": "Column gap"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_mobile",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "default": 1.5,
+      "unit": "rem",
+      "label": "Row gap (vertical)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding bottom"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRBERG REVIEWS",
+      "category": "Page"
+    }
+  ]
+}
+{% endschema %}

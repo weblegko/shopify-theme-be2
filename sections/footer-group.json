@@ -29,9 +29,9 @@
         "padding_bottom": 36
       }
     },
-    "weblegko-footer": {
-      "type": "weblegko-footer",
-      "name": "WEBLEGKO Footer",
+    "drberg-footer": {
+      "type": "drberg-footer",
+      "name": "DRBERG FOOTER",
       "settings": {
         "newsletter_heading": "Sign up to our Newsletter, for the latest Promotions, New Products and Sales!",
         "menu": "main-menu",
@@ -46,6 +46,6 @@
   },
   "order": [
     "footer",
-    "weblegko-footer"
+    "drberg-footer"
   ]
 }

@@ -1,0 +1,63 @@
+/* === Drberg Popular Products Section Styles === */
+
+/* BEM Tailwind Mapping */
+.drberg-popular {
+  @apply tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem];
+}
+
+.drberg-popular__container {
+  @apply tw:max-w-[112rem] tw:mx-auto;
+}
+
+.drberg-popular__header {
+  @apply tw:flex tw:flex-col tw:items-center tw:gap-[1rem] tw:mb-[2.5rem] tw:md:mb-[3rem];
+}
+
+.drberg-popular__heading {
+  @apply tw:text-[2.4rem] tw:sm:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.33] tw:lg:leading-[1.2] tw:text-center;
+}
+
+.drberg-popular__badge {
+  @apply tw:mx-auto tw:inline-flex tw:items-center tw:justify-center tw:gap-2 tw:py-[0.8rem] tw:px-[2rem] tw:bg-[#e5dccb] tw:rounded-full;
+}
+
+.drberg-popular__badge-text {
+  @apply tw:pt-1 tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-center;
+}
+
+/* Плейсхолдеры */
+.drberg-popular__placeholder {
+  @apply tw:block tw:px-[0.8rem] tw:pt-[0.8rem] tw:pb-[1.6rem] tw:rounded-[1.6rem] tw:bg-white;
+}
+
+.drberg-popular__placeholder-img-wrapper {
+  @apply tw:aspect-square tw:bg-[#f2f1ed] tw:rounded-[0.8rem] tw:flex tw:items-center tw:justify-center tw:mb-[1.6rem];
+}
+
+.drberg-popular__placeholder-icon {
+  @apply tw:w-[6rem] tw:h-[6rem] tw:text-[#d4d4d4];
+}
+
+.drberg-popular__placeholder-text-wrapper {
+  @apply tw:px-[1rem];
+}
+
+.drberg-popular__placeholder-bar {
+  @apply tw:bg-[#f2f1ed] tw:rounded-full;
+}
+
+.drberg-popular__placeholder-bar--1 {
+  @apply tw:h-[1.6rem] tw:w-[70%] tw:mb-[0.8rem];
+}
+
+.drberg-popular__placeholder-bar--2 {
+  @apply tw:h-[1.2rem] tw:w-[100%] tw:mb-[0.4rem];
+}
+
+.drberg-popular__placeholder-bar--3 {
+  @apply tw:h-[1.2rem] tw:w-[60%] tw:mb-[1.2rem];
+}
+
+.drberg-popular__placeholder-bar--4 {
+  @apply tw:h-[1.4rem] tw:w-[40%];
+}

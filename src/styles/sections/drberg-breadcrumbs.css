@@ -1,0 +1,49 @@
+/* === Weblegko Breadcrumbs Section Styles === */
+
+.drberg-breadcrumbs-wrapper {
+  @apply tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem];
+}
+
+.drberg-breadcrumbs {
+  @apply tw:py-[2rem] tw:md:py-[2.5rem] tw:max-w-[112rem] tw:mx-auto;
+}
+
+.drberg-breadcrumbs__list {
+  @apply tw:text-[1.4rem] tw:flex tw:flex-nowrap tw:items-center tw:truncate tw:gap-1 tw:list-none tw:p-0 tw:m-0;
+}
+
+.drberg-breadcrumbs__item {
+  @apply tw:flex tw:items-center;
+}
+
+.drberg-breadcrumbs__item--home {
+  @apply tw:font-inter;
+}
+
+.drberg-breadcrumbs__link {
+  @apply tw:text-grayscale-500 tw:hover:text-grayscale-900 tw:transition-colors tw:duration-200;
+}
+
+.drberg-breadcrumbs__link--home {
+  @apply tw:text-grayscale-400 tw:hover:text-grayscale-950 tw:transition-colors tw:duration-200;
+}
+
+.drberg-breadcrumbs__icon {
+  @apply tw:w-[1.8rem] tw:h-[1.8rem];
+}
+
+.drberg-breadcrumbs__sr-text {
+  @apply tw:sr-only;
+}
+
+.drberg-breadcrumbs__separator {
+  @apply tw:text-grayscale-400 tw:mx-4;
+}
+
+.drberg-breadcrumbs__text {
+  @apply tw:text-grayscale-500;
+}
+
+.drberg-breadcrumbs__current {
+  @apply tw:text-grayscale-900 tw:font-medium tw:truncate;
+}

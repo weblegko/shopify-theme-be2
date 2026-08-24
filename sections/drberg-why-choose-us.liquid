@@ -1,0 +1,282 @@
+{%- liquid
+  assign bg_image = section.settings.bg_image
+  assign poster_url = bg_image | image_url: width: 1920
+-%}
+
+<style>
+  .drberg-why-padding {
+    padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
+    padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
+  }
+  @media screen and (min-width: 640px) {
+    .drberg-why-padding {
+      padding-top: {{ section.settings.padding_top_tablet | default: 5 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 5 }}rem !important;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .drberg-why-padding {
+      padding-top: {{ section.settings.padding_top_desktop | default: 8 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_desktop | default: 8 }}rem !important;
+    }
+  }
+</style>
+
+ {% comment %} Скрыто на мобилке, видно от md (768px)  {% endcomment %}
+<section class="drberg-why">
+   {% comment %} Фоновое изображение  {% endcomment %}
+  {% if bg_image != blank %}
+    {%- assign img_width = 1920 -%}
+    {%- assign img_height = img_width | divided_by: bg_image.aspect_ratio -%}
+    <img
+      src="{{ poster_url }}"
+      alt=""
+      width="{{ img_width }}"
+      height="{{ img_height }}"
+      class="drberg-why__bg-image"
+      loading="lazy"
+    >
+  {% else %}
+    <div class="drberg-why__bg-placeholder"></div>
+  {% endif %}
+
+   {% comment %} Темный оверлей для контраста текста и усиления эффекта стекла  {% endcomment %}
+  <div class="drberg-why__overlay"></div>
+
+   {% comment %} Контент  {% endcomment %}
+  <div class="drberg-why-padding drberg-why__container">
+     {% comment %} Заголовок секции  {% endcomment %}
+    {%- if section.settings.heading != blank -%}
+      <div class="drberg-why__header">
+        <h2 class="drberg-why__heading">
+          {{ section.settings.heading }}
+        </h2>
+
+        {%- if section.settings.description != blank -%}
+          <div class="drberg-why__badge">
+            <span class="drberg-why__badge-text">
+              {{ section.settings.description }}
+            </span>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+     {% comment %} Сетка карточек (2 колонки)  {% endcomment %}
+    <div class="drberg-why__grid">
+      {%- for block in section.blocks -%}
+        <div
+          class="{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {% if settings.animations_reveal_on_scroll %}
+            data-cascade
+            style="--animation-order: {{ forloop.index }};"
+          {% endif %}
+          {{ block.shopify_attributes }}
+        >
+           {% comment %} КАРТОЧКА (Эффект стекла)  {% endcomment %}
+          <div class="drberg-why__card">
+             {% comment %} Иконка  {% endcomment %}
+            {%- if block.settings.icon_image != blank -%}
+              <div class="drberg-why__icon-wrapper">
+                <img
+                  src="{{ block.settings.icon_image | image_url: width: 100 }}"
+                  alt="{{ block.settings.title | escape }}"
+                  width="180"
+                  height="180"
+                  class="drberg-why__icon"
+                  loading="lazy"
+                >
+              </div>
+            {%- else -%}
+              <div class="drberg-why__icon-placeholder">
+                <svg
+                  class="drberg-why__icon-placeholder-svg"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+            {%- endif -%}
+
+             {% comment %} Заголовок карточки  {% endcomment %}
+            {%- if block.settings.title != blank -%}
+              <h3 class="drberg-why__card-title">
+                {{ block.settings.title }}
+              </h3>
+            {%- endif -%}
+
+             {% comment %} Описание карточки  {% endcomment %}
+            {%- if block.settings.text != blank -%}
+              <div class="drberg-why__card-text">
+                {{ block.settings.text }}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRBERG WHY US",
+  "tag": "section",
+  "class": "section-why-us",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Why Choose Us",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "default": "Science-backed nutrition solutions",
+      "label": "Description Badge"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "header",
+      "content": "🖥️ Desktop (≥ 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "💻 Tablet (640px - 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile (< 640px)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding bottom"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Expert Team",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Our professionals provide top-tier service and unparalleled industry experience.</p>",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRBERG WHY US",
+      "category": "Page",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "title": "Whole-food nutrition",
+            "text": "<p>We use only natural ingredients, free from synthetic isolates and artificial additives.</p>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "GMP-certified quality",
+            "text": "<p> Every batch is manufactured to pharmaceutical-grade standards, ensuring maximum safety and purity</p>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Premium ingredients",
+            "text": "<p>Our ingredients are sourced from reliable global partners who share our commitment to quality</p>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Maximum bioavailability",
+            "text": "<p>Each formula is meticulously crafted to enhance absorption and deliver optimal results</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

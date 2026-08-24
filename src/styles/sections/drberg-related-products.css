@@ -1,0 +1,41 @@
+/* === Drberg Related Products Section Styles === */
+
+/* Статическая база сетки (перенесено из <style>) */
+#drberg-related-grid {
+  display: grid !important;
+  width: 100% !important;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+#drberg-related-grid .grid__item {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* BEM Tailwind Mapping */
+.drberg-related__wrapper {
+  @apply tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem] tw:max-w-[112rem] tw:mx-auto;
+}
+
+.drberg-related__header {
+  @apply tw:flex tw:flex-col tw:items-center tw:gap-[1rem] tw:mb-[2.5rem] tw:md:mb-[3rem];
+}
+
+.drberg-related__heading {
+  @apply tw:text-[2.4rem] tw:sm:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.33] tw:lg:leading-[1.2] tw:text-center;
+}
+
+.drberg-related__badge {
+  @apply tw:mx-auto tw:inline-flex tw:items-center tw:justify-center tw:gap-2 tw:py-[0.8rem] tw:px-[2rem] tw:bg-[#e5dccb] tw:rounded-full;
+}
+
+.drberg-related__badge-text {
+  @apply tw:pt-1 tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-center;
+}

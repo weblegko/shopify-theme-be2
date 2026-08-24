@@ -1,0 +1,103 @@
+{{ 'drberg-secondary-slider.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'drberg-secondary-slider.js' | asset_url }}" defer="defer"></script>
+
+<section class="drberg-secondary-slider"> 
+   {% comment %} Главный контейнер Swiper  {% endcomment %}
+  <div class="swiper mySecondarySwiper drberg-secondary-slider__swiper">
+    <div class="swiper-wrapper">
+      
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+                    
+          <div class="swiper-slide drberg-secondary-slider__slide" {{ block.shopify_attributes }}>
+            
+            {% if block.settings.link != blank %}
+              <a href="{{ block.settings.link }}" class="drberg-secondary-slider__link group">
+            {% endif %}
+              
+              {% if block.settings.image != blank %}
+                {%- assign img_width = 1200 -%}
+                {%- assign img_height = img_width | divided_by: block.settings.image.aspect_ratio -%}
+                {{ 
+                  block.settings.image 
+                  | image_url: width: 1200 
+                  | image_tag: 
+                      class: 'drberg-secondary-slider__image',
+                      loading: 'lazy',
+                      widths: '600, 900, 1200',
+                      width: img_width,
+                      height: img_height,
+                      alt: block.settings.image.alt | default: 'Слайд'
+                }}
+              {% else %}
+                {{ 'lifestyle-2' | placeholder_svg_tag: 'drberg-secondary-slider__image-placeholder' }}
+              {% endif %}
+
+            {% if block.settings.link != blank %}
+              </a>
+            {% endif %}
+
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="swiper-slide drberg-secondary-slider__empty">
+          Добавьте слайды в настройках секции
+        </div>
+      {% endif %}
+
+    </div>
+    
+     {% comment %} Пагинация (Полосочки)  {% endcomment %}
+    <div class="secondary-slider-pagination"></div>
+
+     {% comment %} СТРЕЛКА ВЛЕВО  {% endcomment %}
+    <button class="secondary-button-prev drberg-secondary-slider__btn drberg-secondary-slider__btn--prev" aria-label="Предыдущий слайд">
+      <svg class="drberg-secondary-slider__btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+
+     {% comment %} СТРЕЛКА ВПРАВО  {% endcomment %}
+    <button class="secondary-button-next drberg-secondary-slider__btn drberg-secondary-slider__btn--next" aria-label="Следующий слайд">
+      <svg class="drberg-secondary-slider__btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRBERG SECONDARY SLIDER",
+  "class": "section-secondary-slider",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Слайд",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Изображение"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Ссылка (на товар или коллекцию)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRBERG SECONDARY SLIDER",
+      "category": "Page",
+      "blocks": [
+        { "type": "slide" }        
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,121 @@
+/* === Drberg Resources Section Styles === */
+
+/* Анимация появления (перенесено из <style>) */
+@keyframes fadeGrowIn {
+  from {
+    opacity: 0;
+    transform: translateY(2rem) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Служебный класс для скрытия (используется в JS) */
+.is-hidden {
+  @apply tw:hidden;
+}
+
+.drberg-resources__item--animate {
+  animation: fadeGrowIn 0.5s ease-out forwards;
+}
+
+/* BEM Tailwind Mapping */
+.drberg-resources {
+  @apply tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem];
+}
+
+.drberg-resources__container {
+  @apply tw:max-w-[112rem] tw:mx-auto;
+}
+
+.drberg-resources__header {
+  @apply tw:flex tw:flex-col tw:items-center tw:gap-[1rem] tw:mb-[2.5rem] tw:md:mb-[3rem];
+}
+
+.drberg-resources__heading {
+  @apply tw:text-[2.4rem] tw:sm:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.33] tw:md:leading-[1.2] tw:text-center;
+}
+
+.drberg-resources__badge {
+  @apply tw:mx-auto tw:inline-flex tw:items-center tw:justify-center tw:gap-2 tw:py-[0.8rem] tw:px-[2rem] tw:bg-[#e5dccb] tw:rounded-full;
+}
+
+.drberg-resources__badge-text {
+  @apply tw:pt-1 tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-center;
+}
+
+/* Карточка */
+.drberg-resources__card {
+  @apply tw:hover:shadow-lg tw:transition-all tw:duration-300 tw:p-[1rem] tw:bg-white tw:rounded-xl tw:overflow-hidden tw:flex tw:flex-row tw:h-full;
+}
+
+.drberg-resources__card-left {
+  @apply tw:w-[47%] tw:shrink-0 tw:overflow-hidden;
+}
+
+.drberg-resources__card-img {
+  @apply tw:w-full tw:h-auto tw:object-cover tw:rounded-[1rem] tw:border tw:border-slate-200;
+}
+
+.drberg-resources__card-placeholder {
+  @apply tw:w-full tw:h-full;
+}
+
+.drberg-resources__card-right {
+  @apply tw:w-[53%] tw:pl-[1rem] tw:lg:pl-[2rem] tw:flex tw:flex-col;
+}
+
+.drberg-resources__card-info {
+  @apply tw:flex tw:flex-col tw:gap-[0.5rem] tw:sm:gap-[1rem] tw:mb-[1rem];
+}
+
+.drberg-resources__badge-tag {
+  @apply tw:inline-block tw:text-additional-orange tw:bg-additional-orange-light tw:text-[1.4rem] tw:tracking-[-0.04em] tw:leading-[1] tw:px-[0.8rem] tw:py-[0.4rem] tw:rounded-[0.4rem];
+}
+
+.drberg-resources__card-title {
+  @apply tw:text-[1.4rem] tw:lg:text-[2rem] tw:font-bold tw:tracking-[-0.04em] tw:leading-[1.3];
+}
+
+.drberg-resources__card-date {
+  @apply tw:text-[1.3rem] tw:lg:text-[1.4rem] tw:tracking-[-0.04em] tw:leading-[1.23];
+}
+
+.drberg-resources__card-date-label {
+  @apply tw:text-grayscale-400;
+}
+
+.drberg-resources__card-category {
+  @apply tw:text-[1.3rem] tw:lg:text-[1.4rem] tw:tracking-[-0.04em] tw:leading-[1.23];
+}
+
+.drberg-resources__card-category-label {
+  @apply tw:text-grayscale-400;
+}
+
+.drberg-resources__card-btn {
+  @apply tw:mt-auto tw:flex tw:items-center tw:justify-center tw:rounded-full tw:transition-colors tw:duration-300 tw:ease-in-out tw:hover:bg-golden tw:pt-1 tw:px-[1.6rem] tw:h-[3.2rem] tw:sm:h-[4rem] tw:md:h-[3.2rem] tw:lg:h-[4rem] tw:bg-grayscale-50 tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:font-medium;
+}
+
+/* Кнопка Show More */
+.drberg-resources__more-wrapper {
+  @apply tw:flex tw:justify-center;
+}
+
+.drberg-resources__more-btn {
+  @apply tw:mt-[4rem] tw:inline-flex tw:items-center tw:justify-center tw:rounded-full tw:transition-colors tw:duration-300 tw:ease-in-out tw:hover:bg-golden tw:px-[1.6rem] tw:pt-1 tw:h-[3.6rem] tw:bg-white tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:font-medium tw:shadow-md tw:disabled:opacity-70 tw:disabled:cursor-not-allowed;
+}
+
+.drberg-resources__loader {
+  @apply tw:animate-spin tw:mr-2 tw:h-5 tw:w-5 tw:text-goluboydark;
+}
+
+.drberg-resources__loader-circle {
+  @apply tw:opacity-25;
+}
+
+.drberg-resources__loader-path {
+  @apply tw:opacity-75;
+}

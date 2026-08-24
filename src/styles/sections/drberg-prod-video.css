@@ -1,0 +1,55 @@
+/* === Drberg Prod Video Section Styles === */
+
+/* BEM Tailwind Mapping */
+.drberg-video__wrapper {
+  @apply tw:px-[1.6rem];
+}
+
+.drberg-video__container {
+  @apply tw:mx-auto tw:max-w-[112rem];
+}
+
+.drberg-video__header-wrapper {
+  @apply tw:block;
+}
+
+.drberg-video__header {
+  @apply tw:mb-[2.5rem];
+}
+
+.drberg-video__heading {
+  @apply tw:text-grayscale-950 tw:text-[2.4rem] tw:sm:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.33] tw:lg:leading-[1.2] tw:text-center;
+}
+
+/* Кнопка-постер */
+.drberg-video__poster-btn {
+  @apply tw:w-full tw:absolute tw:inset-0 tw:overflow-hidden tw:aspect-video tw:cursor-pointer tw:bg-black;
+}
+
+.drberg-video__poster-img {
+  @apply tw:w-full tw:h-full tw:object-cover tw:transition-transform tw:duration-500 tw:group-hover:scale-105;
+}
+
+.drberg-video__poster-placeholder {
+  @apply tw:w-full tw:h-full tw:object-cover;
+}
+
+.drberg-video__overlay {
+  @apply tw:absolute tw:inset-0 tw:bg-black/30;
+}
+
+.drberg-video__play-wrapper {
+  @apply tw:absolute tw:inset-0 tw:flex tw:flex-col tw:items-center tw:justify-center;
+}
+
+.drberg-video__play-btn {
+  @apply tw:hover:scale-105 tw:flex tw:items-center tw:gap-[0.8rem] tw:px-[1.6rem] tw:h-[4.4rem] tw:bg-black/30 tw:rounded-full tw:text-white tw:transition-all tw:duration-200 tw:hover:bg-goluboy;
+}
+
+.drberg-video__play-icon {
+  @apply tw:w-[1.4rem] tw:h-[1.7rem];
+}
+
+.drberg-video__play-text {
+  @apply tw:text-[1.4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.43];
+}

@@ -1,0 +1,45 @@
+
+/* === BEM Tailwind Mapping === */
+.custom-search-wrapper {
+  @apply tw:relative tw:w-full tw:max-w-[40rem] tw:hidden tw:lg:block;
+}
+
+.custom-search-wrapper__form {
+  @apply tw:flex tw:items-stretch tw:w-full tw:h-[3.2rem];
+}
+
+.custom-search-wrapper__input-container {
+  @apply tw:relative tw:flex tw:flex-1 tw:h-full;
+}
+
+.custom-search-wrapper__input {
+  @apply tw:!w-full tw:px-5 tw:h-full tw:text-[1.4rem] tw:text-grayscale-950 tw:placeholder-gray-400 tw:outline-none tw:focus:outline-none tw:appearance-none tw:border tw:border-r-0 tw:border-gray-200 tw:focus:border-gray-300 tw:transition-colors;
+}
+
+.custom-search-wrapper__reset {
+  @apply tw:hidden tw:absolute tw:right-0 tw:top-0 tw:h-full tw:flex tw:items-center tw:text-gray-400 tw:hover:text-grayscale-950 tw:transition-colors;
+}
+
+.custom-search-wrapper__reset-icon {
+  @apply tw:w-5 tw:h-4;
+}
+
+.custom-search-wrapper__submit {
+  @apply tw:flex tw:items-center tw:justify-center tw:bg-golden tw:text-white tw:px-5 tw:h-full tw:border tw:border-golden tw:hover:bg-golden/80 tw:transition-colors tw:shrink-0 tw:outline-none tw:focus:outline-none;
+}
+
+.custom-search-wrapper__submit-icon {
+  @apply tw:w-7 tw:h-7;
+}
+
+.custom-search-wrapper__spinner {
+  @apply tw:animate-spin tw:h-10 tw:w-10 tw:text-golden;
+}
+
+.custom-search-wrapper__spinner-circle {
+  @apply tw:opacity-25;
+}
+
+.custom-search-wrapper__spinner-path {
+  @apply tw:opacity-75;
+}

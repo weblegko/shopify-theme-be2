@@ -1,4 +1,5 @@
 {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+ 
 {%- if predictive_search.performed -%}
   {% assign first_column_results_size = predictive_search.resources.queries.size
     | plus: predictive_search.resources.collections.size
@@ -6,30 +7,27 @@
     | plus: predictive_search.resources.articles.size
   %}
    
-  <div id="custom-predictive-search-results" role="listbox" class="tw:flex tw:flex-col">
+  <div id="custom-predictive-search-results" role="listbox" class="custom-predictive-search__container">
     {%- if first_column_results_size > 0 or predictive_search.resources.products.size > 0 -%}
-      <div
-        id="custom-predictive-search-results-groups-wrapper"
-        class="tw:max-h-[60dvh] tw:min-h-[10dvh] tw:overflow-y-auto tw:p-2"
-      >
+      <div id="custom-predictive-search-results-groups-wrapper" class="custom-predictive-search__groups">
     {%- endif -%}
  
     {%- if predictive_search.resources.queries.size > 0 or predictive_search.resources.collections.size > 0 -%}
-      <div class="tw:py-2">
-        <h2 class="tw:px-4 tw:py-2 tw:text-[1.2rem] tw:uppercase tw:text-gray-500 tw:font-semibold tw:tracking-wider">
+      <div class="custom-predictive-search__group">
+        <h2 class="custom-predictive-search__title">
           {{- 'templates.search.suggestions' | t -}}
         </h2>
-        <ul class="tw:flex tw:flex-col" role="group">
+        <ul class="custom-predictive-search__list" role="group">
           {%- for query in predictive_search.resources.queries -%}
             <li id="custom-predictive-search-option-query-{{ forloop.index }}" role="option" aria-selected="false">
-              <a href="{{ query.url }}" class="predictive-search__item tw:block tw:px-4 tw:py-3 tw:text-[1.4rem] tw:text-gray-800 tw:hover:bg-gray-50 tw:rounded-md tw:transition-colors" tabindex="-1">
+              <a href="{{ query.url }}" class="predictive-search__item custom-predictive-search__item--text" tabindex="-1">
                 {{ query.styled_text }}
               </a>
             </li>
           {%- endfor -%}
           {%- for collection in predictive_search.resources.collections -%}
             <li id="custom-predictive-search-option-collection-{{ forloop.index }}" role="option" aria-selected="false">
-              <a href="{{ collection.url }}" class="predictive-search__item tw:block tw:px-4 tw:py-3 tw:text-[1.4rem] tw:text-gray-800 tw:hover:bg-gray-50 tw:rounded-md tw:transition-colors" tabindex="-1">
+              <a href="{{ collection.url }}" class="predictive-search__item custom-predictive-search__item--text" tabindex="-1">
                 {{ collection.title | escape }}
               </a>
             </li>
@@ -39,37 +37,33 @@
     {%- endif -%}
  
     {%- if predictive_search.resources.products.size > 0 -%}
-      <div class="tw:py-2">
-        <h2 class="tw:px-4 tw:py-2 tw:text-[1.2rem] tw:uppercase tw:text-gray-500 tw:font-semibold tw:tracking-wider">
+      <div class="custom-predictive-search__group">
+        <h2 class="custom-predictive-search__title">
           {{- 'templates.search.products' | t -}}
         </h2>
-        <ul id="custom-predictive-search-results-products-list" class="tw:flex tw:flex-col" role="group">
+        <ul id="custom-predictive-search-results-products-list" class="custom-predictive-search__list" role="group">
           {%- for product in predictive_search.resources.products -%}
             <li id="custom-predictive-search-option-product-{{ forloop.index }}" role="option" aria-selected="false">
-              <a
-                href="{{ product.url }}"
-                class="predictive-search__item tw:flex tw:items-center tw:gap-4 tw:p-4 tw:hover:bg-gray-50 tw:transition-colors tw:rounded-md"
-                tabindex="-1"
-              >
+              <a href="{{ product.url }}" class="predictive-search__item custom-predictive-search__item--product" tabindex="-1">
                 {%- if product.featured_media != blank -%}
                   <img
-                    class="tw:w-[5rem] tw:h-[5rem] tw:flex-shrink-0 tw:bg-gray-100 tw:rounded-md tw:object-cover"
+                    class="custom-predictive-search__item-media"
                     src="{{ product.featured_media | image_url: width: 150 }}"
                     alt="{{ product.featured_media.alt | escape }}"
                     width="50"
                     height="{{ 50 | divided_by: product.featured_media.preview_image.aspect_ratio }}"
                   >
                 {%- endif -%}
-                <div class="tw:flex-1 tw:min-w-0">
+                <div class="custom-predictive-search__item-info">
                   {%- if settings.predictive_search_show_vendor -%}
                     <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
-                    <div class="tw:text-[1.2rem] tw:text-gray-500 tw:mb-1">
+                    <div class="custom-predictive-search__item-vendor">
                       {{ product.vendor }}
                     </div>
                   {%- endif -%}
-                  <h3 class="tw:text-[1.4rem] tw:font-medium tw:text-grayscale-950 tw:leading-[1.33] tw:line-clamp-2">{{ product.title | escape }}</h3>
+                  <h3 class="custom-predictive-search__item-title">{{ product.title | escape }}</h3>
                   {%- if settings.predictive_search_show_price -%}
-                    <div class="tw:mt-1">
+                    <div class="custom-predictive-search__item-price">
                       {% render 'price', product: product, use_variant: true, show_badges: false %}
                     </div>
                   {%- endif -%}
@@ -82,21 +76,21 @@
     {%- endif -%}
  
     {%- if predictive_search.resources.pages.size > 0 or predictive_search.resources.articles.size > 0 -%}
-      <div class="tw:py-2">
-        <h2 class="tw:px-4 tw:py-2 tw:text-[1.2rem] tw:uppercase tw:text-gray-500 tw:font-semibold tw:tracking-wider">
+      <div class="custom-predictive-search__group">
+        <h2 class="custom-predictive-search__title">
           {{- 'templates.search.pages' | t -}}
         </h2>
-        <ul class="tw:flex tw:flex-col" role="group">
+        <ul class="custom-predictive-search__list" role="group">
           {%- for page in predictive_search.resources.pages -%}
             <li id="custom-predictive-search-option-page-{{ forloop.index }}" role="option" aria-selected="false">
-              <a href="{{ page.url }}" class="predictive-search__item tw:block tw:px-4 tw:py-3 tw:text-[1.4rem] tw:text-gray-800 tw:hover:bg-gray-50 tw:rounded-md tw:transition-colors" tabindex="-1">
+              <a href="{{ page.url }}" class="predictive-search__item custom-predictive-search__item--text" tabindex="-1">
                 {{ page.title | escape }}
               </a>
             </li>
           {%- endfor -%}
           {%- for article in predictive_search.resources.articles -%}
             <li id="custom-predictive-search-option-article-{{ forloop.index }}" role="option" aria-selected="false">
-              <a href="{{ article.url }}" class="predictive-search__item tw:block tw:px-4 tw:py-3 tw:text-[1.4rem] tw:text-gray-800 tw:hover:bg-gray-50 tw:rounded-md tw:transition-colors" tabindex="-1">
+              <a href="{{ article.url }}" class="predictive-search__item custom-predictive-search__item--text" tabindex="-1">
                 {{ article.title | escape }}
               </a>
             </li>
@@ -111,10 +105,10 @@
  
     {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
  
-    <div id="custom-predictive-search-option-search-keywords" class="tw:mt-1 tw:border-t tw:border-gray-100">
+    <div id="custom-predictive-search-option-search-keywords" class="custom-predictive-search__footer">
        <a
         href="{{ routes.search_url }}?q={{ predictive_search.terms | escape }}&type=product&options[prefix]=last"
-        class="predictive-search__item predictive-search__item--term tw:!py-8 tw:!block tw:w-full tw:!text-center tw:py-6  tw:text-golden tw:bg-gray-50 tw:hover:!text-goluboy tw:transition-colors tw:text-[1.4rem] tw:font-poppins tw:font-semibold tw:uppercase"     
+        class="predictive-search__item predictive-search__item--term custom-predictive-search__link-all"     
       >        
           See all products        
       </a>

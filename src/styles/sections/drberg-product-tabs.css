@@ -1,0 +1,26 @@
+/* === Drberg Product Tabs Section Styles === */
+
+/* BEM Tailwind Mapping */
+.drberg-tabs {
+  @apply tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem];
+}
+
+.drberg-tabs__container {
+  @apply tw:max-w-[112rem] tw:mx-auto;
+}
+
+.drberg-tabs__heading {
+  @apply tw:text-[2.4rem] tw:sm:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.2] tw:text-center tw:mb-[3rem];
+}
+
+.drberg-tabs__header {
+  @apply tw:rounded-t-[1.6rem] tw:bg-white tw:border-b tw:border-[#e5e5e5];
+}
+
+.drberg-tabs__list {
+  @apply tw:flex tw:gap-[1.6rem] tw:px-[1.6rem] tw:flex-nowrap;
+}
+
+.drberg-tabs__content-wrapper {
+  @apply tw:rounded-b-[1.6rem] tw:bg-white tw:px-[1.6rem] tw:py-[1.6rem];
+}

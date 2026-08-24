@@ -1,0 +1,103 @@
+/* === Custom Header Drawer Snippet Styles === */
+
+.custom-drawer {
+  @apply tw:fixed tw:inset-0 tw:z-[100];
+}
+.custom-drawer.is-hidden {
+  @apply tw:hidden;
+}
+
+.custom-drawer__overlay {
+  @apply tw:absolute tw:inset-0 tw:bg-black/50 tw:opacity-0 tw:transition-opacity tw:duration-300 tw:ease-in-out;
+}
+.custom-drawer__overlay.is-visible {
+  @apply tw:opacity-100;
+}
+
+.custom-drawer__panel {
+  @apply tw:absolute tw:top-0 tw:right-0 tw:h-full tw:w-[40rem] tw:max-w-[85%] tw:bg-white tw:shadow-2xl tw:translate-x-full tw:transition-transform tw:duration-300 tw:ease-in-out tw:flex tw:flex-col;
+}
+.custom-drawer__panel.is-open {
+  @apply tw:translate-x-0;
+}
+
+.custom-drawer__header {
+  @apply tw:flex tw:justify-between tw:items-center tw:p-6 tw:border-b tw:border-gray-100;
+}
+.custom-drawer__title {
+  @apply tw:text-[1.6rem] tw:font-poppins tw:font-semibold tw:uppercase tw:tracking-wider;
+}
+.custom-drawer__close {
+  @apply tw:p-2 tw:hover:bg-gray-100 tw:rounded-full tw:transition-colors;
+}
+.custom-drawer__close-icon {
+  @apply tw:w-8 tw:h-8;
+}
+
+.custom-drawer__nav {
+  @apply tw:flex-1 tw:overflow-y-auto tw:p-6;
+}
+.custom-drawer__list {
+  @apply tw:flex tw:flex-col tw:gap-2;
+}
+.custom-drawer__item {
+  @apply tw:border-b tw:border-gray-100 tw:pb-2;
+}
+
+/* Уровень 1 (group оставлен в HTML) */
+.custom-drawer__summary {
+  @apply tw:cursor-pointer tw:flex tw:justify-between tw:items-center tw:py-3 tw:text-[1.6rem] tw:font-medium tw:list-none tw:[&::-webkit-details-marker]:hidden;
+}
+
+.custom-drawer__arrow {
+  @apply tw:w-6 tw:h-6 tw:transition-transform tw:group-open:rotate-90;
+}
+.custom-drawer__sublist {
+  @apply tw:pl-4 tw:mt-2 tw:flex tw:flex-col tw:gap-1;
+}
+.custom-drawer__link--l1 {
+  @apply tw:block tw:py-3 tw:text-[1.6rem] tw:font-medium tw:hover:text-golden tw:transition-colors;
+}
+
+
+/* Уровень 2 (group/sub оставлен в HTML) */
+.custom-drawer__subsummary {
+  @apply tw:cursor-pointer tw:flex tw:justify-between tw:items-center tw:py-2 tw:text-[1.4rem] tw:text-gray-600 tw:hover:text-black tw:transition-colors tw:list-none tw:[&::-webkit-details-marker]:hidden;
+}
+.custom-drawer__subarrow {
+  @apply tw:w-5 tw:h-5 tw:transition-transform tw:group-open/sub:rotate-90;
+}
+.custom-drawer__subsublist {
+  @apply tw:pl-4 tw:mt-1 tw:flex tw:flex-col tw:gap-1;
+}
+.custom-drawer__link--l2 {
+  @apply tw:block tw:py-2 tw:text-[1.4rem] tw:text-gray-600 tw:hover:text-black tw:transition-colors;
+}
+
+/* Уровень 3 */
+.custom-drawer__link--l3 {
+  @apply tw:block tw:py-1.5 tw:text-[1.4rem] tw:text-gray-500 tw:hover:text-black tw:transition-colors;
+}
+
+/* Подвал */
+.custom-drawer__footer {
+  @apply tw:py-6 tw:px-8 tw:border-t tw:border-gray-100 tw:flex tw:flex-col tw:gap-6;
+}
+.custom-drawer__account-link {
+  @apply tw:flex tw:items-center tw:gap-3 tw:text-[1.4rem] tw:font-medium tw:text-gray-700 tw:hover:text-black tw:transition-colors;
+}
+.custom-drawer__account-icon {
+  @apply tw:w-[2.4rem] tw:h-[2.4rem];
+}
+.custom-drawer__socials {
+  @apply tw:flex tw:items-center tw:gap-8;
+}
+.custom-drawer__social-link {
+  @apply tw:opacity-85 tw:hover:opacity-100 tw:transition-opacity;
+}
+.custom-drawer__social-icon {
+  @apply tw:w-[2.4rem] tw:h-[2.4rem];
+}
+.custom-drawer__social-img {
+  @apply tw:w-full tw:h-full tw:object-cover;
+}

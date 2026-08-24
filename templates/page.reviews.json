@@ -9,12 +9,12 @@
  */
 {
   "sections": {
-    "weblegko-reviews": {
-      "type": "weblegko-reviews",
+    "drberg-reviews": {
+      "type": "drberg-reviews",
       "settings": {}
     }
   },
   "order": [
-    "weblegko-reviews"
+    "drberg-reviews"
   ]
 }

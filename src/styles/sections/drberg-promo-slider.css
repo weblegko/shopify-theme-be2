@@ -1,0 +1,46 @@
+/* === Drberg Promo Slider Section Styles === */
+
+.drberg-promo-slider {
+  @apply tw:relative tw:max-w-[144rem] tw:mx-auto tw:w-full tw:h-[20rem] tw:md:h-[26rem] tw:bg-gray-100 tw:overflow-hidden;
+}
+
+.drberg-promo-slider__swiper {
+  @apply tw:w-full tw:h-full;
+}
+
+.drberg-promo-slider__slide {
+  @apply tw:relative tw:h-full;
+}
+
+.drberg-promo-slider__link {
+  @apply tw:block tw:w-full tw:h-full;
+}
+
+.drberg-promo-slider__image {
+  @apply tw:w-full tw:h-full tw:object-cover tw:transition-transform tw:duration-500 tw:group-hover:scale-105;
+}
+
+.drberg-promo-slider__image-placeholder {
+  @apply tw:w-full tw:h-full tw:object-cover tw:opacity-50;
+}
+
+.drberg-promo-slider__empty {
+  @apply tw:flex tw:items-center tw:justify-center tw:bg-gray-200 tw:text-gray-500 tw:font-inter;
+}
+
+/* Кнопки навигации */
+.drberg-promo-slider__btn {
+  @apply tw:absolute tw:top-1/2 tw:-translate-y-1/2 tw:z-10 tw:w-[4.5rem] tw:h-[4.5rem] tw:flex tw:items-center tw:justify-center tw:text-white tw:hover:bg-goluboy tw:rounded-full tw:duration-300 tw:transition-colors;
+}
+
+.drberg-promo-slider__btn--prev {
+  @apply tw:left-2;
+}
+
+.drberg-promo-slider__btn--next {
+  @apply tw:right-2;
+}
+
+.drberg-promo-slider__btn-icon {
+  @apply tw:w-[3.2rem] tw:h-[3.2rem];
+}

@@ -1,9 +1,52 @@
 @import "tailwindcss";
 @config "../../tailwind.config.js";
 
+/* fonts */
 @import "./fonts.css";
-@import "./weblegko-badges.css";
-@import "./weblegko-buttons.css";
+
+/* addons */
+@import "./addons/custom-buttons-and-badges.css";
+
+/* sections */
+@import "./sections/custom-predictive-search.css";
+
+@import "./sections/drberg-header.css";
+@import "./sections/drberg-footer.css";
+
+@import "./sections/drberg-about-doctor.css";
+@import "./sections/drberg-breadcrumbs.css";
+@import "./sections/drberg-collections.css";
+@import "./sections/drberg-doctor-grid.css";
+@import "./sections/drberg-doctor-quote.css";
+@import "./sections/drberg-faq.css";
+@import "./sections/drberg-features.css";
+@import "./sections/drberg-newsletter-banner.css";
+@import "./sections/drberg-popular-products.css";
+@import "./sections/drberg-premium-products.css";
+@import "./sections/drberg-product-tabs.css";
+@import "./sections/drberg-prod-video.css";
+@import "./sections/drberg-promo-slider.css";
+@import "./sections/drberg-related-products.css";
+@import "./sections/drberg-resources.css";
+@import "./sections/drberg-secondary-slider.css";
+@import "./sections/drberg-video.css";
+@import "./sections/drberg-why-us.css";
+@import "./sections/drberg-reviews.css";
+
+
+
+/* snippets */
+@import "./snippets/custom-header-search.css";
+@import "./snippets/custom-header-drawer.css";
+
+@import "./snippets/drberg-header-search.css";
+@import "./snippets/drberg-price.css";
+@import "./snippets/drberg-product-price.css";
+@import "./snippets/drberg-search-form.css";
+@import "./snippets/drberg-product-media-gallery.css";
+@import "./snippets/drberg-card-product.css";
+@import "./snippets/drberg-card-product-premium.css";
+
 
 
 html {

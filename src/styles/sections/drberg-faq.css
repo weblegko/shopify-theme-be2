@@ -1,0 +1,62 @@
+/* === Drberg FAQ Section Styles === */
+
+.drberg-faq {
+  @apply tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem];
+}
+
+.drberg-faq__container {
+  @apply tw:max-w-[112rem] tw:mx-auto;
+}
+
+.drberg-faq__header {
+  @apply tw:flex tw:flex-col tw:items-center tw:gap-[1rem] tw:mb-[3rem];
+}
+
+.drberg-faq__heading {
+  @apply tw:font-poppins tw:text-[2.4rem] tw:sm:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.2] tw:text-center;
+}
+
+.drberg-faq__categories {
+  @apply tw:flex tw:flex-col;
+}
+
+.drberg-faq__items {
+  @apply tw:flex tw:flex-col;
+}
+
+.drberg-faq__item {
+  /* Убрали tw:group, так как он вызывает ошибку в @apply */
+  @apply tw:hover:scale-[101%] tw:hover:shadow-lg tw:transition-all tw:duration-300 tw:bg-white tw:rounded-[1.2rem] tw:border tw:border-gray-200 tw:shadow-sm tw:overflow-hidden;
+}
+
+.drberg-faq__summary {
+  @apply tw:flex tw:justify-between tw:items-start tw:p-[1.5rem] tw:md:p-[2rem] tw:cursor-pointer tw:transition-colors;
+}
+
+.drberg-faq__question {
+  @apply tw:pt-1 tw:text-[1.4rem] tw:font-medium tw:pr-8 tw:leading-[1.4] tw:tracking-[-0.04em] tw:lg:text-[2rem];
+}
+
+.drberg-faq__icon-wrapper {
+  @apply tw:relative tw:w-[2rem] tw:h-[2rem] tw:flex-shrink-0 tw:flex tw:items-center tw:justify-center tw:lg:w-[2.8rem] tw:lg:h-[2.8rem];
+}
+
+.drberg-faq__icon {
+  @apply tw:absolute tw:w-full tw:h-full tw:text-golden tw:transition-opacity tw:duration-300;
+}
+
+.drberg-faq__icon--minus {
+  @apply tw:opacity-0;
+}
+
+.drberg-faq__answer {
+  @apply tw:translate-y-[-1rem] tw:px-[2rem] tw:pb-[1rem] tw:text-[1.3rem] tw:text-[#8b867a] tw:leading-[1.23] tw:tracking-[-0.04em] tw:lg:text-[1.6rem] tw:lg:leading-[1.5];
+}
+
+.drberg-faq__btn-wrapper {
+  @apply tw:flex tw:justify-center;
+}
+
+.drberg-faq__btn {
+  @apply tw:mt-[2.5rem] tw:md:mt-[4rem] tw:inline-flex tw:items-center tw:justify-center tw:rounded-full tw:transition-colors tw:duration-300 tw:ease-in-out tw:hover:bg-golden tw:px-[1.6rem] tw:pt-1 tw:h-[3.6rem] tw:bg-white tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:font-medium tw:shadow-md;
+}

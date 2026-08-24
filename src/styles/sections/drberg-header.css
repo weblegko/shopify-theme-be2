@@ -1,0 +1,68 @@
+/* === BEM Tailwind Mapping === */
+.drberg-header {
+  @apply tw:bg-white tw:border-b tw:border-black/10 tw:px-[1.6rem] tw:sm:px-[2.4rem] tw:h-[6rem] tw:shadow-md tw:flex tw:justify-between tw:items-center;
+}
+
+.drberg-header__left {
+  @apply tw:flex tw:items-center tw:gap-4 tw:flex-1;
+}
+
+.drberg-header__logo {
+  @apply tw:ml-3 tw:sm:ml-0 tw:flex tw:items-center tw:gap-2 tw:aspect-[142/40] tw:h-[4rem];
+}
+
+.drberg-header__logo-img {
+  @apply tw:h-[inherit] tw:w-auto tw:object-cover;
+}
+
+.drberg-header__logo-text {
+  @apply tw:text-3xl tw:md:text-4xl tw:font-bold tw:tracking-tight;
+}
+
+.drberg-header__search {
+  @apply tw:ml-[2rem] tw:w-full;
+}
+
+.drberg-header__localization {
+  @apply tw:mr-[3rem];
+}
+
+.drberg-header__socials {
+  @apply tw:hidden tw:md:flex tw:items-center tw:gap-9 tw:pr-12;
+}
+
+.drberg-header__social-link {
+  @apply tw:opacity-85 tw:hover:opacity-100 tw:transition-opacity;
+}
+
+.drberg-header__icon {
+  @apply tw:w-[2.4rem] tw:h-[2.4rem] tw:xl:w-[2rem] tw:xl:h-[2rem];
+}
+
+.drberg-header__icon--shrink {
+  @apply tw:shrink-0;
+}
+
+.drberg-header__social-img {
+  @apply tw:w-full tw:h-full tw:object-cover;
+}
+
+.drberg-header__cart {
+  @apply tw:relative;
+}
+
+.drberg-header__cart-bubble {
+  @apply tw:!bg-goluboy tw:absolute tw:top-[0.4rem] tw:!left-[2.2rem] tw:flex tw:items-center tw:justify-center tw:!w-[2rem] tw:!h-[2rem] tw:rounded-full tw:text-white tw:text-[1.2rem] tw:font-bold tw:leading-[1] tw:px-[0.4rem] tw:border-2 tw:border-white tw:shadow-sm;
+}
+
+.drberg-header__cart-count {
+  @apply tw:mt-1;
+}
+
+.drberg-header__burger-wrapper {
+  @apply tw:flex tw:lg990:hidden tw:ml-5;
+}
+
+.drberg-header__dropdown {
+  @apply tw:bg-white tw:px-[1.5rem];
+}

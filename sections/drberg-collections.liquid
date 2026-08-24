@@ -1,0 +1,332 @@
+<style> 
+  .drberg-collections-padding {
+    padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
+    padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
+  }
+  @media screen and (min-width: 640px) {
+    .drberg-collections-padding {
+      padding-top: {{ section.settings.padding_top_tablet | default: 4 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 4 }}rem !important;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .drberg-collections-padding {
+      padding-top: {{ section.settings.padding_top_desktop | default: 6 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_desktop | default: 6 }}rem !important;
+    }
+  } 
+  #drberg-collections-grid {
+    display: grid !important;
+    grid-template-columns: repeat({{ section.settings.columns_mobile | default: 2 }}, 1fr) !important;
+    gap: {{ section.settings.row_gap_mobile | default: 1 }}rem {{ section.settings.col_gap_mobile | default: 0.5 }}rem !important;
+  }
+  @media screen and (min-width: 640px) and (max-width: 1023px) {
+    #drberg-collections-grid {
+      grid-template-columns: repeat({{ section.settings.columns_tablet | default: 3 }}, 1fr) !important;
+      gap: {{ section.settings.row_gap_tablet | default: 1.5 }}rem {{ section.settings.col_gap_tablet | default: 1 }}rem !important;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    #drberg-collections-grid {
+      grid-template-columns: repeat({{ section.settings.columns_desktop | default: 6 }}, 1fr) !important;
+      gap: {{ section.settings.row_gap_desktop | default: 2 }}rem {{ section.settings.col_gap_desktop | default: 2 }}rem !important;
+    }
+  }
+</style>
+
+<section class="drberg-collections-padding drberg-collections">  
+  <div class="drberg-collections__container">
+     {% comment %} Заголовок секции  {% endcomment %}
+    {%- if section.settings.heading != blank -%}
+      <div class="drberg-collections__header">
+        <h2 class="drberg-collections__heading">
+          {{ section.settings.heading }}
+        </h2>
+
+        {% comment %} можно чета дообавить       {% endcomment %}
+      </div>
+    {%- endif -%}
+
+    <ul id="drberg-collections-grid" class="drberg-collections__grid">
+      {%- for i in (1..6) -%}
+        {%- assign current_block = section.blocks[forloop.index0] -%}
+        <li 
+          class="drberg-collections__item {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {% if settings.animations_reveal_on_scroll %}data-cascade style="--animation-order: {{ forloop.index }};"{% endif %}
+        >
+          
+          {%- if current_block != blank and current_block.settings.collection != blank -%}
+            {%- assign collection = current_block.settings.collection -%}
+             {% comment %} ЕСЛИ КОЛЛЕКЦИЯ ЕСТЬ  {% endcomment %}
+            <a href="{{ collection.url }}" class="drberg-collections__link group">
+              
+              <div class="drberg-collections__image-wrapper">
+                {%- if collection.image != blank -%}
+                  <img 
+                    srcset="{%- if collection.image.width >= 165 -%}{{ collection.image | image_url: width: 165 }} 165w,{%- endif -%}
+                            {%- if collection.image.width >= 360 -%}{{ collection.image | image_url: width: 360 }} 360w,{%- endif -%}
+                            {%- if collection.image.width >= 533 -%}{{ collection.image | image_url: width: 533 }} 533w,{%- endif -%}
+                            {{ collection.image | image_url }} {{ collection.image.width }}w"
+                    src="{{ collection.image | image_url: width: 533 }}"
+                    sizes="(min-width: 1024px) calc((100vw - 8rem) / {{ section.settings.columns_desktop | default: 6 }}), (min-width: 640px) calc((100vw - 4rem) / {{ section.settings.columns_tablet | default: 5 }}), calc((100vw - 3rem) / {{ section.settings.columns_mobile | default: 2 }})"
+                    alt="{{ collection.image.alt | escape }}"
+                    loading="lazy"
+                    class="drberg-collections__image"
+                    width="{{ collection.image.width }}"
+                    height="{{ collection.image.height }}"
+                  >
+                {%- elsif collection.products.first and collection.products.first.featured_image != blank -%}
+                  {%- assign image = collection.products.first.featured_image -%}
+                  <img 
+                    src="{{ image | image_url: width: 533 }}"
+                    alt="{{ image.alt | escape }}"
+                    loading="lazy"
+                    class="drberg-collections__image"
+                    width="{{ image.width }}"
+                    height="{{ image.height }}"
+                  >
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag: 'drberg-collections__image' }}
+                {%- endif -%}
+              </div>
+
+              <h3 class="drberg-collections__title">
+                {{ collection.title }}
+              </h3>
+              <span class="drberg-collections__view-more">             
+                  View Collection 
+                 <svg class="drberg-collections__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"/>
+                      <polyline points="12 8 16 12 12 16"/>
+                      <line x1="8" y1="12" x2="16" y2="12"/>
+                </svg>
+              </span>
+              
+            </a>
+
+          {%- else -%}
+             {% comment %} ЕСЛИ КОЛЛЕКЦИИ НЕТ (ПЛЕЙСХОЛДЕР)  {% endcomment %}
+            <div class="drberg-collections__placeholder">
+              <div class="drberg-collections__placeholder-wrapper">
+                <svg class="drberg-collections__placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </div>
+              <h3 class="drberg-collections__title">
+                Empty
+              </h3>
+              <span class="drberg-collections__placeholder-text">             
+                Add collection
+              </span>
+            </div>
+          {%- endif -%}
+
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    <div class="drberg-collections__btn-wrapper">
+      <a href="/collections" class="drberg-collections__btn">
+        View all collections
+      </a>
+    </div>
+    
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRBERG COLLECTIONS",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Browse popular collection",
+      "label": "Heading"
+    },
+    {
+      "type": "header",
+      "content": "🖥️ Desktop (≥ 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 6,
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_desktop",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 2,
+      "unit": "rem",
+      "label": "Column gap"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_desktop",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 2,
+      "unit": "rem",
+      "label": "Row gap (vertical)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 6,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 6,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "💻 Tablet (640px - 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3,
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_tablet",
+      "min": 0,
+      "max": 4,
+      "step": 0.5,
+      "default": 1,
+      "unit": "rem",
+      "label": "Column gap"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_tablet",
+      "min": 0,
+      "max": 4,
+      "step": 0.5,
+      "default": 2.5,
+      "unit": "rem",
+      "label": "Row gap (vertical)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile (< 640px)"
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2,
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_mobile",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "default": 0.5,
+      "unit": "rem",
+      "label": "Column gap"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_mobile",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "default": 2.5,
+      "unit": "rem",
+      "label": "Row gap (vertical)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding bottom"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRBERG COLLECTIONS",
+      "category": "Page",
+      "blocks": [       
+      ]
+    }
+  ]
+}
+{% endschema %}

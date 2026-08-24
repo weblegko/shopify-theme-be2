@@ -1,0 +1,76 @@
+/* === Weblegko Collections Section Styles === */
+
+.drberg-collections {
+  @apply tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem];
+}
+
+.drberg-collections__container {
+  @apply tw:max-w-[112rem] tw:mx-auto;
+}
+
+.drberg-collections__header {
+  @apply tw:flex tw:flex-col tw:items-center tw:gap-[1rem] tw:mb-[3rem];
+}
+
+.drberg-collections__heading {
+  @apply tw:font-poppins tw:text-[2.4rem] tw:sm:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.2] tw:text-center;
+}
+
+.drberg-collections__grid {
+  @apply tw:list-none tw:p-0 tw:m-0;
+}
+
+.drberg-collections__item {
+  @apply tw:flex tw:justify-center;
+}
+
+/* Элемент коллекции */
+.drberg-collections__link {
+  @apply tw:flex tw:flex-col tw:items-center tw:text-center tw:w-full tw:max-w-[20rem] tw:no-underline tw:text-inherit;
+}
+
+.drberg-collections__image-wrapper {
+  @apply tw:border tw:shadow-lg tw:border-black/10 tw:w-full tw:aspect-square tw:rounded-full tw:overflow-hidden tw:mb-[1rem] tw:transition-transform tw:duration-300 tw:group-hover:scale-[105%];
+}
+
+.drberg-collections__image {
+  @apply tw:w-full tw:h-full tw:object-cover tw:block tw:hover:scale-[105%] tw:transition-all tw:duration-300;
+}
+
+.drberg-collections__title {
+  @apply tw:text-[1.2rem] tw:font-medium tw:m-0 tw:mb-[0.5rem];
+}
+
+.drberg-collections__view-more {
+  @apply tw:flex tw:items-center tw:gap-2 tw:text-[1rem] tw:hover:no-underline tw:underline tw:underline-offset-[0.3rem] tw:opacity-80 tw:group-hover:opacity-100 tw:transition-opacity tw:duration-200;
+}
+
+.drberg-collections__arrow {
+  @apply tw:w-[1.3em] tw:h-[1.3em];
+}
+
+/* Плейсхолдер */
+.drberg-collections__placeholder {
+  @apply tw:flex tw:flex-col tw:w-full tw:max-w-[20rem] tw:items-center tw:text-center tw:opacity-30 tw:pointer-events-none tw:select-none;
+}
+
+.drberg-collections__placeholder-wrapper {
+  @apply tw:shadow-lg tw:border tw:border-dashed tw:border-black/40 tw:w-full tw:aspect-square tw:rounded-full tw:mb-[1rem] tw:flex tw:items-center tw:justify-center;
+}
+
+.drberg-collections__placeholder-icon {
+  @apply tw:w-[2.5rem] tw:h-[2.5rem];
+}
+
+.drberg-collections__placeholder-text {
+  @apply tw:flex tw:items-center tw:gap-2 tw:text-[1rem];
+}
+
+/* Кнопка "View All" */
+.drberg-collections__btn-wrapper {
+  @apply tw:flex tw:justify-center;
+}
+
+.drberg-collections__btn {
+  @apply tw:mt-[2.5rem] tw:md:mt-[4rem] tw:inline-flex tw:items-center tw:justify-center tw:rounded-full tw:transition-colors tw:duration-300 tw:ease-in-out tw:hover:bg-golden tw:px-[1.6rem] tw:pt-1 tw:h-[3.6rem] tw:bg-white tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:font-medium tw:shadow-md tw:disabled:opacity-70 tw:disabled:cursor-not-allowed;
+}

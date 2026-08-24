@@ -1,0 +1,21 @@
+ /* Принудительное растягивание видео внутри Dawn (Tailwind тут бессилен) */
+  .video-modal__container deferred-media {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding-bottom: 0 !important;
+    background: #000;
+  }
+  .video-modal__container deferred-media .deferred-media__poster {
+    display: none !important;
+  }
+  .video-modal__container deferred-media .deferred-media__wrapper,
+  .video-modal__container deferred-media iframe,
+  .video-modal__container deferred-media video {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    border: 0;
+  }

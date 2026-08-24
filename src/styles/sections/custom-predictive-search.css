@@ -1,0 +1,57 @@
+/* === Custom Predictive Search Snippet Styles === */
+
+.custom-predictive-search__container {
+  @apply tw:flex tw:flex-col;
+}
+
+.custom-predictive-search__groups {
+  @apply tw:max-h-[60dvh] tw:min-h-[10dvh] tw:overflow-y-auto tw:p-2;
+}
+
+.custom-predictive-search__group {
+  @apply tw:py-2;
+}
+
+.custom-predictive-search__title {
+  @apply tw:px-4 tw:py-2 tw:text-[1.2rem] tw:uppercase tw:text-gray-500 tw:font-semibold tw:tracking-wider;
+}
+
+.custom-predictive-search__list {
+  @apply tw:flex tw:flex-col;
+}
+
+.custom-predictive-search__item--text {
+  @apply tw:block tw:px-4 tw:py-3 tw:text-[1.4rem] tw:text-gray-800 tw:hover:bg-gray-50 tw:rounded-md tw:transition-colors;
+}
+
+.custom-predictive-search__item--product {
+  @apply tw:flex tw:items-center tw:gap-4 tw:p-4 tw:hover:bg-gray-50 tw:transition-colors tw:rounded-md;
+}
+
+.custom-predictive-search__item-media {
+  @apply tw:w-[5rem] tw:h-[5rem] tw:flex-shrink-0 tw:bg-gray-100 tw:rounded-md tw:object-cover;
+}
+
+.custom-predictive-search__item-info {
+  @apply tw:flex-1 tw:min-w-0;
+}
+
+.custom-predictive-search__item-vendor {
+  @apply tw:text-[1.2rem] tw:text-gray-500 tw:mb-1;
+}
+
+.custom-predictive-search__item-title {
+  @apply tw:text-[1.4rem] tw:font-medium tw:text-grayscale-950 tw:leading-[1.33] tw:line-clamp-2;
+}
+
+.custom-predictive-search__item-price {
+  @apply tw:mt-1;
+}
+
+.custom-predictive-search__footer {
+  @apply tw:mt-1 tw:border-t tw:border-gray-100;
+}
+
+.custom-predictive-search__link-all {
+  @apply tw:!py-8 tw:!block tw:w-full tw:!text-center tw:py-6 tw:text-golden tw:bg-gray-50 tw:hover:!text-goluboy tw:transition-colors tw:text-[1.4rem] tw:font-poppins tw:font-semibold tw:uppercase;
+}

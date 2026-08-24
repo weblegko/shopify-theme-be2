@@ -1,91 +1,18 @@
 {%- comment -%}
   Тег: <custom-predictive-search>, Скрипт: custom-predictive-search.js
 {%- endcomment -%}
- 
-<style>
-  /* Убиваем дефолтные браузерные outline и рамки */
-  .custom-search-wrapper input,
-  .custom-search-wrapper button,
-  .custom-search-wrapper a {
-    outline: none !important;
-    box-shadow: none !important;
-  }
-  .custom-search-wrapper input[type="search"]::-webkit-search-decoration,
-  .custom-search-wrapper input[type="search"]::-webkit-search-cancel-button,
-  .custom-search-wrapper input[type="search"]::-webkit-search-results-button,
-  .custom-search-wrapper input[type="search"]::-webkit-search-results-decoration {
-    -webkit-appearance: none;
-  }
- 
-  /* Управляем видимостью дропдауна и сбрасываем Dawn */
-  .custom-search-wrapper .predictive-search {
-    display: none !important;
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-    right: 0 !important;   
-    width: 100% !important;
-    border: 0.0625rem solid #f3f4f6 !important; /* gray-100 */
-    background-color: #ffffff !important; /* bg-white */
-    border-radius: 0.5rem !important;
-    box-shadow: 0 0.625rem 1rem -2rem rgba(0, 0, 0, 0.1), 0 0.25rem 0.45rem -0.125rem rgba(0, 0, 0, 0.05) !important;
-    overflow: hidden;
-    z-index: 50;
-  }
-  .custom-search-wrapper[open] .predictive-search {
-    display: block !important;
-  }
- 
-  /* Стили для кастомного спиннера (скрываем по умолчанию) */
-  .custom-search-wrapper .predictive-search__loading-state {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 3rem 0;
-  }
-  /* Показываем спиннер только когда есть атрибут loading */
-  .custom-search-wrapper[loading="true"] .predictive-search__loading-state {
-    display: flex;
-  }
-  /* Скрываем старые результаты, пока грузится новый запрос */
-  .custom-search-wrapper[loading="true"] #custom-predictive-search-results {
-    display: none;
-  }
- 
-  /* Кастомный скроллбар */
-  .custom-search-wrapper #custom-predictive-search-results-groups-wrapper::-webkit-scrollbar {
-    width: 0.4rem;
-  }
-  .custom-search-wrapper #custom-predictive-search-results-groups-wrapper::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .custom-search-wrapper #custom-predictive-search-results-groups-wrapper::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 0.65rem;
-  }
 
-
-  /* Подсветка при навигации с клавиатуры (стрелочки) */
-  .custom-search-wrapper #custom-predictive-search-results li[aria-selected="true"] > a {
-    background-color: #F9FAFB !important; /* tw:bg-gray-50 */
-  }
-  .custom-search-wrapper #custom-predictive-search-results li[aria-selected="true"] > .predictive-search__item--term {
-    background-color: #F3F4F6 !important; /* tw:bg-gray-100 для кнопки */
-    color: #0ea5e9 !important; /* tw:text-goluboy */
-  }
-
-
-</style>
+{{ 'custom-header-search.css' | asset_url | stylesheet_tag }}
  
-<custom-predictive-search class="custom-search-wrapper tw:relative tw:w-full tw:max-w-[60rem] tw:hidden tw:lg:block"
+<custom-predictive-search class="custom-search-wrapper"
   data-loading-text="{{ 'accessibility.loading' | t }}"
   data-min-chars="{{ settings.predictive_search_min_chars | default: 2 }}"
 >
-  <form action="{{ routes.search_url }}" method="get" role="search" class="tw:flex tw:items-stretch tw:w-full tw:h-[3.2rem]">
+  <form action="{{ routes.search_url }}" method="get" role="search" class="custom-search-wrapper__form">
      
-    <div class="tw:relative tw:flex tw:flex-1 tw:h-full">
+    <div class="custom-search-wrapper__input-container">
       <input
-        class="tw:!w-full tw:px-5 tw:h-full tw:text-[1.4rem] tw:text-grayscale-950 tw:placeholder-gray-400 tw:outline-none tw:focus:outline-none tw:appearance-none tw:border tw:border-r-0 tw:border-gray-200 tw:focus:border-gray-300 tw:transition-colors"
+        class="custom-search-wrapper__input"
         id="Header-Search-Input"
         type="search"
         name="q"
@@ -105,10 +32,10 @@
        
       <button
         type="reset"
-        class="reset__button tw:hidden tw:absolute tw:right-0 tw:top-0 tw:h-full tw:flex tw:items-center tw:text-gray-400 tw:hover:text-grayscale-950 tw:transition-colors{% if search.terms == blank %} hidden{% endif %}"
+        class="reset__button custom-search-wrapper__reset{% if search.terms == blank %} hidden{% endif %}"
         aria-label="{{ 'general.search.reset' | t }}"
       >
-        <svg class="tw:w-5 tw:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="custom-search-wrapper__reset-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
@@ -117,18 +44,17 @@
     <input type="hidden" name="type" value="product">
     <input type="hidden" name="options[prefix]" value="last">
  
-    <button type="submit" class="tw:flex tw:items-center tw:justify-center tw:bg-golden tw:text-white tw:px-5 tw:h-full tw:border tw:border-golden tw:hover:bg-golden/80 tw:transition-colors tw:shrink-0 tw:outline-none tw:focus:outline-none" aria-label="{{ 'general.search.search' | t }}">
-      <svg class="tw:w-7 tw:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <button type="submit" class="custom-search-wrapper__submit" aria-label="{{ 'general.search.search' | t }}">
+      <svg class="custom-search-wrapper__submit-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
       </svg>
     </button>
  
-    <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
-      <!-- Наш кастомный Tailwind-спиннер -->
+    <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>      
       <div class="predictive-search__loading-state">
-        <svg class="tw:animate-spin tw:h-10 tw:w-10 tw:text-golden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-          <circle class="tw:opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-          <path class="tw:opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        <svg class="custom-search-wrapper__spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="custom-search-wrapper__spinner-circle" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="custom-search-wrapper__spinner-path" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
       </div>
     </div>

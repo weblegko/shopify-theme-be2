@@ -1,0 +1,59 @@
+/* === Drberg Video Section Styles === */
+
+.drberg-video {
+  @apply tw:hidden tw:md:block tw:bg-seriy tw:text-grayscale-950;
+}
+
+/* Триггер (Постер) */
+.drberg-video__trigger {
+  @apply tw:relative tw:overflow-hidden tw:aspect-video tw:cursor-pointer tw:bg-black;
+}
+
+.drberg-video__cover {
+  @apply tw:w-full tw:h-full tw:object-cover tw:transition-transform tw:duration-500 tw:group-hover:scale-105;
+}
+
+.drberg-video__cover-placeholder {
+  @apply tw:w-full tw:h-full tw:object-cover;
+}
+
+.drberg-video__overlay {
+  @apply tw:absolute tw:inset-0 tw:bg-black/30;
+}
+
+.drberg-video__play-wrapper {
+  @apply tw:absolute tw:inset-0 tw:flex tw:flex-col tw:items-center tw:justify-center;
+}
+
+.drberg-video__play-btn {
+  @apply tw:hover:scale-105 tw:flex tw:items-center tw:gap-[0.8rem] tw:px-[1.6rem] tw:h-[4.4rem] tw:bg-black/30 tw:rounded-full tw:text-white tw:transition-all tw:duration-200 tw:hover:bg-goluboy;
+}
+
+.drberg-video__play-icon {
+  @apply tw:w-[1.4rem] tw:h-[1.7rem];
+}
+
+.drberg-video__play-text {
+  @apply tw:text-[1.4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.43];
+}
+
+/* Модалка */
+.drberg-video__modal {
+  @apply tw:fixed tw:inset-0 tw:z-[9999] tw:flex tw:items-center tw:justify-center tw:bg-black/80 tw:opacity-0 tw:invisible tw:transition-opacity tw:duration-300;
+}
+
+.drberg-video__modal.is-open {
+  @apply tw:opacity-100 tw:visible;
+}
+
+.drberg-video__close-btn {
+  @apply tw:absolute tw:top-[1.6rem] tw:right-[1.6rem] tw:z-20 tw:w-[4.8rem] tw:h-[4.8rem] tw:flex tw:items-center tw:justify-center tw:bg-white/30 tw:rounded-full tw:text-white tw:cursor-pointer tw:transition-colors tw:duration-200 tw:hover:bg-goluboy tw:border-none tw:p-0;
+}
+
+.drberg-video__close-icon {
+  @apply tw:w-[2.4rem] tw:h-[2.4rem];
+}
+
+.drberg-video__modal-container {
+  @apply tw:relative tw:w-full tw:max-w-7xl tw:mx-[1.6rem] tw:aspect-video tw:bg-black tw:overflow-hidden tw:shadow-[0_20px_60px_rgba(0,0,0,0.5)];
+}

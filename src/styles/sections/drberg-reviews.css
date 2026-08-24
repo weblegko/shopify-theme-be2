@@ -1,0 +1,63 @@
+/* === Drberg Reviews Section Styles === */
+
+.drberg-reviews {
+  @apply tw:bg-seriy tw:text-grayscale-950 tw:px-[1.6rem];
+}
+
+.drberg-reviews__container {
+  @apply tw:max-w-[112rem] tw:mx-auto;
+}
+
+.drberg-reviews__header {
+  @apply tw:flex tw:flex-col tw:items-center tw:gap-[1rem] tw:mb-[2.5rem] tw:md:mb-[3rem];
+}
+
+.drberg-reviews__heading {
+  @apply tw:text-[2.4rem] tw:sm:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.2] tw:text-center;
+}
+
+.drberg-reviews__badge {
+  @apply tw:mx-auto tw:inline-flex tw:items-center tw:justify-center tw:gap-2 tw:py-[0.8rem] tw:px-[2rem] tw:bg-[#e5dccb] tw:rounded-full;
+}
+
+.drberg-reviews__badge-text {
+  @apply tw:pt-1 tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-center;
+}
+
+/* Карточка отзыва */
+.drberg-reviews__card {
+  @apply tw:hover:shadow-lg tw:transition-all tw:duration-300 tw:bg-white tw:rounded-[1.2rem] tw:p-[1.5rem] tw:h-full tw:flex tw:flex-col;
+}
+
+.drberg-reviews__stars {
+  @apply tw:flex tw:gap-1 tw:mb-4;
+}
+
+.drberg-reviews__star {
+  @apply tw:w-[1.8rem] tw:h-[1.8rem] tw:text-goluboydark;
+}
+
+.drberg-reviews__author {
+  @apply tw:block tw:mb-4;
+}
+
+.drberg-reviews__author-name {
+  @apply tw:text-[1.6rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.5];
+}
+
+.drberg-reviews__title {
+  @apply tw:text-[2rem] tw:leading-[1.4] tw:tracking-[-0.04em] tw:font-medium tw:mb-3;
+}
+
+.drberg-reviews__text {
+  @apply tw:text-[1.6rem] tw:text-[#8b867a] tw:leading-[1.5] tw:tracking-[-0.04em] tw:font-medium tw:flex-1 tw:mb-6;
+}
+
+/* Кнопка */
+.drberg-reviews__btn-wrapper {
+  @apply tw:flex tw:justify-center;
+}
+
+.drberg-reviews__btn {
+  @apply tw:mt-[2.5rem] tw:md:mt-[4rem] tw:inline-flex tw:items-center tw:justify-center tw:rounded-full tw:transition-colors tw:duration-300 tw:ease-in-out tw:hover:bg-golden tw:px-[1.6rem] tw:pt-1 tw:h-[3.6rem] tw:bg-white tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:font-medium tw:shadow-md tw:disabled:opacity-70 tw:disabled:cursor-not-allowed;
+}

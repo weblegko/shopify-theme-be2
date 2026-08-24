@@ -2,7 +2,8 @@
 export default {
   prefix: "tw",
   content: [
-    "./src/**/*.{js,ts,jsx,tsx,liquid}",
+    "./src/styles/**/*.{css}",
+    "./src/styles/*.{css}",
     "./layout/**/*.liquid",
     "./sections/**/*.liquid",
     "./snippets/**/*.liquid",

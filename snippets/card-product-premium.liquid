@@ -29,17 +29,7 @@
   {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {%- endunless -%}
 
-<style>
-  .card__information {
-    grid-row-start: 2;
-    padding: 1.3rem 0rem 0rem 0rem;
-  }
-  /* Добавляем z-index для кнопки, чтобы она была поверх */
-  .quick-add {
-    position: relative;
-    z-index: 2;
-  }
-</style>
+{{ 'drberg-card-product.css' | asset_url | stylesheet_tag }}
 
 {% assign has_features = false %}
 {% if card_product.metafields.custom.feature_1 != blank
@@ -54,26 +44,18 @@
   {%- liquid
     assign ratio = 1
   -%}
-  <div class="tw:h-full tw:hover:shadow-lg tw:transition tw:duration-300 tw:rounded-[1.6rem] tw:bg-white tw:px-3 tw:pt-3 tw:pb-6 tw:overflow-hidden card-wrapper product-card-wrapper underline-links-hover">
+  <div class="drberg-card-premium card-wrapper product-card-wrapper underline-links-hover">
     <div
-      class="
-        card card--{{ settings.card_style }}
-        {% if card_product.featured_media %} card--media{% else %} card--text{% endif %}
-        {% if settings.card_style == 'card' %} color-{{ settings.card_color_scheme }} gradient{% endif %}
-        {% if image_shape and image_shape != 'default' %} card--shape{% endif %}
-        {% if extend_height %} card--extend-height{% endif %}
-        {% if card_product.featured_media == nil and settings.card_style == 'card' %} ratio{% endif %}
-        {% if horizontal_class %} card--horizontal{% endif %}
-      "
+      class="card card--{{ settings.card_style }}{% if card_product.featured_media %} card--media{% else %} card--text{% endif %}{% if settings.card_style == 'card' %} color-{{ settings.card_color_scheme }} gradient{% endif %}{% if image_shape and image_shape != 'default' %} card--shape{% endif %}{% if extend_height %} card--extend-height{% endif %}{% if card_product.featured_media == nil and settings.card_style == 'card' %} ratio{% endif %}{% if horizontal_class %} card--horizontal{% endif %}"
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
     >
       <div
-        class="tw:!rounded-[0.8rem] tw:overflow-hidden card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
+        class="drberg-card-premium__inner card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
         style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
       >
         {%- if card_product.featured_media -%}
           <div class="card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
-            <div class="tw:scale-[80%] media media--transparent media--hover-effect">
+            <div class="drberg-card-premium__media media media--transparent media--hover-effect">
               {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
               <img
                 srcset="
@@ -131,7 +113,7 @@
               <a
                 href="{{ card_product.url }}"
                 id="CardLink-{{ section_id }}-{{ card_product.id }}"
-                class="tw:!line-clamp-2 tw:!font-poppins tw:!text-left tw:font-medium tw:text-[1.8rem] tw:leading-[1.33] tw:tracking-[-0.01em] tw:text-grayscale-950 full-unstyled-link"
+                class="drberg-card-premium__heading-link full-unstyled-link"
                 aria-labelledby="CardLink-{{ section_id }}-{{ card_product.id }} Badge-{{ section_id }}-{{ card_product.id }}"
               >
                 {{ card_product.title | escape }}
@@ -158,8 +140,8 @@
         </div>
       </div>
 
-      <div class="card__content">
-        <div class="tw:!px-4 tw:!flex tw:!flex-col tw:flex-1 card__information">
+      <div class="drberg-card-premium__content card__content">
+        <div class="drberg-card-premium__information card__information">
           <h3
             class="card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}"
             {% if card_product.featured_media or settings.card_style == 'card' %}
@@ -169,19 +151,19 @@
             <a
               href="{{ card_product.url }}"
               id="CardLink-{{ section_id }}-{{ card_product.id }}"
-              class="tw:min-h-[4.7rem] tw:!line-clamp-2 tw:!font-poppins tw:!text-left tw:font-medium tw:text-[1.8rem] tw:leading-[1.33] tw:tracking-[-0.01em] tw:text-grayscale-950 full-unstyled-link"
+              class="drberg-card-premium__heading-link drberg-card-premium__heading-link--block full-unstyled-link"
               aria-labelledby="CardLink-{{ section_id }}-{{ card_product.id }} Badge-{{ section_id }}-{{ card_product.id }}"
             >
               {{ card_product.title | escape }}
             </a>
           </h3>
           {%- if card_product.metafields.custom.short_intro != blank -%}
-            <p class="tw:min-h-[3.35rem] tw:!text-left tw:!mt-[0.6rem] tw:!text-[1.2rem] tw:!leading-[1.33] tw:!tracking-[-0.01em] tw:!text-grayscale-600 tw:!line-clamp-2 tw:!font-poppins">
+            <p class="drberg-card-premium__intro">
               {{ card_product.metafields.custom.short_intro | metafield_text | truncate: 150 }}
             </p>
           {%- endif -%}
 
-          <div class="tw:w-full tw:h-[0.1rem] tw:bg-grayscale-50 tw:mt-[1.5rem] tw:mb-[1rem]">
+          <div class="drberg-card-premium__divider">
             <span></span>
           </div>
 
@@ -229,17 +211,14 @@
               </p>
             {%- endif -%}
 
-            <div class="tw:flex tw:items-center tw:mb-4 tw:gap-4">
-              {% render 'weblegko-price', product: card_product, price_class: '', show_compare_at_price: true %}
+            <div class="drberg-card-premium__price-wrapper">
+              {% render 'drberg-price', product: card_product, price_class: '', show_compare_at_price: true %}
 
               {% if card_product.compare_at_price > card_product.price %}
                 {% assign discount = card_product.compare_at_price | minus: card_product.price %}
                 {% assign discount_percent = discount | times: 100 | divided_by: card_product.compare_at_price %}
                 <span
-                  class="
-                    tw:!border-golden tw:!bg-golden tw:!text-[1.4rem] tw:!leading-[1.43] tw:!tracking-[-0.01em] tw:!px-3 tw:!py-1 tw:!text-nowrap
-                    badge badge--sale
-                  "
+                  class="drberg-card-premium__badge--sale badge badge--sale"
                 >
                   {{ discount_percent | round }}% OFF
                 </span>
@@ -333,28 +312,26 @@
             {%- endif -%}
           </div>
 
-          <div class="tw:w-full tw:h-[0.1rem] tw:bg-grayscale-50 tw:mt-[0.5rem] tw:mb-[1.5rem]">
+          <div class="drberg-card-premium__divider drberg-card-premium__divider--bottom">
             <span></span>
           </div>      
-
-          <!-- highlights -->
 
           {% assign highlights_data = card_product.metafields.custom.product_highlights.value %}
 
           {% if highlights_data != blank %}
-            <ul class="weblegko-features-product--list tw:!mb-[2rem] tw:flex tw:flex-wrap tw:gap-[0.6rem] tw:list-none tw:w-full">
+            <ul class="weblegko-features-product--list drberg-card-premium__highlights">
               {% for highlight in highlights_data %}
-                <li class="tw:w-full">
-                  <span class="tw:bg-white tw:flex tw:items-center tw:gap-2 tw:px-[1rem] tw:min-h-[3.2rem] tw:rounded-full tw:border tw:border-grayscale-100">
+                <li class="drberg-card-premium__highlight-item">
+                  <span class="drberg-card-premium__highlight-content">
                     <svg
-                      class="tw:w-[1.6rem] tw:h-[1.6rem] tw:text-additional-green tw:flex-shrink-0"
+                      class="drberg-card-premium__highlight-icon"
                       focusable="false"
                       aria-hidden="true"
                     >
                       <use href="#check"></use>
                     </svg>
 
-                    <span class="tw:text-left tw:my-[0.6rem] tw:text-[1.2rem] tw:leading-[1.33] tw:tracking-[-0.04em] tw:text-grayscale-950">
+                    <span class="drberg-card-premium__highlight-text">
                       {{ highlight.description }}
                     </span>
                   </span>
@@ -365,7 +342,7 @@
           
 
           <a
-            class="tw:mt-auto tw:mb-4 tw:tracking-[-0.04em] tw:font-medium tw:block tw:text-center tw:text-[1.2rem]"
+            class="drberg-card-premium__more-info"
             href="{{ product.url }}"
             >More info</a
           >
@@ -373,7 +350,7 @@
 
         {% assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id %}
         {% if quick_add == 'standard' %}
-          <div class="tw:!px-4  quick-add no-js-hidden">
+          <div class="drberg-card-premium__quick-add quick-add no-js-hidden">
             {%- liquid
               assign qty_rules = false
               if card_product.selected_or_first_available_variant.quantity_rule.min > 1 or card_product.selected_or_first_available_variant.quantity_rule.max != null or card_product.selected_or_first_available_variant.quantity_rule.increment > 1
@@ -598,7 +575,7 @@
                         <a href="{{ card_product.url }}" class="full-unstyled-link">
                           <h3>{{ card_product.title | escape }}</h3>
                         </a>
-                        {% render 'weblegko-price',
+                        {% render 'drberg-price',
                           product: card_product,
                           price_class: '',
                           show_compare_at_price: true
@@ -617,7 +594,7 @@
                             {{ card_product.title | escape }}
                           </h3>
                         </a>
-                        {% render 'weblegko-price',
+                        {% render 'drberg-price',
                           product: card_product,
                           price_class: '',
                           show_compare_at_price: true
@@ -709,7 +686,7 @@
               <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
               <div class="caption-with-letter-spacing light">{{ 'products.product.vendor' | t }}</div>
             {%- endif -%}
-            {% render 'weblegko-price', placeholder: placeholder, show_compare_at_price: true %}
+            {% render 'drberg-price', placeholder: placeholder, show_compare_at_price: true %}
           </div>
         </div>
       </div>

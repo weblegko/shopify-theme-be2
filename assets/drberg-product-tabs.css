@@ -1,0 +1,53 @@
+/* Стили табов (перенесено из <style>) */
+.drberg-tab-btn {
+  padding: 2rem 0 1.5rem;
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 143%;
+  letter-spacing: -0.04em;
+  color: #596173;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.drberg-tab-btn:hover {
+  color: #ffc356;
+}
+
+.drberg-tab-btn.active {
+  color: #00b5d1;
+  font-weight: 600;
+}
+
+.drberg-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #00b5d1;
+}
+
+.drberg-tab-content {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.drberg-tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

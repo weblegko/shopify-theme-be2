@@ -1,0 +1,55 @@
+
+/* Кастомная пагинация для премиум-слайдера */
+.premium-pagination {
+  margin-top: 3rem;
+}
+.premium-pagination .custom-bullet {
+  width: 4rem !important;
+  height: 0.3rem !important;
+  border-radius: 0.2rem !important;
+  background: rgba(0, 0, 0, 0.15) !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.premium-pagination .custom-bullet .bullet-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #1a1a1a;
+  border-radius: 0.2rem;
+  transition: width 0.3s ease;
+  width: 0%;
+}
+.premium-pagination .custom-bullet.active .bullet-progress {
+  background: #1a1a1a;
+}
+.premium-pagination .custom-bullet:hover {
+  background: rgba(0, 0, 0, 0.25) !important;
+}
+.premium-pagination .swiper-pagination-bullet {
+  display: none !important;
+}
+
+/* ОДИНАКОВАЯ ВЫСОТА СЛАЙДОВ */
+.premiumSwiper.swiper {
+  height: auto !important;
+  user-select: none;
+}
+.premiumSwiper .swiper-wrapper {
+  height: auto !important;
+  align-items: stretch !important;
+}
+.premiumSwiper .swiper-slide {
+  height: auto !important;
+  align-self: stretch !important;
+  display: flex !important;
+}
+.premiumSwiper .swiper-slide > div {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  width: 100% !important;
+}

@@ -1,0 +1,218 @@
+<style>    
+  .drberg-about-padding {
+    padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
+    padding-bottom: {{ section.settings.padding_bottom_mobile | default: 3 }}rem !important;
+  }
+
+  @media screen and (min-width: 640px) {
+    .drberg-about-padding {
+      padding-top: {{ section.settings.padding_top_tablet | default: 5 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_tablet | default: 5 }}rem !important;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .drberg-about-padding {
+      padding-top: {{ section.settings.padding_top_desktop | default: 8 }}rem !important;
+      padding-bottom: {{ section.settings.padding_bottom_desktop | default: 8 }}rem !important;
+    }
+  }
+</style>
+
+{{ 'drberg-about-doctor.css' | asset_url | stylesheet_tag }}
+
+ {% comment %} Передаем настройки в JavaScript  {% endcomment %}
+<script>
+  window.weblegkoAboutConfig = {
+    buttonLabel: {{ section.settings.button_label | default: 'Show More' | json }}
+  };
+</script>
+
+ {% comment %} Подключаем внешний скрипт  {% endcomment %}
+<script src="{{ 'drberg-about-doctor.js' | asset_url }}" defer="defer"></script>
+
+<section class="drberg-about">
+  <div class="drberg-about-padding drberg-about__container">
+    
+    {%- if section.settings.heading != blank -%}
+      <h2 class="drberg-about__heading">
+        {{ section.settings.heading }}
+      </h2>
+    {%- endif -%}
+
+     {% comment %} Текст-анонс с абзацами  {% endcomment %}
+    {%- if section.settings.text != blank -%}
+      <div 
+        id="about-text-container" 
+        class="drberg-about__text-container"
+        data-desktop-initial="{{ section.settings.initial_paragraphs_desktop | default: 2 }}"
+        data-tablet-initial="{{ section.settings.initial_paragraphs_tablet | default: 2 }}"
+        data-mobile-initial="{{ section.settings.initial_paragraphs_mobile | default: 1 }}"
+      >
+        {%- assign paragraphs = section.settings.text | split: '</p>' -%}
+        {%- for paragraph in paragraphs -%}
+          {%- assign clean_paragraph = paragraph | append: '</p>' -%}
+          {%- if clean_paragraph != '</p>' -%}
+            <div class="about-paragraph about-paragraph-hidden">{{ clean_paragraph }}</div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+     {% comment %} Кнопка "Show More"  {% endcomment %}
+    {%- if section.blocks.size == 0 and section.settings.text contains '</p>' -%}
+      <div class="drberg-about__btn-wrapper">
+        <button
+          type="button"
+          id="about-show-more-btn"
+          class="drberg-about__btn"
+        >
+           {% comment %} Спиннер  {% endcomment %}
+          <svg
+            id="about-loader"
+            class="drberg-about__loader"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle class="drberg-about__loader-circle" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="drberg-about__loader-path" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <span id="about-btn-text">{{ section.settings.button_label | default: 'Show More' }}</span>
+        </button>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DRBERG ABOUT DOCTOR",
+  "tag": "section",
+  "class": "section-about-doctor",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "More About Dr. Berg Supplements",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "default": "<p>Dr. Berg's supplements are formulated with the highest quality natural ingredients to support your health and wellness journey. Each product is carefully crafted based on years of research and clinical experience.</p><p>As the official UK distributor, we ensure that all products meet strict quality standards and are delivered fresh to your door. Our commitment to excellence means you can trust every supplement you purchase.</p><p>All of our products are third-party tested for purity and potency, giving you peace of mind with every purchase.</p><p>We offer fast, reliable shipping across the UK and Europe with tracking available for all orders.</p><p>Our customer support team is always ready to help you find the right supplements for your needs.</p>",
+      "label": "Text with paragraphs"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Show More",
+      "label": "Button label"
+    },
+    {
+      "type": "header",
+      "content": "🖥️ Desktop (≥ 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "initial_paragraphs_desktop",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 2,
+      "label": "Initial paragraphs to show"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "default": 8,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "💻 Tablet (640px - 1024px)"
+    },
+    {
+      "type": "range",
+      "id": "initial_paragraphs_tablet",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 2,
+      "label": "Initial paragraphs to show"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tablet",
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "rem",
+      "label": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "📱 Mobile (< 640px)"
+    },
+    {
+      "type": "range",
+      "id": "initial_paragraphs_mobile",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1,
+      "label": "Initial paragraphs to show"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "default": 3,
+      "unit": "rem",
+      "label": "Padding bottom"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DRBERG ABOUT DOCTOR",
+      "category": "Page"
+    }
+  ]
+}
+{% endschema %}

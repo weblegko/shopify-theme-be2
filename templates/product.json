@@ -10,7 +10,7 @@
 {
   "sections": {
     "breadcrumbs": {
-      "type": "weblegko-breadcrumbs",
+      "type": "drberg-breadcrumbs",
       "settings": {
         "show_breadcrumbs": true,
         "home_label": "Главная",
@@ -96,7 +96,7 @@
       }
     },
     "weblegko_main_product_RUgmNA": {
-      "type": "weblegko-main-product",
+      "type": "drberg-main-product",
       "blocks": {
         "text_4Riaxt": {
           "type": "text",
@@ -305,7 +305,7 @@
       }
     },
     "weblegko_about_doctor_nz4gJJ": {
-      "type": "weblegko-about-doctor",
+      "type": "drberg-about-doctor",
       "name": "WEBLEGKO ABOUT DOCTOR",
       "settings": {
         "heading": "More About Dr. Berg Supplements",
