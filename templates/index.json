@@ -380,8 +380,10 @@
       "type": "drberg-newsletter-banner",
       "name": "DRBERG NEWSLETTER",
       "settings": {
+        "bg_image": "shopify://shop_images/whychooseus-background.webp",
         "heading_line_1": "Stay",
         "heading_line_2": "Updated",
+        "avatar": "shopify://shop_images/drberg-avatar.webp",
         "doctor_name": "Dr. Eric Berg",
         "doctor_role": "Health & Nutrition Expert",
         "text": "Subscribe to our newsletter and receive exclusive offers and news! Fill out the form below or message us to stay updated on all the great deals and special offers."
