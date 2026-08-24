@@ -115,6 +115,28 @@
         "padding_bottom_mobile": 3
       }
     },
+    "drberg_collections_FiWJ8h": {
+      "type": "drberg-collections",
+      "name": "DRBERG COLLECTIONS",
+      "settings": {
+        "heading": "Browse popular collection",
+        "columns_desktop": 6,
+        "col_gap_desktop": 2,
+        "row_gap_desktop": 2,
+        "padding_top_desktop": 6,
+        "padding_bottom_desktop": 6,
+        "columns_tablet": 3,
+        "col_gap_tablet": 1,
+        "row_gap_tablet": 2.5,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "columns_mobile": 2,
+        "col_gap_mobile": 0.5,
+        "row_gap_mobile": 2.5,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
+      }
+    },
     "drberg_premium_products_MM8qW6": {
       "type": "drberg-premium-products",
       "name": "DRBERG PREMIUM",
@@ -123,7 +145,7 @@
         "description": "Premium supplements for your health",
         "collection": "premium-products",
         "space_between_desktop": 2,
-        "padding_top_desktop": 13,
+        "padding_top_desktop": 7,
         "padding_bottom_desktop": 12,
         "space_between_tablet": 2,
         "padding_top_tablet": 5,
@@ -470,6 +492,7 @@
     "drberg_promo_slider_gn63Wj",
     "drberg_doctor_grid_DkqAqJ",
     "drberg_features_WDxRJL",
+    "drberg_collections_FiWJ8h",
     "drberg_premium_products_MM8qW6",
     "drberg_why_choose_us_eJfRkP",
     "drberg_popular_products_d9T7TM",
