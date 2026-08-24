@@ -297,56 +297,60 @@
     "drberg_resources_G4adf7": {
       "type": "drberg-resources",
       "blocks": {
-        "resource_RcL8rh": {
+        "resource_xgqcMn": {
           "type": "resource",
           "settings": {
+            "resource_image": "shopify://shop_images/essential-definitions.webp",
             "badge": "Free PDF Document",
             "title": "Essential Definitions for Healthy Living",
             "publish_date": "2025-06-20",
             "category": "Health Resources",
             "button_label": "Learn More",
-            "button_link": ""
+            "button_link": "/pages/essential-definitions-for-healthy-living"
           }
         },
-        "resource_edtqxm": {
+        "resource_ATr3dW": {
           "type": "resource",
           "settings": {
+            "resource_image": "shopify://shop_images/how-junk-foods.webp",
             "badge": "Free PDF Document",
-            "title": "Essential Definitions for Healthy Living",
+            "title": "How Junk Foods Trick Your Body",
             "publish_date": "2025-06-20",
             "category": "Health Resources",
             "button_label": "Learn More",
-            "button_link": ""
+            "button_link": "/pages/how-junk-foods-trick-your-body"
           }
         },
-        "resource_gdTn8K": {
+        "resource_ztbHzn": {
           "type": "resource",
           "settings": {
+            "resource_image": "shopify://shop_images/how-to-make-yogurt.webp",
             "badge": "Free PDF Document",
-            "title": "Essential Definitions for Healthy Living",
+            "title": "How to Make L. Reuteri Yogurt",
             "publish_date": "2025-06-20",
             "category": "Health Resources",
             "button_label": "Learn More",
-            "button_link": ""
+            "button_link": "/pages/copy-of-how-junk-foods-trick-your-body"
           }
         },
-        "resource_HdAVhX": {
+        "resource_igYWpq": {
           "type": "resource",
           "settings": {
+            "resource_image": "shopify://shop_images/beginners-guide-to-healthy.webp",
             "badge": "Free PDF Document",
-            "title": "Essential Definitions for Healthy Living",
+            "title": "Beginner’s Guide to Healthy Fertilizer and Composting",
             "publish_date": "2025-06-20",
             "category": "Health Resources",
             "button_label": "Learn More",
-            "button_link": ""
+            "button_link": "/pages/beginner-s-guide-to-healthy-fertilizer-and-composting"
           }
         }
       },
       "block_order": [
-        "resource_RcL8rh",
-        "resource_edtqxm",
-        "resource_gdTn8K",
-        "resource_HdAVhX"
+        "resource_xgqcMn",
+        "resource_ATr3dW",
+        "resource_ztbHzn",
+        "resource_igYWpq"
       ],
       "name": "DRBERG RESOURCES",
       "settings": {
