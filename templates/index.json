@@ -117,6 +117,17 @@
     },
     "drberg_collections_FiWJ8h": {
       "type": "drberg-collections",
+      "blocks": {
+        "collection_gFbUpq": {
+          "type": "collection",
+          "settings": {
+            "collection": "b-vitamins"
+          }
+        }
+      },
+      "block_order": [
+        "collection_gFbUpq"
+      ],
       "name": "DRBERG COLLECTIONS",
       "settings": {
         "heading": "Browse popular collection",
