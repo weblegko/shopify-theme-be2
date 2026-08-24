@@ -403,6 +403,24 @@
         "padding_top_mobile": 3,
         "padding_bottom_mobile": 3
       }
+    },
+    "drberg_about_doctor_k7jNQt": {
+      "type": "drberg-about-doctor",
+      "name": "DRBERG ABOUT DOCTOR",
+      "settings": {
+        "heading": "More About Dr. Berg Supplements",
+        "text": "<p>Dr. Berg's supplements are formulated with the highest quality natural ingredients to support your health and wellness journey. Each product is carefully crafted based on years of research and clinical experience.</p><p>As the official UK distributor, we ensure that all products meet strict quality standards and are delivered fresh to your door. Our commitment to excellence means you can trust every supplement you purchase.</p><p>All of our products are third-party tested for purity and potency, giving you peace of mind with every purchase.</p><p>We offer fast, reliable shipping across the UK and Europe with tracking available for all orders.</p><p>Our customer support team is always ready to help you find the right supplements for your needs.</p>",
+        "button_label": "Show More",
+        "initial_paragraphs_desktop": 2,
+        "padding_top_desktop": 8,
+        "padding_bottom_desktop": 8,
+        "initial_paragraphs_tablet": 2,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "initial_paragraphs_mobile": 1,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
+      }
     }
   },
   "order": [
@@ -418,6 +436,7 @@
     "drberg_resources_G4adf7",
     "drberg_newsletter_banner_ayTj7X",
     "drberg_reviews_XbEgQb",
-    "drberg_faq_QDhkPD"
+    "drberg_faq_QDhkPD",
+    "drberg_about_doctor_k7jNQt"
   ]
 }
