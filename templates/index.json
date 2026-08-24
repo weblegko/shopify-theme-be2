@@ -231,6 +231,9 @@
       "type": "drberg-video",
       "name": "DRBERG VIDEO",
       "settings": {
+        "video": "shopify://files/videos/drberg.mp4",
+        "video_url": "",
+        "cover_image": "shopify://shop_images/drberg-video-poster.webp",
         "description": "",
         "enable_video_looping": false
       }
