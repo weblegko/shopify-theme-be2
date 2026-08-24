@@ -118,10 +118,16 @@
     "drberg_collections_FiWJ8h": {
       "type": "drberg-collections",
       "blocks": {
-        "collection_yaMwFd": {
+        "collection_KREnFf": {
           "type": "collection",
           "settings": {
-            "collection": "electrolytes"
+            "collection": "supplements"
+          }
+        },
+        "collection_gFbUpq": {
+          "type": "collection",
+          "settings": {
+            "collection": "nighttime-support"
           }
         },
         "collection_6GtWG9": {
@@ -130,17 +136,18 @@
             "collection": "bundles"
           }
         },
-        "collection_gFbUpq": {
+        "collection_yaMwFd": {
           "type": "collection",
           "settings": {
-            "collection": "nighttime-support"
+            "collection": "electrolytes"
           }
         }
       },
       "block_order": [
-        "collection_yaMwFd",
+        "collection_KREnFf",
+        "collection_gFbUpq",
         "collection_6GtWG9",
-        "collection_gFbUpq"
+        "collection_yaMwFd"
       ],
       "name": "DRBERG COLLECTIONS",
       "settings": {
