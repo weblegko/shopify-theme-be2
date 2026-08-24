@@ -141,7 +141,7 @@
     },
     "drberg_why_choose_us_eJfRkP": {
       "type": "drberg-why-choose-us",
-       "blocks": {
+      "blocks": {
         "card_wrJM9A": {
           "type": "card",
           "settings": {
@@ -396,7 +396,7 @@
         "homepage_mode": true,
         "reviews_limit": 3,
         "button_text": "Show More Reviews",
-        "button_link": "",
+        "button_link": "shopify://pages/reviews",
         "heading": "What Our Customers Say",
         "rating_score": "4.8",
         "review_count": "2,847",
