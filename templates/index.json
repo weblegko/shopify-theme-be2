@@ -118,18 +118,6 @@
     "drberg_collections_FiWJ8h": {
       "type": "drberg-collections",
       "blocks": {
-        "collection_a4YPrV": {
-          "type": "collection",
-          "settings": {
-            "collection": "energy-support"
-          }
-        },
-        "collection_KREnFf": {
-          "type": "collection",
-          "settings": {
-            "collection": "supplements"
-          }
-        },
         "collection_gFbUpq": {
           "type": "collection",
           "settings": {
@@ -147,14 +135,33 @@
           "settings": {
             "collection": "electrolytes"
           }
+        },
+        "collection_KREnFf": {
+          "type": "collection",
+          "settings": {
+            "collection": "supplements"
+          }
+        },
+        "collection_a4YPrV": {
+          "type": "collection",
+          "settings": {
+            "collection": "energy-support"
+          }
+        },
+        "collection_VVeMrJ": {
+          "type": "collection",
+          "settings": {
+            "collection": "hair-skin-nails"
+          }
         }
       },
       "block_order": [
-        "collection_a4YPrV",
-        "collection_KREnFf",
         "collection_gFbUpq",
         "collection_6GtWG9",
-        "collection_yaMwFd"
+        "collection_yaMwFd",
+        "collection_KREnFf",
+        "collection_a4YPrV",
+        "collection_VVeMrJ"
       ],
       "name": "DRBERG COLLECTIONS",
       "settings": {
