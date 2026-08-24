@@ -141,41 +141,45 @@
     },
     "drberg_why_choose_us_eJfRkP": {
       "type": "drberg-why-choose-us",
-      "blocks": {
-        "card_J8n7Rx": {
+       "blocks": {
+        "card_wrJM9A": {
           "type": "card",
           "settings": {
+            "icon_image": "shopify://shop_images/leaf.webp",
             "title": "Whole-food nutrition",
             "text": "<p>We use only natural ingredients, free from synthetic isolates and artificial additives.</p>"
           }
         },
-        "card_Rf8QxK": {
+        "card_NnBnft": {
           "type": "card",
           "settings": {
+            "icon_image": "shopify://shop_images/shield.webp",
             "title": "GMP-certified quality",
             "text": "<p> Every batch is manufactured to pharmaceutical-grade standards, ensuring maximum safety and purity</p>"
           }
         },
-        "card_A37BCH": {
+        "card_grHXxx": {
           "type": "card",
           "settings": {
+            "icon_image": "shopify://shop_images/ai-star.webp",
             "title": "Premium ingredients",
             "text": "<p>Our ingredients are sourced from reliable global partners who share our commitment to quality</p>"
           }
         },
-        "card_VRKg9X": {
+        "card_y89386": {
           "type": "card",
           "settings": {
+            "icon_image": "shopify://shop_images/lightning.webp",
             "title": "Maximum bioavailability",
             "text": "<p>Each formula is meticulously crafted to enhance absorption and deliver optimal results</p>"
           }
         }
       },
       "block_order": [
-        "card_J8n7Rx",
-        "card_Rf8QxK",
-        "card_A37BCH",
-        "card_VRKg9X"
+        "card_wrJM9A",
+        "card_NnBnft",
+        "card_grHXxx",
+        "card_y89386"
       ],
       "name": "DRBERG WHY US",
       "settings": {
