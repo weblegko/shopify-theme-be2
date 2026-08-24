@@ -103,11 +103,321 @@
         "padding_top_mobile": 3,
         "padding_bottom_mobile": 3
       }
+    },
+    "drberg_premium_products_MM8qW6": {
+      "type": "drberg-premium-products",
+      "name": "DRBERG PREMIUM",
+      "settings": {
+        "heading": "Premium Products",
+        "description": "Premium supplements for your health",
+        "collection": "",
+        "space_between_desktop": 2,
+        "padding_top_desktop": 8,
+        "padding_bottom_desktop": 8,
+        "space_between_tablet": 2,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "space_between_mobile": 1,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3,
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard"
+      }
+    },
+    "drberg_why_choose_us_eJfRkP": {
+      "type": "drberg-why-choose-us",
+      "blocks": {
+        "card_J8n7Rx": {
+          "type": "card",
+          "settings": {
+            "title": "Whole-food nutrition",
+            "text": "<p>We use only natural ingredients, free from synthetic isolates and artificial additives.</p>"
+          }
+        },
+        "card_Rf8QxK": {
+          "type": "card",
+          "settings": {
+            "title": "GMP-certified quality",
+            "text": "<p> Every batch is manufactured to pharmaceutical-grade standards, ensuring maximum safety and purity</p>"
+          }
+        },
+        "card_A37BCH": {
+          "type": "card",
+          "settings": {
+            "title": "Premium ingredients",
+            "text": "<p>Our ingredients are sourced from reliable global partners who share our commitment to quality</p>"
+          }
+        },
+        "card_VRKg9X": {
+          "type": "card",
+          "settings": {
+            "title": "Maximum bioavailability",
+            "text": "<p>Each formula is meticulously crafted to enhance absorption and deliver optimal results</p>"
+          }
+        }
+      },
+      "block_order": [
+        "card_J8n7Rx",
+        "card_Rf8QxK",
+        "card_A37BCH",
+        "card_VRKg9X"
+      ],
+      "name": "DRBERG WHY US",
+      "settings": {
+        "heading": "Why Choose Us",
+        "description": "Science-backed nutrition solutions",
+        "padding_top_desktop": 8,
+        "padding_bottom_desktop": 8,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
+      }
+    },
+    "drberg_popular_products_d9T7TM": {
+      "type": "drberg-popular-products",
+      "name": "DRBERG POPULAR",
+      "settings": {
+        "heading": "Popular Products",
+        "description": "Premium supplements for your health",
+        "collection": "",
+        "products_to_show_desktop": 6,
+        "columns_desktop": 3,
+        "col_gap_desktop": 2,
+        "row_gap_desktop": 2,
+        "padding_top_desktop": 8,
+        "padding_bottom_desktop": 8,
+        "products_to_show_tablet": 4,
+        "columns_tablet": 2,
+        "col_gap_tablet": 1.5,
+        "row_gap_tablet": 1.5,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "products_to_show_mobile": 2,
+        "columns_mobile": 1,
+        "col_gap_mobile": 1,
+        "row_gap_mobile": 1,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3,
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard"
+      }
+    },
+    "drberg_video_xKiFMK": {
+      "type": "drberg-video",
+      "name": "DRBERG VIDEO",
+      "settings": {
+        "description": "",
+        "enable_video_looping": false
+      }
+    },
+    "drberg_doctor_quote_WJLYNB": {
+      "type": "drberg-doctor-quote",
+      "name": "DRBERG DOCTOR QUOTE",
+      "settings": {
+        "quote_text": "<p>Dr. Eric Berg is a renowned expert in healthy ketosis and intermittent fasting. With over 15 million subscribers worldwide, Dr. Berg has dedicated his career to helping people achieve optimal health through natural nutrition.</p><p>All supplements are scientifically formulated with the highest quality natural ingredients, ensuring maximum effectiveness and safety.</p>",
+        "button_label": "Learn More",
+        "button_link": "",
+        "image_width_desktop": 53,
+        "content_width_desktop": 47,
+        "gap_desktop": 5,
+        "padding_top_desktop": 8,
+        "padding_bottom_desktop": 8,
+        "image_width_tablet": 45,
+        "content_width_tablet": 55,
+        "gap_tablet": 3,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "gap_mobile": 2,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
+      }
+    },
+    "drberg_secondary_slider_ekUUer": {
+      "type": "drberg-secondary-slider",
+      "blocks": {
+        "slide_WpqWyA": {
+          "type": "slide",
+          "settings": {
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_WpqWyA"
+      ],
+      "name": "DRBERG SECONDARY SLIDER",
+      "settings": {}
+    },
+    "drberg_resources_G4adf7": {
+      "type": "drberg-resources",
+      "blocks": {
+        "resource_RcL8rh": {
+          "type": "resource",
+          "settings": {
+            "badge": "Free PDF Document",
+            "title": "Essential Definitions for Healthy Living",
+            "publish_date": "2025-06-20",
+            "category": "Health Resources",
+            "button_label": "Learn More",
+            "button_link": ""
+          }
+        },
+        "resource_edtqxm": {
+          "type": "resource",
+          "settings": {
+            "badge": "Free PDF Document",
+            "title": "Essential Definitions for Healthy Living",
+            "publish_date": "2025-06-20",
+            "category": "Health Resources",
+            "button_label": "Learn More",
+            "button_link": ""
+          }
+        },
+        "resource_gdTn8K": {
+          "type": "resource",
+          "settings": {
+            "badge": "Free PDF Document",
+            "title": "Essential Definitions for Healthy Living",
+            "publish_date": "2025-06-20",
+            "category": "Health Resources",
+            "button_label": "Learn More",
+            "button_link": ""
+          }
+        },
+        "resource_HdAVhX": {
+          "type": "resource",
+          "settings": {
+            "badge": "Free PDF Document",
+            "title": "Essential Definitions for Healthy Living",
+            "publish_date": "2025-06-20",
+            "category": "Health Resources",
+            "button_label": "Learn More",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "resource_RcL8rh",
+        "resource_edtqxm",
+        "resource_gdTn8K",
+        "resource_HdAVhX"
+      ],
+      "name": "DRBERG RESOURCES",
+      "settings": {
+        "heading": "Health Resources",
+        "description": "Free Guides for Better Living",
+        "columns_desktop": 2,
+        "initial_items_desktop": 2,
+        "col_gap_desktop": 2,
+        "row_gap_desktop": 2,
+        "padding_top_desktop": 8,
+        "padding_bottom_desktop": 8,
+        "columns_tablet": 2,
+        "initial_items_tablet": 2,
+        "col_gap_tablet": 1.5,
+        "row_gap_tablet": 1.5,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "columns_mobile": 1,
+        "initial_items_mobile": 1,
+        "col_gap_mobile": 1.5,
+        "row_gap_mobile": 1.5,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
+      }
+    },
+    "drberg_newsletter_banner_ayTj7X": {
+      "type": "drberg-newsletter-banner",
+      "name": "DRBERG NEWSLETTER",
+      "settings": {
+        "heading_line_1": "Stay",
+        "heading_line_2": "Updated",
+        "doctor_name": "Dr. Eric Berg",
+        "doctor_role": "Health & Nutrition Expert",
+        "text": "Subscribe to our newsletter and receive exclusive offers and news! Fill out the form below or message us to stay updated on all the great deals and special offers."
+      }
+    },
+    "drberg_reviews_XbEgQb": {
+      "type": "drberg-reviews",
+      "name": "DRBERG REVIEWS",
+      "settings": {
+        "homepage_mode": true,
+        "reviews_limit": 3,
+        "button_text": "Show More Reviews",
+        "button_link": "",
+        "heading": "What Our Customers Say",
+        "rating_score": "4.8",
+        "review_count": "2,847",
+        "columns_desktop": 3,
+        "initial_items_desktop": 3,
+        "col_gap_desktop": 2.5,
+        "row_gap_desktop": 2.5,
+        "padding_top_desktop": 8,
+        "padding_bottom_desktop": 8,
+        "columns_tablet": 2,
+        "initial_items_tablet": 2,
+        "col_gap_tablet": 2,
+        "row_gap_tablet": 2,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "columns_mobile": 1,
+        "initial_items_mobile": 1,
+        "col_gap_mobile": 1.5,
+        "row_gap_mobile": 1.5,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
+      }
+    },
+    "drberg_faq_QDhkPD": {
+      "type": "drberg-faq",
+      "name": "DRBERG FAQ META",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "disable_jsonld": true,
+        "hide_categories": true,
+        "homepage_mode": true,
+        "questions_limit": 0,
+        "button_text": "More FAQ",
+        "faq_page": "",
+        "rating_score": "4.8",
+        "review_count": "2,847",
+        "gap_categories_desktop": 2.5,
+        "gap_items_desktop": 2.5,
+        "padding_top_desktop": 8,
+        "padding_bottom_desktop": 8,
+        "gap_categories_tablet": 2,
+        "gap_items_tablet": 2,
+        "padding_top_tablet": 5,
+        "padding_bottom_tablet": 5,
+        "gap_categories_mobile": 1.5,
+        "gap_items_mobile": 1.5,
+        "padding_top_mobile": 3,
+        "padding_bottom_mobile": 3
+      }
     }
   },
   "order": [
     "drberg_promo_slider_gn63Wj",
     "drberg_doctor_grid_DkqAqJ",
-    "drberg_features_WDxRJL"
+    "drberg_features_WDxRJL",
+    "drberg_premium_products_MM8qW6",
+    "drberg_why_choose_us_eJfRkP",
+    "drberg_popular_products_d9T7TM",
+    "drberg_video_xKiFMK",
+    "drberg_doctor_quote_WJLYNB",
+    "drberg_secondary_slider_ekUUer",
+    "drberg_resources_G4adf7",
+    "drberg_newsletter_banner_ayTj7X",
+    "drberg_reviews_XbEgQb",
+    "drberg_faq_QDhkPD"
   ]
 }
