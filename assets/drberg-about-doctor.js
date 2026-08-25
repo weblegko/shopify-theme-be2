@@ -7,7 +7,7 @@ function initAboutText() {
   if (!container) return;
 
   // Получаем текст кнопки из глобального объекта
-  const buttonLabel = (window.weblegkoAboutConfig && window.weblegkoAboutConfig.buttonLabel) || 'Show More';
+  const buttonLabel = (window.drbergAboutConfig && window.drbergAboutConfig.buttonLabel) || 'Show More';
 
   const paragraphs = container.querySelectorAll('.about-paragraph');
   if (paragraphs.length === 0) {

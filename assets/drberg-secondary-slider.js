@@ -53,13 +53,10 @@ function initSecondarySlider() {
       
       // Функция обновления булетов
       function updateBullets(swiperInstance) {
-        let currentIndex = swiperInstance.realIndex % totalSlides;
-        
+        let currentIndex = swiperInstance.realIndex;
         const bullets = document.querySelectorAll('.secondary-slider-pagination .custom-bullet');
         
-        if (bullets.length === 0) return;
-        
-        const bulletsCount = bullets.length;
+        if (bullets.length === 0 || totalSlides === 0) return;
         
         bullets.forEach((bullet, idx) => {
           // Определяем диапазон слайдов для этого булета
@@ -70,6 +67,9 @@ function initSecondarySlider() {
           if (idx === bulletsCount - 1) {
             end = totalSlides;
           }
+
+          // Защита от деления на ноль, если вдруг группа пустая
+          const groupSize = end - start > 0 ? end - start : 1;
           
           // Проверяем активность
           const isActive = currentIndex >= start && currentIndex < end;
@@ -79,8 +79,8 @@ function initSecondarySlider() {
           let progress = 0;
           if (isActive) {
             const positionInGroup = currentIndex - start;
-            const groupSize = end - start;
-            progress = (positionInGroup / groupSize) * 100;
+            // ИСПРАВЛЕНО: Добавляем +1 к позиции, чтобы последний слайд в группе давал 100%
+            progress = ((positionInGroup + 1) / groupSize) * 100;
           } else if (currentIndex >= end) {
             progress = 100;
           }
@@ -91,28 +91,16 @@ function initSecondarySlider() {
             progressBar.style.width = Math.min(Math.max(progress, 0), 100) + '%';
           }
           
-          // Обработчик клика
+          // Обработчик клика (ИСПРАВЛЕНО: используем встроенный slideToLoop)
           bullet.onclick = function() {
             const targetIndex = Math.round((idx / bulletsCount) * totalSlides);
-            // Находим слайд с нужным индексом в loop режиме
-            const slides = swiperInstance.slides;
-            for (let i = 0; i < slides.length; i++) {
-              if (!slides[i].classList.contains('swiper-slide-duplicate')) {
-                const slideIndex = parseInt(slides[i].getAttribute('data-swiper-slide-index'));
-                if (slideIndex === targetIndex) {
-                  swiperInstance.slideTo(i);
-                  break;
-                }
-              }
-            }
+            swiperInstance.slideToLoop(targetIndex);
           };
         });
       }
       
-      // Обновляем булеты при событиях
-      swiper.on('init', function() {
-        setTimeout(() => updateBullets(this), 100);
-      });
+      // Обновляем булеты сразу при инициализации и при смене слайда
+      updateBullets(swiper);
       
       swiper.on('slideChange', function() {
         updateBullets(this);
