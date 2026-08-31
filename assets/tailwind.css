@@ -535,6 +535,9 @@
   .tw\:\!text-grayscale-600 {
     color: #596173 !important;
   }
+  .tw\:\!text-white {
+    color: #fff !important;
+  }
   .tw\:text-\[\#004c5a\] {
     color: #004c5a;
   }
