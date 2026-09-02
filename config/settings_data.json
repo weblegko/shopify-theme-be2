@@ -110,8 +110,8 @@
     "brand_headline": "",
     "brand_description": "<p></p>",
     "brand_image_width": 100,
-    "social_facebook_link": "#",
-    "social_instagram_link": "#",
+    "social_facebook_link": "https://www.facebook.com/share/19oi3FDoQY/?mibextid=wwXIfr",
+    "social_instagram_link": "https://www.instagram.com/dr.berg_uk?igsh=ZWk2dW51cnlvNXR2",
     "social_youtube_link": "",
     "social_tiktok_link": "",
     "social_twitter_link": "",
@@ -146,7 +146,7 @@
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "background": "#F7F3EB",
+          "background": "#f7f3eb",
           "background_gradient": "",
           "text": "#121212",
           "button": "#121212",
