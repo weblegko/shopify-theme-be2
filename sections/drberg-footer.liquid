@@ -144,6 +144,7 @@
              {% comment %} Сверху: Политики (Dynamic)  {% endcomment %}
             {%- if section.settings.show_policy -%}
               <ul class="drberg-footer__policies-list">
+                <li><a href="/pages/about-us" class="drberg-footer__link">About us</a></li>
                 {%- for policy in shop.policies -%}
                   {%- if policy != blank -%}
                     <li>
