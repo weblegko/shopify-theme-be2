@@ -61,3 +61,10 @@
 .drberg-reviews__btn {
   @apply tw:mt-[2.5rem] tw:md:mt-[4rem] tw:inline-flex tw:items-center tw:justify-center tw:rounded-full tw:transition-colors tw:duration-300 tw:ease-in-out tw:hover:bg-golden tw:px-[1.6rem] tw:pt-1 tw:h-[3.6rem] tw:bg-white tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:font-medium tw:shadow-md tw:disabled:opacity-70 tw:disabled:cursor-not-allowed;
 }
+
+.drberg-reviews-disclaimer {
+  font-size: 1.4rem;
+  text-align: center;
+  color: #80899c;
+  margin-top: 2rem;
+}

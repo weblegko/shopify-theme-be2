@@ -4263,6 +4263,12 @@
     margin-top: 4rem;
   }
 }
+.drberg-reviews-disclaimer {
+  font-size: 1.4rem;
+  text-align: center;
+  color: #80899c;
+  margin-top: 2rem;
+}
 .custom-search-wrapper {
   position: relative;
   display: none;
