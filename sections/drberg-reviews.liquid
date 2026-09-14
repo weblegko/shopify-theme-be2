@@ -114,6 +114,10 @@
       {%- endfor -%}
     </div>
 
+    <div class="drberg-reviews-disclaimer">
+      {{ section.settings.disclaimer }}
+    </div>
+
      {% comment %} Кнопка Show More (показывается только в режиме главной) {% endcomment %}
     {%- if section.settings.homepage_mode and section.settings.button_link != blank -%}
       <div class="drberg-reviews__btn-wrapper">
@@ -122,6 +126,8 @@
         </a>
       </div>
     {%- endif -%}
+
+    
 
   </div>
 </section>
@@ -188,6 +194,12 @@
       "id": "review_count",
       "default": "2,847",
       "label": "Total number of reviews (e.g., 2,847)"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "disclaimer",
+      "default": "Disclaimer text here",
+      "label": "Disclaimer"
     },
     {
       "type": "header",
