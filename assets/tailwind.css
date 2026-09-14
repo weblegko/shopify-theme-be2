@@ -2627,8 +2627,8 @@
 }
 .drberg-newsletter__card {
   display: flex;
-  height: 54rem;
-  min-height: 42rem;
+  height: 40rem;
+  min-height: 40rem;
   width: 100%;
   max-width: 54rem;
   flex-direction: column;

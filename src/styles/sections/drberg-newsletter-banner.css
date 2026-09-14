@@ -22,7 +22,7 @@
 }
 
 .drberg-newsletter__card {
-  @apply tw:bg-white tw:rounded-2xl tw:p-[1.6rem] tw:w-full tw:h-[54rem] tw:max-w-[54rem] tw:flex tw:flex-col tw:min-h-[42rem];
+  @apply tw:bg-white tw:rounded-2xl tw:p-[1.6rem] tw:w-full tw:h-[40rem] tw:max-w-[54rem] tw:flex tw:flex-col tw:min-h-[40rem];
 }
 
 .drberg-newsletter__card-header {
