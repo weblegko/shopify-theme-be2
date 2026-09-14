@@ -215,32 +215,32 @@
           "type": "card",
           "settings": {
             "icon_image": "shopify://shop_images/leaf.webp",
-            "title": "Whole-food nutrition",
-            "text": "<p>We use only natural ingredients, free from synthetic isolates and artificial additives.</p>"
+            "title": "Authorised UK distributor",
+            "text": "<p>Genuine Dr. Berg products, supplied through the official channel</p>"
           }
         },
         "card_NnBnft": {
           "type": "card",
           "settings": {
             "icon_image": "shopify://shop_images/shield.webp",
-            "title": "GMP-certified quality",
-            "text": "<p> Every batch is manufactured to pharmaceutical-grade standards, ensuring maximum safety and purity</p>"
+            "title": "Dispatchedf rom England",
+            "text": "<p>UK stock, no customs and no waiting for international delivery</p>"
           }
         },
         "card_grHXxx": {
           "type": "card",
           "settings": {
             "icon_image": "shopify://shop_images/ai-star.webp",
-            "title": "Premium ingredients",
-            "text": "<p>Our ingredients are sourced from reliable global partners who share our commitment to quality</p>"
+            "title": "GMP-manufactured",
+            "text": "<p>Made to Good Manufacturing Practice (GMP) standards</p>"
           }
         },
         "card_y89386": {
           "type": "card",
           "settings": {
             "icon_image": "shopify://shop_images/lightning.webp",
-            "title": "Maximum bioavailability",
-            "text": "<p>Each formula is meticulously crafted to enhance absorption and deliver optimal results</p>"
+            "title": "Natural ingredients",
+            "text": "<p>Free from unnecessary synthetic isolates and artificial additives</p>"
           }
         }
       },
