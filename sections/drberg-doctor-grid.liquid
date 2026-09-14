@@ -118,9 +118,10 @@
           </div>
         {%- endif -%}
 
-         {% comment %} Рейтинг звездами  {% endcomment %}
+        {% comment %} Рейтинг звездами  {% endcomment %}
+        {% comment %}
         <div class="drberg-doctor__rating">
-           {% comment %} Звезды (Динамический вывод из настроек)  {% endcomment %}
+           
           <div class="drberg-doctor__stars">
             {%- for i in (1..5) -%}
               <svg class="drberg-doctor__star-icon">
@@ -149,6 +150,7 @@
             </svg>
           </button>
         </div>
+        {% endcomment %}
 
         {%- if section.settings.info_description != blank -%}
           <div class="drberg-doctor__description">
