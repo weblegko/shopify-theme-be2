@@ -188,7 +188,7 @@
       "type": "drberg-premium-products",
       "name": "DRBERG PREMIUM",
       "settings": {
-        "heading": "Popular Products",
+        "heading": "Bestsellers products",
         "description": "Premium supplements for your health",
         "collection": "premium-products",
         "space_between_desktop": 2,
