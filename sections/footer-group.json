@@ -38,9 +38,9 @@
         "newsletter_enable": true,
         "show_policy": true,
         "footer_email": "support@drberg.uk",
-        "info_text_1": "<p>Life Is Real, So Take Real Supplements™</p>",
-        "info_text_2": "<p>Promotions and discounts cannot be stacked. Promotional codes are not valid on Subscriptions.</p>",
-        "info_text_3": "<p>Food supplement. Not intended to diagnose, treat, cure or prevent any<br/>disease. Food supplements should not be used as a substitute for a<br/>varied, balanced diet and a healthy lifestyle. If you are pregnant,<br/>breastfeeding, taking medication or have a medical condition, consult<br/>your GP or pharmacist before use.</p>"
+        "info_text_1": "<p>Food supplement. Not intended to diagnose, treat, cure or prevent any<br/>disease. Food supplements should not be used as a substitute for a<br/>varied, balanced diet and a healthy lifestyle. If you are pregnant,<br/>breastfeeding, taking medication or have a medical condition, consult<br/>your GP or pharmacist before use.</p>",
+        "info_text_2": "<p>Britannia Tiger Health Ltd — registered in England & Wales, company no. 14702720. Registered office: 167–169 Great Portland Street, 5th Floor, London W1W 5PF, United Kingdom. Authorised UK distributor of Dr. Berg products.</p>",
+        "info_text_3": ""
       }
     }
   },
