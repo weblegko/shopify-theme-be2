@@ -312,7 +312,7 @@
       "name": "DRBERG DOCTOR QUOTE",
       "settings": {
         "doctor_image": "shopify://shop_images/drberg-quote.webp",
-        "quote_text": "<p>Dr. Eric Berg is a renowned expert in healthy ketosis and intermittent fasting. With over 15 million subscribers worldwide, Dr. Berg has dedicated his career to helping people achieve optimal health through natural nutrition.</p><p>All supplements are scientifically formulated with the highest quality natural ingredients, ensuring maximum effectiveness and safety.</p>",
+        "quote_text": "<p>Dr. Eric Berg is a renowned expert in healthy ketosis and intermittent fasting. With over 15 million subscribers worldwide, Dr. Berg has dedicated his career to helping people achieve optimal health through natural nutrition.</p><p>All supplements are made with high-quality natural ingredients.</p>",
         "button_label": "Learn More",
         "button_link": "",
         "image_width_desktop": 53,
