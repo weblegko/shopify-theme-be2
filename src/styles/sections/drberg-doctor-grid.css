@@ -74,7 +74,7 @@
 }
 
 .drberg-doctor__info-heading {
-  @apply tw:text-[4rem] tw:lg:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.2] tw:text-grayscale-950;
+  @apply tw:text-[1.8rem] tw:md:text-[3rem] tw:xl:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.2] tw:text-grayscale-950;
 }
 
 .drberg-doctor__info-heading-amp {
@@ -148,7 +148,7 @@
 
 /* Слайдер */
 .drberg-doctor__slider-wrapper {
-  @apply tw:relative tw:w-full tw:h-[20.8rem] tw:md:h-[42.6rem] tw:bg-gray-100 tw:overflow-hidden tw:rounded-[0.8rem];
+  @apply tw:relative tw:w-full  tw:md:h-[42.6rem] tw:bg-gray-100 tw:overflow-hidden tw:rounded-[0.8rem];
 }
 
 .drberg-doctor__slide-image {
@@ -177,4 +177,66 @@
 
 .drberg-doctor__slider-btn-icon {
   @apply tw:w-[2.4rem] tw:h-[2.4rem];
+}
+
+
+
+.drberg-doctor__slide-info {
+  padding: 1.6rem;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+@media(min-width: 768px) {
+  .drberg-doctor__slide-info {
+    position: absolute;
+    top: 2.4rem;
+    left: 2.4rem;
+    border-radius: 0.8rem;
+  }
+}
+
+.drberg-doctor__slide-info .tit {
+  font-size: 1.6rem;
+  line-height: 1;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #0b0c0e;
+}
+
+.drberg-doctor__slide-info .sub {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #596173;
+}
+
+.drberg-doctor__slide-info .shop-btn {
+    display: flex;
+    height: 4.8rem;
+    width: auto;
+    align-items: center;
+    justify-content: center;
+    border-radius: .8rem;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: #ffc356;
+    background-color: color-mix(in oklab,#ffc356 10%,transparent);
+    padding-inline: 2.4rem;
+    font-size: 1.6rem;
+    --tw-leading: 1.5;
+    line-height: 1.5;
+    --tw-font-weight: var(--tw-font-weight-medium);
+    font-weight: var(--tw-font-weight-medium);
+    --tw-tracking: -.04em;
+    letter-spacing: -.04em;
+    color: #ffc356;
+    transition-property: color,background-color,border-color,outline-color,text-decoration-color,fill,stroke,--tw-gradient-from,--tw-gradient-via,--tw-gradient-to;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    --tw-duration: .2s;
+    transition-duration: .2s;
+}
+
+.drberg-doctor__slide-info .shop-btn:hover {
+  color: #000;
+  background-color: #ffc356;
 }

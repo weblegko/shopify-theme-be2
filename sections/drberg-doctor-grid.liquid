@@ -193,9 +193,7 @@
             {% if section.blocks.size > 0 %}
               {% for block in section.blocks %}
                 <div class="swiper-slide tw:relative tw:h-full" {{ block.shopify_attributes }}>
-                  {% if block.settings.link != blank %}
-                    <a href="{{ block.settings.link }}" class="tw:block tw:w-full tw:h-full group">
-                  {% endif %}
+                  
                   {% if block.settings.image != blank %}
                     {%- assign img_width = 800 -%}
                     {%- assign img_height = img_width | divided_by: block.settings.image.aspect_ratio -%}
@@ -214,9 +212,15 @@
                   {% else %}
                     {{ 'lifestyle-2' | placeholder_svg_tag: 'weblegko-doctor__slide-placeholder' }}
                   {% endif %}
-                  {% if block.settings.link != blank %}
-                    </a>
+                                    
+                  {% if block.settings.tit != blank %}
+                    <div class="drberg-doctor__slide-info">
+                      <div class="tit">{{block.settings.tit}}</div>
+                      <div class="sub">{{block.settings.sub}}</div>
+                      <a class="shop-btn" href="{{block.settings.btn_url}}">{{block.settings.btn_tit}}</a>
+                    </div>
                   {% endif %}
+
                 </div>
               {% endfor %}
             {% else %}
@@ -359,9 +363,24 @@
           "label": "Image"
         },
         {
+          "type": "text",
+          "id": "tit",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "sub",
+          "label": "Subtitle"
+        },
+        {
+          "type": "text",
+          "id": "btn_tit",
+          "label": "Button title"
+        },
+        {
           "type": "url",
-          "id": "link",
-          "label": "Link"
+          "id": "btn_url",
+          "label": "Url"
         }
       ]
     }
