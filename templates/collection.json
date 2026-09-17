@@ -42,7 +42,7 @@
       "type": "drberg-collection-product-grid",
       "name": "DRBERG COLLECTION GRID",
       "settings": {
-        "products_per_page": 16,
+        "products_per_page": 36,
         "col_gap_desktop": 2,
         "row_gap_desktop": 2,
         "padding_top_desktop": 0,
