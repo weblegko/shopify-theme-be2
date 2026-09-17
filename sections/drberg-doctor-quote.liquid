@@ -69,7 +69,7 @@
           {%- assign img_height = img_width | divided_by: section.settings.doctor_image.aspect_ratio -%}
           <img
             src="{{ section.settings.doctor_image | image_url: width: 800 }}"
-            alt="{{ section.settings.doctor_name | default: 'Doctor' | escape }}"
+            alt="{{ section.settings.doctor_image.alt | default: 'Doctor' | escape }}"
             width="{{ img_width }}"
             height="{{ img_height }}"
             class="drberg-doctor-quote__image"
