@@ -91,7 +91,7 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/doctor-berg-uk-electrolites.webp",
-            "tit": "Made in the UKShipped from England",
+            "tit": "Made in the UK<br>Shipped from England",
             "sub": "Dr. Berg electrolytes — three flavours",
             "btn_tit": "Shop electrolytes",
             "btn_url": "shopify://collections/electrolytes"
