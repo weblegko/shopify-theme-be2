@@ -9,7 +9,8 @@
 }
 
 .drberg-doctor-quote__grid {
-  @apply tw:flex tw:flex-col tw:md:flex-row;
+  /* ИСПРАВЛЕНО: sm:flex-row вместо md:flex-row (совпадает с 640px из Liquid) */
+  @apply tw:flex tw:flex-col tw:sm:flex-row;
 }
 
 /* Левая колонка */
@@ -27,7 +28,8 @@
 
 /* Правая колонка */
 .drberg-doctor-quote__content {
-  @apply tw:flex tw:flex-col tw:justify-center tw:mt-[2rem] tw:md:mt-0;
+  /* ИСПРАВЛЕНО: sm:mt-0 вместо md:mt-0 */
+  @apply tw:flex tw:flex-col tw:justify-center tw:mt-[2rem] tw:sm:mt-0;
 }
 
 .drberg-doctor-quote__icon-wrapper {

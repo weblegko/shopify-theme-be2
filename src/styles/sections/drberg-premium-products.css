@@ -30,7 +30,7 @@
 }
 
 .drberg-premium__swiper {
-  @apply tw:mx-auto tw:max-w-[112rem] tw:relative tw:!overflow-visible;
+  @apply tw:mx-auto tw:max-w-[112rem] tw:relative ;
 }
 
 .drberg-premium__slide-inner {

@@ -1,7 +1,7 @@
 /* === Drberg Newsletter Banner Section Styles === */
 
 .drberg-newsletter {
-  @apply tw:z-0 tw:relative tw:w-full tw:p-[1.6rem] tw:flex tw:items-center tw:overflow-hidden;
+  @apply tw:z-0 tw:relative tw:w-full tw:p-[1.6rem] tw:flex tw:items-start tw:xs:items-center tw:overflow-hidden;
   background: linear-gradient(180deg, #00b5d1 0%, #048498 100%);
 }
 
@@ -10,11 +10,13 @@
 }
 
 .drberg-newsletter__inner {
-  @apply tw:relative tw:z-10 tw:w-full tw:flex tw:flex-col tw:xs:flex-row tw:justify-between tw:gap-[10rem] tw:xs:gap-[3rem];
+  /* ИСПРАВЛЕНО: На мобилке 3rem, на xs+ 10rem */
+  @apply tw:relative tw:z-10 tw:w-full tw:flex tw:flex-col tw:xs:flex-row tw:justify-between tw:gap-[3rem] tw:xs:gap-[10rem];
 }
 
 .drberg-newsletter__heading {
-  @apply tw:text-white tw:text-[4rem] tw:font-medium tw:leading-[1.2] tw:tracking-[-0.04em];
+  /* ИСПРАВЛЕНО: Flex для одной строки, nowrap, и размер 2.8rem на мобилке, 4rem на xs+ */
+  @apply tw:max-w-[20rem] tw:text-white tw:text-[2.8rem] tw:xs:text-[4rem] tw:font-medium tw:leading-[1.2] tw:tracking-[-0.04em];
 }
 
 .drberg-newsletter__heading-italic {
@@ -22,7 +24,8 @@
 }
 
 .drberg-newsletter__card {
-  @apply tw:bg-white tw:rounded-2xl tw:p-[1.6rem] tw:w-full tw:h-[40rem] tw:max-w-[54rem] tw:flex tw:flex-col tw:min-h-[40rem];
+  /* ИСПРАВЛЕНО: Убрали жесткую высоту h-[40rem] и min-h-[40rem] с мобилки. Оставили только для xs+ */
+  @apply tw:bg-white tw:rounded-2xl tw:p-[1.6rem] tw:w-full tw:max-w-[54rem] tw:xs:min-h-[40rem] tw:flex tw:flex-col;
 }
 
 .drberg-newsletter__card-header {
@@ -54,7 +57,8 @@
 }
 
 .drberg-newsletter__form-wrapper {
-  @apply tw:mt-auto;
+  /* ИСПРАВЛЕНО: Прижимаем к низу только на xs+ */
+  @apply tw:xs:mt-auto;
 }
 
 .drberg-newsletter__form-inner {
@@ -71,7 +75,7 @@
 }
 
 .drberg-newsletter__cb-label {
-  @apply tw:flex tw:items-center tw:gap-[0.8rem] tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-grayscale-950;
+  @apply tw:flex tw:items-start tw:gap-[0.8rem] tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-grayscale-950;
 }
 
 .drberg-newsletter__cb-box {
@@ -83,7 +87,7 @@
 }
 
 .drberg-newsletter__cb-text {
-  @apply tw:text-[1.4rem] tw:tracking-[-0.04em] tw:leading-[1.43];
+  @apply tw:text-[1.2rem] tw:sm:text-[1.4rem] tw:tracking-[-0.04em] tw:leading-[1.43];
 }
 
 .drberg-newsletter__cb-text-muted {

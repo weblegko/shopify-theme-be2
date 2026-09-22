@@ -1,51 +1,132 @@
+/* =========================================
+   1. ПЕРЕКЛЮЧЕНИЕ БЛОКОВ (Мобилка/Десктоп)
+   (!important нужен, чтобы перебить базовые стили Dawn)
+   ========================================= */
+.drberg-popular__desktop-wrapper {
+  display: none !important;
+  width: 100% !important;
+}
+.drberg-popular__mobile-wrapper {
+  display: block !important;
+  width: 100% !important;
+}
+@media screen and (min-width: 640px) {
+  .drberg-popular__desktop-wrapper { display: block !important; }
+  .drberg-popular__mobile-wrapper { display: none !important; }
+}
 
-/* Статические хаки сетки и карточек (перенесено из <style>) */
-.section-popular-products .product-grid > * {
+/* =========================================
+   2. БАЗОВЫЕ ХАКИ КАРТОЧЕК (Одинаковая высота)
+   ========================================= */
+.section-popular-products .product-grid > *,
+.section-popular-products .swiper-slide {
   display: flex !important;
+  height: auto !important;
 }
 .section-popular-products .product-card-wrapper,
 .section-popular-products .product-card-wrapper .card {
-  height: 100% !important;
   display: flex !important;
   flex-direction: column !important;
+  height: 100% !important;
+  width: 100% !important;
 }
 .section-popular-products .card__content:last-child {
-  flex: 1 !important;
   display: flex !important;
   flex-direction: column !important;
+  flex: 1 !important; /* Прижимает кнопку к низу карточки */
 }
 
+/* =========================================
+   3. ДЕСКТОПНАЯ СЕТКА
+   ========================================= */
 #drberg-popular-grid {
   display: grid !important;
   width: 100% !important;
-  list-style: none !important;
-  padding: 0 !important;
   margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
 }
-
 #drberg-popular-grid .grid__item {
+  display: flex !important;
+  flex-direction: column !important;
   width: 100% !important;
   min-width: 0 !important;
   max-width: 100% !important;
-  padding: 0 !important;
   margin: 0 !important;
-  display: flex !important;
-  flex-direction: column !important;
+  padding: 0 !important;
 }
 
-/* Скрытие товаров на разных экранах */
-@media screen and (max-width: 639px) {
-  .drberg-popular-hide-mobile {
-    display: none !important;
-  }
+/* =========================================
+   4. СЛАЙДЕР (Мобилка)
+   (!important перебивает инлайн-стили Swiper)
+   ========================================= */
+.popularSwiper.swiper {
+  width: 100% !important;
+  overflow: hidden !important; /* Убивает горизонтальный скролл */
+  box-sizing: border-box !important;
 }
+.popularSwiper .swiper-wrapper {
+  align-items: stretch !important;
+  box-sizing: border-box !important;
+}
+.popularSwiper .swiper-slide {
+  flex-shrink: 0 !important;
+  min-width: 0 !important;
+  max-width: none !important; /* Разрешаем выглядывание краешка (1.045) */
+  box-sizing: border-box !important;
+}
+/* Внутренности слайда занимают 100% высоты и ширины */
+.popularSwiper .swiper-slide > div,
+.popularSwiper .swiper-slide .grid__item {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* =========================================
+   5. КАСТОМНАЯ ПАГИНАЦИЯ
+   (Без !important, наши классы и так работают)
+   ========================================= */
+.popular-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 3rem;
+}
+.popular-pagination .custom-bullet {
+  position: relative;
+  overflow: hidden;
+  width: 4rem;
+  height: 0.32rem;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 0.2rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.popular-pagination .custom-bullet:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+.popular-pagination .custom-bullet .bullet-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: #1a1a1a;
+  border-radius: 0.2rem;
+  transition: width 0.3s ease;
+}
+.popular-pagination .custom-bullet.active .bullet-progress {
+  background: #1a1a1a;
+}
+
+/* =========================================
+   6. СКРЫТИЕ ТОВАРОВ В СЕТКЕ
+   ========================================= */
 @media screen and (min-width: 640px) and (max-width: 1023px) {
-  .drberg-popular-hide-tablet {
-    display: none !important;
-  }
+  .drberg-popular-hide-tablet { display: none !important; }
 }
 @media screen and (min-width: 1024px) {
-  .drberg-popular-hide-desktop {
-    display: none !important;
-  }
+  .drberg-popular-hide-desktop { display: none !important; }
 }

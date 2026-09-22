@@ -86,6 +86,7 @@ export default {
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
+        oswald: ["Oswald", "sans-serif"],
         geist: ["Geist", "sans-serif"],
         roboto: ["Roboto", "sans-serif"],
         play: ["PlayfairDisplay", "sans-serif"],

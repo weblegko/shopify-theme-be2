@@ -256,7 +256,8 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
-    {{ 'custom.css' | asset_url | stylesheet_tag }}    
+    <link rel="stylesheet" href="{{ 'custom.css' | asset_url }}" type="text/css" media="all" crossorigin="anonymous">
+
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}
@@ -293,8 +294,8 @@
     {%- endif -%}
 
     
-     {% comment %} Добавляем Tailwind  {% endcomment %}
-    {{ 'tailwind.css' | asset_url | stylesheet_tag }}
+    {% comment %} Добавляем Tailwind  {% endcomment %}
+    <link rel="stylesheet" href="{{ 'tailwind.css' | asset_url }}" type="text/css" media="all" crossorigin="anonymous">
 
      {% comment %} Добавляем Swiper  {% endcomment %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
@@ -322,7 +323,7 @@
 
     {% sections 'header-group' %}
 
-    <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+    <main id="MainContent" class="content-for-layout focus-none overflow-hidden" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
 

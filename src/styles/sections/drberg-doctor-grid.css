@@ -26,8 +26,14 @@
 }
 
 /* Бейджи */
+/* Бейджи */
 .drberg-doctor__badge-name {
-  @apply tw:absolute tw:top-[0.5rem] tw:left-[0.5rem] tw:bg-white/90 tw:backdrop-blur-sm tw:px-[1.6rem] tw:py-[1rem] tw:rounded-[0.4rem] tw:shadow-md;
+  /* МОБИЛКА: По центру сверху и полупрозрачный */
+  @apply tw:absolute tw:top-[1rem] tw:left-1/2 tw:-translate-x-1/2 tw:bg-white/50 tw:backdrop-blur-md tw:px-[1.6rem] tw:py-[1rem] tw:rounded-[0.4rem] tw:shadow-md tw:text-center tw:w-max;
+  
+  /* ПЛАНШЕТ/ДЕСКТОП (от 640px): Возвращаем в левый верхний угол */
+  @apply tw:sm:top-[0.5rem] tw:sm:left-[0.5rem] tw:sm:right-auto tw:sm:translate-x-0 tw:sm:bg-white/90 tw:sm:text-left;
+  
   backdrop-filter: blur(20rem);
 }
 
@@ -74,7 +80,7 @@
 }
 
 .drberg-doctor__info-heading {
-  @apply tw:text-[1.8rem] tw:md:text-[3rem] tw:xl:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.2] tw:text-grayscale-950;
+  @apply tw:text-[1.55rem] tw:xs:text-[1.8rem] tw:md:text-[3rem] tw:xl:text-[4rem] tw:font-medium tw:tracking-[-0.04em] tw:leading-[1.2] tw:text-grayscale-950;
 }
 
 .drberg-doctor__info-heading-amp {
@@ -127,7 +133,7 @@
 }
 
 .drberg-doctor__description {
-  @apply tw:mt-[2rem] tw:mb-[2.4rem] tw:text-[1.6rem] tw:text-grayscale-600 tw:leading-[1.5] tw:tracking-[-0.04em];
+  @apply tw:mt-[1.5rem] tw:mb-[2rem] tw:xs:mt-[2rem] tw:xs:mb-[2.4rem] tw:text-[1.45rem] tw:xs:text-[1.6rem]  tw:text-grayscale-600 tw:leading-[1.5] tw:tracking-[-0.04em];
 }
 
 .drberg-doctor__buttons {
@@ -135,7 +141,7 @@
 }
 
 .drberg-doctor__btn-blue {
-  @apply tw:xs:flex tw:hidden tw:w-full tw:items-center tw:justify-center tw:gap-4 tw:px-[2.4rem] tw:h-[4.8rem] tw:bg-goluboy tw:hover:bg-goluboydark tw:text-white tw:rounded-[0.8rem] tw:text-[1.6rem] tw:leading-[1.5] tw:font-medium tw:tracking-[-0.04em] tw:transition-colors tw:duration-200;
+  @apply tw:flex tw:w-full tw:items-center tw:justify-center tw:gap-4 tw:px-[2.4rem] tw:h-[4.8rem] tw:bg-goluboy tw:hover:bg-goluboydark tw:text-white tw:rounded-[0.8rem] tw:text-[1.6rem] tw:leading-[1.5] tw:font-medium tw:tracking-[-0.04em] tw:transition-colors tw:duration-200;
 }
 
 .drberg-doctor__btn-blue-icon {
@@ -143,7 +149,7 @@
 }
 
 .drberg-doctor__btn-grey {
-  @apply tw:flex tw:w-full tw:items-center tw:justify-center tw:px-[2.4rem] tw:h-[4.8rem] tw:bg-golden/10 tw:hover:bg-golden tw:hover:text-grayscale-950 tw:border tw:border-golden tw:text-golden tw:rounded-[0.8rem] tw:text-[1.6rem] tw:leading-[1.5] tw:font-medium tw:tracking-[-0.04em] tw:transition-colors tw:duration-200;
+  @apply tw:xs:flex tw:hidden tw:w-full tw:items-center tw:justify-center tw:px-[2.4rem] tw:h-[4.8rem] tw:bg-golden/10 tw:hover:bg-golden tw:hover:text-grayscale-950 tw:border tw:border-golden tw:text-golden tw:rounded-[0.8rem] tw:text-[1.6rem] tw:leading-[1.5] tw:font-medium tw:tracking-[-0.04em] tw:transition-colors tw:duration-200;
 }
 
 /* Слайдер */
