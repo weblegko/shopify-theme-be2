@@ -10,8 +10,6 @@
   {{ 'quick-add.css' | asset_url | stylesheet_tag }}
 {%- endunless -%}
 
-{{ 'drberg-premium-products.css' | asset_url | stylesheet_tag }}
-
 {%- if section.settings.quick_add == 'standard' -%}
   <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
@@ -26,6 +24,7 @@
 
 <script src="{{ 'drberg-premium-products.js' | asset_url }}" defer="defer"></script>
 
+{{ 'drberg-premium-products.css' | asset_url | stylesheet_tag }}
 {%- style -%}
   .drberg-premium-padding {
     padding-top: {{ section.settings.padding_top_mobile | default: 3 }}rem !important;
@@ -65,7 +64,7 @@
     <div class="drberg-premium__overflow-wrapper">
        {% comment %} Слайдер (передаем динамические отступы через data-атрибуты для JS)  {% endcomment %}
       <div 
-        class="swiper premiumSwiper drberg-premium__swiper"
+        class="swiper premiumSwiper drberg-premium__swiper tw:!overflow-visible"
         data-space-mobile="{{ section.settings.space_between_mobile | default: 1 | times: 10 }}"
         data-space-tablet="{{ section.settings.space_between_tablet | default: 2 | times: 10 }}"
         data-space-desktop="{{ section.settings.space_between_desktop | default: 2 | times: 10 }}"

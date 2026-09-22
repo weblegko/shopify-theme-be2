@@ -375,6 +375,9 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+  .tw\:\!overflow-visible {
+    overflow: visible !important;
+  }
   .tw\:\!rounded-\[0\.8rem\] {
     border-radius: 0.8rem !important;
   }
@@ -418,6 +421,9 @@
   }
   .tw\:\!bg-white {
     background-color: #fff !important;
+  }
+  .tw\:bg-\[\#02a7c1\] {
+    background-color: #02a7c1;
   }
   .tw\:bg-additional-red {
     background-color: #e53935;
@@ -467,6 +473,9 @@
   .tw\:\!font-poppins {
     font-family: Poppins, sans-serif !important;
   }
+  .tw\:font-oswald {
+    font-family: Oswald, sans-serif;
+  }
   .tw\:font-play {
     font-family: PlayfairDisplay, sans-serif;
   }
@@ -488,6 +497,10 @@
   .tw\:\!leading-\[1\.33\] {
     --tw-leading: 1.33 !important;
     line-height: 1.33 !important;
+  }
+  .tw\:\!leading-\[1\] {
+    --tw-leading: 1 !important;
+    line-height: 1 !important;
   }
   .tw\:leading-\[1\.2\] {
     --tw-leading: 1.2;
@@ -594,6 +607,11 @@
       }
     }
   }
+  .tw\:sm\:text-\[1\.8rem\] {
+    @media (width >= 640px) {
+      font-size: 1.8rem;
+    }
+  }
   .tw\:sm750\:\!max-w-\[48\%\] {
     @media (width >= 750px) {
       max-width: 48% !important;
@@ -634,6 +652,13 @@
   src: url('Inter-Regular.woff2') format('woff2');
   font-display: swap;
   font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Oswald";
+  src: url('Oswald-Medium.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 500;
   font-style: normal;
 }
 @font-face {
@@ -1852,17 +1877,40 @@
 }
 .drberg-doctor__badge-name {
   position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
+  top: 1rem;
+  left: calc(1 / 2 * 100%);
+  width: max-content;
+  --tw-translate-x: calc(calc(1 / 2 * 100%) * -1);
+  translate: var(--tw-translate-x) var(--tw-translate-y);
   border-radius: 0.4rem;
-  background-color: color-mix(in oklab, #fff 90%, transparent);
+  background-color: color-mix(in oklab, #fff 50%, transparent);
   padding-inline: 1.6rem;
   padding-block: 1rem;
+  text-align: center;
   --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
   box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-  --tw-backdrop-blur: blur(var(--tw-blur-sm));
+  --tw-backdrop-blur: blur(var(--tw-blur-md));
   -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
   backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  @media (width >= 640px) {
+    top: 0.5rem;
+  }
+  @media (width >= 640px) {
+    right: auto;
+  }
+  @media (width >= 640px) {
+    left: 0.5rem;
+  }
+  @media (width >= 640px) {
+    --tw-translate-x: 0;
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  @media (width >= 640px) {
+    background-color: color-mix(in oklab, #fff 90%, transparent);
+  }
+  @media (width >= 640px) {
+    text-align: left;
+  }
   backdrop-filter: blur(20rem);
 }
 .drberg-doctor__name {
@@ -1955,7 +2003,7 @@
   }
 }
 .drberg-doctor__info-heading {
-  font-size: 1.8rem;
+  font-size: 1.55rem;
   --tw-leading: 1.2;
   line-height: 1.2;
   --tw-font-weight: var(--tw-font-weight-medium);
@@ -1963,6 +2011,9 @@
   --tw-tracking: -0.04em;
   letter-spacing: -0.04em;
   color: #0b0c0e;
+  @media (width >= 576px) {
+    font-size: 1.8rem;
+  }
   @media (width >= 768px) {
     font-size: 3rem;
   }
@@ -2061,14 +2112,23 @@
   }
 }
 .drberg-doctor__description {
-  margin-top: 2rem;
-  margin-bottom: 2.4rem;
-  font-size: 1.6rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  font-size: 1.45rem;
   --tw-leading: 1.5;
   line-height: 1.5;
   --tw-tracking: -0.04em;
   letter-spacing: -0.04em;
   color: #596173;
+  @media (width >= 576px) {
+    margin-top: 2rem;
+  }
+  @media (width >= 576px) {
+    margin-bottom: 2.4rem;
+  }
+  @media (width >= 576px) {
+    font-size: 1.6rem;
+  }
 }
 .drberg-doctor__buttons {
   margin-top: auto;
@@ -2076,7 +2136,7 @@
   gap: 1.2rem;
 }
 .drberg-doctor__btn-blue {
-  display: none;
+  display: flex;
   height: 4.8rem;
   width: 100%;
   align-items: center;
@@ -2103,16 +2163,13 @@
       background-color: #0091A8;
     }
   }
-  @media (width >= 576px) {
-    display: flex;
-  }
 }
 .drberg-doctor__btn-blue-icon {
   height: 2.4rem;
   width: 2.4rem;
 }
 .drberg-doctor__btn-grey {
-  display: flex;
+  display: none;
   height: 4.8rem;
   width: 100%;
   align-items: center;
@@ -2145,6 +2202,9 @@
     @media (hover: hover) {
       color: #0b0c0e;
     }
+  }
+  @media (width >= 576px) {
+    display: flex;
   }
 }
 .drberg-doctor__slider-wrapper {
@@ -2290,7 +2350,7 @@
 .drberg-doctor-quote__grid {
   display: flex;
   flex-direction: column;
-  @media (width >= 768px) {
+  @media (width >= 640px) {
     flex-direction: row;
   }
 }
@@ -2315,7 +2375,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  @media (width >= 768px) {
+  @media (width >= 640px) {
     margin-top: 0;
   }
 }
@@ -2637,9 +2697,12 @@
   z-index: 0;
   display: flex;
   width: 100%;
-  align-items: center;
+  align-items: flex-start;
   overflow: hidden;
   padding: 1.6rem;
+  @media (width >= 576px) {
+    align-items: center;
+  }
   background: linear-gradient(180deg, #00b5d1 0%, #048498 100%);
 }
 .drberg-newsletter__bg-image {
@@ -2657,16 +2720,17 @@
   width: 100%;
   flex-direction: column;
   justify-content: space-between;
-  gap: 10rem;
+  gap: 3rem;
   @media (width >= 576px) {
     flex-direction: row;
   }
   @media (width >= 576px) {
-    gap: 3rem;
+    gap: 10rem;
   }
 }
 .drberg-newsletter__heading {
-  font-size: 4rem;
+  max-width: 20rem;
+  font-size: 2.8rem;
   --tw-leading: 1.2;
   line-height: 1.2;
   --tw-font-weight: var(--tw-font-weight-medium);
@@ -2674,20 +2738,24 @@
   --tw-tracking: -0.04em;
   letter-spacing: -0.04em;
   color: #fff;
+  @media (width >= 576px) {
+    font-size: 4rem;
+  }
 }
 .drberg-newsletter__heading-italic {
   font-style: italic;
 }
 .drberg-newsletter__card {
   display: flex;
-  height: 40rem;
-  min-height: 40rem;
   width: 100%;
   max-width: 54rem;
   flex-direction: column;
   border-radius: var(--tw-radius-2xl);
   background-color: #fff;
   padding: 1.6rem;
+  @media (width >= 576px) {
+    min-height: 40rem;
+  }
 }
 .drberg-newsletter__card-header {
   margin-bottom: 2rem;
@@ -2742,7 +2810,9 @@
   color: #80899c;
 }
 .drberg-newsletter__form-wrapper {
-  margin-top: auto;
+  @media (width >= 576px) {
+    margin-top: auto;
+  }
 }
 .drberg-newsletter__form-inner {
   display: flex;
@@ -2790,7 +2860,7 @@
 }
 .drberg-newsletter__cb-label {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.8rem;
   font-size: 1.4rem;
   --tw-leading: 1.43;
@@ -2827,11 +2897,14 @@
   scale: var(--tw-scale-x) var(--tw-scale-y);
 }
 .drberg-newsletter__cb-text {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   --tw-leading: 1.43;
   line-height: 1.43;
   --tw-tracking: -0.04em;
   letter-spacing: -0.04em;
+  @media (width >= 640px) {
+    font-size: 1.4rem;
+  }
 }
 .drberg-newsletter__cb-text-muted {
   color: #8c94a6;
@@ -3062,7 +3135,6 @@
   position: relative;
   margin-inline: auto;
   max-width: 112rem;
-  overflow: visible !important;
 }
 .drberg-premium__slide-inner {
   height: inherit;
@@ -5199,6 +5271,7 @@ html {
   overflow-x: hidden;
 }
 body {
+  overflow-x: hidden;
   font-family: Poppins, sans-serif;
   color: #0b0c0e;
 }

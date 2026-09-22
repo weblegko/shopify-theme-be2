@@ -57,6 +57,7 @@ html {
 
 /* добавляем цвет тексту и шрифт глобально для сайта */
 body {
+  overflow-x: hidden;
   @apply tw:font-poppins tw:text-grayscale-950;
 }
 

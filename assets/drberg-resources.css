@@ -1,0 +1,96 @@
+/* =========================================
+   1. ПЕРЕКЛЮЧЕНИЕ БЛОКОВ (Мобилка/Десктоп)
+   ========================================= */
+.drberg-resources__desktop-wrapper {
+  display: none !important;
+  width: 100% !important;
+}
+.drberg-resources__mobile-wrapper {
+  display: block !important;
+  width: 100% !important;
+}
+@media screen and (min-width: 640px) {
+  .drberg-resources__desktop-wrapper { display: block !important; }
+  .drberg-resources__mobile-wrapper { display: none !important; }
+}
+
+/* =========================================
+   2. ДЕСКТОПНАЯ СЕТКА
+   ========================================= */
+#drberg-resources-grid {
+  display: grid !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+/* Скрывает элементы при нажатии "Show More" на десктопе */
+@media screen and (min-width: 640px) {
+  .drberg-resources__item.is-hidden { 
+    display: none !important; 
+  }
+}
+
+/* =========================================
+   3. СЛАЙДЕР (Мобилка)
+   (!important перебивает инлайн-стили Swiper)
+   ========================================= */
+.resourcesSwiper.swiper {
+  width: 100% !important;
+  overflow: hidden !important; /* Убивает горизонтальный скролл */
+  box-sizing: border-box !important;
+}
+.resourcesSwiper .swiper-wrapper {
+  align-items: stretch !important;
+  box-sizing: border-box !important;
+}
+.resourcesSwiper .swiper-slide {
+  height: auto !important;
+  flex-shrink: 0 !important;
+  min-width: 0 !important;
+  max-width: none !important; /* Разрешаем выглядывание краешка (1.045) */
+  box-sizing: border-box !important;
+}
+/* Карточка-ссылка занимает ровно 100% слайда */
+.resourcesSwiper .drberg-resources__card {
+  display: flex !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* =========================================
+   4. КАСТОМНАЯ ПАГИНАЦИЯ
+   (Без !important, наши классы и так работают)
+   ========================================= */
+.resources-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 3rem;
+}
+.resources-pagination .custom-bullet {
+  position: relative;
+  overflow: hidden;
+  width: 4rem;
+  height: 0.3rem;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 0.2rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.resources-pagination .custom-bullet:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+.resources-pagination .custom-bullet .bullet-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: #1a1a1a;
+  border-radius: 0.2rem;
+  transition: width 0.3s ease;
+}
+.resources-pagination .custom-bullet.active .bullet-progress {
+  background: #1a1a1a;
+}
