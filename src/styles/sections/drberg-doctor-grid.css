@@ -50,7 +50,7 @@
 }
 
 .drberg-doctor__social-card {
-  @apply tw:w-[15.5rem] tw:flex tw:justify-center tw:items-center tw:gap-[0.8rem] tw:bg-white/90 tw:px-[1.2rem] tw:py-[0.8rem] tw:rounded-[0.4rem];
+  @apply tw:w-[18rem] tw:flex tw:justify-center tw:items-center tw:gap-[0.8rem] tw:bg-white/90 tw:px-[1.2rem] tw:py-[0.8rem] tw:rounded-[0.4rem];
   backdrop-filter: blur(20rem);
 }
 

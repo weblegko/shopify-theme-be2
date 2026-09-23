@@ -37,7 +37,8 @@
         <div class="drberg-doctor__socials">
           {%- if section.settings.instagram_count != blank -%}
             <div class="drberg-doctor__social-card">
-               {% comment %} Иконка Instagram  {% endcomment %}
+              {% comment %} Иконка Instagram  {% endcomment %}
+              {% comment %}
               <div class="drberg-doctor__social-icon-wrapper">
                 <img
                   src="{{ 'instagram.webp' | asset_url }}"
@@ -48,6 +49,7 @@
                   height="60"
                 >
               </div>
+              {% endcomment %}
 
               <span class="drberg-doctor__social-text">
                 {{- section.settings.instagram_count -}}
@@ -58,7 +60,8 @@
           {%- if section.settings.youtube_count != blank -%}
             <div class="drberg-doctor__social-card">
                {% comment %} Иконка YouTube  {% endcomment %}
-              <div class="drberg-doctor__social-icon-wrapper">
+              {% comment %}
+               <div class="drberg-doctor__social-icon-wrapper">
                 <img
                   src="{{ 'youtube-around.webp' | asset_url }}"
                   alt="Youtube"
@@ -68,6 +71,7 @@
                   height="60"
                 >
               </div>
+              {% endcomment %}
 
               <span class="drberg-doctor__social-text">
                 {{- section.settings.youtube_count -}}
@@ -101,12 +105,13 @@
                 </svg>
 
                 <span class="drberg-doctor__youtube-icon-wrapper">
+                  {% comment %}
                   <svg class="tw:w-[2rem] tw:h-[2rem]">
                     <use href="#youtube"></use>
                   </svg>
-
+                  {% endcomment %}
                   <span class="drberg-doctor__youtube-text">
-                    {{- section.settings.youtube_count -}}
+                    {{- section.settings.youtube_count_2 -}}
                   </span>
                 </span>
 
@@ -293,6 +298,12 @@
       "type": "text",
       "id": "youtube_count",
       "label": "Youtube Subscribers",
+      "default": "14M subscribers"
+    },
+    {
+      "type": "text",
+      "id": "youtube_count_2",
+      "label": "Youtube Subscribers 2",
       "default": "14M subscribers"
     },
     {
