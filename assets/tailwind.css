@@ -375,9 +375,6 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .tw\:\!overflow-visible {
-    overflow: visible !important;
-  }
   .tw\:\!rounded-\[0\.8rem\] {
     border-radius: 0.8rem !important;
   }
@@ -3113,6 +3110,9 @@
   line-height: 1.43;
   --tw-tracking: -0.04em;
   letter-spacing: -0.04em;
+}
+.drberg-premium__nav-wrapper {
+  position: relative;
 }
 .drberg-premium__overflow-wrapper {
   @media (width >= 640px) {
