@@ -375,6 +375,9 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+  .tw\:\!overflow-visible {
+    overflow: visible !important;
+  }
   .tw\:\!rounded-\[0\.8rem\] {
     border-radius: 0.8rem !important;
   }
