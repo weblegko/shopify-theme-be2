@@ -131,7 +131,12 @@ function initResourcesSlider() {
   const spaceBetweenMobile = parseInt(sliderEl.dataset.spaceMobile) || 15;
   const isLoop = totalSlides > 4 ? true : false; // Для 2-х буллетов loop нужен при > 4 слайдов
 
-  resourcesSwiper = new Swiper('.resourcesSwiper', {
+  // Ищем универсальные кнопки внутри текущего слайдера
+  const nextBtn = sliderEl.querySelector('.slider-arrow--next');
+  const prevBtn = sliderEl.querySelector('.slider-arrow--prev');
+
+  // Передаем sliderEl напрямую
+  resourcesSwiper = new Swiper(sliderEl, {
     slidesPerView: 1.045,
     spaceBetween: spaceBetweenMobile,
     loop: isLoop,
@@ -141,6 +146,12 @@ function initResourcesSlider() {
       disableOnInteraction: false,
     },
     pagination: false,
+    // Добавляем навигацию
+    navigation: {
+      nextEl: nextBtn,
+      prevEl: prevBtn,
+      disabledClass: 'slider-arrow--disabled', // Наш универсальный класс
+    },
     on: {
       slideChange: function() { updateResourcesBullets(this); },
       resize: function() { updateResourcesBullets(this); }

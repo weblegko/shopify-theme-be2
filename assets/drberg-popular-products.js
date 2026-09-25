@@ -34,7 +34,12 @@ function initPopularSlider() {
   const spaceBetweenMobile = parseInt(sliderEl.dataset.spaceMobile) || 10;
   const isLoop = totalSlides > 6 ? true : false;
 
-  popularSwiper = new Swiper('.popularSwiper', {
+  // Ищем универсальные кнопки внутри текущего слайдера
+  const nextBtn = sliderEl.querySelector('.slider-arrow--next');
+  const prevBtn = sliderEl.querySelector('.slider-arrow--prev');
+
+  // Передаем sliderEl напрямую вместо строки '.popularSwiper'
+  popularSwiper = new Swiper(sliderEl, {
     slidesPerView: 1.045,
     spaceBetween: spaceBetweenMobile,
     loop: isLoop,
@@ -44,6 +49,12 @@ function initPopularSlider() {
       disableOnInteraction: false,
     },
     pagination: false,
+    // Добавляем навигацию
+    navigation: {
+      nextEl: nextBtn,
+      prevEl: prevBtn,
+      disabledClass: 'slider-arrow--disabled', // Указываем наш универсальный класс
+    },
     on: {
       slideChange: function() { updatePopularBullets(this); },
       resize: function() { updatePopularBullets(this); }

@@ -1,0 +1,108 @@
+/* =========================================
+   УНИВЕРСАЛЬНЫЕ СТРЕЛКИ ДЛЯ СЛАЙДЕРОВ
+   ========================================= */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 4rem;
+  height: 4rem;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.08);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  user-select: none;
+}
+
+.slider-arrow svg {
+  color: #444444;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Отступы слева/справа (по умолчанию 1rem, можно переопределять локально) */
+/* Отступы слева/справа по умолчанию (на мобилке внутри слайдера) */
+.slider-arrow--prev {
+  left: 1rem;
+}
+
+.slider-arrow--next {
+  right: 1rem;
+}
+
+/* На десктопе выносим стрелки за пределы слайдера */
+@media screen and (min-width: 1280px) {
+  .slider-arrow--prev {
+    left: -3rem; /* Сдвигаем влево за границу слайдера */
+  }
+  
+  .slider-arrow--next {
+    right: -3rem; /* Сдвигаем вправо за границу слайдера */
+  }
+}
+
+@media screen and (min-width: 1536px) {
+  .slider-arrow--prev {
+    left: -5rem; /* Сдвигаем влево за границу слайдера */
+  }
+  
+  .slider-arrow--next {
+    right: -5rem; /* Сдвигаем вправо за границу слайдера */
+  }
+}
+ /* ГОЛУБОЙ ХОВЕР */
+.slider-arrow:hover {
+  background: #00b5d1; 
+  border-color: white;
+  box-shadow: 0 0.6rem 2rem rgba(37, 99, 235, 0.25);
+}
+
+.slider-arrow:hover svg {
+  color: #ffffff;
+}
+
+/* Анимация направления стрелки */
+.slider-arrow--prev:hover svg {
+  transform: translateX(-0.3rem);
+}
+
+.slider-arrow--next:hover svg {
+  transform: translateX(0.3rem);
+}
+
+/* Состояние Disabled */
+.slider-arrow--disabled {
+  opacity: 0.4;
+  cursor: default; 
+  /* ВАЖНО: тут НЕТ pointer-events: none;, 
+     поэтому кнопка блокирует клики сквозь себя */
+}
+
+/* Сбрасываем ховер, если кнопка disabled, чтобы не было диссонанса */
+.slider-arrow--disabled:hover {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0.4rem 1.5rem rgba(0, 0, 0, 0.08);
+}
+
+.slider-arrow--disabled:hover svg {
+  color: #1a1a1a;
+  transform: none;
+}
+
+/* Адаптив для мобилок */
+@media screen and (max-width: 640px) {
+  .slider-arrow {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  .slider-arrow svg {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+}

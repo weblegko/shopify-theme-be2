@@ -25,6 +25,10 @@
   @apply tw:pt-1 tw:text-[1.4rem] tw:leading-[1.43] tw:tracking-[-0.04em] tw:text-center;
 }
 
+.drberg-premium__nav-wrapper {
+  @apply tw:relative;
+}
+
 .drberg-premium__overflow-wrapper {
   @apply tw:sm:pt-[1rem] tw:sm:pb-[2rem] tw:sm:mx-auto tw:sm:max-w-[115rem] tw:sm:!overflow-hidden;
 }

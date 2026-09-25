@@ -3114,6 +3114,9 @@
   --tw-tracking: -0.04em;
   letter-spacing: -0.04em;
 }
+.drberg-premium__nav-wrapper {
+  position: relative;
+}
 .drberg-premium__overflow-wrapper {
   @media (width >= 640px) {
     margin-inline: auto;

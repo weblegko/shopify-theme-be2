@@ -1,6 +1,7 @@
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'swiper-slider-arrows.css' | asset_url | stylesheet_tag }}
 
 {% if section.settings.image_shape == 'blob' %}
   {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
@@ -155,6 +156,10 @@
             {%- endfor -%}
           {%- endif -%}
         </div>
+         {% comment %} НАВИГАЦИЯ - СТРЕЛКИ {% endcomment %}
+        {%- liquid
+          render 'swiper-slider-arrows'
+        -%}
       </div>
       <div class="popular-pagination drberg-popular__pagination"></div>
     </div>
